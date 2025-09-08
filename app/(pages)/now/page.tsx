@@ -1,6 +1,6 @@
 export default function NowPage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12">
+    <main className="mx-auto max-w-4xl px-4 py-12">
       <h1 className="text-2xl font-semibold tracking-tight">/now</h1>
       <p className="mt-2 text-sm text-neutral-500">
         What I'm focused on right now.
@@ -10,7 +10,7 @@ export default function NowPage() {
         <h3 className="text-lg font-semibold">
           Thesis - Static Malware Detection Across Modalities
         </h3>
-        <p className="text-sm text-[var(--muted-fg)] text-justify">
+        <p className="text-sm text-muted-foreground text-justify">
           Exploring which signals work best for malware detection: text-based
           static features (e.g., EMBER 2024) vs visual representations
           (MalNet-style images). Running controlled head-to-head benchmarks and
@@ -21,7 +21,7 @@ export default function NowPage() {
         </p>
       </div>
 
-      <p className="mt-6 text-xs text-[var(--muted-fg)]">
+      <p className="mt-6 text-xs text-muted-foreground">
         Last updated: Aug 2025
       </p>
     </main>

@@ -26,12 +26,12 @@ export default function ChangelogItem({
         <h3 className="text-lg font-semibold">{version}</h3>
         <time
           dateTime={date}
-          className="font-mono text-xs text-[var(--muted-fg)]"
+          className="font-mono text-xs text-muted-foreground"
         >
           {d}
         </time>
       </div>
-      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted-fg)]">
+      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
         {bullets.map((b, i) => (
           <li key={i}>{b}</li>
         ))}

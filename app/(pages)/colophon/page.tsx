@@ -1,6 +1,6 @@
 export default function ColophonPage() {
   return (
-    <main className="mx-auto max-w-6xl min-h-screen px-4 py-12">
+    <main className="mx-auto max-w-4xl min-h-screen px-4 py-12">
       <h1 className="text-2xl font-semibold tracking-tight">Colophon</h1>
       <p className="mt-2 text-sm text-neutral-500">
         Notes about how this site is built and run.
@@ -15,10 +15,64 @@ export default function ColophonPage() {
         <li>TypeScript</li>
       </ul>
 
+      <h2 className="text-base font-semibold tracking-tight mt-8">
+        Content &amp; blog (MDX)
+      </h2>
+      <ul className="list-disc list-inside text-md space-y-1">
+        <li>
+          Posts are written in <code>.mdx</code> and live under{' '}
+          <code>/content/blog</code>. Each file has frontmatter:
+          <ul className="ml-6 list-[circle]">
+            <li>
+              <code>title</code>, <code>summary</code>, <code>tags</code>,{' '}
+              <code>date</code>, <code>draft</code>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Rendering uses{' '}
+          <a
+            href="https://github.com/hashicorp/next-mdx-remote"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline after:content-['↗']"
+          >
+            next-mdx-remote (RSC)
+          </a>{' '}
+          with{' '}
+          <a
+            href="https://github.com/remarkjs/remark-gfm"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline after:content-['↗']"
+          >
+            remark-gfm
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://shiki.style/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline after:content-['↗']"
+          >
+            rehype-shiki
+          </a>{' '}
+          for code highlighting (GitHub light/dark themes).
+        </li>
+        <li>
+          Custom MDX components power callouts, code blocks with copy buttons,
+          and styled headings.
+        </li>
+        <li>
+          Blog routes are statically generated; drafts (<code>draft: true</code>
+          ) are excluded from production builds.
+        </li>
+      </ul>
+
       <h2 className="text-base font-semibold tracking-tight mt-8">Fonts</h2>
       <ul className="list-disc list-inside text-md">
         <li>
-          Monaspace Neon{" "}
+          Monaspace Neon{' '}
           <a
             href="https://github.com/githubnext/monaspace"
             target="_blank"
@@ -62,7 +116,19 @@ export default function ColophonPage() {
         <li>Terminal : Ghostty</li>
         <li>Shell : Zsh</li>
         <li>
-          Dotfiles :{" "}
+          Prompt: oh-my-posh{' '}
+          <a
+            href="https://ohmyposh.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline after:content-['↗']"
+          >
+            Link
+          </a>
+        </li>
+
+        <li>
+          Dotfiles :{' '}
           <a
             href="https://github.com/hdprajwal/dotfiles"
             target="_blank"

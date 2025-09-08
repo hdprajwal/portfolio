@@ -40,10 +40,10 @@ export default function NotFound() {
             className="pointer-events-none absolute inset-x-0 bottom-0 h-32 -z-10 bg-gradient-to-b from-transparent to-[var(--bg)]"
           />
 
-          <div className="container mx-auto max-w-6xl px-4 py-20">
+          <div className="container mx-auto max-w-4xl px-4 py-20">
             {/* Header / logo */}
             <div className="mb-6 flex items-center gap-2">
-              <span className="text-[var(--muted-fg)]">/ 404</span>
+              <span className="text-muted-foreground">/ 404</span>
             </div>
 
             {/* Terminal block */}
@@ -51,7 +51,7 @@ export default function NotFound() {
               <h1 className="mb-2 text-2xl font-bold tracking-tight">
                 File not found
               </h1>
-              <p className="mb-4 text-sm text-[var(--muted-fg)]">
+              <p className="mb-4 text-sm text-muted-foreground">
                 The path you requested doesn't exist or moved.
               </p>
 
@@ -86,7 +86,7 @@ export default function NotFound() {
                   Read the blog
                 </Link>
               </div>
-              <div className="mt-6 text-xs text-[var(--muted-fg)]">
+              <div className="mt-6 text-xs text-muted-foreground">
                 If you believe this is a broken link,{' '}
                 <a
                   className="underline"
@@ -119,7 +119,7 @@ function Line({
     );
   return (
     <div className="flex items-start gap-2">
-      <span className="text-[var(--muted-fg)]">{prompt}</span>
+      <span className="text-muted-foreground">{prompt}</span>
       <code className="text-[var(--chip-fg)]">{cmd}</code>
     </div>
   );

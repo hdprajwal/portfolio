@@ -1,16 +1,31 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BashTyping from './BashTyping';
 
-export default function Hero({ now }: { now: string }) {
+export default function Hero() {
   const [showOutput, setShowOutput] = useState(false);
+  const [now, setNow] = useState<string>('');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const fmt = new Intl.DateTimeFormat(undefined, {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'America/Indiana/Indianapolis',
+    });
+    const update = () => setNow(fmt.format(new Date()));
+    update();
+    const id = setInterval(update, 60_000);
+    return () => clearInterval(id);
+  }, []);
   return (
-    <header className="relative isolate overflow-hidden">
+    <section className="relative isolate overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-12 -z-10 bg-gradient-to-b  from-[var(--bg)] to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-12 -z-10 bg-gradient-to-b  from-background to-transparent"
       />
       <div
         aria-hidden
@@ -18,55 +33,54 @@ export default function Hero({ now }: { now: string }) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-20 [background:repeating-linear-gradient(90deg,var(--grid)_0_1px,transparent_1px_48px),repeating-linear-gradient(0deg,var(--grid)_0_1px,transparent_1px_48px)]"
+        className="pointer-events-none absolute inset-0 -z-20 [background:repeating-linear-gradient(90deg,var(--foreground)_0_1px,transparent_1px_48px),repeating-linear-gradient(0deg,var(--foreground)_0_1px,transparent_1px_48px)] opacity-[0.08]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-12 -z-10 bg-gradient-to-b from-transparent to-[var(--bg)]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-12 -z-10 bg-gradient-to-b from-transparent to-background"
       />
 
-      <div className="container mx-auto max-w-6xl px-4 py-24">
-        <div className="flex flex-col gap-4 sm:gap-4">
+      <div className="container mx-auto max-w-4xl px-6 md:px-8 py-32 md:py-40">
+        <div className="flex flex-col gap-6 sm:gap-8">
           <BashTyping prompt="whoami" onDone={() => setShowOutput(true)} />
           <div
-            className={`transition-all duration-500 font-mono border-l border-[var(--border)] pl-2 ${
+            className={`transition-all duration-500 font-mono border-l border-[var(--border)] pl-3 md:pl-4 space-y-5 sm:space-y-6 ${
               showOutput
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-1'
             }`}
             aria-hidden={!showOutput}
           >
-            <h1 className="bg-gradient-to-r from-[var(--fg)] to-[var(--accent)] bg-clip-text text-transparent font-extrabold leading-tight tracking-tight text-[clamp(2.25rem,8vw,4.75rem)] not-italic normal-case">
-              Prajwal
+            <h1 className="text-foreground bg-clip-text font-extrabold leading-tight tracking-tight text-[clamp(2.25rem,8vw,4.75rem)] not-italic normal-case">
+              Prajwal HD
             </h1>
-            <h2 className="text-xl sm:text-2xl font-semibold text-[var(--fg)] not-italic">
-              Security × AI (Grad Researcher)
+            <h2 className="text-xl sm:text-3xl font-semibold text-foreground not-italic">
+              Software Engineer
             </h2>
-            <p className="max-w-3xl text-base sm:text-lg text-[var(--muted-fg)]">
-              Software Engineer and Security Researcher focusing on AI, and
-              Security. Researching Static malware detection at Purdue Fort
-              Wayne.
+            <p className="max-w-2xl text-base sm:text-lg text-muted-fg">
+              I build reliable services with clean APIs and strong observability.
+              MS CS @ Purdue Fort Wayne. Security background and practical AI
+              experience.
             </p>
-            <div className="flex flex-wrap items-center gap-3 mt-4">
+            <div className="flex flex-wrap items-center gap-3">
               <EmailButton email="hdprajwal01@gmail.com" />
               <AboutButton href="/about" />
               <Link
                 href="#projects"
-                className="inline-flex items-center rounded-md border border-[var(--border)] px-4 py-2 text-sm font-medium bg-[var(--bg)] hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
+                className="inline-flex items-center rounded-md border border-[var(--border)] px-4 py-2 text-sm font-medium bg-background hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
               >
                 View projects
               </Link>
-              {/* <SSHChip email="hdprajwal01@gmail.com" /> */}
               <CurlChip />
             </div>
-            <div className="mt-2 sm:mt-4 text-sm text-[var(--muted-fg)]">
-              It’s <span className="font-mono">{now || '--:--'}</span> for me —
+            <div className="text-sm text-muted-foreground">
+              It's <span className="font-mono">{mounted ? now : '--:--'}</span> for me —
               replies in &lt;24h.
             </div>
           </div>
         </div>
       </div>
-    </header>
+    </section>
   );
 }
 
@@ -74,7 +88,7 @@ function EmailButton({ email }: { email: string }) {
   return (
     <Link
       href={`mailto:${email}`}
-      className="inline-flex items-center rounded-md bg-[var(--fg)] px-4 py-2 text-sm font-medium text-[var(--bg)] hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
+      className="inline-flex items-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
     >
       Email me
     </Link>
@@ -85,7 +99,7 @@ function AboutButton({ href }: { href: string }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center rounded-md border border-[var(--border)] px-4 py-2 text-sm font-medium bg-[var(--bg)] hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
+      className="inline-flex items-center rounded-md border border-[var(--border)] px-4 py-2 text-sm font-medium bg-background hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
     >
       About me
     </Link>

@@ -9,7 +9,7 @@ export default function SectionHeader({
 }) {
   return (
     <div className="mb-6">
-      <p className="font-mono text-xs uppercase tracking-wider text-[var(--muted-fg)]">
+      <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
         {eyebrow}
       </p>
       <h2 className="mt-1 text-2xl font-semibold tracking-tight">{title}</h2>

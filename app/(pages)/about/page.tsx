@@ -98,6 +98,18 @@ const AboutMe = {
         from: 'Jan 2024',
         to: 'Present',
       },
+      summary: (
+        <div className="space-y-1">
+          <div>
+            Activities & Research: Thesis on Static Malware Detection Across
+            Modalities (Static Analysis)
+          </div>
+          <div>
+            Relevant Coursework: Application of Deep Learning, Cryptography &
+            Network Security, NLP, Algorithm Design, Database Systems.
+          </div>
+        </div>
+      ),
     },
     {
       organization: 'Govt. S.K.S.J Technological Institute, Bangalore, India',
@@ -108,14 +120,15 @@ const AboutMe = {
         from: 'Aug 2017',
         to: 'Jul 2021',
       },
+      summary: '',
     },
   ],
 };
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12">
-      <h1 className="text-2xl font-semibold tracking-tight">About</h1>
+    <main className="mx-auto max-w-4xl px-4 py-12">
+      <h1 className="text-2xl font-semibold tracking-tight">About Me</h1>
       <p className="mt-2 text-sm text-neutral-500">
         Education, experience, and background.
       </p>
@@ -129,12 +142,17 @@ export default function AboutPage() {
                 <h3 className="font-medium">
                   {edu.degree} in {edu.major}
                 </h3>
-                <p className="text-sm text-[var(--muted-fg)]">
+                <p className="text-sm text-muted-foreground">
                   {edu.organization}
                 </p>
-                <p className="text-xs text-[var(--muted-fg)]">
+                <p className="text-xs text-muted-foreground">
                   {edu.dates.from} - {edu.dates.to}
                 </p>
+                {edu.summary && (
+                  <div className="mt-2 text-xs text-muted-foreground">
+                    {edu.summary}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -149,7 +167,7 @@ export default function AboutPage() {
                   <h3 className="text-lg font-semibold">
                     {company.organization}
                   </h3>
-                  <p className="text-sm text-[var(--muted-fg)]">
+                  <p className="text-sm text-muted-foreground">
                     {company.location}
                   </p>
                 </div>
@@ -161,10 +179,10 @@ export default function AboutPage() {
                       className="border-l border-[var(--border)] border-opacity-50 pl-4"
                     >
                       <h4 className="font-medium">{role.jobTitle}</h4>
-                      <p className="text-sm text-[var(--muted-fg)]">
+                      <p className="text-sm text-muted-foreground">
                         {role.jobType} • {role.dates.from} - {role.dates.to}
                       </p>
-                      <ul className="mt-2 text-sm text-[var(--muted-fg)] list-disc list-inside space-y-1">
+                      <ul className="mt-2 text-sm text-muted-foreground list-disc list-inside space-y-1">
                         {role.job_descriptions.map(
                           (description: string, idx: number) => (
                             <li key={idx}>{description}</li>

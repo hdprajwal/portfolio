@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import SiteHeader from "@/components/SiteHeader";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -6,6 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="bg-[var(--bg)] text-[var(--fg)]">
         <SiteHeader />
         <div className="min-h-screen">{children}</div>
+        <Footer />
       </div>
     </main>
   );

@@ -30,12 +30,12 @@ export default function BlogItem({
           <h3 className="text-lg font-medium group-hover:underline">{title}</h3>
           <time
             dateTime={date}
-            className="font-mono text-xs text-[var(--muted-fg)]"
-          >
+            className="font-mono text-xs text-muted-foreground"
+          >``
             {d}
           </time>
         </div>
-        <p className="mt-1 text-sm text-[var(--muted-fg)]">{summary}</p>
+        <p className="mt-1 text-sm text-muted-foreground">{summary}</p>
       </Link>
     </li>
   );

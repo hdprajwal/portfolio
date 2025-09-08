@@ -46,7 +46,7 @@ export default function BashTyping({
   }, []);
 
   return (
-    <div className="font-mono text-md text-[var(--muted-fg)]">
+    <div className="font-mono text-md text-muted-foreground">
       {out || "$"}
       {!stopped && <span className="ml-0.5 animate-pulse">|</span>}
     </div>
