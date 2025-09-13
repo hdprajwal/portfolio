@@ -9,6 +9,7 @@ export type Post = {
   summary?: string;
   tags?: string[];
   content?: string;
+  image?: string;
 };
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
@@ -44,6 +45,7 @@ export async function listPosts(): Promise<Post[]> {
         summary: data.summary,
         tags: data.tags || [],
         content: mdxContent,
+        image: data.image || data.cover || data.banner || undefined,
       };
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

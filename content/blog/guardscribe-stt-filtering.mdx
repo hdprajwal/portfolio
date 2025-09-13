@@ -3,6 +3,7 @@ title: 'GuardScribe: Real-time speech-to-text with toxicity filtering'
 summary: 'A simple pipeline that turns live audio into text, spots toxic language, and masks it before anyone sees it. You can pick speed or accuracy depending on your use case.'
 tags: [speech, nlp, moderation, realtime, whisper, wav2vec2, distilbert]
 date: 2025-08-25
+image: 'https://assets.hdprajwal.dev/blog/guardscribe_thumbnail.png'
 draft: false
 ---
 
@@ -50,7 +51,7 @@ Live audio is everywhere: streams, games, voice chat, assistants. Most moderatio
 
 ### Pseudocode snapshot
 
-```
+```bash
 # AudioCapture → queue
 while running:
   frame = mic.read()

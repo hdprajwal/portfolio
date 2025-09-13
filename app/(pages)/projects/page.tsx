@@ -1,6 +1,7 @@
 'use client';
 
 import ProjectCard, { Project } from '@/components/ProjectCard';
+import Reveal from '@/components/Reveal';
 
 
 const PROJECTS: Project[] = [
@@ -32,8 +33,10 @@ export default function ProjectsPage() {
       </header>
 
       <div className="mt-6 grid gap-6 md:grid-cols-2">
-        {PROJECTS.map((p) => (
-          <ProjectCard key={p.name} {...p} />
+        {PROJECTS.map((p, i) => (
+          <Reveal key={p.name} delay={i * 80}>
+            <ProjectCard {...p} />
+          </Reveal>
         ))}
       </div>
       {PROJECTS.length === 0 && (

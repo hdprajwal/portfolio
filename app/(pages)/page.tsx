@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import SectionHeader from '@/components/SectionHeader';
 import Card from '@/components/Card';
 import ProjectCard from '@/components/ProjectCard';
+import Reveal from '@/components/Reveal';
 import ContactSection from '@/components/ContactSection';
 import RecentBlogs from '@/components/RecentBlogs';
 
@@ -34,6 +35,7 @@ export default async function Home() {
       <section id="projects" className="container mx-auto max-w-4xl px-4 py-12">
         <SectionHeader eyebrow="Projects" title="A few things I built" />
         <div className="grid gap-6 md:grid-cols-2">
+          <Reveal>
           <ProjectCard
             name="DevAssist AI"
             tagline="AI Pair Programmer"
@@ -41,6 +43,8 @@ export default async function Home() {
             impact="Helps developers write code faster with AI suggestions"
             codeHref="https://github.com/hdprajwal/DevAssist_AI"
           />
+          </Reveal>
+          <Reveal delay={80}>
           <ProjectCard
             name="Podcast Creator (HF Space)"
             tagline="Text to podcast using Gemini"
@@ -49,6 +53,7 @@ export default async function Home() {
             codeHref="https://github.com/hdprajwal"
             liveHref="https://huggingface.co/spaces/hdprajwal/podcast-creator"
           />
+          </Reveal>
         </div>
         <div className="mt-6">
           <Link className="text-sm underline" href="/projects">

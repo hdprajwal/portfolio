@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { listPosts } from '@/lib/posts';
-import Card from '@/components/Card';
+import Reveal from '@/components/Reveal';
+import BlogCard from '@/components/BlogCard';
 
 export default async function RecentBlogs() {
   const posts = await listPosts();
@@ -13,26 +13,12 @@ export default async function RecentBlogs() {
   }
 
   return (
-    <ul className="space-y-4">
-      {recentPosts.map((post) => (
-        <li key={post.slug} className="">
-          <Link href={`/blog/${post.slug}`} className="block group">
-            <Card>
-              <h3 className="text-lg font-semibold group-hover:underline">
-                {post.title}
-              </h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </p>
-              {post.summary && (
-                <p className="text-sm text-muted-foreground mt-2">{post.summary}</p>
-              )}
-            </Card>
-          </Link>
+    <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {recentPosts.map((post, i) => (
+        <li key={post.slug}>
+          <Reveal delay={i * 80}>
+            <BlogCard post={post} />
+          </Reveal>
         </li>
       ))}
     </ul>

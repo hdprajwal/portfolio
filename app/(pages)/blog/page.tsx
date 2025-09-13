@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { listPosts } from '@/lib/posts';
+import Reveal from '@/components/Reveal';
+import BlogCard from '@/components/BlogCard';
 
 export default async function BlogIndexPage() {
   const posts = await listPosts();
@@ -12,41 +13,12 @@ export default async function BlogIndexPage() {
         </p>
       </header>
 
-      <ul className="mt-6 space-y-4">
-        {posts.map((p) => (
-          <li
-            key={p.slug}
-            className="rounded-md border border-[var(--border)] bg-[var(--card)] p-5"
-          >
-            <Link href={`/blog/${p.slug}`} className="group block">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                <h2 className="text-lg font-medium group-hover:underline">
-                  {p.title}
-                </h2>
-                <time
-                  dateTime={p.date}
-                  className="font-mono text-xs text-muted-foreground"
-                >
-                  {new Date(p.date).toLocaleDateString(undefined, {
-                    year: 'numeric',
-                    month: 'short',
-                    day: '2-digit',
-                  })}
-                </time>
-              </div>
-              <p className="mt-1 text-sm text-muted-foreground">{p.summary}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {p.tags &&
-                  p.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-md bg-[var(--chip)] px-2 py-1 font-mono text-[10px] text-[var(--chip-fg)] ring-1 ring-inset ring-[var(--border)]"
-                    >
-                      {t}
-                    </span>
-                  ))}
-              </div>
-            </Link>
+      <ul className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+        {posts.map((p, i) => (
+          <li key={p.slug}>
+            <Reveal delay={i * 60}>
+              <BlogCard post={p} />
+            </Reveal>
           </li>
         ))}
         {posts.length === 0 && (
