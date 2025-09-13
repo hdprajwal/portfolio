@@ -1,5 +1,3 @@
-'use client';
-
 import ProjectCard, { Project } from '@/components/ProjectCard';
 import Reveal from '@/components/Reveal';
 import type { Metadata } from 'next';
