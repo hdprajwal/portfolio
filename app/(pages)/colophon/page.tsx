@@ -142,3 +142,8 @@ export default function ColophonPage() {
     </main>
   );
 }
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Colophon',
+};

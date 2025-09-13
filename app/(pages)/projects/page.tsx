@@ -2,6 +2,7 @@
 
 import ProjectCard, { Project } from '@/components/ProjectCard';
 import Reveal from '@/components/Reveal';
+import type { Metadata } from 'next';
 
 
 const PROJECTS: Project[] = [
@@ -47,3 +48,7 @@ export default function ProjectsPage() {
     </main>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Projects',
+};

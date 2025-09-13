@@ -27,3 +27,8 @@ export default function NowPage() {
     </main>
   );
 }
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Now',
+};

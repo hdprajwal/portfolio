@@ -1,6 +1,7 @@
 import { listPosts } from '@/lib/posts';
 import Reveal from '@/components/Reveal';
 import BlogCard from '@/components/BlogCard';
+import type { Metadata } from 'next';
 
 export default async function BlogIndexPage() {
   const posts = await listPosts();
@@ -30,3 +31,7 @@ export default async function BlogIndexPage() {
     </main>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Blogs',
+};

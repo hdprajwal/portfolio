@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import SectionHeader from '@/components/SectionHeader';
 import Card from '@/components/Card';
@@ -75,3 +76,7 @@ export default async function Home() {
     </div>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Home',
+};

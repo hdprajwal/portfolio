@@ -200,3 +200,8 @@ export default function AboutPage() {
     </main>
   );
 }
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About',
+};

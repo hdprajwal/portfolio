@@ -27,14 +27,14 @@ export async function generateMetadata({
   let post = posts.find((post: Post) => post.slug === slug);
 
   if (!post) {
-    return { title: 'Post Not Found — Prajwal HD' };
+    return { title: 'Post Not Found' };
   }
 
   let { title, date: publishedTime, summary: description } = post;
   let ogImage = `${baseUrl}/og?title=${encodeURIComponent(title)}`;
 
   return {
-    title: `${title} — Prajwal HD`,
+    title,
     description,
     openGraph: {
       title,
