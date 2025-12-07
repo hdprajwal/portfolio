@@ -6,6 +6,15 @@ import rehypeShiki from '@shikijs/rehype';
 const nextConfig = {
   experimental: {},
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'assets.hdprajwal.dev',
+        port: '',
+        pathname: '/**',
+      },
+    ],  },
 };
 
 const withMDX = createMDX({
@@ -13,25 +22,26 @@ const withMDX = createMDX({
   options: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
-      [rehypeShiki, {
-        themes: {
-          light: 'github-light',
-          dark: 'github-dark',
+      [
+        rehypeShiki,
+        {
+          themes: {
+            light: 'github-light',
+            dark: 'github-dark',
+          },
+          defaultColor: false,
+          cssVariablePrefix: '--shiki-',
         },
-        defaultColor: false,
-        cssVariablePrefix: '--shiki-',
-      }]
+      ],
     ],
   },
-  experimental:{
+  experimental: {
     mdxRs: {
       jsxRuntime: 'automatic',
       jsxImportSource: 'react',
       mdxType: 'gfm',
     },
-  }
+  },
 });
 
 export default withMDX(nextConfig);
-
-
