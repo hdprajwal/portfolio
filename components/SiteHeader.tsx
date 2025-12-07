@@ -12,33 +12,33 @@ export default function SiteHeader() {
     setMounted(true);
   }, []);
   return (
-    <header className="bg-transparent backdrop-blur-lg sticky top-0 z-50">
-      <div className="container mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
+    <header className="grid-row sticky top-0 z-50 bg-[var(--background)]/80 backdrop-blur-md supports-[backdrop-filter]:bg-[var(--background)]/60">
+      <div className="flex items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2">
           <span
             aria-hidden
             className="inline-flex h-7 w-7 items-center justify-center"
           >
             <Image
-              src="/favicon-dark.svg"
+              src="/icon.png"
               alt="Prajwal HD"
-              width={24}
-              height={24}
+              width={28}
+              height={28}
             />
           </span>
-          <span className="font-semibold tracking-tight">Prajwal HD</span>
+          {/* <span className="font-semibold tracking-tight">Prajwal HD</span> */}
         </Link>
 
         <div className="flex items-center gap-4">
-          <Link href="/about" className="text-sm hover:underline">
-            About
+          <Link href="/about" className="text-sm hover:text-[var(--accent)] transition-colors">
+            [About]
           </Link>
 
-          <Link href="/projects" className="text-sm hover:underline">
-            Projects
+          <Link href="/projects" className="text-sm hover:text-[var(--accent)] transition-colors">
+            [Projects]
           </Link>
-          <Link href="/blog" className="text-sm hover:underline">
-            Blog
+          <Link href="/blog" className="text-sm hover:text-[var(--accent)] transition-colors">
+            [Blog]
           </Link>
           {mounted && theme === 'dark' ? (
             <button

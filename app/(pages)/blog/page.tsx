@@ -6,29 +6,28 @@ import type { Metadata } from 'next';
 export default async function BlogIndexPage() {
   const posts = await listPosts();
   return (
-    <main className="container mx-auto max-w-4xl px-4 py-12">
-      <header className="mb-8">
-        <h1 className="text-3xl font-semibold tracking-tight">Writing</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+    <div className="flex-1 bg-background">
+      <section className="grid-row p-6">
+        <h1 className="text-3xl font-semibold tracking-tight mb-2">Writing</h1>
+        <p className="text-sm text-muted-foreground">
           Essays, notes, and quick TILs.
         </p>
-      </header>
+      </section>
 
-      <ul className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {posts.map((p, i) => (
-          <li key={p.slug}>
-            <Reveal delay={i * 60}>
-              <BlogCard post={p} />
-            </Reveal>
-          </li>
-        ))}
-        {posts.length === 0 && (
-          <li className="rounded-md border border-[var(--border)] bg-[var(--card)] p-6 text-muted-foreground">
+      {posts.map((p, i) => (
+        <Reveal key={p.slug} delay={i * 60}>
+          <BlogCard post={p} />
+        </Reveal>
+      ))}
+
+      {posts.length === 0 && (
+        <div className="grid-row p-6">
+          <p className="text-muted-foreground">
             No posts yet.
-          </li>
-        )}
-      </ul>
-    </main>
+          </p>
+        </div>
+      )}
+    </div>
   );
 }
 

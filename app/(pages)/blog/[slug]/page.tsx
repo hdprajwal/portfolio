@@ -6,7 +6,6 @@ import { CustomMDX } from '@/components/MDX';
 import ReadingProgress from '@/components/ReadingProgress';
 import { formatDate, getBlogPosts, baseUrl } from '@/lib/posts';
 import { type Post } from '@/lib/posts';
-import ArticleToc from '@/components/ArticleToc';
 import SidebarActions from '@/components/SidebarActions';
 
 export async function generateStaticParams() {
@@ -81,8 +80,13 @@ export default async function Blog({
   const isExternalImg = /^https?:\/\//.test(heroImage);
 
   return (
-    <main className="container mx-auto max-w-4xl px-4 py-10 md:py-12 overflow-x-hidden min-h-screen relative">
+    <main className="container mx-auto max-w-4xl px-4 py-10 md:py-12 overflow-x-hidden min-h-screen relative bg-background">
       <ReadingProgress targetSelector="article" />
+
+      {/* Floating share actions - positioned outside main column */}
+      <div className="hidden xl:block fixed right-8 top-1/2 -translate-y-1/2 z-10">
+        <SidebarActions url={shareUrl} title={post.title} />
+      </div>
       <div className="mb-6 mx-auto w-full max-w-4xl">
         <Link
           href="/blog"
@@ -127,7 +131,7 @@ export default async function Blog({
           )}
         </header>
 
-      <section className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_200px]">
+      <section className="mx-auto w-full max-w-4xl">
         <div className="mx-auto w-full max-w-4xl min-w-0">
         <script
           type="application/ld+json"
@@ -177,12 +181,6 @@ export default async function Blog({
           )}
         </div>
         </div>
-        <aside className="hidden lg:block self-start sticky top-24 h-fit">
-          <div className="w-[200px] space-y-6">
-            <SidebarActions url={shareUrl} title={post.title} />
-            <ArticleToc targetSelector="article" headings="h2, h3" />
-          </div>
-        </aside>
       </section>
     </main>
   );

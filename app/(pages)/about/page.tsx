@@ -127,7 +127,7 @@ const AboutMe = {
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-4xl px-4 py-12">
+    <main className="mx-auto max-w-4xl px-4 py-12 bg-background grid-row">
       <h1 className="text-2xl font-semibold tracking-tight">About Me</h1>
       <p className="mt-2 text-sm text-neutral-500">
         Education, experience, and background.

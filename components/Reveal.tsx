@@ -37,7 +37,7 @@ export default function Reveal({ children, className = '', delay = 0 }: RevealPr
           }
         });
       },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.15 }
+      { rootMargin: '0px 0px 100px 0px', threshold: 0.01 }
     );
 
     observer.observe(node);
@@ -47,8 +47,8 @@ export default function Reveal({ children, className = '', delay = 0 }: RevealPr
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 will-change-transform ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+      className={`transition-all duration-700 ${
+        visible ? 'opacity-100' : 'opacity-0'
       } ${className}`}
     >
       {children}

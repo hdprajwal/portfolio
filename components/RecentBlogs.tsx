@@ -13,14 +13,12 @@ export default async function RecentBlogs() {
   }
 
   return (
-    <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <>
       {recentPosts.map((post, i) => (
-        <li key={post.slug}>
-          <Reveal delay={i * 80}>
-            <BlogCard post={post} />
-          </Reveal>
-        </li>
+        <Reveal key={post.slug} delay={i * 80}>
+          <BlogCard post={post} />
+        </Reveal>
       ))}
-    </ul>
+    </>
   );
 }

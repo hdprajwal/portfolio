@@ -1,5 +1,3 @@
-import BashTyping from "@/components/BashTyping";
-
 export default function SectionHeader({
   eyebrow,
   title,
@@ -8,11 +6,15 @@ export default function SectionHeader({
   title: string;
 }) {
   return (
-    <div className="mb-6">
-      <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-        {eyebrow}
-      </p>
-      <h2 className="mt-1 text-2xl font-semibold tracking-tight">{title}</h2>
+    <div className="">
+      <div className="bg-white/5 px-4 py-3 border-none border-[var(--border)] flex justify-between items-center">
+        <span className="font-mono text-sm uppercase tracking-wider text-muted-foreground font-bold">
+          {eyebrow}
+        </span>
+        <span className="font-mono text-sm text-muted-foreground/50">
+          {title}
+        </span>
+      </div>
     </div>
   );
 }

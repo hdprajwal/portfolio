@@ -23,27 +23,28 @@ const PROJECTS: Project[] = [
 
 export default function ProjectsPage() {
   return (
-    <main className="container mx-auto max-w-4xl px-4 py-12">
-      <header className="mb-8">
-        <h1 className="text-3xl font-semibold tracking-tight">Projects</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+    <div className="flex-1 bg-background">
+      <section className="grid-row p-6 py-12">
+        <h1 className="text-3xl font-semibold tracking-tight mb-2">Projects</h1>
+        <p className="text-sm text-muted-foreground">
           A few builds and experiments.
         </p>
-      </header>
+      </section>
 
-      <div className="mt-6 grid gap-6 md:grid-cols-2">
-        {PROJECTS.map((p, i) => (
-          <Reveal key={p.name} delay={i * 80}>
-            <ProjectCard {...p} />
-          </Reveal>
-        ))}
-      </div>
+      {PROJECTS.map((p, i) => (
+        <Reveal key={p.name} delay={i * 80}>
+          <ProjectCard {...p} />
+        </Reveal>
+      ))}
+
       {PROJECTS.length === 0 && (
-        <div className="rounded-md border border-[var(--border)] bg-[var(--card)] p-6 text-muted-foreground">
-          No projects found. Try another tag or search.
+        <div className="grid-row p-6">
+          <p className="text-muted-foreground">
+            No projects found. Try another tag or search.
+          </p>
         </div>
       )}
-    </main>
+    </div>
   );
 }
 

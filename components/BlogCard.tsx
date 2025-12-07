@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import type { Post } from '@/lib/posts';
 
 export default function BlogCard({ post }: { post: Post }) {
@@ -9,52 +8,38 @@ export default function BlogCard({ post }: { post: Post }) {
     day: '2-digit',
   });
 
-  const isExternal = typeof post.image === 'string' && /^https?:\/\//.test(post.image);
-
   return (
-    <Link href={`/blog/${post.slug}`} className="group block">
-      <article className="overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card)]">
-        <div className="relative aspect-[16/9] w-full bg-[var(--muted)]">
-          {post.image ? (
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              unoptimized={isExternal}
-              priority={false}
-            />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--muted)] to-[var(--accent)]" />
-          )}
-        </div>
-        <div className="p-4">
-          <h3 className="text-base sm:text-lg font-semibold group-hover:underline">
-            {post.title}
-          </h3>
+    <Link href={`/blog/${post.slug}`} className="group block grid-row p-6 transition-colors hover:bg-[var(--muted)]">
+      <article>
+        <div className="flex justify-between items-start mb-3">
+          <span className="text-xs border px-2 py-0.5 rounded tracking-wide text-term-yellow border-term-yellow/30">
+            BLOG
+          </span>
           <time
             dateTime={post.date}
-            className="mt-1 block font-mono text-[11px] text-muted-foreground"
+            className="font-mono text-[11px] text-muted-foreground"
           >
             {dateStr}
           </time>
-          {post.summary && (
-            <p className="mt-2 text-sm text-muted-foreground">{post.summary}</p>
-          )}
-          {post.tags && post.tags.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {post.tags.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-md bg-[var(--chip)] px-2 py-1 font-mono text-[10px] text-[var(--chip-fg)] ring-1 ring-inset ring-[var(--border)]"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          )}
         </div>
+
+        <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--accent)] transition-colors">
+          {post.title}
+        </h3>
+        {post.summary && (
+          <p className="text-sm text-muted-foreground leading-relaxed">{post.summary}</p>
+        )}
+
+        {post.tags && post.tags.length > 0 && (
+          <div className="mt-4 pt-4 border-t border-dashed border-[var(--border)] flex flex-wrap gap-3 text-xs text-muted-foreground font-bold">
+            {post.tags.map((t, idx) => (
+              <span key={t}>
+                {idx > 0 && <span className="mr-3">•</span>}
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
       </article>
     </Link>
   );

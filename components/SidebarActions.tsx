@@ -12,33 +12,40 @@ export default function SidebarActions({ url, title }: { url: string; title: str
   const itemBase =
     'flex items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]';
 
+  const chipClass = "flex items-center justify-center w-9 h-9 rounded-full bg-[var(--chip)] text-[var(--chip-fg)] hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] transition-colors ring-1 ring-inset ring-[var(--border)]";
+
   return (
-    <div className="mb-6">
-      <div className="mb-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-        Share
-      </div>
-      <div className="flex flex-col gap-1.5">
-        <a className={itemBase} href={x} target="_blank" rel="noreferrer noopener">
-          <Twitter className="h-4 w-4" />
-          <span>Share on X</span>
-        </a>
-        <a className={itemBase} href={li} target="_blank" rel="noreferrer noopener">
-          <Linkedin className="h-4 w-4" />
-          <span>LinkedIn</span>
-        </a>
-        <button
-          className={itemBase}
-          onClick={async () => {
-            await navigator.clipboard.writeText(url);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1200);
-          }}
-          aria-label="Copy link"
-        >
-          {copied ? <Check className="h-4 w-4" /> : <LinkIcon className="h-4 w-4" />}
-          <span>{copied ? 'Copied' : 'Copy link'}</span>
-        </button>
-      </div>
+    <div className="flex flex-col gap-2">
+      <a
+        className={chipClass}
+        href={x}
+        target="_blank"
+        rel="noreferrer noopener"
+        title="Share on X"
+      >
+        <Twitter className="h-4 w-4" />
+      </a>
+      <a
+        className={chipClass}
+        href={li}
+        target="_blank"
+        rel="noreferrer noopener"
+        title="Share on LinkedIn"
+      >
+        <Linkedin className="h-4 w-4" />
+      </a>
+      <button
+        className={chipClass}
+        onClick={async () => {
+          await navigator.clipboard.writeText(url);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1200);
+        }}
+        aria-label="Copy link"
+        title={copied ? 'Copied!' : 'Copy link'}
+      >
+        {copied ? <Check className="h-4 w-4" /> : <LinkIcon className="h-4 w-4" />}
+      </button>
     </div>
   );
 }

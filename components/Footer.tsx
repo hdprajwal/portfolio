@@ -23,13 +23,13 @@ export default function Footer() {
     return () => clearInterval(id);
   }, []);
   return (
-    <footer className="border-t border-[var(--border)] py-10">
-      <div className="container mx-auto flex max-w-4xl flex-col items-start justify-between gap-4 px-4 sm:flex-row sm:items-center">
+    <footer className="grid-row p-6">
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <p className="text-sm text-muted-foreground">
           © {mounted ? currentYear : 2025} Prajwal HD
         </p>
         <div className="flex flex-wrap items-center gap-3 text-xs">
-          <Link href="/colophon" className="underline">
+          <Link href="/colophon" className="underline hover:text-[var(--accent)] transition-colors">
             colophon
           </Link>
           <span className="text-muted-foreground">
