@@ -1,119 +1,179 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from '@/components/ui/command';
+import {
+  Home,
+  User,
+  Newspaper,
+  FolderGit2,
+  Lightbulb,
+  Clock,
+  FileText,
+  Mountain,
+  Wrench,
+  Mail,
+  Copy,
+  Sun,
+  Moon,
+} from 'lucide-react';
+import { baseUrl } from '@/lib/site';
 
-type Item = {
-  id: string;
-  label: string;
-  hint?: string;
-  onSelect?: () => void;
-  href?: string;
-};
+const navigationItems = [
+  { icon: Home, label: 'Home', href: '/', keywords: ['home', 'main'] },
+  { icon: User, label: 'About', href: '/about', keywords: ['about', 'bio'] },
+  {
+    icon: Newspaper,
+    label: 'Blogs',
+    href: '/blog',
+    keywords: ['blog', 'posts', 'writing'],
+  },
+  {
+    icon: FolderGit2,
+    label: 'Projects',
+    href: '/projects',
+    keywords: ['projects', 'work', 'portfolio'],
+  },
+  {
+    icon: Lightbulb,
+    label: 'TILs',
+    href: '/tils',
+    keywords: ['til', 'today i learned', 'learning'],
+  },
+  { icon: Clock, label: 'Now', href: '/now', keywords: ['now', 'current'] },
+  {
+    icon: FileText,
+    label: 'Resume',
+    href: '/resume',
+    keywords: ['resume', 'cv'],
+  },
+  {
+    icon: Mountain,
+    label: 'Bucket List',
+    href: '/bucket-list',
+    keywords: ['bucket', 'goals', 'dreams'],
+  },
+  {
+    icon: FileText,
+    label: 'Colophon',
+    href: '/colophon',
+    keywords: ['colophon', 'site'],
+  },
+];
 
 export default function CommandMenu() {
   const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState('');
+  const router = useRouter();
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      const isK = e.key.toLowerCase() === 'k';
-      if ((e.metaKey || e.ctrlKey) && isK) {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen((v) => !v);
-      } else if (e.key === 'Escape') {
-        setOpen(false);
+        setOpen((open) => !open);
       }
     };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
   }, []);
 
-  const items = useMemo<Item[]>(
-    () => [
-      { id: 'home', label: 'Home', href: '/' },
-      { id: 'about', label: 'About', href: '/about' },
-      { id: 'projects', label: 'Projects', href: '/projects' },
-      { id: 'blog', label: 'Blog', href: '/blog' },
-      {
-        id: 'toggle-theme',
-        label: theme === 'dark' ? 'Switch to Light' : 'Switch to Dark',
-        hint: 'Theme',
-        onSelect: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
-      },
-    ],
-    [theme, setTheme]
-  );
+  const handleSelect = (callback: () => void) => {
+    setOpen(false);
+    callback();
+  };
 
-  const filtered = items.filter((i) =>
-    i.label.toLowerCase().includes(query.toLowerCase())
-  );
-
-  if (!open) return null;
+  const copyToClipboard = async (text: string) => {
+    await navigator.clipboard.writeText(text);
+  };
 
   return (
-    <div
-      role="dialog"
-      aria-modal
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 p-4 backdrop-blur-sm"
-      onClick={() => setOpen(false)}
+    <CommandDialog
+      open={open}
+      onOpenChange={setOpen}
+      title="Command Menu"
+      description="Quick navigation and actions"
+      showCloseButton
+      className="sm:max-w-lg"
     >
-      <div
-        className="w-full max-w-xl overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--card)] shadow-xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center gap-2 border-b px-3 py-2">
-          <input
-            autoFocus
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type a command or search..."
-            className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-          />
-          <kbd className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
-            Esc
-          </kbd>
-        </div>
-        <ul className="max-h-[60vh] overflow-y-auto p-1">
-          {filtered.map((i) => (
-            <li key={i.id} className="">
-              {i.href ? (
-                <Link
-                  href={i.href}
-                  className="flex items-center justify-between rounded-md px-2 py-2 text-sm hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
-                  onClick={() => setOpen(false)}
+      <Command>
+        <CommandInput placeholder="Type a command or search..." />
+        <CommandList className="max-h-96">
+          <CommandEmpty>No results found.</CommandEmpty>
+
+          <CommandGroup heading="Navigation">
+            {navigationItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <CommandItem
+                  key={item.href}
+                  value={`${item.label} ${item.keywords.join(' ')}`}
+                  onSelect={() => handleSelect(() => router.push(item.href))}
                 >
-                  <span>{i.label}</span>
-                  {i.hint && (
-                    <span className="text-xs text-muted-foreground">{i.hint}</span>
-                  )}
-                </Link>
-              ) : (
-                <button
-                  className="flex w-full items-center justify-between rounded-md px-2 py-2 text-left text-sm hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
-                  onClick={() => {
-                    setOpen(false);
-                    i.onSelect?.();
-                  }}
-                >
-                  <span>{i.label}</span>
-                  {i.hint && (
-                    <span className="text-xs text-muted-foreground">{i.hint}</span>
-                  )}
-                </button>
-              )}
-            </li>
-          ))}
-          {filtered.length === 0 && (
-            <li className="px-2 py-4 text-center text-sm text-muted-foreground">
-              No results
-            </li>
-          )}
-        </ul>
-      </div>
-    </div>
+                  <Icon />
+                  <span>{item.label}</span>
+                </CommandItem>
+              );
+            })}
+          </CommandGroup>
+
+          <CommandSeparator />
+
+          <CommandGroup heading="Actions">
+            <CommandItem
+              value="copy email contact"
+              onSelect={() =>
+                handleSelect(() => copyToClipboard('hdprajwal01@gmail.com'))
+              }
+            >
+              <Mail />
+              <span>Copy Email</span>
+            </CommandItem>
+            <CommandItem
+              value="copy resume url download"
+              onSelect={() =>
+                handleSelect(() =>
+                  copyToClipboard(`${baseUrl}/resume.pdf`)
+                )
+              }
+            >
+              <Copy />
+              <span>Copy Resume URL</span>
+            </CommandItem>
+          </CommandGroup>
+
+          <CommandSeparator />
+
+          <CommandGroup heading="Theme">
+            <CommandItem
+              value="light theme"
+              onSelect={() => handleSelect(() => setTheme('light'))}
+            >
+              <Sun />
+              <span>Light Mode</span>
+            </CommandItem>
+            <CommandItem
+              value="dark theme"
+              onSelect={() => handleSelect(() => setTheme('dark'))}
+            >
+              <Moon />
+              <span>Dark Mode</span>
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </Command>
+    </CommandDialog>
   );
 }
-

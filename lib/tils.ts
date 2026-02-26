@@ -3,17 +3,15 @@ import path from 'path';
 import matter from 'gray-matter';
 import { cache } from 'react';
 
-export type Post = {
+export type TIL = {
   slug: string;
   title: string;
   date: string;
-  summary?: string;
+  description: string;
   tags?: string[];
-  content?: string;
-  image?: string;
 };
 
-const BLOG_DIR = path.join(process.cwd(), 'content/blog');
+const TIL_DIR = path.join(process.cwd(), 'content/til');
 
 export { baseUrl } from '@/lib/site';
 
@@ -25,17 +23,17 @@ export function formatDate(date: string): string {
   });
 }
 
-export const listPosts = cache(async (): Promise<Post[]> => {
-  if (!fs.existsSync(BLOG_DIR)) {
+export const listTILs = cache(async (): Promise<TIL[]> => {
+  if (!fs.existsSync(TIL_DIR)) {
     return [];
   }
 
-  const files = fs.readdirSync(BLOG_DIR);
-  const posts = files
+  const files = fs.readdirSync(TIL_DIR);
+  const tils = files
     .filter((file) => file.endsWith('.mdx'))
     .map((file) => {
       const slug = file.replace('.mdx', '');
-      const filePath = path.join(BLOG_DIR, file);
+      const filePath = path.join(TIL_DIR, file);
       const content = fs.readFileSync(filePath, 'utf8');
       const { data, content: mdxContent } = matter(content);
 
@@ -43,21 +41,17 @@ export const listPosts = cache(async (): Promise<Post[]> => {
         slug,
         title: data.title || slug,
         date: data.date || '1970-01-01',
-        summary: data.summary,
+        description: data.description || '',
         tags: data.tags || [],
-        content: mdxContent,
-        image: data.image || data.cover || data.banner || undefined,
       };
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  return posts;
+  return tils;
 });
 
-export const getBlogPosts = listPosts;
-
-export async function getPost(slug: string) {
-  const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+export async function getTIL(slug: string) {
+  const filePath = path.join(TIL_DIR, `${slug}.mdx`);
 
   if (!fs.existsSync(filePath)) {
     return null;
@@ -70,9 +64,8 @@ export async function getPost(slug: string) {
     slug,
     title: data.title || slug,
     date: data.date || '1970-01-01',
-    summary: data.summary,
-    tags: data.tags || [],
+    description: data.description || '',
     content: mdxContent,
+    tags: data.tags || [],
   };
 }
-

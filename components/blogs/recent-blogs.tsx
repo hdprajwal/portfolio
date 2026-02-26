@@ -1,5 +1,5 @@
 import { listPosts } from '@/lib/posts';
-import BlogCard from '@/components/BlogCard';
+import BlogCard from '@/components/blogs/blog-card';
 
 export default async function RecentBlogs() {
   const posts = await listPosts();
@@ -7,14 +7,14 @@ export default async function RecentBlogs() {
 
   if (recentPosts.length === 0) {
     return (
-      <p className="text-sm text-muted-foreground">No blog posts found.</p>
+      <p className="text-muted-foreground text-sm">No blog posts found.</p>
     );
   }
 
   return (
     <div>
-      {recentPosts.map((post, i) => (
-        <BlogCard post={post} key={i} />
+      {recentPosts.map((post) => (
+        <BlogCard post={post} key={post.slug} />
       ))}
     </div>
   );

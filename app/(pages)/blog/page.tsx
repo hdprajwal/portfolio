@@ -1,32 +1,27 @@
 import { listPosts } from '@/lib/posts';
-import Reveal from '@/components/Reveal';
-import BlogCard from '@/components/BlogCard';
+import BlogCard from '@/components/blogs/blog-card';
 import type { Metadata } from 'next';
-import { Separator } from '@/components/ui/separator';
 
 export default async function BlogIndexPage() {
   const posts = await listPosts();
   return (
     <div className="flex-1">
-      <div className="px-4 pt-20 pb-10">
-        <h1 className="text-[2.5rem] font-extrabold tracking-tight leading-[1.2]">Blogs</h1>
-        <p className="text-[0.9rem] text-muted-foreground mt-2">
+      <div className="px-4 py-14">
+        <h1 className="text-xl font-medium tracking-tight text-balance sm:text-2xl">
+          Blogs
+        </h1>
+        <p className="text-muted-foreground pt-2 text-sm">
           Essays, notes, and more.
         </p>
-        <Separator className="mt-1 bg-muted-foreground" />
       </div>
 
       <div className="px-4">
-        {posts.map((p, i) => (
-          <Reveal key={p.slug} delay={i * 60}>
-            <BlogCard post={p} />
-          </Reveal>
+        {posts.map((p) => (
+          <BlogCard post={p} key={p.slug} />
         ))}
 
         {posts.length === 0 && (
-          <p className="text-[0.9rem] text-muted-foreground">
-            No posts yet.
-          </p>
+          <p className="text-muted-foreground">No posts yet.</p>
         )}
       </div>
     </div>

@@ -1,0 +1,234 @@
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import { Separator } from '@/components/ui/separator';
+
+const AboutMe = {
+  workExperience: [
+    {
+      organization: 'Purdue University',
+      location: 'Fort Wayne',
+      logo: '/purdue.png',
+      roles: [
+        {
+          jobTitle: 'Teaching Assistant',
+          jobType: 'Part-time',
+          dates: {
+            from: 'Jan 2025',
+            to: 'Present',
+          },
+          job_descriptions: [
+            'Assisted in grading and providing feedback for an undergraduate Machine Learning course at Purdue University Fort Wayne.',
+            'Automated grading processes using Python, enhancing efficiency and consistency in student evaluations.',
+            'Collaborated with faculty to ensure timely feedback, improving overall student performance and engagement.•',
+          ],
+        },
+        {
+          jobTitle: 'Research Assistant',
+          jobType: 'Full-time',
+          dates: {
+            from: 'Oct 2024',
+            to: 'Dec 2024',
+          },
+          job_descriptions: [
+            'Designed and developed a minimum viable product (MVP) mobile application and backend from the ground up using React Native and TypeScript.',
+            'Improved user engagement by aligning features with project requirements.',
+          ],
+        },
+      ],
+    },
+
+    {
+      organization: 'Opslyft',
+      location: 'Bangalore, India',
+      logo: '/opslyft.jpeg',
+      roles: [
+        {
+          jobTitle: 'Cloud Engineer',
+          jobType: 'Full-time',
+          dates: {
+            from: 'Mar 2022',
+            to: 'Nov 2023',
+          },
+          job_descriptions: [
+            'Collaborated with customers to identify and implement cost saving opportunities. Resulting in an average recurring saving of over $100,000 every month.',
+            'Architected secure and scalable cloud architecture based on customer interactions and requirements.',
+            'Partnered with customers to design secure, scalable cloud architectures, improving deployment efficiency.',
+            'Developed multi-Cloud Asset management solution, streamlining customers resource discovery workflow for cost management and general use.',
+          ],
+        },
+        {
+          jobTitle: 'Software Development Engineer',
+          jobType: 'Full-time',
+          dates: {
+            from: 'Apr 2021',
+            to: 'Mar 2022',
+          },
+          job_descriptions: [
+            'Developed and optimized existing Ul components for the SaaS Platform, resulting in 2x reduction in page load times.',
+            'Redesigned the backend logic for the Instance scheduler to cover all the edge cases, resulting in 99% service uptime in customer environments.',
+            'Architected Data Transfer Visibility for multi cloud, solving a major pain point for companies trying to get visibility on Data Transfer.',
+          ],
+        },
+      ],
+    },
+    {
+      organization: 'Gradspace',
+      location: 'Bangalore, India',
+      logo: '/gradspace.jpeg',
+      roles: [
+        {
+          jobTitle: 'Full-stack Developer Intern',
+          jobType: 'Internship',
+          dates: {
+            from: 'Sep 2020',
+            to: 'Feb 2021',
+          },
+          job_descriptions: [
+            'Architected the backend resulting in improved API response time and decreased time to deploy on Amazon Web services(AWS).',
+            'Implement mobile push notification to improve user engagement on the platform.',
+            'Coordinate with mobile developers to refactor the codebase, reducing the app load time by 60%.',
+          ],
+        },
+      ],
+    },
+  ],
+  education: [
+    {
+      organization: 'Purdue University, Fort Wayne, IN',
+      organizationId: '',
+      degree: 'Master of Science',
+      major: 'Computer Science',
+      dates: {
+        from: 'Jan 2024',
+        to: 'Present',
+      },
+      summary: (
+        <div className="space-y-1">
+          <div>
+            Activities & Research: Thesis on Static Malware Detection Across
+            Modalities (Static Analysis)
+          </div>
+          <div>
+            Relevant Coursework: Application of Deep Learning, Cryptography &
+            Network Security, NLP, Algorithm Design, Database Systems.
+          </div>
+        </div>
+      ),
+    },
+    {
+      organization: 'Govt. S.K.S.J Technological Institute, Bangalore, India',
+      organizationId: '',
+      degree: 'Bachelor of Engineering',
+      major: 'Computer Science & Engineering',
+      dates: {
+        from: 'Aug 2017',
+        to: 'Jul 2021',
+      },
+      summary: '',
+    },
+  ],
+};
+
+export default function ResumePage() {
+  return (
+    <div className="flex-1">
+      <div className="px-4 py-14">
+        <h1 className="text-xl font-medium tracking-tight text-balance sm:text-2xl">Resume</h1>
+        <p className="text-muted-foreground mt-2 text-sm">
+          Education, experience, and background.
+        </p>
+      </div>
+
+      <div className="px-4 space-y-8 mb-16">
+        <section>
+          <h2 className="text-lg font-semibold mb-4">Education</h2>
+          <div className="space-y-4">
+            {AboutMe.education.map((edu, index) => (
+              <div key={index} className="">
+                <h3 className="font-medium">
+                  {edu.degree} in {edu.major}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {edu.organization}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {edu.dates.from} - {edu.dates.to}
+                </p>
+                {edu.summary && (
+                  <div className="mt-2 text-xs text-muted-foreground">
+                    {edu.summary}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold mb-4">Publications</h2>
+          <div className="space-y-3">
+            <div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Hosahalli Dayananda, P.; Chen, Z. Re-Evaluating Android Malware
+                Detection: Tabular Features, Vision Models, and Ensembles.{' '}
+                <em>Electronics</em> 2026, 15, 544.{' '}
+                <Link
+                  href="https://doi.org/10.3390/electronics15030544"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/80 transition-colors underline"
+                >
+                  https://doi.org/10.3390/electronics15030544
+                </Link>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold mb-4">Experience</h2>
+          <div className="space-y-8">
+            {AboutMe.workExperience.map((company: any, companyIndex) => (
+              <div key={companyIndex} className="">
+                <div className="mb-4 ">
+                  <h3 className="text-lg font-semibold">
+                    {company.organization}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {company.location}
+                  </p>
+                </div>
+
+                <div className="space-y-4 ml-2">
+                  {company.roles.map((role: any, roleIndex: number) => (
+                    <div
+                      key={roleIndex}
+                      className="border-l border-border border-opacity-50 pl-4"
+                    >
+                      <h4 className="font-medium">{role.jobTitle}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {role.jobType} • {role.dates.from} - {role.dates.to}
+                      </p>
+                      <ul className="mt-2 text-sm text-muted-foreground list-disc list-inside space-y-1">
+                        {role.job_descriptions.map(
+                          (description: string, idx: number) => (
+                            <li key={idx}>{description}</li>
+                          )
+                        )}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+export const metadata: Metadata = {
+  title: 'Resume',
+  description: "Prajwal's work experience, education, and skills.",
+};

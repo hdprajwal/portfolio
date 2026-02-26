@@ -2,7 +2,14 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { MapPin, Clock, Mail, User, Terminal, Globe } from 'lucide-react';
 import BashTyping from './BashTyping';
+
+const clockFmt = new Intl.DateTimeFormat(undefined, {
+  hour: '2-digit',
+  minute: '2-digit',
+  timeZone: 'America/Indiana/Indianapolis',
+});
 
 export default function Hero() {
   const [showOutput, setShowOutput] = useState(false);
@@ -11,62 +18,69 @@ export default function Hero() {
 
   useEffect(() => {
     setMounted(true);
-    const fmt = new Intl.DateTimeFormat(undefined, {
-      hour: '2-digit',
-      minute: '2-digit',
-      timeZone: 'America/Indiana/Indianapolis',
-    });
-    const update = () => setNow(fmt.format(new Date()));
+    const update = () => setNow(clockFmt.format(new Date()));
     update();
     const id = setInterval(update, 60_000);
     return () => clearInterval(id);
   }, []);
+
   return (
-    <section className="grid-row relative overflow-hidden group">
-      <div className="px-6 md:px-8 py-24 md:py-28">
-        <div className="flex flex-col gap-4 sm:gap-6">
+    <section id="hero" className="relative overflow-hidden">
+      <div className="px-4 py-14 md:py-18">
+        <div className="flex flex-col gap-5">
           <BashTyping prompt="whoami" onDone={() => setShowOutput(true)} />
+
           <div
-            className={`transition-all duration-500 font-mono space-y-4 sm:space-y-5 ${
+            className={`space-y-5 transition-[opacity,transform] duration-500 ${
               showOutput
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-1'
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-2 opacity-0'
             }`}
             aria-hidden={!showOutput}
           >
-            <h1 className="text-foreground font-extrabold leading-tight tracking-tight text-[clamp(2rem,7vw,4rem)]">
-              Prajwal HD
-            </h1>
-            <p className="text-muted-foreground text-sm sm:text-base">
-              Software Engineer • Security Researcher
-            </p>
-            <p className="max-w-2xl text-base sm:text-lg text-foreground/90">
-              I build reliable services with clean APIs and strong observability.
-              MS CS @ Purdue Fort Wayne. Security background and practical AI
-              experience.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="bg-[var(--chip)] text-[var(--chip-fg)] px-3 py-1.5 rounded text-xs border border-[var(--accent)]/20">
-                Available Jan 2026
-              </span>
-              <span className="bg-cyan-500/10 text-cyan-400 px-3 py-1.5 rounded text-xs border border-cyan-500/20">
-                Fort Wayne, IN
-              </span>
+            <div>
+              <h1 className="text-foreground text-2xl font-medium tracking-tight text-balance md:text-3xl">
+                Hi, I&apos;m Prajwal
+              </h1>
+              <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed">
+                Software engineer focused on backend systems and applied AI.
+                Three years building production systems at Opslyft. I care more
+                about how a system behaves under pressure than what it&apos;s
+                built with.
+              </p>
             </div>
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <EmailButton email="hdprajwal01@gmail.com" />
-              <AboutButton href="/about" />
-              <Link
-                href="#projects"
-                className="inline-flex items-center rounded-md border border-[var(--border)] px-4 py-2 text-sm font-medium bg-background hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
-              >
-                View projects
-              </Link>
-              <CurlChip />
-            </div>
-            <div className="text-xs sm:text-sm text-muted-foreground">
-              It's <span className="font-mono">{mounted ? now : '--:--'}</span> for me —
-              replies in &lt;24h.
+
+            <div className="grid max-w-xl grid-cols-1 gap-2 pt-1 sm:grid-cols-2">
+              <div className="flex flex-col gap-2.5">
+                <InfoItem icon={<User className="h-3.5 w-3.5" />}>
+                  Software Engineer
+                </InfoItem>
+                <InfoItem icon={<MapPin className="h-3.5 w-3.5" />}>
+                  Fort Wayne, IN
+                </InfoItem>
+                <InfoItem icon={<Mail className="h-3.5 w-3.5" />}>
+                  <Link
+                    href="mailto:hdprajwal01@gmail.com"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                  >
+                    hdprajwal01@gmail.com
+                  </Link>
+                </InfoItem>
+                <InfoItem icon={<Globe className="h-3.5 w-3.5" />}>
+                  <Link
+                    href="#projects"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                  >
+                    hdprajwal.dev
+                  </Link>
+                </InfoItem>
+              </div>
+              <div className="flex flex-col gap-2.5">
+                <AvailabilityItem />
+                <InfoItem icon={<Clock className="h-4 w-4" />}>
+                  {mounted ? now : '--:--'} ET
+                </InfoItem>
+              </div>
             </div>
           </div>
         </div>
@@ -75,60 +89,29 @@ export default function Hero() {
   );
 }
 
-function EmailButton({ email }: { email: string }) {
+function InfoItem({
+  icon,
+  children,
+}: {
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}) {
   return (
-    <Link
-      href={`mailto:${email}`}
-      className="inline-flex items-center rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
-    >
-      Email me
-    </Link>
+    <div className="text-muted-foreground flex items-center gap-2 font-mono text-xs">
+      <span className="flex-shrink-0 opacity-60">{icon}</span>
+      <span>{children}</span>
+    </div>
   );
 }
 
-function AboutButton({ href }: { href: string }) {
+function AvailabilityItem() {
   return (
-    <Link
-      href={href}
-      className="inline-flex items-center rounded-md border border-[var(--border)] px-4 py-2 text-sm font-medium bg-background hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
-    >
-      About me
-    </Link>
-  );
-}
-
-function SSHChip({ email }: { email: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <button
-      onClick={async () => {
-        await navigator.clipboard.writeText(email);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1200);
-      }}
-      className="inline-flex items-center rounded-md bg-[var(--chip)] px-3 py-1.5 font-mono text-xs text-[var(--chip-fg)] ring-1 ring-inset ring-[var(--border)] hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
-      aria-label="Copy email to clipboard"
-    >
-      {copied ? 'copied ✔' : `ssh hdprajwal01@gmail.com`}
-    </button>
-  );
-}
-
-function CurlChip() {
-  const cmd =
-    'curl -L https://hdprajwal.dev/resume.pdf -o Prajwal_HD_Resume.pdf';
-  const [copied, setCopied] = useState(false);
-  return (
-    <button
-      onClick={async () => {
-        await navigator.clipboard.writeText(cmd);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1200);
-      }}
-      className="inline-flex items-center rounded-md bg-[var(--chip)] px-3 py-1.5 font-mono text-[11px] text-[var(--chip-fg)] ring-1 ring-inset ring-[var(--border)] hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
-      aria-label="Copy curl command for resume"
-    >
-      {copied ? 'copied ✔' : 'curl resume'}
-    </button>
+    <div className="text-muted-foreground flex items-center gap-2 font-mono text-xs">
+      <div className="relative flex h-3.5 w-3.5 flex-shrink-0 items-center justify-center">
+        <span className="absolute inline-flex h-3.5 w-3.5 rounded-full bg-green-500 opacity-60 motion-safe:animate-ping" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+      </div>
+      <span>Open to collaboration</span>
+    </div>
   );
 }

@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { CustomMDX } from '@/components/MDX';
-import ReadingProgress from '@/components/ReadingProgress';
+import { CustomMDX } from '@/components/mdx/custom-mdx';
+import ReadingProgress from '@/components/reading-progress';
 import { formatDate, getBlogPosts, baseUrl } from '@/lib/posts';
 import { type Post } from '@/lib/posts';
-import ShareActions from '@/components/ShareActions';
-import { ArrowLeftIcon, ArrowRightIcon, Link2, Share, ShareIcon } from 'lucide-react';
+import ShareActions from '@/components/blogs/share-actions';
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
 export async function generateStaticParams() {
@@ -78,16 +78,17 @@ export default async function Blog({
   const words = (post.content || '').trim().split(/\s+/).filter(Boolean).length;
   const readingMins = Math.max(1, Math.round(words / 225));
   const shareUrl = `${baseUrl}/blog/${post.slug}`;
-  const heroImage = post.image || `${baseUrl}/og?title=${encodeURIComponent(post.title)}`;
+  const heroImage =
+    post.image || `${baseUrl}/og?title=${encodeURIComponent(post.title)}`;
   const isExternalImg = /^https?:\/\//.test(heroImage);
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-10 md:py-12 overflow-x-hidden min-h-screen relative bg-background">
+    <div className="bg-background relative container mx-auto min-h-screen max-w-4xl overflow-x-hidden px-4 py-10 md:py-12">
       <ReadingProgress targetSelector="article" />
-      <div className="mb-6 mx-auto w-full max-w-4xl flex justify-between items-center">
+      <div className="mx-auto mb-6 flex w-full max-w-4xl items-center justify-between">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:underline"
+          className="text-primary inline-flex items-center gap-2 text-sm hover:underline"
         >
           <ArrowLeftIcon className="inline-block h-4 w-4" />
           Blogs
@@ -97,12 +98,11 @@ export default async function Blog({
         </div>
       </div>
 
-
       <header className="mb-8">
-        <h1 className="break-words font-bold tracking-tight leading-[1.2] mb-4 text-[1.2rem] md:text-[1.8rem]">
+        <h1 className="mb-4 text-[1.2rem] leading-[1.2] font-bold tracking-tight text-balance break-words md:text-[1.8rem]">
           {post.title}
         </h1>
-        <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+        <div className="text-muted-foreground mb-4 flex flex-wrap items-center gap-2 text-xs">
           <span>{formatDate(post.date)}</span>
           <span aria-hidden>•</span>
           <span>{readingMins} min read</span>
@@ -112,7 +112,7 @@ export default async function Blog({
             {post.tags.map((tag: string) => (
               <span
                 key={tag}
-                className="rounded bg-muted px-[0.6rem] py-[0.2rem] font-mono text-xs text-chip-fg lowercase"
+                className="bg-muted text-muted-foreground rounded px-[0.6rem] py-[0.2rem] font-mono text-xs lowercase"
               >
                 #{tag}
               </span>
@@ -120,21 +120,22 @@ export default async function Blog({
           </div>
         )}
       </header>
-      {post.image && <div className="relative mx-auto mb-8 w-full max-w-5xl overflow-hidden rounded-lg border border-border">
-        <div className="relative aspect-[16/9] w-full bg-muted">
-          <Image
-            src={heroImage}
-            alt={post.title}
-            fill
-            className="object-cover"
-            unoptimized={isExternalImg}
-            priority={false}
-          />
+      {post.image && (
+        <div className="border-border relative mx-auto mb-8 w-full max-w-5xl overflow-hidden rounded-lg border">
+          <div className="bg-muted relative aspect-[16/9] w-full">
+            <Image
+              src={heroImage}
+              alt={post.title}
+              fill
+              className="object-cover"
+              unoptimized={isExternalImg}
+              priority
+            />
+          </div>
         </div>
-      </div>
-      }
+      )}
       <Separator />
-      <section className="mx-auto w-full max-w-4xl mt-8">
+      <section className="mx-auto mt-8 w-full max-w-4xl">
         <div className="mx-auto w-full max-w-4xl min-w-0">
           <script
             type="application/ld+json"
@@ -157,35 +158,36 @@ export default async function Blog({
             }}
           />
 
-          <article className="w-full max-w-none min-w-0 prose prose-sm break-words dark:prose-invert md:prose-base">
+          <article className="prose prose-sm dark:prose-invert md:prose-base w-full max-w-none min-w-0 break-words">
             <CustomMDX source={post.content} />
           </article>
 
-          <hr className="my-10 border-border" />
+          <hr className="border-border my-10" />
 
           <div className="flex flex-col gap-4 md:flex-row md:items-stretch md:justify-between">
             {prev && (
-              <Link
-                href={`/blog/${prev.slug}`}
-                className="group flex-1 hover:text-accent-foreground-foreground"
-              >
-                <div className="mb-1 text-xs text-muted-foreground group-hover:text-foreground flex items-center gap-2">
+              <Link href={`/blog/${prev.slug}`} className="group flex-1">
+                <div className="text-muted-foreground group-hover:text-foreground mb-1 flex items-center gap-2 text-xs">
                   <ArrowLeftIcon className="inline-block h-4 w-4" />
                   New
                 </div>
-                <div className="font-medium group-hover:underline">{prev.title}</div>
+                <div className="font-medium group-hover:underline">
+                  {prev.title}
+                </div>
               </Link>
             )}
             {next && (
               <Link
                 href={`/blog/${next.slug}`}
-                className="group flex-1 text-right hover:text-accent-foreground"
+                className="group hover:text-accent-foreground flex-1 text-right"
               >
-                <div className="mb-1 text-xs text-muted-foreground group-hover:text-foreground flex items-center gap-2 justify-end">
+                <div className="text-muted-foreground group-hover:text-foreground mb-1 flex items-center justify-end gap-2 text-xs">
                   Old
                   <ArrowRightIcon className="inline-block h-4 w-4" />
                 </div>
-                <div className="font-medium group-hover:underline">{next.title}</div>
+                <div className="font-medium group-hover:underline">
+                  {next.title}
+                </div>
               </Link>
             )}
           </div>

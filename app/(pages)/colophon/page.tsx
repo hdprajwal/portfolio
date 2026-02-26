@@ -1,149 +1,155 @@
+import { ArrowUpRight } from 'lucide-react';
+import type { Metadata } from 'next';
+
 export default function ColophonPage() {
   return (
-    <main className="mx-auto max-w-4xl min-h-screen px-4 py-12">
-      <h1 className="text-2xl font-semibold tracking-tight">Colophon</h1>
-      <p className="mt-2 text-sm text-neutral-500">
-        Notes about how this site is built and run.
-      </p>
+    <div className="flex-1">
+      <div className="px-4 py-14">
+        <h1 className="text-xl font-medium tracking-tight text-balance sm:text-2xl">
+          Colophon
+        </h1>
+        <p className="text-muted-foreground mt-2 text-xs">
+          Notes about how this site is built and run.
+        </p>
+      </div>
 
-      <h2 className="text-base font-semibold tracking-tight mt-8">
-        Tech stack
-      </h2>
-      <ul className="list-disc list-inside text-md">
-        <li>Next.js</li>
-        <li>Tailwind CSS</li>
-        <li>TypeScript</li>
-      </ul>
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold md:text-lg">Tech Stack</h2>
+        <ul className="text-muted-foreground space-y-2 text-sm">
+          <li>Next.js (App Router)</li>
+          <li>Tailwind CSS v4</li>
+          <li>Shadcn UI</li>
+          <li>TypeScript</li>
+        </ul>
+      </section>
 
-      <h2 className="text-base font-semibold tracking-tight mt-8">
-        Content &amp; blog (MDX)
-      </h2>
-      <ul className="list-disc list-inside text-md space-y-1">
-        <li>
-          Posts are written in <code>.mdx</code> and live under{' '}
-          <code>/content/blog</code>. Each file has frontmatter:
-          <ul className="ml-6 list-[circle]">
-            <li>
-              <code>title</code>, <code>summary</code>, <code>tags</code>,{' '}
-              <code>date</code>, <code>draft</code>
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold md:text-lg">Content & Blog</h2>
+        <ul className="text-muted-foreground space-y-2 text-sm">
+          <li>
+            Posts are written in{' '}
+            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              .mdx
+            </code>{' '}
+            under{' '}
+            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              /content/blog
+            </code>{' '}
+            with frontmatter:{' '}
+            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              title
+            </code>
+            ,{' '}
+            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              summary
+            </code>
+            ,{' '}
+            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              tags
+            </code>
+            ,{' '}
+            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              date
+            </code>
+          </li>
+          <li>
+            Rendering via{' '}
+            <a
+              href="https://github.com/hashicorp/next-mdx-remote"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 underline transition-colors"
+            >
+              next-mdx-remote
+            </a>{' '}
+            with{' '}
+            <a
+              href="https://shiki.style/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 underline transition-colors"
+            >
+              rehype-shiki
+            </a>{' '}
+            for syntax highlighting
+          </li>
+          <li>
+            Statically generated at build time; drafts excluded from production
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold md:text-lg">Fonts</h2>
+        <ul className="text-muted-foreground space-y-2 text-sm">
+          <li>Geist & Geist Mono by Vercel</li>
+        </ul>
+      </section>
+
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold md:text-lg">Hosting</h2>
+        <ul className="text-muted-foreground space-y-2 text-sm">
+          <li>Vercel</li>
+        </ul>
+      </section>
+
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold md:text-lg">Source</h2>
+        <ul className="text-muted-foreground space-y-2 text-sm">
+          <li>
+            <a
+              href="https://github.com/hdprajwal/portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary group hover:text-primary/80 inline-flex items-center underline transition-colors"
+            >
+              github.com/hdprajwal/portfolio{' '}
+              <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold md:text-lg">System</h2>
+        <ul className="text-muted-foreground space-y-2 text-sm">
+          {[
+            ['OS', 'Arch Linux'],
+            ['WM', 'Hyprland'],
+            ['Browser', 'Zen Browser & Helium'],
+            ['Editor', 'Zed / Cursor'],
+            ['Terminal', 'Ghostty'],
+            ['Shell', 'zsh + oh-my-posh'],
+          ].map(([key, value]) => (
+            <li key={key} className="flex items-baseline gap-3">
+              <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-xs">
+                {key}
+              </span>
+              <span>{value}</span>
             </li>
-          </ul>
-        </li>
-        <li>
-          Rendering uses{' '}
-          <a
-            href="https://github.com/hashicorp/next-mdx-remote"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline after:content-['↗']"
-          >
-            next-mdx-remote (RSC)
-          </a>{' '}
-          with{' '}
-          <a
-            href="https://github.com/remarkjs/remark-gfm"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline after:content-['↗']"
-          >
-            remark-gfm
-          </a>{' '}
-          and{' '}
-          <a
-            href="https://shiki.style/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline after:content-['↗']"
-          >
-            rehype-shiki
-          </a>{' '}
-          for code highlighting (GitHub light/dark themes).
-        </li>
-        <li>
-          Custom MDX components power callouts, code blocks with copy buttons,
-          and styled headings.
-        </li>
-        <li>
-          Blog routes are statically generated; drafts (<code>draft: true</code>
-          ) are excluded from production builds.
-        </li>
-      </ul>
-
-      <h2 className="text-base font-semibold tracking-tight mt-8">Fonts</h2>
-      <ul className="list-disc list-inside text-md">
-        <li>
-          Monaspace Neon{' '}
-          <a
-            href="https://github.com/githubnext/monaspace"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline after:content-['↗']"
-          >
-            Link
-          </a>
-        </li>
-      </ul>
-
-      <h2 className="text-base font-semibold tracking-tight mt-8">Hosting</h2>
-      <ul className="list-disc list-inside text-md">
-        <li>Vercel</li>
-      </ul>
-
-      <h2 className="text-base font-semibold tracking-tight mt-8">
-        Source code
-      </h2>
-      <ul className="list-disc list-inside text-md">
-        <li>
-          <a
-            href="https://github.com/hdprajwal/portfolio"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline after:content-['↗']"
-          >
-            hdprajwal/portfolio
-          </a>
-        </li>
-      </ul>
-
-      <h2 className="text-base font-semibold tracking-tight mt-8">
-        System Information
-      </h2>
-      <ul className="list-disc list-inside text-md">
-        <li>OS : Arch Linux</li>
-        <li>Window Manager : Hyprland</li>
-        <li>Browser : Zen Browser</li>
-        <li>Editor : vscode</li>
-        <li>Terminal : Ghostty</li>
-        <li>Shell : Zsh</li>
-        <li>
-          Prompt: oh-my-posh{' '}
-          <a
-            href="https://ohmyposh.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline after:content-['↗']"
-          >
-            Link
-          </a>
-        </li>
-
-        <li>
-          Dotfiles :{' '}
-          <a
-            href="https://github.com/hdprajwal/dotfiles"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline after:content-['↗']"
-          >
-            Link
-          </a>
-        </li>
-      </ul>
-    </main>
+          ))}
+          <li className="flex items-baseline gap-3">
+            <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-xs">
+              Dotfiles
+            </span>
+            <a
+              href="https://github.com/hdprajwal/dotfiles"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary group hover:text-primary/80 inline-flex items-center underline transition-colors"
+            >
+              github.com/hdprajwal/dotfiles
+              <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
   );
 }
-import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Colophon',
+  description:
+    'How this site is built - tech stack, content setup, and deployment.',
 };

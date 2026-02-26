@@ -1,5 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { MDXComponents } from '@/components/MDXComponents';
+import { MDXComponents } from '@/components/mdx/mdx-components';
 import remarkGfm from 'remark-gfm';
 import rehypeShiki from '@shikijs/rehype';
 import { transformerCopyButton } from '@rehype-pretty/transformers';

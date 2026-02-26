@@ -1,88 +1,68 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
-import SectionHeader from '@/components/SectionHeader';
-import Card from '@/components/Card';
-import ProjectCard from '@/components/ProjectCard';
-import Reveal from '@/components/Reveal';
+import SectionHeader from '@/components/section-header';
 import ContactSection from '@/components/ContactSection';
-import RecentBlogs from '@/components/RecentBlogs';
+import RecentBlogs from '@/components/blogs/recent-blogs';
+import FeaturedProjects from '@/components/projects/featured-projects';
 
 export default async function Home() {
   return (
     <>
       <Hero />
-
-      <section id="now">
-        <div className='grid-row'>
-          <SectionHeader eyebrow="Now" title="What I'm focused on" />
-        </div>
-        <div className="grid-row p-6">
-          <div>
-            <h3 className="text-base font-semibold mb-2">
-              Thesis - Static Malware Detection Across Modalities
-            </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Static features, PyTorch experiments, and robustness evals.
-              Target: Dec '25.
+      <div className="space-y-16 px-4 pb-18 md:space-y-20">
+        <section id="now">
+          <SectionHeader label="Now" />
+          <div className="mt-4">
+            <p className="text-muted-foreground text-xs leading-relaxed">
+              MS done. Going deep on Go and Rust - building a private tunneling
+              service and a personal dashboard. Shipping things I actually want
+              to use.
+            </p>
+            <p className="text-muted-foreground mt-2 font-mono text-xs opacity-70">
+              Last updated: Feb 2026 &middot;{' '}
+              <Link
+                className="text-primary hover:text-foreground transition-colors"
+                href="/now"
+              >
+                /now
+              </Link>
             </p>
           </div>
-          <p className="mt-4 text-xs text-muted-foreground">
-            Last updated: Aug 2025 •{' '}
-            <Link className="underline hover:text-[var(--accent)] transition-colors" href="/now">
-              /now
-            </Link>
-          </p>
-        </div>
         </section>
 
         <section id="projects">
-          <div className="grid-row">
-            <SectionHeader eyebrow="Projects" title="A few things I built" />
-          </div>
-          <Reveal>
-            <ProjectCard
-              name="DevAssist AI"
-              tagline="AI Pair Programmer"
-              tags={['AI Agents', 'OpenAI', 'Gemini', 'VS Code Extension']}
-              impact="Helps developers write code faster with AI suggestions"
-              codeHref="https://github.com/hdprajwal/DevAssist_AI"
-            />
-          </Reveal>
-          <Reveal delay={80}>
-            <ProjectCard
-              name="Podcast Creator (HF Space)"
-              tagline="Text to podcast using Gemini"
-              tags={['Audio/ML', 'Gradio', 'HuggingFace']}
-              impact="One-click demo; browser-only sandboxed flow"
-              codeHref="https://github.com/hdprajwal"
-              liveHref="https://huggingface.co/spaces/hdprajwal/podcast-creator"
-            />
-          </Reveal>
-          <div className="grid-row p-6">
-            <Link className="text-sm text-muted-foreground hover:text-[var(--accent)] transition-colors underline" href="/projects">
-              View all Projects →
-            </Link>
-          </div>
+          <SectionHeader label="Projects" />
+          <FeaturedProjects />
+          <Link
+            className="text-primary hover:text-primary/80 mt-4 inline-block font-mono text-xs transition-colors"
+            href="/projects"
+          >
+            View all →
+          </Link>
         </section>
 
         <section id="blog">
-          <div className="grid-row">
-            <SectionHeader eyebrow="Writing" title="Recent blogs" />
-          </div>
+          <SectionHeader label="Writing" />
           <RecentBlogs />
-          <div className="grid-row p-6">
-            <Link className="text-sm text-muted-foreground hover:text-[var(--accent)] transition-colors underline" href="/blog">
-              View all blogs →
-            </Link>
-          </div>
+          <Link
+            className="text-primary hover:text-primary/80 mt-4 inline-block font-mono text-xs transition-colors"
+            href="/blog"
+          >
+            View all →
+          </Link>
         </section>
 
-      <ContactSection />
+        <section id="contact">
+          <SectionHeader label="Connect" />
+          <ContactSection />
+        </section>
+      </div>
     </>
   );
 }
 
 export const metadata: Metadata = {
   title: 'Home',
+  description: "Prajwal's personal site - projects, writing, and links.",
 };

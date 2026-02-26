@@ -1,207 +1,112 @@
-const AboutMe = {
-  workExperience: [
-    {
-      organization: 'Purdue University',
-      location: 'Fort Wayne',
-      logo: '/purdue.png',
-      roles: [
-        {
-          jobTitle: 'Teaching Assistant',
-          jobType: 'Part-time',
-          dates: {
-            from: 'Jan 2025',
-            to: 'Present',
-          },
-          job_descriptions: [
-            'Assisted in grading and providing feedback for an undergraduate Machine Learning course at Purdue University Fort Wayne.',
-            'Automated grading processes using Python, enhancing efficiency and consistency in student evaluations.',
-            'Collaborated with faculty to ensure timely feedback, improving overall student performance and engagement.•',
-          ],
-        },
-        {
-          jobTitle: 'Research Assistant',
-          jobType: 'Full-time',
-          dates: {
-            from: 'Oct 2024',
-            to: 'Dec 2024',
-          },
-          job_descriptions: [
-            'Designed and developed a minimum viable product (MVP) mobile application and backend from the ground up using React Native and TypeScript.',
-            'Improved user engagement by aligning features with project requirements.',
-          ],
-        },
-      ],
-    },
-
-    {
-      organization: 'Opslyft',
-      location: 'Bangalore, India',
-      logo: '/opslyft.jpeg',
-      roles: [
-        {
-          jobTitle: 'Cloud Engineer',
-          jobType: 'Full-time',
-          dates: {
-            from: 'Mar 2022',
-            to: 'Nov 2023',
-          },
-          job_descriptions: [
-            'Collaborated with customers to identify and implement cost saving opportunities. Resulting in an average recurring saving of over $100,000 every month.',
-            'Architected secure and scalable cloud architecture based on customer interactions and requirements.',
-            'Partnered with customers to design secure, scalable cloud architectures, improving deployment efficiency.',
-            'Developed multi-Cloud Asset management solution, streamlining customers resource discovery workflow for cost management and general use.',
-          ],
-        },
-        {
-          jobTitle: 'Software Development Engineer',
-          jobType: 'Full-time',
-          dates: {
-            from: 'Apr 2021',
-            to: 'Mar 2022',
-          },
-          job_descriptions: [
-            'Developed and optimized existing Ul components for the SaaS Platform, resulting in 2x reduction in page load times.',
-            'Redesigned the backend logic for the Instance scheduler to cover all the edge cases, resulting in 99% service uptime in customer environments.',
-            'Architected Data Transfer Visibility for multi cloud, solving a major pain point for companies trying to get visibility on Data Transfer.',
-          ],
-        },
-      ],
-    },
-    {
-      organization: 'Gradspace',
-      location: 'Bangalore, India',
-      logo: '/gradspace.jpeg',
-      roles: [
-        {
-          jobTitle: 'Full-stack Developer Intern',
-          jobType: 'Internship',
-          dates: {
-            from: 'Sep 2020',
-            to: 'Feb 2021',
-          },
-          job_descriptions: [
-            'Architected the backend resulting in improved API response time and decreased time to deploy on Amazon Web services(AWS).',
-            'Implement mobile push notification to improve user engagement on the platform.',
-            'Coordinate with mobile developers to refactor the codebase, reducing the app load time by 60%.',
-          ],
-        },
-      ],
-    },
-  ],
-  education: [
-    {
-      organization: 'Purdue University, Fort Wayne, IN',
-      organizationId: '',
-      degree: 'Master of Science',
-      major: 'Computer Science',
-      dates: {
-        from: 'Jan 2024',
-        to: 'Present',
-      },
-      summary: (
-        <div className="space-y-1">
-          <div>
-            Activities & Research: Thesis on Static Malware Detection Across
-            Modalities (Static Analysis)
-          </div>
-          <div>
-            Relevant Coursework: Application of Deep Learning, Cryptography &
-            Network Security, NLP, Algorithm Design, Database Systems.
-          </div>
-        </div>
-      ),
-    },
-    {
-      organization: 'Govt. S.K.S.J Technological Institute, Bangalore, India',
-      organizationId: '',
-      degree: 'Bachelor of Engineering',
-      major: 'Computer Science & Engineering',
-      dates: {
-        from: 'Aug 2017',
-        to: 'Jul 2021',
-      },
-      summary: '',
-    },
-  ],
-};
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import { ArrowRight } from 'lucide-react';
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-4xl px-4 py-12 bg-background grid-row">
-      <h1 className="text-2xl font-semibold tracking-tight">About Me</h1>
-      <p className="mt-2 text-sm text-neutral-500">
-        Education, experience, and background.
-      </p>
-
-      <div className="mt-8 space-y-8">
-        <section>
-          <h2 className="text-lg font-bold mb-4">Education</h2>
-          <div className="space-y-4">
-            {AboutMe.education.map((edu, index) => (
-              <div key={index} className="">
-                <h3 className="font-medium">
-                  {edu.degree} in {edu.major}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {edu.organization}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {edu.dates.from} - {edu.dates.to}
-                </p>
-                {edu.summary && (
-                  <div className="mt-2 text-xs text-muted-foreground">
-                    {edu.summary}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-lg font-bold mb-4">Experience</h2>
-          <div className="space-y-8">
-            {AboutMe.workExperience.map((company: any, companyIndex) => (
-              <div key={companyIndex} className="">
-                <div className="mb-4 ">
-                  <h3 className="text-lg font-semibold">
-                    {company.organization}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {company.location}
-                  </p>
-                </div>
-
-                <div className="space-y-4 ml-2">
-                  {company.roles.map((role: any, roleIndex: number) => (
-                    <div
-                      key={roleIndex}
-                      className="border-l border-[var(--border)] border-opacity-50 pl-4"
-                    >
-                      <h4 className="font-medium">{role.jobTitle}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {role.jobType} • {role.dates.from} - {role.dates.to}
-                      </p>
-                      <ul className="mt-2 text-sm text-muted-foreground list-disc list-inside space-y-1">
-                        {role.job_descriptions.map(
-                          (description: string, idx: number) => (
-                            <li key={idx}>{description}</li>
-                          )
-                        )}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+    <div className="flex-1">
+      <div className="px-4 py-14">
+        <h1 className="text-xl font-medium tracking-tight text-balance sm:text-2xl">
+          About
+        </h1>
+        <p className="text-muted-foreground pt-2 text-sm">
+          Who I am, what I do, and what I care about.
+        </p>
       </div>
-    </main>
+
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold">Background</h2>
+        <div className="text-muted-foreground space-y-2 text-sm">
+          <p>
+            I&apos;m Prajwal. Software engineer with a background in CS and a
+            strong lean toward security and systems work.
+          </p>
+          <p>
+            Before grad school, I spent close to three years as a software and
+            cloud engineer at Opslyft. I learned a lot there - production
+            systems, customer-facing architecture, real constraints. Then I went
+            back to do my Master&apos;s at Purdue Fort Wayne, where I spent the
+            last year researching adversarial ML and malware detection under Dr.
+            Zesheng Chen.
+          </p>
+          <p>
+            Dr. Chen had one question he kept asking: &quot;Why are you assuming
+            that&apos;s the right approach?&quot; That question changed how I
+            think about almost everything.
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold">How I Think About Building</h2>
+        <div className="text-muted-foreground space-y-2 text-sm">
+          <p>
+            I don&apos;t have a favorite language or a preferred stack. Python,
+            Go, Rust, AWS - none of them are sacred. I use whatever fits the
+            problem.
+          </p>
+          <p>
+            What I care about is writing code the next person can read without
+            wanting to rewrite it, and building systems that fail loudly instead
+            of quietly. Silent failures are the worst kind. Complexity is a
+            cost. I try not to spend it unless I&apos;m getting something real
+            back.
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold">Outside the Terminal</h2>
+        <div className="text-muted-foreground space-y-2 text-sm">
+          <p>
+            Gym and books. Not things I decided to be into - just things that
+            stuck around. The gym taught me something about consistency that I
+            haven&apos;t been able to learn any other way.
+          </p>
+          <p>
+            The books I keep coming back to are the ones that change how I
+            think, not just what I know. Kahneman on how we reason, Newport on
+            how to actually do deep work, Aurelius on not complaining about
+            things outside your control. That kind of reading compounds in a way
+            that technical books alone don&apos;t.
+          </p>
+        </div>
+      </section>
+
+      <section className="mb-8 px-4">
+        <h2 className="mb-2 font-semibold">More</h2>
+        <div className="text-muted-foreground flex flex-wrap gap-4 text-sm">
+          <Link
+            href="/now"
+            className="text-primary hover:text-primary/80 transition-colors hover:underline"
+          >
+            Now <ArrowRight className="inline-block size-4" />
+          </Link>
+          <Link
+            href="/resume"
+            className="text-primary hover:text-primary/80 transition-colors hover:underline"
+          >
+            Resume <ArrowRight className="inline-block size-4" />
+          </Link>
+          <Link
+            href="/projects"
+            className="text-primary hover:text-primary/80 transition-colors hover:underline"
+          >
+            Projects <ArrowRight className="inline-block size-4" />
+          </Link>
+          <Link
+            href="/blog"
+            className="text-primary hover:text-primary/80 transition-colors hover:underline"
+          >
+            Blog <ArrowRight className="inline-block size-4" />
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }
-import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About',
+  description: 'Learn about Prajwal - background, experience, and interests.',
 };
