@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { ArrowUpRight } from 'lucide-react';
 import Hero from '@/components/Hero';
 import SectionHeader from '@/components/section-header';
 import ContactSection from '@/components/ContactSection';
@@ -27,6 +28,32 @@ export default async function Home() {
               >
                 /now
               </Link>
+            </p>
+          </div>
+        </section>
+
+        <section id="research">
+          <SectionHeader label="Research" />
+          <div className="mt-4">
+            <span className="text-primary font-mono text-[10px] tracking-wider uppercase opacity-70">
+              Peer-reviewed · MDPI Electronics 2026
+            </span>
+            <Link
+              href="https://doi.org/10.3390/electronics15030544"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-2 block"
+            >
+              <h3 className="text-primary text-sm font-medium tracking-tight group-hover:underline">
+                Re-Evaluating Android Malware Detection: Tabular Features,
+                Vision Models, and Ensembles
+                <ArrowUpRight className="ml-1 inline-block h-3.5 w-3.5 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+              </h3>
+            </Link>
+            <p className="text-muted-foreground mt-1.5 font-mono text-xs leading-relaxed">
+              Hosahalli Dayananda, P.; Chen, Z. Compares tabular static
+              features, vision-based models, and ensemble strategies for Android
+              malware classification.
             </p>
           </div>
         </section>

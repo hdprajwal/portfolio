@@ -1,5 +1,6 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import GithubIcon from '@/components/icons/GithubIcon';
 
 export type Project = {
   name: string;
@@ -13,44 +14,61 @@ export type Project = {
   slug?: string;
 };
 
-const cardContent = (p: Project) => (
-  <>
-    <div className="flex items-center justify-between gap-3">
-      <h3 className="text-primary text-sm font-medium tracking-tight transition-colors group-hover:underline">
-        {p.name}
-        <ArrowUpRight className="ml-1.5 inline-block h-4 w-4 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
-      </h3>
-    </div>
-
-    <p className="text-muted-foreground mt-1.5 text-xs leading-relaxed">
-      {p.description}
-    </p>
-
-    <div className="mt-2.5 flex flex-wrap gap-2">
-      {p.tags.map((tag) => (
-        <span key={tag} className="text-muted-foreground font-mono text-xs">
-          #{tag}
-        </span>
-      ))}
-    </div>
-  </>
-);
-
 export default function ProjectCard(p: Project) {
-  if (p.slug) {
-    return (
-      <Link
-        href={`/projects/${p.slug}`}
-        className="group border-border block border-b py-4 transition-all duration-200 first:pt-0 last:border-b-0 hover:pl-2"
-      >
-        {cardContent(p)}
-      </Link>
-    );
-  }
-
   return (
-    <div className="border-border border-b py-4 first:pt-0 last:border-b-0">
-      {cardContent(p)}
+    <div className="group border-border border-b py-4 first:pt-0 last:border-b-0">
+      {p.slug ? (
+        <Link href={`/projects/${p.slug}`}>
+          <h3 className="text-primary text-sm font-medium tracking-tight group-hover:underline">
+            {p.name}
+          </h3>
+        </Link>
+      ) : (
+        <h3 className="text-primary flex justify-between text-sm font-medium tracking-tight">
+          {p.name}
+
+          {(p.codeHref || p.liveHref) && (
+            <div className="flex items-center gap-3">
+              {p.codeHref && (
+                <Link
+                  href={p.codeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary flex items-center gap-1 font-mono text-xs transition-colors"
+                >
+                  <GithubIcon className="h-3 w-3" />
+                  Source
+                </Link>
+              )}
+              {p.liveHref && (
+                <Link
+                  href={p.liveHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary flex items-center gap-0.5 font-mono text-xs transition-colors"
+                >
+                  Live
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
+              )}
+            </div>
+          )}
+        </h3>
+      )}
+
+      <p className="text-muted-foreground mt-1.5 text-xs leading-relaxed">
+        {p.description}
+      </p>
+
+      <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap gap-2">
+          {p.tags.map((tag) => (
+            <span key={tag} className="text-muted-foreground font-mono text-xs">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
