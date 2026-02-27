@@ -13,7 +13,7 @@ const navLinks = [
 ];
 
 function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -22,13 +22,13 @@ function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
       className="text-muted-foreground hover:text-foreground px-2 transition-colors duration-200"
       aria-label="Toggle theme"
     >
       {!mounted ? (
         <span className="inline-block h-3.5 w-3.5" aria-hidden />
-      ) : theme === 'dark' ? (
+      ) : resolvedTheme === 'dark' ? (
         <Sun className="h-3.5 w-3.5" />
       ) : (
         <Moon className="h-3.5 w-3.5" />

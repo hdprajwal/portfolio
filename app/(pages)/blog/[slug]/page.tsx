@@ -99,7 +99,7 @@ export default async function Blog({
       </div>
 
       <header className="mb-8">
-        <h1 className="mb-4 text-[1.2rem] leading-[1.2] font-bold tracking-tight text-balance break-words md:text-[1.8rem]">
+        <h1 className="mb-4 text-2xl leading-[1.2] font-bold tracking-tight">
           {post.title}
         </h1>
         <div className="text-muted-foreground mb-4 flex flex-wrap items-center gap-2 text-xs">

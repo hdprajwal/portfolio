@@ -66,7 +66,7 @@ export default async function ProjectPage({
       </Link>
 
       <div className="flex items-baseline justify-between gap-4">
-        <h1 className="text-2xl leading-[1.2] font-bold tracking-tight text-balance md:text-3xl">
+        <h1 className="text-2xl leading-[1.2] font-bold tracking-tight">
           {project.name}
         </h1>
         {project.liveHref && (

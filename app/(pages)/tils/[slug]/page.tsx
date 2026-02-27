@@ -60,20 +60,20 @@ export default async function TilPage({
 
   return (
     <div className="bg-background relative container mx-auto min-h-screen max-w-4xl overflow-x-hidden px-4 py-10 md:py-12">
-      <div className="mb-6 mx-auto w-full max-w-4xl">
+      <div className="mx-auto mb-6 w-full max-w-4xl">
         <Link
           href="/tils"
-          className="inline-block text-sm text-primary hover:underline"
+          className="text-primary inline-block text-sm hover:underline"
         >
           ← Back to all TILs
         </Link>
       </div>
 
       <header className="mb-8">
-        <h1 className="title mb-4 break-words text-balance text-3xl font-semibold tracking-tight md:text-4xl">
+        <h1 className="title mb-4 text-2xl font-semibold tracking-tight text-balance">
           {til.title}
         </h1>
-        <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        <div className="text-muted-foreground mb-4 flex flex-wrap items-center gap-3 text-sm">
           <span>{formatDate(til.date)}</span>
         </div>
         {til.tags && til.tags.length > 0 && (
@@ -92,29 +92,35 @@ export default async function TilPage({
 
       <section className="mx-auto w-full max-w-4xl">
         <div className="mx-auto w-full max-w-4xl min-w-0">
-          <article className="w-full min-w-0 max-w-none prose prose-sm break-words dark:prose-invert md:prose-base">
+          <article className="prose prose-sm dark:prose-invert md:prose-base w-full max-w-none min-w-0 break-words">
             <CustomMDX source={til.content} />
           </article>
 
-          <hr className="my-10 border-border" />
+          <hr className="border-border my-10" />
 
           <div className="flex flex-col gap-4 md:flex-row md:items-stretch md:justify-between">
             {prev && (
               <Link
                 href={`/tils/${prev.slug}`}
-                className="group flex-1 rounded-md border border-border p-4 hover:bg-accent hover:text-accent-foreground"
+                className="group border-border hover:bg-accent hover:text-accent-foreground flex-1 rounded-md border p-4"
               >
-                <div className="mb-1 text-xs text-muted-foreground">Previous</div>
-                <div className="font-medium group-hover:underline">{prev.title}</div>
+                <div className="text-muted-foreground mb-1 text-xs">
+                  Previous
+                </div>
+                <div className="font-medium group-hover:underline">
+                  {prev.title}
+                </div>
               </Link>
             )}
             {next && (
               <Link
                 href={`/tils/${next.slug}`}
-                className="group flex-1 rounded-md border border-border p-4 text-right hover:bg-accent hover:text-accent-foreground"
+                className="group border-border hover:bg-accent hover:text-accent-foreground flex-1 rounded-md border p-4 text-right"
               >
-                <div className="mb-1 text-xs text-muted-foreground">Next</div>
-                <div className="font-medium group-hover:underline">{next.title}</div>
+                <div className="text-muted-foreground mb-1 text-xs">Next</div>
+                <div className="font-medium group-hover:underline">
+                  {next.title}
+                </div>
               </Link>
             )}
           </div>

@@ -1,0 +1,77 @@
+---
+title: "v0 exports images as base64 text, not binary"
+date: "2026-02-27"
+description: "v0 doesn't export public/ assets. Moving images to another folder exports them, but as base64-encoded text. Decode with base64 -d to get actual binary images."
+tags: ["v0", "debugging"]
+---
+
+I was playing around with v0 and it gave me a really good landing page. But when I downloaded the zip, the images were not included at all.
+
+Turns out v0 doesn't export anything under `public/` in the zip. So I copied the image files into a different folder inside v0 (outside of `public/`) and downloaded again. Got the files, but then none of them would open. Not in the browser, not in my image viewer, nothing.
+
+---
+
+## Diagnosing the Problem
+
+Ran the `file` command to check what the downloaded files actually were:
+
+```bash
+file public/images/*
+```
+
+Output:
+```
+about.jpg:  ASCII text, with very long lines (65536), with no line terminators
+hero-bg.jpg:        ASCII text, with very long lines (65536), with no line terminators
+logo.png:   ASCII text, with very long lines (20936), with no line terminators
+...
+```
+
+The files were **ASCII text**, not binary images. v0 had saved them as raw **base64-encoded strings** instead of actual binary image data.
+
+You can confirm this by looking at the file contents:
+
+```bash
+head -c 80 public/images/logo.png
+# iVBORw0KGgoAAAANSUhEUgAAA...
+```
+
+`iVBORw0KGgo` is the base64 encoding of the PNG magic bytes.
+
+---
+
+## Fix
+
+Decode all the files back to binary using `base64 -d`:
+
+```bash
+for f in public/images/*.jpg public/images/*.png; do
+  base64 -d "$f" > "${f}.tmp" && mv "${f}.tmp" "$f"
+done
+```
+
+After running this, verify with `file` again:
+
+```bash
+file public/images/*
+```
+
+Expected output:
+```
+about.jpg:  JPEG image data, baseline, precision 8, 1024x1024, components 3
+hero-bg.jpg:        JPEG image data, baseline, precision 8, 1024x1024, components 3
+logo.png:   PNG image data, 432 x 126, 8-bit/color RGBA, non-interlaced
+...
+```
+
+All images are now proper binary files and open correctly.
+
+---
+
+## Why does this happen? (my guess)
+
+Since v0 only exports code files, I think it just treats everything in the zip as a text/code file. So when an image gets pulled in this way, it gets serialized as a base64 string instead of written as a binary file — like it's treating the image as source code. Can't confirm this for sure but it's the only thing that makes sense to me.
+
+The annoying part is that copying to a non-`public/` folder is the only way to get images in the download zip right now, so you'll have to run the decode step every time.
+
+I haven't tried connecting a git repo to see if it uploads the images to GitHub.

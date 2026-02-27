@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { MapPin, Clock, Mail, User, Terminal, Globe } from 'lucide-react';
+import { MapPin, Clock, Mail, User, Terminal, FileText } from 'lucide-react';
 import BashTyping from './BashTyping';
 
 const clockFmt = new Intl.DateTimeFormat(undefined, {
@@ -66,12 +66,12 @@ export default function Hero() {
                     hdprajwal01@gmail.com
                   </Link>
                 </InfoItem>
-                <InfoItem icon={<Globe className="h-3.5 w-3.5" />}>
+                <InfoItem icon={<FileText className="h-3.5 w-3.5" />}>
                   <Link
-                    href="#projects"
+                    href="/resume"
                     className="text-primary hover:text-primary/80 transition-colors"
                   >
-                    hdprajwal.dev
+                    Resume
                   </Link>
                 </InfoItem>
               </div>
@@ -111,7 +111,7 @@ function AvailabilityItem() {
         <span className="absolute inline-flex h-3.5 w-3.5 rounded-full bg-green-500 opacity-60 motion-safe:animate-ping" />
         <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
       </div>
-      <span>Open to collaboration</span>
+      <span>Open to full-time roles</span>
     </div>
   );
 }
