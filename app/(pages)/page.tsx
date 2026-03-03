@@ -38,23 +38,24 @@ export default async function Home() {
             <span className="text-primary font-mono text-[10px] tracking-wider uppercase opacity-70">
               Peer-reviewed · MDPI Electronics 2026
             </span>
-            <Link
-              href="https://doi.org/10.3390/electronics15030544"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-2 block"
-            >
-              <h3 className="text-primary text-sm font-medium tracking-tight group-hover:underline">
-                Re-Evaluating Android Malware Detection: Tabular Features,
-                Vision Models, and Ensembles
-                <ArrowUpRight className="ml-1 inline-block h-3.5 w-3.5 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
-              </h3>
-            </Link>
+            <h3 className="text-primary mt-2 text-sm font-medium tracking-tight">
+              Re-Evaluating Android Malware Detection: Tabular Features,
+              Vision Models, and Ensembles
+            </h3>
             <p className="text-muted-foreground mt-1.5 font-mono text-xs leading-relaxed">
               Hosahalli Dayananda, P.; Chen, Z. Compares tabular static
               features, vision-based models, and ensemble strategies for Android
               malware classification.
             </p>
+            <Link
+              href="https://doi.org/10.3390/electronics15030544"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 group mt-2 inline-flex items-center gap-0.5 font-mono text-xs transition-colors"
+            >
+              Read paper
+              <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
           </div>
         </section>
 

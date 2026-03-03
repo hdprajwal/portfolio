@@ -2,6 +2,7 @@ import Footer from '@/components/Footer';
 import SiteHeader from '@/components/site-header';
 import CommandMenu from '@/components/CommandMenu';
 import { Toaster } from '@/components/ui/sooner';
+import ScrollToTop from '@/components/scroll-to-top';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,6 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
       <Toaster />
       <CommandMenu />
+      <ScrollToTop />
     </>
   );
 }

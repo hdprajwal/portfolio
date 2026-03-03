@@ -14,12 +14,12 @@ const AboutMe = {
           jobType: 'Part-time',
           dates: {
             from: 'Jan 2025',
-            to: 'Present',
+            to: 'Dec 2025',
           },
           job_descriptions: [
             'Assisted in grading and providing feedback for an undergraduate Machine Learning course at Purdue University Fort Wayne.',
             'Automated grading processes using Python, enhancing efficiency and consistency in student evaluations.',
-            'Collaborated with faculty to ensure timely feedback, improving overall student performance and engagement.•',
+            'Collaborated with faculty to ensure timely feedback, improving overall student performance and engagement.',
           ],
         },
         {
@@ -100,7 +100,7 @@ const AboutMe = {
       major: 'Computer Science',
       dates: {
         from: 'Jan 2024',
-        to: 'Present',
+        to: 'Dec 2025',
       },
       summary: (
         <div className="space-y-1">
@@ -133,29 +133,31 @@ export default function ResumePage() {
   return (
     <div className="flex-1">
       <div className="px-4 py-14">
-        <h1 className="text-xl font-medium tracking-tight text-balance sm:text-2xl">Resume</h1>
+        <h1 className="text-xl font-medium tracking-tight text-balance sm:text-2xl">
+          Resume
+        </h1>
         <p className="text-muted-foreground mt-2 text-sm">
           Education, experience, and background.
         </p>
       </div>
 
-      <div className="px-4 space-y-8 mb-16">
+      <div className="mb-16 space-y-8 px-4">
         <section>
-          <h2 className="text-lg font-semibold mb-4">Education</h2>
+          <h2 className="mb-4 text-lg font-semibold">Education</h2>
           <div className="space-y-4">
             {AboutMe.education.map((edu, index) => (
               <div key={index} className="">
                 <h3 className="font-medium">
                   {edu.degree} in {edu.major}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   {edu.organization}
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-muted-foreground text-xs">
                   {edu.dates.from} - {edu.dates.to}
                 </p>
                 {edu.summary && (
-                  <div className="mt-2 text-xs text-muted-foreground">
+                  <div className="text-muted-foreground mt-2 text-xs">
                     {edu.summary}
                   </div>
                 )}
@@ -165,10 +167,10 @@ export default function ResumePage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-4">Publications</h2>
+          <h2 className="mb-4 text-lg font-semibold">Publications</h2>
           <div className="space-y-3">
             <div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed">
                 Hosahalli Dayananda, P.; Chen, Z. Re-Evaluating Android Malware
                 Detection: Tabular Features, Vision Models, and Ensembles.{' '}
                 <em>Electronics</em> 2026, 15, 544.{' '}
@@ -176,7 +178,7 @@ export default function ResumePage() {
                   href="https://doi.org/10.3390/electronics15030544"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:text-primary/80 transition-colors underline"
+                  className="text-primary hover:text-primary/80 underline transition-colors"
                 >
                   https://doi.org/10.3390/electronics15030544
                 </Link>
@@ -186,30 +188,30 @@ export default function ResumePage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-4">Experience</h2>
+          <h2 className="mb-4 text-lg font-semibold">Experience</h2>
           <div className="space-y-8">
             {AboutMe.workExperience.map((company: any, companyIndex) => (
               <div key={companyIndex} className="">
-                <div className="mb-4 ">
+                <div className="mb-4">
                   <h3 className="text-lg font-semibold">
                     {company.organization}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     {company.location}
                   </p>
                 </div>
 
-                <div className="space-y-4 ml-2">
+                <div className="ml-2 space-y-4">
                   {company.roles.map((role: any, roleIndex: number) => (
                     <div
                       key={roleIndex}
-                      className="border-l border-border border-opacity-50 pl-4"
+                      className="border-border border-opacity-50 border-l pl-4"
                     >
                       <h4 className="font-medium">{role.jobTitle}</h4>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         {role.jobType} • {role.dates.from} - {role.dates.to}
                       </p>
-                      <ul className="mt-2 text-sm text-muted-foreground list-disc list-inside space-y-1">
+                      <ul className="text-muted-foreground mt-2 list-inside list-disc space-y-1 text-sm">
                         {role.job_descriptions.map(
                           (description: string, idx: number) => (
                             <li key={idx}>{description}</li>
