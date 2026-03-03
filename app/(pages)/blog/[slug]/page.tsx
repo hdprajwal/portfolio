@@ -84,7 +84,7 @@ export default async function Blog({
 
   return (
     <div className="bg-background relative container mx-auto min-h-screen max-w-4xl overflow-x-hidden px-4 py-10 md:py-12">
-      <ReadingProgress targetSelector="article" />
+      <ReadingProgress />
       <div className="mx-auto mb-6 flex w-full max-w-4xl items-center justify-between">
         <Link
           href="/blog"
