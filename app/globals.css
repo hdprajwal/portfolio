@@ -163,33 +163,22 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   html {
     scrollbar-gutter: stable;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 
-  /* Grid container styling */
-  .grid-stack {
-    border-left: 1px solid var(--border);
-    border-right: 1px solid var(--border);
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Grid row styling */
-  .grid-row {
-    border-bottom: 1px solid var(--border);
-    background: var(--background);
-    position: relative;
-  }
 
   /* Blog typography hardening for small screens */
   .prose {
     overflow-wrap: anywhere;
     word-break: normal;
   }
+
   .prose pre,
   .prose table,
   .prose img,

@@ -1,5 +1,4 @@
 import { listPosts } from '@/lib/posts';
-import Reveal from '@/components/Reveal';
 import BlogCard from '@/components/BlogCard';
 
 export default async function RecentBlogs() {
@@ -13,12 +12,10 @@ export default async function RecentBlogs() {
   }
 
   return (
-    <>
+    <div>
       {recentPosts.map((post, i) => (
-        <Reveal key={post.slug} delay={i * 80}>
-          <BlogCard post={post} />
-        </Reveal>
+        <BlogCard post={post} key={i} />
       ))}
-    </>
+    </div>
   );
 }

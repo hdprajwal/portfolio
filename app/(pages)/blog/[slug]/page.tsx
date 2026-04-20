@@ -6,7 +6,9 @@ import { CustomMDX } from '@/components/MDX';
 import ReadingProgress from '@/components/ReadingProgress';
 import { formatDate, getBlogPosts, baseUrl } from '@/lib/posts';
 import { type Post } from '@/lib/posts';
-import SidebarActions from '@/components/SidebarActions';
+import ShareActions from '@/components/ShareActions';
+import { ArrowLeftIcon, ArrowRightIcon, Link2, Share, ShareIcon } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
 
 export async function generateStaticParams() {
   let posts = await getBlogPosts();
@@ -80,24 +82,46 @@ export default async function Blog({
   const isExternalImg = /^https?:\/\//.test(heroImage);
 
   return (
-    <main className="container mx-auto max-w-4xl px-4 py-10 md:py-12 overflow-x-hidden min-h-screen relative bg-background">
+    <div className="container mx-auto max-w-4xl px-4 py-10 md:py-12 overflow-x-hidden min-h-screen relative bg-background">
       <ReadingProgress targetSelector="article" />
-
-      {/* Floating share actions - positioned outside main column */}
-      <div className="hidden xl:block fixed right-8 top-1/2 -translate-y-1/2 z-10">
-        <SidebarActions url={shareUrl} title={post.title} />
-      </div>
-      <div className="mb-6 mx-auto w-full max-w-4xl">
+      <div className="mb-6 mx-auto w-full max-w-4xl flex justify-between items-center">
         <Link
           href="/blog"
-          className="inline-block text-sm text-muted-foreground hover:underline"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:underline"
         >
-          ← Back to all blogs
+          <ArrowLeftIcon className="inline-block h-4 w-4" />
+          Blogs
         </Link>
+        <div>
+          <ShareActions url={shareUrl} title={post.title} />
+        </div>
       </div>
 
-      <div className="relative mx-auto mb-8 w-full max-w-5xl overflow-hidden rounded-lg border border-[var(--border)]">
-        <div className="relative aspect-[16/6] w-full bg-[var(--muted)]">
+
+      <header className="mb-8">
+        <h1 className="break-words font-bold tracking-tight leading-[1.2] mb-4 text-[1.2rem] md:text-[1.8rem]">
+          {post.title}
+        </h1>
+        <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+          <span>{formatDate(post.date)}</span>
+          <span aria-hidden>•</span>
+          <span>{readingMins} min read</span>
+        </div>
+        {post.tags && post.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {post.tags.map((tag: string) => (
+              <span
+                key={tag}
+                className="rounded bg-muted px-[0.6rem] py-[0.2rem] font-mono text-xs text-chip-fg lowercase"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </header>
+      {post.image && <div className="relative mx-auto mb-8 w-full max-w-5xl overflow-hidden rounded-lg border border-border">
+        <div className="relative aspect-[16/9] w-full bg-muted">
           <Image
             src={heroImage}
             alt={post.title}
@@ -108,80 +132,65 @@ export default async function Blog({
           />
         </div>
       </div>
-        <header className="mb-6">
-          <h1 className="title mb-2 break-words text-3xl font-semibold tracking-tight md:text-4xl xl:text-5xl">
-            {post.title}
-          </h1>
-          <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-            <span>{formatDate(post.date)}</span>
-            <span aria-hidden>•</span>
-            <span>{readingMins} min read</span>
-          </div>
-          {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="rounded-md bg-[var(--chip)] px-2 py-1 font-mono text-[10px] text-[var(--chip-fg)] ring-1 ring-inset ring-[var(--border)]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </header>
-
-      <section className="mx-auto w-full max-w-4xl">
+      }
+      <Separator />
+      <section className="mx-auto w-full max-w-4xl mt-8">
         <div className="mx-auto w-full max-w-4xl min-w-0">
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'BlogPosting',
-              headline: post.title,
-              datePublished: post.date,
-              dateModified: post.date,
-              description: post.summary,
-              image: `${baseUrl}/og?title=${encodeURIComponent(post.title)}`,
-              url: `${baseUrl}/blog/${post.slug}`,
-              author: {
-                '@type': 'Person',
-                name: 'Prajwal HD',
-              },
-            }),
-          }}
-        />
+          <script
+            type="application/ld+json"
+            suppressHydrationWarning
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'BlogPosting',
+                headline: post.title,
+                datePublished: post.date,
+                dateModified: post.date,
+                description: post.summary,
+                image: `${baseUrl}/og?title=${encodeURIComponent(post.title)}`,
+                url: `${baseUrl}/blog/${post.slug}`,
+                author: {
+                  '@type': 'Person',
+                  name: 'Prajwal HD',
+                },
+              }),
+            }}
+          />
 
-        <article className="w-full min-w-0 max-w-none prose prose-sm break-words dark:prose-invert md:prose-base lg:prose-lg">
-          <CustomMDX source={post.content} />
-        </article>
+          <article className="w-full max-w-none min-w-0 prose prose-sm break-words dark:prose-invert md:prose-base">
+            <CustomMDX source={post.content} />
+          </article>
 
-        <hr className="my-10 border-[var(--border)]" />
+          <hr className="my-10 border-border" />
 
-        <div className="flex flex-col gap-4 md:flex-row md:items-stretch md:justify-between">
-          {prev && (
-            <Link
-              href={`/blog/${prev.slug}`}
-              className="group flex-1 rounded-md border border-[var(--border)] p-4 hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
-            >
-              <div className="mb-1 text-xs text-muted-foreground">Previous</div>
-              <div className="font-medium group-hover:underline">{prev.title}</div>
-            </Link>
-          )}
-          {next && (
-            <Link
-              href={`/blog/${next.slug}`}
-              className="group flex-1 rounded-md border border-[var(--border)] p-4 text-right hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
-            >
-              <div className="mb-1 text-xs text-muted-foreground">Next</div>
-              <div className="font-medium group-hover:underline">{next.title}</div>
-            </Link>
-          )}
-        </div>
+          <div className="flex flex-col gap-4 md:flex-row md:items-stretch md:justify-between">
+            {prev && (
+              <Link
+                href={`/blog/${prev.slug}`}
+                className="group flex-1 hover:text-accent-foreground-foreground"
+              >
+                <div className="mb-1 text-xs text-muted-foreground group-hover:text-foreground flex items-center gap-2">
+                  <ArrowLeftIcon className="inline-block h-4 w-4" />
+                  New
+                </div>
+                <div className="font-medium group-hover:underline">{prev.title}</div>
+              </Link>
+            )}
+            {next && (
+              <Link
+                href={`/blog/${next.slug}`}
+                className="group flex-1 text-right hover:text-accent-foreground"
+              >
+                <div className="mb-1 text-xs text-muted-foreground group-hover:text-foreground flex items-center gap-2 justify-end">
+                  Old
+                  <ArrowRightIcon className="inline-block h-4 w-4" />
+                </div>
+                <div className="font-medium group-hover:underline">{next.title}</div>
+              </Link>
+            )}
+          </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
