@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { cache } from 'react';
 
 export type Post = {
   slug: string;
@@ -14,7 +15,7 @@ export type Post = {
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
 
-export const baseUrl = 'https://prajwalhd.dev';
+export { baseUrl } from '@/lib/site';
 
 export function formatDate(date: string): string {
   return new Date(date).toLocaleDateString('en-US', {
@@ -24,7 +25,7 @@ export function formatDate(date: string): string {
   });
 }
 
-export async function listPosts(): Promise<Post[]> {
+export const listPosts = cache(async (): Promise<Post[]> => {
   if (!fs.existsSync(BLOG_DIR)) {
     return [];
   }
@@ -51,7 +52,7 @@ export async function listPosts(): Promise<Post[]> {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return posts;
-}
+});
 
 export const getBlogPosts = listPosts;
 
@@ -74,3 +75,4 @@ export async function getPost(slug: string) {
     content: mdxContent,
   };
 }
+

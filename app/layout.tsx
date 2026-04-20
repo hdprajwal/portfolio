@@ -1,40 +1,45 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { ThemeProvider } from '@/components/ThemeProvider';
-import { Analytics } from '@vercel/analytics/next';
+import { ThemeProvider } from '@/components/theme-provider';
+import AnalyticsProvider from '@/components/analytics';
+import { baseUrl } from '@/lib/site';
 
-import { JetBrains_Mono } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 
-const jetBrainsSans = JetBrains_Mono({
+const geist = Geist({
   subsets: ['latin'],
   variable: '--font-sans',
 });
-const jetBrainsMono = JetBrains_Mono({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
 });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Prajwal',
-    template: '%s | Prajwal',
+    default: 'Prajwal HD | Backend, Platform & Applied AI',
+    template: '%s | Prajwal HD',
   },
-  description: "Prajwal's personal site — projects, writing, and links.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://hdprajwal.dev'
-  ),
+  description:
+    'Software engineer building backend systems, developer tools, and applied AI. Shipped cloud cost infrastructure at Opslyft, published Android malware detection research, and builds tools like QuackCode and Gitwise.',
+  metadataBase: new URL(baseUrl),
+  alternates: {
+    canonical: baseUrl,
+  },
   openGraph: {
-    title: 'Prajwal',
-    description: "Prajwal's personal site — projects, writing, and links.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://hdprajwal.dev',
-    siteName: 'Prajwal',
+    title: 'Prajwal HD | Backend, Platform & Applied AI',
+    description:
+      'Software engineer building backend systems, developer tools, and applied AI. Shipped cloud cost infrastructure at Opslyft, published Android malware detection research, and builds tools like QuackCode and Gitwise.',
+    url: baseUrl,
+    siteName: 'Prajwal HD',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Prajwal',
-    description: "Prajwal's personal site — projects, writing, and links.",
+    title: 'Prajwal HD | Backend, Platform & Applied AI',
+    description:
+      'Software engineer building backend systems, developer tools, and applied AI. Shipped cloud cost infrastructure at Opslyft, published Android malware detection research, and builds tools like QuackCode and Gitwise.',
   },
   icons: {
     icon: [
@@ -56,9 +61,59 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${jetBrainsSans.className} ${jetBrainsMono.className}`}
+      className={`${geist.className} ${geistMono.className}`}
     >
       <body className="antialiased">
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebSite',
+                  '@id': `${baseUrl}/#website`,
+                  url: baseUrl,
+                  name: 'Prajwal HD',
+                  description:
+                    'Portfolio, projects, writing, and resume of Prajwal HD.',
+                  inLanguage: 'en-US',
+                },
+                {
+                  '@type': 'Person',
+                  '@id': `${baseUrl}/#person`,
+                  name: 'Prajwal HD',
+                  url: baseUrl,
+                  jobTitle: 'Software Engineer',
+                  alumniOf: [
+                    {
+                      '@type': 'CollegeOrUniversity',
+                      name: 'Purdue University Fort Wayne',
+                    },
+                  ],
+                  knowsAbout: [
+                    'Backend Systems',
+                    'Platform Engineering',
+                    'Developer Tools',
+                    'Applied AI',
+                    'Cloud Cost Engineering',
+                    'Android Malware Detection',
+                    'Multi-cloud Infrastructure',
+                    'Python',
+                    'Go',
+                    'TypeScript',
+                  ],
+                  sameAs: [
+                    'https://github.com/hdprajwal',
+                    'https://www.linkedin.com/in/hdprajwal',
+                    'https://x.com/_hdprajwal',
+                  ],
+                },
+              ],
+            }),
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -66,7 +121,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <Analytics />
+          <AnalyticsProvider />
         </ThemeProvider>
       </body>
     </html>

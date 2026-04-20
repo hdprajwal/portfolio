@@ -11,10 +11,10 @@ draft: false
 
 I built a realtime “listen → transcribe → filter → show” pipeline. It skips silence, turns speech into text, checks if the text is toxic, and masks only the toxic words.
 There are two speech-to-text (ASR) engines: **wav2vec2** (fast) and **Whisper** (more accurate).
-With wav2vec2, average end-to-end latency is **under 400 ms**. With Whisper, it’s **\~1.1–1.8 s** but the text is cleaner.
+With wav2vec2, average end-to-end latency is **under 400 ms**. With Whisper, it’s **\~1.1 to 1.8 s** but the text is cleaner.
 The sentence-level toxicity model reached **F1 0.807**, **Precision 0.835**, **Recall 0.781**, **PR-AUC 0.845**.
 
-> This started as a Natural Language Programming (NLP) course project. Not a paper — just a practical build to learn the full workflow and measure latency.
+> This started as a Natural Language Programming (NLP) course project. Not a paper - just a practical build to learn the full workflow and measure latency.
 
 ## Why I built this
 
@@ -126,7 +126,7 @@ while running:
 | Path          | Typical E2E | Best fit use case          |
 | ------------- | :---------: | -------------------------- |
 | wav2vec2 path |   < 400 ms  | Interactive chat and games |
-| Whisper path  |  1.1–1.8 s  | Streams and broadcasts     |
+| Whisper path  |  1.1 to 1.8 s  | Streams and broadcasts     |
 
 ## Design choices that helped
 
@@ -149,12 +149,12 @@ while running:
 
 * **False positives:** harmless idioms (like “break a leg”) and **quoted slurs** can be flagged. Using **context checks** or allow‑list rules for quoted content will help reduce False Positives.
 * **False negatives:** implied/multi‑sentence abuse or **contextual insults** can slip through. Lowering the threshold or adding **short memory across turns** will help.
-* **ASR issues:** the **worst 5–10%** of utterances (fast speech, rare words) hurt moderation the most. Considering to **fallback** or **ask‑to‑repeat** prompts on low ASR confidence chunks will help reduce the ASR issue.
+* **ASR issues:** the **worst 5 to 10%** of utterances (fast speech, rare words) hurt moderation the most. Considering to **fallback** or **ask‑to‑repeat** prompts on low ASR confidence chunks will help reduce the ASR issue.
 
 ## Latency budget & runtime notes
 
 * **wav2vec2 path:** \~139 ms ASR on CPU‑friendly settings; total **< 400 ms** E2E is realistic for interactive use.
-* **Whisper path:** \~1.2 s ASR due to larger context; total **1.1–1.8 s** with span masking.
+* **Whisper path:** \~1.2 s ASR due to larger context; total **1.1 to 1.8 s** with span masking.
 * **Token tagger:** \~5 ms per utterance; negligible.
 * **Bench box:** Quad‑core CPU, 32 GB RAM, GTX 1050. Training/fine‑tuning done on a **single T4**.
 

@@ -1,32 +1,30 @@
 import { listPosts } from '@/lib/posts';
-import Reveal from '@/components/Reveal';
-import BlogCard from '@/components/BlogCard';
+import BlogCardGrid from '@/components/blogs/blog-card-grid';
 import type { Metadata } from 'next';
-import { Separator } from '@/components/ui/separator';
 
 export default async function BlogIndexPage() {
   const posts = await listPosts();
   return (
     <div className="flex-1">
-      <div className="px-4 pt-20 pb-10">
-        <h1 className="text-[2.5rem] font-extrabold tracking-tight leading-[1.2]">Blogs</h1>
-        <p className="text-[0.9rem] text-muted-foreground mt-2">
-          Essays, notes, and more.
+      <div className="px-4 pt-14 pb-8">
+        <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
+          Blogs
+        </h1>
+        <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed">
+          Essays and notes on software engineering, security, applied AI, and
+          the systems behind them. Occasional deep dives, mostly short.
         </p>
-        <Separator className="mt-1 bg-muted-foreground" />
       </div>
 
-      <div className="px-4">
-        {posts.map((p, i) => (
-          <Reveal key={p.slug} delay={i * 60}>
-            <BlogCard post={p} />
-          </Reveal>
-        ))}
-
-        {posts.length === 0 && (
-          <p className="text-[0.9rem] text-muted-foreground">
-            No posts yet.
-          </p>
+      <div className="px-4 pb-16">
+        {posts.length === 0 ? (
+          <p className="text-muted-foreground text-[0.9rem]">No posts yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+            {posts.map((p) => (
+              <BlogCardGrid key={p.slug} post={p} />
+            ))}
+          </div>
         )}
       </div>
     </div>
@@ -35,5 +33,9 @@ export default async function BlogIndexPage() {
 
 export const metadata: Metadata = {
   title: 'Blogs',
-  description: 'Writing on software engineering, development, and technology.',
+  description:
+    'Writing on backend systems, developer tools, applied AI, and engineering tradeoffs. Essays, notes, and technical writeups by Prajwal HD.',
+  alternates: {
+    canonical: '/blog',
+  },
 };

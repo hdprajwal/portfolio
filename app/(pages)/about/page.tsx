@@ -1,207 +1,193 @@
-const AboutMe = {
-  workExperience: [
-    {
-      organization: 'Purdue University',
-      location: 'Fort Wayne',
-      logo: '/purdue.png',
-      roles: [
-        {
-          jobTitle: 'Teaching Assistant',
-          jobType: 'Part-time',
-          dates: {
-            from: 'Jan 2025',
-            to: 'Present',
-          },
-          job_descriptions: [
-            'Assisted in grading and providing feedback for an undergraduate Machine Learning course at Purdue University Fort Wayne.',
-            'Automated grading processes using Python, enhancing efficiency and consistency in student evaluations.',
-            'Collaborated with faculty to ensure timely feedback, improving overall student performance and engagement.•',
-          ],
-        },
-        {
-          jobTitle: 'Research Assistant',
-          jobType: 'Full-time',
-          dates: {
-            from: 'Oct 2024',
-            to: 'Dec 2024',
-          },
-          job_descriptions: [
-            'Designed and developed a minimum viable product (MVP) mobile application and backend from the ground up using React Native and TypeScript.',
-            'Improved user engagement by aligning features with project requirements.',
-          ],
-        },
-      ],
-    },
-
-    {
-      organization: 'Opslyft',
-      location: 'Bangalore, India',
-      logo: '/opslyft.jpeg',
-      roles: [
-        {
-          jobTitle: 'Cloud Engineer',
-          jobType: 'Full-time',
-          dates: {
-            from: 'Mar 2022',
-            to: 'Nov 2023',
-          },
-          job_descriptions: [
-            'Collaborated with customers to identify and implement cost saving opportunities. Resulting in an average recurring saving of over $100,000 every month.',
-            'Architected secure and scalable cloud architecture based on customer interactions and requirements.',
-            'Partnered with customers to design secure, scalable cloud architectures, improving deployment efficiency.',
-            'Developed multi-Cloud Asset management solution, streamlining customers resource discovery workflow for cost management and general use.',
-          ],
-        },
-        {
-          jobTitle: 'Software Development Engineer',
-          jobType: 'Full-time',
-          dates: {
-            from: 'Apr 2021',
-            to: 'Mar 2022',
-          },
-          job_descriptions: [
-            'Developed and optimized existing Ul components for the SaaS Platform, resulting in 2x reduction in page load times.',
-            'Redesigned the backend logic for the Instance scheduler to cover all the edge cases, resulting in 99% service uptime in customer environments.',
-            'Architected Data Transfer Visibility for multi cloud, solving a major pain point for companies trying to get visibility on Data Transfer.',
-          ],
-        },
-      ],
-    },
-    {
-      organization: 'Gradspace',
-      location: 'Bangalore, India',
-      logo: '/gradspace.jpeg',
-      roles: [
-        {
-          jobTitle: 'Full-stack Developer Intern',
-          jobType: 'Internship',
-          dates: {
-            from: 'Sep 2020',
-            to: 'Feb 2021',
-          },
-          job_descriptions: [
-            'Architected the backend resulting in improved API response time and decreased time to deploy on Amazon Web services(AWS).',
-            'Implement mobile push notification to improve user engagement on the platform.',
-            'Coordinate with mobile developers to refactor the codebase, reducing the app load time by 60%.',
-          ],
-        },
-      ],
-    },
-  ],
-  education: [
-    {
-      organization: 'Purdue University, Fort Wayne, IN',
-      organizationId: '',
-      degree: 'Master of Science',
-      major: 'Computer Science',
-      dates: {
-        from: 'Jan 2024',
-        to: 'Present',
-      },
-      summary: (
-        <div className="space-y-1">
-          <div>
-            Activities & Research: Thesis on Static Malware Detection Across
-            Modalities (Static Analysis)
-          </div>
-          <div>
-            Relevant Coursework: Application of Deep Learning, Cryptography &
-            Network Security, NLP, Algorithm Design, Database Systems.
-          </div>
-        </div>
-      ),
-    },
-    {
-      organization: 'Govt. S.K.S.J Technological Institute, Bangalore, India',
-      organizationId: '',
-      degree: 'Bachelor of Engineering',
-      major: 'Computer Science & Engineering',
-      dates: {
-        from: 'Aug 2017',
-        to: 'Jul 2021',
-      },
-      summary: '',
-    },
-  ],
-};
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import { Mail, ArrowUpRight } from 'lucide-react';
+import GithubIcon from '@/components/icons/GithubIcon';
+import LinkedinIcon from '@/components/icons/LinkedinIcon';
+import SectionHeader from '@/components/section-header';
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-4xl px-4 py-12 bg-background grid-row">
-      <h1 className="text-2xl font-semibold tracking-tight">About Me</h1>
-      <p className="mt-2 text-sm text-neutral-500">
-        Education, experience, and background.
-      </p>
+    <div className="flex-1">
+      <section className="px-4 pt-14 pb-8">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
+            About
+          </h1>
+          <span className="text-muted-foreground/60 font-mono text-xs">
+            / who, what, why
+          </span>
+        </div>
+        <p className="text-muted-foreground mt-3 max-w-2xl text-base leading-relaxed">
+          I build backend systems, developer tools, and applied AI. Most of the
+          work I enjoy sits where product decisions and infrastructure decisions
+          overlap: reliability, cost, safety, and usability all pulling on the
+          same system at once.
+        </p>
+      </section>
 
-      <div className="mt-8 space-y-8">
-        <section>
-          <h2 className="text-lg font-bold mb-4">Education</h2>
-          <div className="space-y-4">
-            {AboutMe.education.map((edu, index) => (
-              <div key={index} className="">
-                <h3 className="font-medium">
-                  {edu.degree} in {edu.major}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {edu.organization}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {edu.dates.from} - {edu.dates.to}
-                </p>
-                {edu.summary && (
-                  <div className="mt-2 text-xs text-muted-foreground">
-                    {edu.summary}
-                  </div>
-                )}
-              </div>
-            ))}
+      <div className="space-y-12 px-4 pb-20 md:space-y-14">
+        <section id="how-i-think">
+          <SectionHeader label="How I think about building" />
+          <div className="text-muted-foreground space-y-3 text-base leading-relaxed">
+            <p>
+              I care about systems that fail loudly, APIs that are hard to
+              misuse, and code the next person can read without reverse-
+              engineering my intent. Complexity is a cost. I try not to spend it
+              unless I&apos;m getting something real back.
+            </p>
+            <p>
+              I also care a lot about recovery. A lot of engineering mistakes
+              are survivable if the system makes them obvious and cheap to fix.
+              Silent failures are the worst kind.
+            </p>
           </div>
         </section>
 
-        <section>
-          <h2 className="text-lg font-bold mb-4">Experience</h2>
-          <div className="space-y-8">
-            {AboutMe.workExperience.map((company: any, companyIndex) => (
-              <div key={companyIndex} className="">
-                <div className="mb-4 ">
-                  <h3 className="text-lg font-semibold">
-                    {company.organization}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {company.location}
-                  </p>
-                </div>
-
-                <div className="space-y-4 ml-2">
-                  {company.roles.map((role: any, roleIndex: number) => (
-                    <div
-                      key={roleIndex}
-                      className="border-l border-[var(--border)] border-opacity-50 pl-4"
-                    >
-                      <h4 className="font-medium">{role.jobTitle}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {role.jobType} • {role.dates.from} - {role.dates.to}
-                      </p>
-                      <ul className="mt-2 text-sm text-muted-foreground list-disc list-inside space-y-1">
-                        {role.job_descriptions.map(
-                          (description: string, idx: number) => (
-                            <li key={idx}>{description}</li>
-                          )
-                        )}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+        <section id="how-i-work">
+          <SectionHeader label="How I work with teams" />
+          <div className="text-muted-foreground space-y-3 text-base leading-relaxed">
+            <p>
+              I like ambiguous problems when the constraint is real. At Opslyft
+              that meant customer-facing architecture work, cost investigations,
+              and shipping changes into environments I did not fully control.
+            </p>
+            <p>
+              I try to reduce ambiguity for everyone else: make the tradeoff
+              explicit and the failure mode visible.
+            </p>
           </div>
+        </section>
+
+        <section id="background">
+          <SectionHeader label="Background" />
+          <div className="text-muted-foreground space-y-3 text-base leading-relaxed">
+            <p>
+              Before grad school, I spent close to three years at Opslyft
+              working on cloud cost infrastructure, multi-cloud visibility, and
+              reliability-sensitive backend systems. That&apos;s where I learned
+              the difference between code that works and systems that hold up in
+              production. Alongside the work, I co-presented{' '}
+              <Link
+                href="https://hasgeek.com/rootconf/optimizing-costs-of-cloud-infrastructure/sub/data-transfer-cost-optimization-KGSAciSRiEjTo1bjGNWChG"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground/70 underline underline-offset-2 transition-colors"
+              >
+                data transfer cost optimization at Rootconf 2022
+              </Link>
+              .
+            </p>
+            <p>
+              Then I went to Purdue Fort Wayne for my Master&apos;s, where I
+              worked on adversarial ML and Android malware detection under Dr.
+              Zesheng Chen. That work became a peer-reviewed paper in{' '}
+              <Link
+                href="https://doi.org/10.3390/electronics15030544"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground/70 underline underline-offset-2 transition-colors"
+              >
+                MDPI Electronics
+              </Link>
+              .
+            </p>
+            <p>
+              Dr. Chen had one question he kept asking: &quot;Why are you
+              assuming that&apos;s the right approach?&quot; That question
+              changed how I think about almost everything.
+            </p>
+            <p>
+              Alongside the research, I TA&apos;d undergraduate machine learning
+              for two semesters. I automated parts of the grading pipeline, but
+              the better part of the experience was explaining where the math,
+              implementation, and model behavior actually meet.
+            </p>
+          </div>
+        </section>
+
+        <section id="outside">
+          <SectionHeader label="Outside the terminal" />
+          <div className="text-muted-foreground space-y-3 text-base leading-relaxed">
+            <p>
+              Gym and books. The gym taught me something about consistency that
+              I haven&apos;t been able to learn any other way.
+            </p>
+            <p>
+              The books I come back to are usually the ones that change how I
+              think, not just what I know.
+            </p>
+          </div>
+        </section>
+
+        <section id="reach-me">
+          <SectionHeader label="Reach me" />
+          <p className="text-muted-foreground mb-4 max-w-2xl text-base leading-relaxed">
+            If you&apos;re hiring for backend, platform, developer tooling, or
+            applied AI work, email is the fastest way to reach me.
+          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              href="mailto:hdprajwal01@gmail.com"
+              className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+            >
+              <Mail className="h-3 w-3" />
+              Email
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/hdprajwal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+            >
+              <LinkedinIcon className="h-3 w-3" />
+              LinkedIn
+              <ArrowUpRight className="h-3 w-3" />
+            </Link>
+            <Link
+              href="https://github.com/hdprajwal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+            >
+              <GithubIcon className="h-3 w-3" />
+              GitHub
+              <ArrowUpRight className="h-3 w-3" />
+            </Link>
+          </div>
+          <p className="text-muted-foreground mt-4 text-xs">
+            Or keep reading:{' '}
+            <Link
+              href="/projects"
+              className="hover:text-foreground underline underline-offset-2 transition-colors"
+            >
+              projects
+            </Link>
+            <span className="text-muted-foreground/40"> · </span>
+            <Link
+              href="/blog"
+              className="hover:text-foreground underline underline-offset-2 transition-colors"
+            >
+              blog
+            </Link>
+            <span className="text-muted-foreground/40"> · </span>
+            <Link
+              href="/resume"
+              className="hover:text-foreground underline underline-offset-2 transition-colors"
+            >
+              resume
+            </Link>
+          </p>
         </section>
       </div>
-    </main>
+    </div>
   );
 }
-import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About',
+  description:
+    'Background, working style, and experience of Prajwal HD: production cloud infrastructure at Opslyft, Android malware detection research at Purdue, and teaching machine learning.',
+  alternates: {
+    canonical: '/about',
+  },
 };

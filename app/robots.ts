@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
+import { baseUrl } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
-  const base = "https://hdprajwal.dev";
   return {
     rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: `${base}/sitemap.xml`,
-    host: base,
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   };
 }
 

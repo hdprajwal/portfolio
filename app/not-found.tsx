@@ -27,7 +27,7 @@ export default function NotFound() {
               <Link
                 key={href}
                 href={href}
-                className="inline-flex items-center gap-2 text-sm hover:text-muted-foreground transition-colors"
+                className="inline-flex items-center gap-2 text-base hover:text-muted-foreground transition-colors"
               >
                 <ArrowRight className="h-4 w-4" />
                 {label}
@@ -35,7 +35,7 @@ export default function NotFound() {
             ))}
           </nav>
 
-          <p className="text-xs text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             If you believe this is a broken link,{' '}
             <a
               href="mailto:hdprajwal01@gmail.com?subject=404%20on%20site"

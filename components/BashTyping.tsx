@@ -1,5 +1,5 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
+'use client';
+import { useEffect, useRef, useState } from 'react';
 
 export default function BashTyping({
   onDone,
@@ -9,13 +9,13 @@ export default function BashTyping({
   prompt: string;
 }) {
   const base = `$ ${prompt}`;
-  const [out, setOut] = useState("");
+  const [out, setOut] = useState('');
   const [stopped, setStopped] = useState(false);
   const iRef = useRef(0);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      '(prefers-reduced-motion: reduce)'
     ).matches;
     if (prefersReduced) {
       setOut(base);
@@ -31,24 +31,31 @@ export default function BashTyping({
       }
     }, 50);
     const onKey = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key.toLowerCase() === "c") {
+      if (e.ctrlKey && e.key.toLowerCase() === 'c') {
         setStopped(true);
         clearInterval(id);
-        setOut((s) => (s.endsWith("^C") ? s : s + "^C"));
+        setOut((s) => (s.endsWith('^C') ? s : s + '^C'));
         onDone();
       }
     };
-    window.addEventListener("keydown", onKey as unknown as EventListener);
+    window.addEventListener('keydown', onKey as unknown as EventListener);
     return () => {
       clearInterval(id);
-      window.removeEventListener("keydown", onKey as unknown as EventListener);
+      window.removeEventListener('keydown', onKey as unknown as EventListener);
     };
   }, []);
 
+  const hasPrompt = out.length > 0;
+  const dollarSign = hasPrompt ? out.slice(0, 1) : '$';
+  const rest = hasPrompt ? out.slice(1) : '';
+
   return (
-    <div className="font-mono text-md text-muted-foreground">
-      {out || "$"}
-      {!stopped && <span className="ml-0.5 animate-pulse">|</span>}
+    <div className="text-muted-foreground font-mono text-sm">
+      <span className="text-primary">{dollarSign}</span>
+      {rest}
+      {!stopped && (
+        <span className="bg-primary ml-0.5 inline-block h-[13px] w-[7px] -translate-y-[1px] animate-pulse align-middle opacity-70" />
+      )}
     </div>
   );
 }

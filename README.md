@@ -1,6 +1,6 @@
 # Portfolio Website
 
-A modern, minimal, terminal‑themed personal website for projects, writing, and a living /now page.
+A modern, minimal, terminal‑themed personal website for projects and writing.
 
 Live - [https://hdprajwal.dev](https://hdprajwal.dev)
 

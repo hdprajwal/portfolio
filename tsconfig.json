@@ -33,7 +33,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/page copy.tsx.bk",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
