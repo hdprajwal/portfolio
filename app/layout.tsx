@@ -17,19 +17,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Prajwal HD | Backend, Platform & Applied AI',
+    default: 'Prajwal HD | AI Engineer, Backend & Full-Stack',
     template: '%s | Prajwal HD',
   },
   description:
-    'Software engineer building backend systems, developer tools, and applied AI. Shipped cloud cost infrastructure at Opslyft, published Android malware detection research, and builds tools like QuackCode and Gitwise.',
+    'AI engineer building agent tooling and applied ML, with three years of backend and full-stack engineering at Opslyft. Peer-reviewed Android malware detection research and open-source tools like QuackCode and Gitwise.',
   metadataBase: new URL(baseUrl),
   alternates: {
     canonical: baseUrl,
   },
   openGraph: {
-    title: 'Prajwal HD | Backend, Platform & Applied AI',
+    title: 'Prajwal HD | AI Engineer, Backend & Full-Stack',
     description:
-      'Software engineer building backend systems, developer tools, and applied AI. Shipped cloud cost infrastructure at Opslyft, published Android malware detection research, and builds tools like QuackCode and Gitwise.',
+      'AI engineer building agent tooling and applied ML, with three years of backend and full-stack engineering at Opslyft. Peer-reviewed Android malware detection research and open-source tools like QuackCode and Gitwise.',
     url: baseUrl,
     siteName: 'Prajwal HD',
     locale: 'en_US',
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Prajwal HD | Backend, Platform & Applied AI',
+    title: 'Prajwal HD | AI Engineer, Backend & Full-Stack',
     description:
-      'Software engineer building backend systems, developer tools, and applied AI. Shipped cloud cost infrastructure at Opslyft, published Android malware detection research, and builds tools like QuackCode and Gitwise.',
+      'AI engineer building agent tooling and applied ML, with three years of backend and full-stack engineering at Opslyft. Peer-reviewed Android malware detection research and open-source tools like QuackCode and Gitwise.',
   },
   icons: {
     icon: [
@@ -85,7 +85,7 @@ export default function RootLayout({
                   '@id': `${baseUrl}/#person`,
                   name: 'Prajwal HD',
                   url: baseUrl,
-                  jobTitle: 'Software Engineer',
+                  jobTitle: 'AI Engineer',
                   alumniOf: [
                     {
                       '@type': 'CollegeOrUniversity',
@@ -93,16 +93,18 @@ export default function RootLayout({
                     },
                   ],
                   knowsAbout: [
-                    'Backend Systems',
-                    'Platform Engineering',
-                    'Developer Tools',
                     'Applied AI',
-                    'Cloud Cost Engineering',
+                    'AI Agents',
+                    'Developer Tools',
+                    'Backend Systems',
+                    'Full-Stack Development',
                     'Android Malware Detection',
+                    'Platform Engineering',
+                    'Cloud Cost Engineering',
                     'Multi-cloud Infrastructure',
                     'Python',
-                    'Go',
                     'TypeScript',
+                    'Go',
                   ],
                   sameAs: [
                     'https://github.com/hdprajwal',

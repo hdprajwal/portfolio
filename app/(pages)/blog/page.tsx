@@ -8,7 +8,7 @@ export default async function BlogIndexPage() {
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
         <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
-          Blogs
+          Blog
         </h1>
         <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed">
           Essays and notes on software engineering, security, applied AI, and
@@ -32,9 +32,9 @@ export default async function BlogIndexPage() {
 }
 
 export const metadata: Metadata = {
-  title: 'Blogs',
+  title: 'Blog',
   description:
-    'Writing on backend systems, developer tools, applied AI, and engineering tradeoffs. Essays, notes, and technical writeups by Prajwal HD.',
+    'Writing on applied AI, backend systems, developer tools, and engineering tradeoffs. Essays, notes, and technical writeups by Prajwal HD.',
   alternates: {
     canonical: '/blog',
   },

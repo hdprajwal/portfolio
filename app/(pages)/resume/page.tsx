@@ -178,14 +178,14 @@ export default function ResumePage() {
               <span className="text-muted-foreground/40"> · </span>
               California, USA
               <span className="text-muted-foreground/40"> · </span>
-              Backend / Platform / Applied AI
+              AI Engineer / Backend / Full-Stack
             </p>
           </div>
         </div>
 
         <p className="text-muted-foreground mt-4 max-w-3xl text-sm leading-relaxed">
-          Backend systems and applied AI engineer. Three years shipping
-          production cloud cost infrastructure at Opslyft (including
+          AI engineer with a backend and full-stack foundation. Three years
+          shipping production cloud cost infrastructure at Opslyft (including
           ~$100K/month in recurring savings for enterprise AWS customers), plus
           peer-reviewed research on Android malware detection at Purdue.
         </p>
@@ -398,7 +398,7 @@ export default function ResumePage() {
 export const metadata: Metadata = {
   title: 'Resume',
   description:
-    'Resume of Prajwal HD: backend systems, platform work, and applied AI, with Opslyft cloud cost engineering, peer-reviewed Android malware detection research, and public speaking.',
+    'Resume of Prajwal HD: AI engineer, backend, and full-stack, with Opslyft cloud cost engineering, peer-reviewed Android malware detection research, and public speaking.',
   alternates: {
     canonical: '/resume',
   },

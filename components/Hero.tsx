@@ -2,7 +2,7 @@ import Link from 'next/link';
 import GithubIcon from '@/components/icons/GithubIcon';
 import LinkedinIcon from '@/components/icons/LinkedinIcon';
 import TwitterIcon from '@/components/icons/TwitterIcon';
-import { Mail } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -11,11 +11,31 @@ export default function Hero() {
         Prajwal HD
       </h1>
       <p className="text-muted-foreground mt-3 max-w-xl text-base leading-relaxed">
-        Software engineer focused on backend systems and applied AI. Three years
-        building production infrastructure at Opslyft. I care more about how a
+        AI engineer building agent tooling and applied ML. Three years of
+        backend and full-stack engineering at Opslyft. I care more about how a
         system behaves under pressure than what it&apos;s built with.
       </p>
-      <div className="mt-5 flex items-center gap-4">
+      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+        <Link
+          href="/projects"
+          className="text-foreground hover:text-foreground/70 inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
+        >
+          View projects
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+        <Link
+          href="mailto:hdprajwal01@gmail.com"
+          className="text-muted-foreground hover:text-foreground transition-colors"
+        >
+          Email
+        </Link>
+        <Link
+          href="/resume"
+          className="text-muted-foreground hover:text-foreground transition-colors"
+        >
+          Resume
+        </Link>
+        <span aria-hidden className="bg-border h-4 w-px" />
         <Link
           href="https://github.com/hdprajwal"
           target="_blank"
@@ -42,20 +62,6 @@ export default function Hero() {
           aria-label="X/Twitter"
         >
           <TwitterIcon className="h-4 w-4" />
-        </Link>
-        <Link
-          href="mailto:hdprajwal01@gmail.com"
-          className="text-muted-foreground hover:text-foreground transition-colors"
-          aria-label="Email"
-        >
-          <Mail className="h-4 w-4" />
-        </Link>
-        <span className="bg-border mx-1 h-4 w-px" />
-        <Link
-          href="/resume"
-          className="text-muted-foreground hover:text-foreground font-mono text-xs transition-colors"
-        >
-          Resume
         </Link>
       </div>
     </section>

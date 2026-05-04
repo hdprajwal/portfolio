@@ -2,11 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Post } from '@/lib/posts';
 import TagChips from '@/components/projects/tag-chips';
-
-function getReadTime(content?: string): number {
-  if (!content) return 1;
-  return Math.max(1, Math.round(content.trim().split(/\s+/).length / 200));
-}
+import { readingMinutes } from '@/lib/reading-time';
 
 export default function BlogCardGrid({ post }: { post: Post }) {
   const dateStr = new Date(post.date).toLocaleDateString('en-US', {
@@ -14,7 +10,7 @@ export default function BlogCardGrid({ post }: { post: Post }) {
     day: 'numeric',
     year: 'numeric',
   });
-  const readTime = getReadTime(post.content);
+  const readTime = readingMinutes(post.content);
 
   return (
     <Link href={`/blog/${post.slug}`} className="group block">

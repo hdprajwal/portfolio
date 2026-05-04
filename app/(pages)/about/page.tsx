@@ -18,8 +18,9 @@ export default function AboutPage() {
           </span>
         </div>
         <p className="text-muted-foreground mt-3 max-w-2xl text-base leading-relaxed">
-          I build backend systems, developer tools, and applied AI. Most of the
-          work I enjoy sits where product decisions and infrastructure decisions
+          I build AI agents, developer tools, and applied ML, with a fullstack
+          and cloud infra background from three years at Opslyft. Most of the
+          work I enjoy lies where product decisions and infrastructure decisions
           overlap: reliability, cost, safety, and usability all pulling on the
           same system at once.
         </p>
@@ -122,8 +123,8 @@ export default function AboutPage() {
         <section id="reach-me">
           <SectionHeader label="Reach me" />
           <p className="text-muted-foreground mb-4 max-w-2xl text-base leading-relaxed">
-            If you&apos;re hiring for backend, platform, developer tooling, or
-            applied AI work, email is the fastest way to reach me.
+            If you&apos;re hiring for AI engineer, backend, or full-stack roles,
+            email is the fastest way to reach me.
           </p>
           <div className="flex flex-wrap items-center gap-2">
             <Link

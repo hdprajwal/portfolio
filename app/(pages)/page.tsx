@@ -19,7 +19,7 @@ export default async function Home() {
           </p>
           <ul className="text-muted-foreground space-y-2 text-sm leading-relaxed">
             <li>
-              Looking for backend, platform, and applied AI roles with
+              Looking for AI engineer and backend/full-stack roles with
               end-to-end ownership. California, remote, or hybrid.
             </li>
             <li>
@@ -174,10 +174,10 @@ export default async function Home() {
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Prajwal HD | Backend Systems, Developer Tools & Applied AI',
+    absolute: 'Prajwal HD | AI Engineer, Backend & Full-Stack',
   },
   description:
-    'Software engineer building backend systems, developer tools, and applied AI. Three years shipping production cloud cost infrastructure at Opslyft, peer-reviewed Android malware detection research, and ongoing tools like QuackCode and Gitwise.',
+    'AI engineer building agent tooling and applied ML, with three years of backend and full-stack engineering at Opslyft. Peer-reviewed Android malware detection research and ongoing tools like QuackCode and Gitwise.',
   alternates: {
     canonical: '/',
   },

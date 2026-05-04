@@ -1,19 +1,14 @@
 import Link from 'next/link';
 import type { Post } from '@/lib/posts';
 import { Clock } from 'lucide-react';
-
-function getReadTime(content?: string): number {
-  if (!content) return 1;
-  const words = content.trim().split(/\s+/).length;
-  return Math.max(1, Math.round(words / 200));
-}
+import { readingMinutes } from '@/lib/reading-time';
 
 export default function BlogCard({ post }: { post: Post }) {
   const dateStr = new Date(post.date).toLocaleDateString('en-US', {
     month: 'short',
     year: 'numeric',
   });
-  const readTime = getReadTime(post.content);
+  const readTime = readingMinutes(post.content);
 
   return (
     <Link

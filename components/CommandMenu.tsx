@@ -33,7 +33,7 @@ const navigationItems = [
   { icon: User, label: 'About', href: '/about', keywords: ['about', 'bio'] },
   {
     icon: Newspaper,
-    label: 'Blogs',
+    label: 'Blog',
     href: '/blog',
     keywords: ['blog', 'posts', 'writing'],
   },
