@@ -64,6 +64,12 @@ export default function RootLayout({
       className={`${geist.className} ${geistMono.className}`}
     >
       <body className="antialiased">
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Prajwal HD, Blog RSS Feed"
+          href="/rss.xml"
+        />
         <script
           type="application/ld+json"
           suppressHydrationWarning

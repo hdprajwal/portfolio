@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Rss } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import GithubIcon from '@/components/icons/GithubIcon';
 import LinkedinIcon from '@/components/icons/LinkedinIcon';
@@ -37,6 +38,13 @@ export default function Footer() {
             aria-label="X/Twitter"
           >
             <TwitterIcon className="h-3.5 w-3.5" />
+          </Link>
+          <Link
+            href="/rss.xml"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="RSS feed"
+          >
+            <Rss className="h-3.5 w-3.5" />
           </Link>
           <span className="bg-border h-3.5 w-px" />
           <Link
