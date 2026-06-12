@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react';
 import Hero from '@/components/Hero';
 import SectionHeader from '@/components/section-header';
 import RecentBlogs from '@/components/blogs/recent-blogs';
@@ -15,39 +15,63 @@ export default async function Home() {
         <section id="now">
           <SectionHeader label="Now" />
           <p className="text-muted-foreground/70 mb-3 font-mono text-[11px] tracking-wider uppercase">
-            Updated April 2026
+            Updated June 2026
           </p>
           <ul className="text-muted-foreground space-y-2 text-sm leading-relaxed">
             <li>
-              Looking for AI engineer and backend/full-stack roles with
-              end-to-end ownership. California, remote, or hybrid.
+              Open to AI engineer and backend/full-stack roles with end-to-end
+              ownership. California, remote, or hybrid.
             </li>
             <li>
               Building{' '}
+              <Link
+                href="/projects/emberd"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                emberd
+              </Link>
+              , a Firecracker-based sandbox runtime that runs AI-agent code
+              inside isolated microVMs. Also maintaining{' '}
               <Link
                 href="/projects/quackcode"
                 className="hover:text-foreground underline underline-offset-2 transition-colors"
               >
                 QuackCode
-              </Link>
-              , a Linux-first desktop agent, and{' '}
+              </Link>{' '}
+              and{' '}
               <Link
                 href="/projects/gitwise"
                 className="hover:text-foreground underline underline-offset-2 transition-colors"
               >
                 Gitwise
               </Link>
-              , a CLI that writes commit messages from staged diffs.
+              .
             </li>
             <li>
-              Stress-testing agent workflows on real codebases: tool use, git
-              safety, isolation, and recovery when the model gets it wrong.
-            </li>
-            <li>
-              Reading: Designing Data-Intensive Applications (re-read), papers
-              on LLM tool use evaluation.
+              Reading:{' '}
+              <Link
+                href="https://a.co/d/050niXpi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                AI Systems Performance Engineering
+              </Link>{' '}
+              right now, and papers on AI agents.
             </li>
           </ul>
+        </section>
+
+        <section id="projects">
+          <SectionHeader label="Projects" />
+          <FeaturedProjects />
+          <Link
+            className="text-muted-foreground hover:text-foreground mt-6 inline-flex items-center gap-2 text-sm transition-colors"
+            href="/projects"
+          >
+            All projects{' '}
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </section>
 
         <section id="research">
@@ -98,18 +122,6 @@ export default async function Home() {
               </div>
             </div>
           </div>
-        </section>
-
-        <section id="projects">
-          <SectionHeader label="Projects" />
-          <FeaturedProjects />
-          <Link
-            className="text-muted-foreground hover:text-foreground mt-6 inline-flex items-center gap-2 text-sm transition-colors"
-            href="/projects"
-          >
-            All projects{' '}
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
         </section>
 
         <section id="blog">
@@ -165,6 +177,47 @@ export default async function Home() {
                 attributing Kubernetes infrastructure costs.
               </p>
             </div>
+          </div>
+        </section>
+
+        <section id="contact">
+          <SectionHeader label="Get in touch" />
+          <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
+            Open to AI engineer and backend/full-stack roles, California,
+            remote, or hybrid. Email is the fastest way to reach me.
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <Link
+              href="mailto:hdprajwal01@gmail.com"
+              className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 text-sm transition-colors"
+            >
+              <Mail className="h-3.5 w-3.5" />
+              Email me
+            </Link>
+            <Link
+              href="/resume"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 text-sm transition-colors"
+            >
+              Resume
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/hdprajwal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 text-sm transition-colors"
+            >
+              LinkedIn
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
+            <Link
+              href="https://github.com/hdprajwal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 text-sm transition-colors"
+            >
+              GitHub
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
         </section>
       </div>

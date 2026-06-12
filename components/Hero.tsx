@@ -10,30 +10,34 @@ export default function Hero() {
       <h1 className="text-foreground text-3xl font-semibold tracking-tight md:text-4xl">
         Prajwal HD
       </h1>
-      <p className="text-muted-foreground mt-3 max-w-xl text-base leading-relaxed">
-        AI engineer building agent tooling and applied ML. Three years of
-        backend and full-stack engineering at Opslyft. I care more about how a
-        system behaves under pressure than what it&apos;s built with.
+      <p className="text-foreground text-md mt-3 max-w-xl leading-relaxed font-semibold">
+        I build agentic systems and the infrastructure to run them safely in
+        production.
       </p>
-      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+      <p className="text-muted-foreground text-md mt-3 max-w-xl leading-relaxed">
+        AI engineer with three years of cloud and software engineering at
+        Opslyft. I care more about how a system behaves under pressure than what
+        it is built with.
+      </p>
+      <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
         <Link
-          href="/projects"
+          href="/resume"
           className="text-foreground hover:text-foreground/70 inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
         >
-          View projects
+          Resume
           <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+        <Link
+          href="/projects"
+          className="text-muted-foreground hover:text-foreground transition-colors"
+        >
+          View projects
         </Link>
         <Link
           href="mailto:hdprajwal01@gmail.com"
           className="text-muted-foreground hover:text-foreground transition-colors"
         >
           Email
-        </Link>
-        <Link
-          href="/resume"
-          className="text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Resume
         </Link>
         <span aria-hidden className="bg-border h-4 w-px" />
         <Link

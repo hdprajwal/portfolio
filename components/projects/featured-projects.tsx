@@ -22,7 +22,7 @@ export default async function FeaturedProjects() {
     <div className="space-y-10">
       {/* Spotlight: first project, wide layout */}
       <div className="group">
-        <div className="grid gap-6 md:grid-cols-2 md:items-center">
+        <div className="grid gap-6 md:grid-cols-2 md:items-start">
           {internalHref ? (
             <Link
               href={internalHref}

@@ -1,0 +1,69 @@
+---
+name: emberd
+tagline: Run untrusted AI-agent code safely on your own machine, fully isolated from the host.
+description: 'A local, open-source runtime for running AI-agent code safely on your own machine. You create a sandbox, it boots a real Firecracker microVM, runs your code inside it, returns the output, then destroys it. The base image is read-only, each sandbox gets a throwaway writable layer, and a sandbox runs with no network device by default.'
+tags: ['Go', 'MicoVM', 'AI-Infra', 'Sandboxing', 'AI Agents']
+codeHref: https://github.com/hdprajwal/emberd
+liveHref: https://emberd.hdprajwal.dev
+date: '2026-06-12'
+hasContent: true
+featured: true
+image: https://assets.hdprajwal.dev/projects/emberd.webp
+---
+
+I wanted a way to run code from an AI agent on my own machine without trusting it. The usual answer is a container, but a container shares the host kernel with everything else on the box. That is the one boundary I did not want agent code sitting on top of.
+
+emberd is my answer. You create a sandbox, it boots a real microVM, you run code inside it, you get the output back, then you destroy it. It is a local, open-source version of hosted sandboxes like E2B and Modal, built to run on the machine in front of you.
+
+## What it does
+
+The API is small. There are three endpoints.
+
+`POST /sandboxes` boots a microVM and waits until the guest is actually ready before it returns. So if you run an exec right after create, it will not fail because the VM was still booting.
+
+`POST /sandboxes/{id}/exec` runs your code inside the guest and returns stdout, stderr, and the exit code.
+
+`DELETE /sandboxes/{id}` shuts it down.
+
+```sh
+curl -X POST http://127.0.0.1:7777/sandboxes
+# {"id":"sb_..."}
+
+curl -X POST http://127.0.0.1:7777/sandboxes/sb_.../exec -d '{"code":"print(6*7)"}'
+# {"stdout":"42\n","stderr":"","exit_code":0,"duration_ms":13}
+
+curl -X DELETE http://127.0.0.1:7777/sandboxes/sb_...
+# 204
+```
+
+You pick what runs the code with `language_pack`. Right now there are two. `python` runs `python3` and `shell` runs `/bin/sh`.
+
+## How it works
+
+There are two programs.
+
+`emberd` runs on the host. It handles the create, exec, and destroy calls, keeps track of the running VMs, and sends exec requests into them.
+
+`emberd-init` runs inside the guest as the first process. When the VM boots, it mounts the read-only base image, stacks a writable temporary layer on top, switches into that combined view, cleans up any leftover child processes, and then listens for code to run.
+
+The host and the guest talk over vsock, which is a direct channel between them, so a sandbox does not need a network device at all. The base image is read-only and every sandbox gets its own writable layer that is thrown away on destroy. Nothing a sandbox does sticks around.
+
+The first real bug was the boot race. Create used to return as soon as the VM started, but the guest was not ready to run code yet, so the next exec would fail. I changed create to wait until the guest is actually listening before it returns. Now the API never hands you a sandbox that cannot do work yet.
+
+## What matters most
+
+Three things, in order.
+
+Isolation comes first. I do not trade away the boundary between agent code and the host for anything.
+
+Correctness comes second. The daemon has to behave when things go wrong: a slow boot, a guest that crashes, a half-sent message, a restart.
+
+Fast startup comes third. It is the reason I started the project, but it never comes before the first two.
+
+That order is also why emberd uses a microVM and not a container. A container would have been faster and a lot less code, but it shares the host kernel. I wanted a real boundary between the agent code and my machine, and that is what a microVM gives you.
+
+## What is next
+
+The big one is faster startup. The plan is to keep a paused VM ready for each language pack and restore it on create with a fresh writable layer, instead of booting from cold every time. The goal is under 100ms.
+
+After that, more hardening. Lock the sandbox down further with the Firecracker jailer and seccomp, and set limits on CPU, memory, time, and process count per sandbox. Then smaller, purpose-built images for each language pack, since both packs share one image right now. More language packs and opt-in network access come after that.

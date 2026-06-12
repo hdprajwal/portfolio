@@ -9,7 +9,7 @@ const RESUME_PDF_URL = 'https://assets.hdprajwal.dev/resume.pdf';
 
 type Role = {
   title: string;
-  type: 'Full-time' | 'Part-time' | 'Internship';
+  type: 'Full-time' | 'Part-time' | 'Internship' | 'Open Source';
   from: string;
   to: string;
   bullets: string[];
@@ -31,6 +31,24 @@ type Education = {
 };
 
 const experience: Company[] = [
+  {
+    name: 'Translation Commons',
+    location: 'Remote',
+    roles: [
+      {
+        title: 'Software Engineer, Open Source',
+        type: 'Open Source',
+        from: 'Feb 2026',
+        to: 'Present',
+        bullets: [
+          "Built lang-nav-mcp, a TypeScript MCP (Model Context Protocol) server deployed on a Cloudflare Worker that exposes the language graph as MCP tools; as one use case, a PM can query a region's language distribution to plan market expansion and localization.",
+          'Set up per-PR Cloudflare preview deployments (a live URL for every PR), cutting review turnaround and letting non-technical Product and Design teammates review changes directly; paired with AI-generated variants, the team now previews multiple versions of a feature live before choosing one.',
+          'Instrumented the platform with Amplitude product analytics, giving maintainers their first visibility into feature and export usage and shifting roadmap decisions from guesswork to data on what users actually use.',
+        ],
+
+      },
+    ],
+  },
   {
     name: 'Opslyft',
     location: 'Bangalore, India',
