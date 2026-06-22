@@ -12,7 +12,8 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
-    ],  },
+    ],
+  },
 };
 
 const withMDX = createMDX({

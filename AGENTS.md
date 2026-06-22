@@ -44,6 +44,7 @@ Mirror an existing loader in `lib/`, create the content directory and the `app/(
 
 - Public pages live under the `app/(pages)/` route group and share its `layout.tsx` (site header, footer, reading progress, scroll-to-top).
 - Root `app/layout.tsx` owns `<html>`, Geist + Geist Mono fonts, `ThemeProvider` (`next-themes`, class-based dark mode), Vercel Analytics, and the top-level JSON-LD `@graph`.
+- Analytics runs two providers in parallel during a migration: Vercel Analytics (`components/analytics.tsx`, in the root layout) stays until PostHog is validated, then retires. PostHog initializes in `instrumentation-client.ts` with auto pageview/pageleave capture (`defaults`), pointed at a managed reverse proxy on `ingest.hdprajwal.dev` (PostHog US cloud). Needs `NEXT_PUBLIC_POSTHOG_KEY`.
 - `app/sitemap.ts` and `app/robots.ts` generate SEO metadata. **Keep new routes in sync with `sitemap.ts`**.
 - Canonical URL resolves through `lib/site.ts` `baseUrl` (`NEXT_PUBLIC_SITE_URL` → prod default `https://hdprajwal.dev` → `http://localhost:3000`). Use this constant; do not hardcode URLs.
 
