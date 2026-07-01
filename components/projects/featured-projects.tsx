@@ -32,7 +32,7 @@ export default async function FeaturedProjects() {
                   src={spotlight.image}
                   alt={`${spotlight.name} preview`}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  className="object-cover"
                 />
               ) : (
                 <DotGridIdenticon name={spotlight.name} showName={false} />

@@ -20,7 +20,7 @@ export default function BlogCardGrid({ post }: { post: Post }) {
             src={post.image}
             alt={post.title}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            className="object-cover"
           />
         ) : (
           <TypographyBanner title={post.title} summary={post.summary} />
