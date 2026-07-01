@@ -9,7 +9,7 @@
   font-family: 'Overused Grotesk';
   src: url('https://assets.hdprajwal.dev/fonts/OverusedGrotesk-VF.woff2')
     format('woff2-variations');
-  font-weight: 300 500 900;
+  font-weight: 300 900;
   /*font-style: oblique 0deg 10deg;*/
   font-style: normal;
   font-display: swap;
@@ -35,7 +35,7 @@
   --text-base--line-height: 1.6;
   --text-md: 1.1875rem; /* 19px — lead / large body */
   --text-md--line-height: 1.6;
-  --text-lg: 1.3125rem; /* 21px */
+  --text-lg: 1.25rem; /* 21px */
   --text-lg--line-height: 1.5;
   --text-xl: 1.5rem; /* 24px */
   --text-xl--line-height: 1.4;

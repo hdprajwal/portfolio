@@ -168,7 +168,7 @@ function RoleBlock({ role }: { role: Role }) {
       <p className="text-muted-foreground/70 font-mono text-3xs tracking-wider uppercase">
         {role.type}
       </p>
-      <ul className="text-muted-foreground mt-2 list-disc space-y-1.5 pl-4 text-sm leading-relaxed">
+      <ul className="text-muted-foreground mt-2 list-disc space-y-2 pl-4 text-sm leading-relaxed">
         {role.bullets.map((b, i) => (
           <li key={i}>{b}</li>
         ))}
@@ -266,7 +266,7 @@ export default function ResumePage() {
         </p>
       </section>
 
-      <div className="space-y-12 px-4 pb-20 md:space-y-14">
+      <div className="space-y-14 px-4 pb-20 md:space-y-20">
         <section id="experience">
           <h2 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
             Experience
@@ -274,15 +274,15 @@ export default function ResumePage() {
           <div className="space-y-10">
             {experience.map((c) => (
               <div key={c.name}>
-                <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 className="text-foreground text-base font-semibold tracking-tight">
                     {c.name}
                   </h3>
-                  <span className="text-muted-foreground/70 font-mono text-2xs tracking-wider uppercase">
+                  <span className="text-muted-foreground/70 font-mono text-3xs tracking-wider uppercase">
                     {c.location}
                   </span>
                 </div>
-                <div className="space-y-5">
+                <div className="space-y-6">
                   {c.roles.map((r) => (
                     <RoleBlock key={r.title + r.from} role={r} />
                   ))}
@@ -336,7 +336,7 @@ export default function ResumePage() {
           <h2 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
             Speaking
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div className="border-border border-l pl-4">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-foreground text-sm font-medium tracking-tight">

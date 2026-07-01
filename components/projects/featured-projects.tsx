@@ -77,7 +77,7 @@ export default async function FeaturedProjects() {
                 </Link>
               )}
             </div>
-            <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+            <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
               {spotlight.tagline || spotlight.description}
             </p>
             <div className="mt-3 flex flex-wrap gap-1.5">
@@ -112,7 +112,7 @@ export default async function FeaturedProjects() {
               : undefined;
             const cardSummary = project.tagline || project.description;
             return (
-              <div key={project.slug} className="group/item py-2 first:pt-0">
+              <div key={project.slug} className="group/item py-4 first:pt-0">
                 <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5">
                   <div className="flex min-w-0 items-center gap-2">
                     {href ? (

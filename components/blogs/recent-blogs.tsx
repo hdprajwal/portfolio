@@ -23,12 +23,12 @@ export default async function RecentBlogs() {
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group flex items-baseline justify-between gap-4 py-3 first:pt-0"
+            className="group flex items-baseline justify-between gap-4 py-4 first:pt-0"
           >
             <div className="flex min-w-0 items-baseline gap-3">
               <time
                 dateTime={post.date}
-                className="text-muted-foreground/60 shrink-0 font-mono text-xs tabular-nums"
+                className="text-muted-foreground/60 shrink-0 font-mono text-2xs tabular-nums"
               >
                 {dateStr}
               </time>

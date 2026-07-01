@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { ArrowLeftIcon, ExternalLink } from 'lucide-react';
 import { CustomMDX } from '@/components/mdx/custom-mdx';
+import TagChips from '@/components/projects/tag-chips';
 import { listProjects, getProject, baseUrl } from '@/lib/projects';
 
 export async function generateStaticParams() {
@@ -71,7 +72,7 @@ export default async function ProjectPage({
       </Link>
 
       <div className="flex items-baseline justify-between gap-4">
-        <h1 className="text-2xl leading-[1.2] font-bold tracking-tight">
+        <h1 className="text-2xl leading-[1.2] font-semibold tracking-tight text-balance">
           {project.name}
         </h1>
         {project.liveHref && (
@@ -92,13 +93,10 @@ export default async function ProjectPage({
       </p>
 
       {project.tags.length > 0 && (
-        <div className="mt-4 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span key={tag} className="text-primary font-mono text-sm">
-              #{tag}
-            </span>
-          ))}
-        </div>
+        <TagChips
+          tags={project.tags}
+          className="mt-4 flex flex-wrap gap-1.5"
+        />
       )}
 
       <div className="border-border bg-muted relative mt-6 overflow-hidden rounded-lg border">

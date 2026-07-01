@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Hero from '@/components/Hero';
 import SectionHeader from '@/components/section-header';
 import RecentBlogs from '@/components/blogs/recent-blogs';
@@ -15,15 +15,12 @@ export default async function Home() {
       <div className="space-y-14 px-4 pb-20 md:space-y-20">
         <section id="now">
           <SectionHeader label="Now" />
-          <p className="text-muted-foreground/70 text-2xs mb-3 font-mono tracking-wider uppercase">
-            Updated June 2026
-          </p>
-          <ul className="text-muted-foreground space-y-2 text-sm leading-relaxed">
-            <li>
+          <div className="text-muted-foreground text-sm leading-relaxed">
+            <p>
               Open to AI engineer and backend/full-stack roles with end-to-end
               ownership. California, remote, or hybrid.
-            </li>
-            <li>
+            </p>
+            <p>
               Building{' '}
               <Link
                 href="/projects/emberd"
@@ -47,8 +44,8 @@ export default async function Home() {
                 Gitwise
               </Link>
               .
-            </li>
-            <li>
+            </p>
+            <p>
               Reading:{' '}
               <Link
                 href="https://a.co/d/050niXpi"
@@ -59,8 +56,8 @@ export default async function Home() {
                 AI Systems Performance Engineering
               </Link>{' '}
               right now, and papers on AI agents.
-            </li>
-          </ul>
+            </p>
+          </div>
         </section>
 
         <section id="projects">
@@ -89,15 +86,7 @@ export default async function Home() {
               </div>
             </div>
             <div className="">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="border-border text-muted-foreground text-3xs inline-flex items-center rounded-sm border px-1.5 py-0.5 font-mono tracking-wider uppercase">
-                  Peer-reviewed
-                </span>
-                <span className="text-muted-foreground/60 text-3xs font-mono tracking-wider uppercase">
-                  MDPI Electronics &middot; 2026
-                </span>
-              </div>
-              <h3 className="text-foreground mt-2 text-base font-semibold tracking-tight md:text-lg">
+              <h3 className="text-foreground text-base font-semibold tracking-tight md:text-lg">
                 Re-Evaluating Android Malware Detection: Tabular Features,
                 Vision Models, and Ensembles
               </h3>
@@ -105,10 +94,10 @@ export default async function Home() {
                 Hosahalli Dayananda, P.; Chen, Z.
               </p>
               <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-                Compares tabular static features, vision-based byte-plot models,
-                and ensemble strategies for Android malware classification.
-                Evaluates where modality choice changes the detection surface
-                and where ensembles actually pay for themselves.
+                Compares tabular features, visual byte-plot images, and ensemble
+                strategies for Android malware detection. Evaluates where
+                modality choice changes the detection surface and where
+                ensembles actually pay for themselves.
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
                 <Link
@@ -148,39 +137,45 @@ export default async function Home() {
             Open to AI engineer and backend/full-stack roles, California,
             remote, or hybrid. Email is the fastest way to reach me.
           </p>
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <Link
-              href="mailto:hdprajwal01@gmail.com"
-              className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors"
-            >
-              <Mail className="h-3.5 w-3.5" />
-              Email me
-            </Link>
-            <Link
-              href="/resume"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors"
-            >
-              Resume
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/hdprajwal"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors"
-            >
-              LinkedIn
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
-            <Link
-              href="https://github.com/hdprajwal"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors"
-            >
-              GitHub
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
+          <ul className="text-muted-foreground mt-5 max-w-xl space-y-2 text-base leading-relaxed">
+            {[
+              {
+                label: 'Email',
+                value: 'hdprajwal01@gmail.com',
+                href: 'mailto:hdprajwal01@gmail.com',
+              },
+              {
+                label: 'LinkedIn',
+                value: 'linkedin.com/in/hdprajwal',
+                href: 'https://www.linkedin.com/in/hdprajwal',
+              },
+              {
+                label: 'GitHub',
+                value: 'github.com/hdprajwal',
+                href: 'https://github.com/hdprajwal',
+              },
+              { label: 'Resume', value: '/resume', href: '/resume' },
+            ].map(({ label, value, href }) => {
+              const external = href.startsWith('http');
+              return (
+                <li key={label} className="flex items-baseline gap-3">
+                  <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-2xs">
+                    {label}
+                  </span>
+                  <Link
+                    href={href}
+                    {...(external
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                    className="group hover:text-foreground inline-flex items-center underline underline-offset-2 transition-colors"
+                  >
+                    {value}
+                    <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </section>
       </div>
     </>

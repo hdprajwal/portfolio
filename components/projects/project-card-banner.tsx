@@ -27,7 +27,7 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
   );
 
   return (
-    <div className="group">
+    <div className="group rounded-xl border p-1">
       {internalHref ? (
         <Link href={internalHref} className="block">
           {banner}
@@ -36,7 +36,7 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
         banner
       )}
 
-      <div className="mt-4">
+      <div className="p-2">
         {internalHref ? (
           <Link href={internalHref}>
             <h3 className="text-foreground group-hover:text-primary text-base font-semibold tracking-tight transition-colors md:text-lg">
@@ -57,17 +57,17 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
           <TagChips tags={project.tags} max={4} />
         </div>
 
-        <div className="text-muted-foreground mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
+        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs">
           {project.codeHref && (
             <Link
               href={project.codeHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-foreground group/link inline-flex items-center gap-1.5 transition-colors"
+              className="text-foreground/80 hover:text-foreground group/link inline-flex items-center gap-1.5 transition-colors"
             >
-              <GithubIcon className="h-3.5 w-3.5" />
+              <GithubIcon className="h-4 w-4" />
               GitHub
-              <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
             </Link>
           )}
           {project.liveHref && (
@@ -75,20 +75,20 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
               href={project.liveHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-foreground group/link inline-flex items-center gap-1.5 transition-colors"
+              className="text-foreground/80 hover:text-foreground group/link inline-flex items-center gap-1.5 transition-colors"
             >
-              <ExternalLink className="h-3.5 w-3.5" />
+              <ExternalLink className="h-4 w-4" />
               Live
-              <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
             </Link>
           )}
           {internalHref && (
             <Link
               href={internalHref}
-              className="text-primary hover:text-primary/80 group/link inline-flex items-center gap-1 transition-colors"
+              className="text-primary hover:text-primary/80 group/link inline-flex items-center gap-1.5 transition-colors"
             >
               Writeup
-              <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
             </Link>
           )}
         </div>
@@ -106,7 +106,7 @@ function TypographyBanner({
 }) {
   return (
     <div className="bg-muted/30 flex h-full w-full flex-col justify-between p-6">
-      <span className="text-muted-foreground/60 font-mono text-3xs tracking-wider uppercase">
+      <span className="text-muted-foreground/60 text-3xs font-mono tracking-wider uppercase">
         ❯ {name.toLowerCase().replace(/\s+/g, '-')}
       </span>
       <div>

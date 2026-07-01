@@ -1,153 +1,156 @@
 import { ArrowUpRight } from 'lucide-react';
 import type { Metadata } from 'next';
+import SectionHeader from '@/components/section-header';
 
 export default function ColophonPage() {
   return (
     <div className="flex-1">
-      <div className="px-4 py-14">
-        <h1 className="text-xl font-medium tracking-tight text-balance sm:text-2xl">
+      <div className="px-4 pt-14 pb-8">
+        <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
           Colophon
         </h1>
-        <p className="text-muted-foreground mt-2 text-sm">
+        <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed">
           Notes about how this site is built and run.
         </p>
       </div>
 
-      <section className="mb-8 px-4">
-        <h2 className="mb-3 font-semibold md:text-lg">Tech Stack</h2>
-        <div className="flex flex-wrap gap-2">
-          {[
-            { name: 'Next.js', detail: 'App Router' },
-            { name: 'React', detail: '19' },
-            { name: 'TypeScript', detail: '' },
-            { name: 'Tailwind CSS', detail: 'v4' },
-            { name: 'shadcn/ui', detail: '' },
-            { name: 'Overused Grotesk', detail: 'display/body' },
-            { name: 'IBM Plex Mono', detail: 'mono' },
-            { name: 'Vercel', detail: 'hosting' },
-          ].map((t) => (
-            <span
-              key={t.name}
-              className="border-border bg-muted/40 text-foreground rounded-md border px-2.5 py-1 text-sm font-medium"
-            >
-              {t.name}
-              {t.detail && (
-                <span className="text-muted-foreground ml-1 font-mono text-3xs">
-                  {t.detail}
-                </span>
-              )}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-8 px-4">
-        <h2 className="mb-2 font-semibold md:text-lg">Content & Blog</h2>
-        <ul className="text-muted-foreground space-y-2 text-base">
-          <li>
-            Posts are written in{' '}
-            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
-              .mdx
-            </code>{' '}
-            under{' '}
-            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
-              /content/blog
-            </code>{' '}
-            with frontmatter:{' '}
-            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
-              title
-            </code>
-            ,{' '}
-            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
-              summary
-            </code>
-            ,{' '}
-            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
-              tags
-            </code>
-            ,{' '}
-            <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
-              date
-            </code>
-          </li>
-          <li>
-            Rendering via{' '}
-            <a
-              href="https://github.com/hashicorp/next-mdx-remote"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 underline transition-colors"
-            >
-              next-mdx-remote
-            </a>{' '}
-            with{' '}
-            <a
-              href="https://shiki.style/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 underline transition-colors"
-            >
-              rehype-shiki
-            </a>{' '}
-            for syntax highlighting
-          </li>
-          <li>
-            Statically generated at build time; drafts excluded from production
-          </li>
-        </ul>
-      </section>
-
-      <section className="mb-8 px-4">
-        <h2 className="mb-2 font-semibold md:text-lg">Source</h2>
-        <ul className="text-muted-foreground space-y-2 text-base">
-          <li>
-            <a
-              href="https://github.com/hdprajwal/portfolio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary group hover:text-primary/80 inline-flex items-center underline transition-colors"
-            >
-              github.com/hdprajwal/portfolio{' '}
-              <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
-            </a>
-          </li>
-        </ul>
-      </section>
-
-      <section className="mb-8 px-4">
-        <h2 className="mb-2 font-semibold md:text-lg">System</h2>
-        <ul className="text-muted-foreground space-y-2 text-base">
-          {[
-            ['OS', 'Arch Linux'],
-            ['WM', 'Hyprland'],
-            ['Browser', 'Zen Browser & Helium'],
-            ['Editor', 'Zed / Cursor'],
-            ['Terminal', 'Ghostty'],
-            ['Shell', 'zsh + oh-my-posh'],
-          ].map(([key, value]) => (
-            <li key={key} className="flex items-baseline gap-3">
-              <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-sm">
-                {key}
+      <div className="space-y-14 px-4 pb-20 md:space-y-20">
+        <section>
+          <SectionHeader label="Tech Stack" />
+          <div className="flex flex-wrap gap-2">
+            {[
+              { name: 'Next.js', detail: 'App Router' },
+              { name: 'React', detail: '19' },
+              { name: 'TypeScript', detail: '' },
+              { name: 'Tailwind CSS', detail: 'v4' },
+              { name: 'shadcn/ui', detail: '' },
+              { name: 'Overused Grotesk', detail: 'display/body' },
+              { name: 'IBM Plex Mono', detail: 'mono' },
+              { name: 'Vercel', detail: 'hosting' },
+            ].map((t) => (
+              <span
+                key={t.name}
+                className="border-border bg-muted/40 text-foreground rounded-md border px-2.5 py-1 text-sm font-medium"
+              >
+                {t.name}
+                {t.detail && (
+                  <span className="text-muted-foreground ml-1 font-mono text-3xs">
+                    {t.detail}
+                  </span>
+                )}
               </span>
-              <span>{value}</span>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <SectionHeader label="Content & Blog" />
+          <ul className="text-muted-foreground space-y-2 text-base leading-relaxed">
+            <li>
+              Posts are written in{' '}
+              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+                .mdx
+              </code>{' '}
+              under{' '}
+              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+                /content/blog
+              </code>{' '}
+              with frontmatter:{' '}
+              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+                title
+              </code>
+              ,{' '}
+              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+                summary
+              </code>
+              ,{' '}
+              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+                tags
+              </code>
+              ,{' '}
+              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+                date
+              </code>
             </li>
-          ))}
-          <li className="flex items-baseline gap-3">
-            <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-sm">
-              Dotfiles
-            </span>
-            <a
-              href="https://github.com/hdprajwal/dotfiles"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary group hover:text-primary/80 inline-flex items-center underline transition-colors"
-            >
-              github.com/hdprajwal/dotfiles
-              <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
-            </a>
-          </li>
-        </ul>
-      </section>
+            <li>
+              Rendering via{' '}
+              <a
+                href="https://github.com/hashicorp/next-mdx-remote"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                next-mdx-remote
+              </a>{' '}
+              with{' '}
+              <a
+                href="https://shiki.style/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                rehype-shiki
+              </a>{' '}
+              for syntax highlighting
+            </li>
+            <li>
+              Statically generated at build time; drafts excluded from production
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <SectionHeader label="Source" />
+          <ul className="text-muted-foreground space-y-2 text-base leading-relaxed">
+            <li>
+              <a
+                href="https://github.com/hdprajwal/portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group hover:text-foreground inline-flex items-center underline underline-offset-2 transition-colors"
+              >
+                github.com/hdprajwal/portfolio{' '}
+                <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <SectionHeader label="System" />
+          <ul className="text-muted-foreground space-y-2 text-base leading-relaxed">
+            {[
+              ['OS', 'Arch Linux'],
+              ['WM', 'Hyprland'],
+              ['Browser', 'Zen Browser & Helium'],
+              ['Editor', 'Zed / Cursor'],
+              ['Terminal', 'Ghostty'],
+              ['Shell', 'zsh + oh-my-posh'],
+            ].map(([key, value]) => (
+              <li key={key} className="flex items-baseline gap-3">
+                <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-2xs">
+                  {key}
+                </span>
+                <span>{value}</span>
+              </li>
+            ))}
+            <li className="flex items-baseline gap-3">
+              <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-2xs">
+                Dotfiles
+              </span>
+              <a
+                href="https://github.com/hdprajwal/dotfiles"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group hover:text-foreground inline-flex items-center underline underline-offset-2 transition-colors"
+              >
+                github.com/hdprajwal/dotfiles
+                <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
     </div>
   );
 }

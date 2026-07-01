@@ -31,11 +31,11 @@ const bucketListItems: BucketItem[] = [
 export default function BucketListPage() {
   return (
     <div className="flex-1">
-      <div className="px-4 py-14">
-        <h1 className="text-xl font-medium tracking-tight text-balance sm:text-2xl">
+      <div className="px-4 pt-14 pb-8">
+        <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
           Bucket List
         </h1>
-        <p className="text-muted-foreground pt-2 text-base">
+        <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed">
           Things I want to do, learn, and experience.
         </p>
       </div>

@@ -7,10 +7,10 @@ import { ArrowRight } from 'lucide-react';
 export default function Hero() {
   return (
     <section id="hero" className="px-4 pt-16 pb-12 md:pt-20 md:pb-16">
-      <p className="text-foreground/90 text-md leading-relaxed">
+      <p className="text-foreground/90 text-lg leading-relaxed">
         Hi, I&apos;m Prajwal
       </p>
-      <p className="text-foreground/90 text-md mt-3 max-w-2xl leading-relaxed">
+      <p className="text-foreground/90 mt-3 max-w-2xl text-base leading-relaxed">
         An AI engineer based in California. I build AI agents and the developer
         tools around them, right now emberd, a runtime that runs untrusted
         AI-agent code inside isolated microVMs. Before this I spent three years
@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
         <Link
           href="/resume"
-          className="text-foreground hover:text-foreground/70 inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
+          className="text-foreground hover:text-foreground inline-flex items-center gap-1 underline underline-offset-2 transition-colors"
         >
           Resume
           <ArrowRight className="h-3.5 w-3.5" />

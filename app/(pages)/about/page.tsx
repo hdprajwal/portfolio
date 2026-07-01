@@ -17,16 +17,17 @@ export default function AboutPage() {
             / who, what, why
           </span>
         </div>
-        <p className="text-muted-foreground mt-3 max-w-2xl text-base leading-relaxed">
+      </section>
+
+      <div className="space-y-14 px-4 pb-20 md:space-y-20">
+        <p className="text-muted-foreground mt-3 text-base leading-relaxed">
           I build AI agents, developer tools, and applied ML, with a fullstack
           and cloud infra background from three years at Opslyft. Most of the
           work I enjoy lies where product decisions and infrastructure decisions
           overlap: reliability, cost, safety, and usability all pulling on the
           same system at once.
         </p>
-      </section>
 
-      <div className="space-y-12 px-4 pb-20 md:space-y-14">
         <section id="how-i-think">
           <SectionHeader label="How I think about building" />
           <div className="text-muted-foreground space-y-3 text-base leading-relaxed">
@@ -72,7 +73,7 @@ export default function AboutPage() {
                 href="https://hasgeek.com/rootconf/optimizing-costs-of-cloud-infrastructure/sub/data-transfer-cost-optimization-KGSAciSRiEjTo1bjGNWChG"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground/70 underline underline-offset-2 transition-colors"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
               >
                 data transfer cost optimization at Rootconf 2022
               </Link>
@@ -86,7 +87,7 @@ export default function AboutPage() {
                 href="https://doi.org/10.3390/electronics15030544"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground/70 underline underline-offset-2 transition-colors"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
               >
                 MDPI Electronics
               </Link>

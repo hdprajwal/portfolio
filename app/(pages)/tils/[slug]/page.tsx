@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { CustomMDX } from '@/components/mdx/custom-mdx';
+import TagChips from '@/components/projects/tag-chips';
 import { formatDate, listTILs, getTIL, baseUrl } from '@/lib/tils';
 import { type TIL } from '@/lib/tils';
 
@@ -85,16 +86,7 @@ export default async function TilPage({
           <span>{formatDate(til.date)}</span>
         </div>
         {til.tags && til.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {til.tags.map((tag: string) => (
-              <span
-                key={tag}
-                className="bg-muted text-muted-foreground ring-border rounded-md px-2 py-1 font-mono text-3xs ring-1 ring-inset"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          <TagChips tags={til.tags} className="flex flex-wrap gap-1.5" />
         )}
       </header>
 

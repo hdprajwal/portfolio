@@ -7,6 +7,7 @@ import ReadingProgress from '@/components/reading-progress';
 import { formatDate, getBlogPosts, baseUrl } from '@/lib/posts';
 import { type Post } from '@/lib/posts';
 import ShareActions from '@/components/blogs/share-actions';
+import TagChips from '@/components/projects/tag-chips';
 import { ArrowLeftIcon, ArrowRightIcon, Clock } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { readingMinutes } from '@/lib/reading-time';
@@ -111,7 +112,7 @@ export default async function Blog({
 
       <div className="mx-auto max-w-4xl">
         <header className="mb-8 max-w-4xl">
-          <h1 className="mt-7 mb-6 text-3xl font-semibold md:text-5xl">
+          <h1 className="mt-7 mb-6 text-3xl font-semibold tracking-tight md:text-5xl">
             {post.title}
           </h1>
           <div className="flex flex-wrap items-center gap-3 text-base">
@@ -124,16 +125,7 @@ export default async function Blog({
             </span>
           </div>
           {post.tags && post.tags.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {post.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="bg-muted text-muted-foreground rounded px-[0.6rem] py-[0.2rem] font-mono text-xs lowercase"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
+            <TagChips tags={post.tags} className="mt-4 flex flex-wrap gap-1.5" />
           )}
         </header>
         {heroImage && (
