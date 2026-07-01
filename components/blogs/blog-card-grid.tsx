@@ -14,7 +14,7 @@ export default function BlogCardGrid({ post }: { post: Post }) {
 
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
-      <div className="border-border relative aspect-video w-full overflow-hidden rounded-md border">
+      <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
         {post.image ? (
           <Image
             src={post.image}
@@ -44,7 +44,7 @@ export default function BlogCardGrid({ post }: { post: Post }) {
           </div>
         )}
 
-        <div className="text-muted-foreground/60 mt-3 flex items-center gap-2 font-mono text-[10px] tracking-wider uppercase">
+        <div className="text-muted-foreground/60 mt-3 flex items-center gap-2 font-mono text-3xs tracking-wider uppercase">
           <time dateTime={post.date} className="tabular-nums">
             {dateStr}
           </time>
@@ -69,7 +69,7 @@ function TypographyBanner({
     .replace(/(^-|-$)/g, '');
   return (
     <div className="bg-muted/30 flex h-full w-full flex-col justify-between p-6">
-      <span className="text-muted-foreground/60 font-mono text-[10px] tracking-wider uppercase">
+      <span className="text-muted-foreground/60 font-mono text-3xs tracking-wider uppercase">
         ❯ {slug}
       </span>
       <div>

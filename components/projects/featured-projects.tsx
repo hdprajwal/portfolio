@@ -19,8 +19,7 @@ export default async function FeaturedProjects() {
     : undefined;
 
   return (
-    <div className="space-y-10">
-      {/* Spotlight: first project, wide layout */}
+    <div className="space-y-8">
       <div className="group">
         <div className="grid gap-6 md:grid-cols-2 md:items-start">
           {internalHref ? (
@@ -85,7 +84,7 @@ export default async function FeaturedProjects() {
               {spotlight.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="border-border text-muted-foreground inline-flex items-center rounded-sm border px-1.5 py-0.5 font-mono text-[10px] leading-none"
+                  className="border-border text-muted-foreground text-3xs inline-flex items-center rounded-sm border px-1.5 py-0.5 font-mono leading-none"
                 >
                   {tag}
                 </span>
@@ -113,17 +112,17 @@ export default async function FeaturedProjects() {
               : undefined;
             const cardSummary = project.tagline || project.description;
             return (
-              <div key={project.slug} className="group/item py-4 first:pt-0">
+              <div key={project.slug} className="group/item py-2 first:pt-0">
                 <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5">
                   <div className="flex min-w-0 items-center gap-2">
                     {href ? (
                       <Link href={href}>
-                        <h3 className="text-foreground group-hover/item:text-primary text-sm font-medium tracking-tight transition-colors">
+                        <h3 className="text-foreground group-hover/item:text-primary text-base font-medium tracking-tight transition-colors">
                           {project.name}
                         </h3>
                       </Link>
                     ) : (
-                      <h3 className="text-foreground text-sm font-medium tracking-tight">
+                      <h3 className="text-foreground text-base font-medium tracking-tight">
                         {project.name}
                       </h3>
                     )}
@@ -142,14 +141,14 @@ export default async function FeaturedProjects() {
                     {project.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="border-border/70 text-muted-foreground/80 inline-flex items-center rounded-sm border px-1.5 py-0.5 font-mono text-[10px] leading-none"
+                        className="border-border/70 text-muted-foreground/80 text-3xs inline-flex items-center rounded-sm border px-1.5 py-0.5 font-mono leading-none"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-                <p className="text-muted-foreground mt-1.5 text-xs leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {cardSummary}
                 </p>
               </div>

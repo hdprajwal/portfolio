@@ -12,7 +12,7 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
   const summary = project.tagline || project.description;
 
   const banner = (
-    <div className="border-border relative aspect-video w-full overflow-hidden rounded-md border">
+    <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
       {project.image ? (
         <Image
           src={project.image}
@@ -106,7 +106,7 @@ function TypographyBanner({
 }) {
   return (
     <div className="bg-muted/30 flex h-full w-full flex-col justify-between p-6">
-      <span className="text-muted-foreground/60 font-mono text-[10px] tracking-wider uppercase">
+      <span className="text-muted-foreground/60 font-mono text-3xs tracking-wider uppercase">
         ❯ {name.toLowerCase().replace(/\s+/g, '-')}
       </span>
       <div>

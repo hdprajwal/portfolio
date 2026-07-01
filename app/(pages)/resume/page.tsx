@@ -161,11 +161,11 @@ function RoleBlock({ role }: { role: Role }) {
         <h4 className="text-foreground text-sm font-medium tracking-tight">
           {role.title}
         </h4>
-        <span className="text-muted-foreground/70 font-mono text-[11px] tabular-nums">
+        <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
           {role.from} to {role.to}
         </span>
       </div>
-      <p className="text-muted-foreground/70 font-mono text-[10px] tracking-wider uppercase">
+      <p className="text-muted-foreground/70 font-mono text-3xs tracking-wider uppercase">
         {role.type}
       </p>
       <ul className="text-muted-foreground mt-2 list-disc space-y-1.5 pl-4 text-sm leading-relaxed">
@@ -211,7 +211,7 @@ export default function ResumePage() {
         <div className="mt-5 flex flex-wrap items-center gap-2 print:hidden">
           <Link
             href="mailto:hdprajwal01@gmail.com"
-            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
           >
             <Mail className="h-3 w-3" />
             Email
@@ -220,7 +220,7 @@ export default function ResumePage() {
             href="https://www.linkedin.com/in/hdprajwal"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
           >
             <LinkedinIcon className="h-3 w-3" />
             LinkedIn
@@ -230,7 +230,7 @@ export default function ResumePage() {
             href="https://github.com/hdprajwal"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
           >
             <GithubIcon className="h-3 w-3" />
             GitHub
@@ -240,7 +240,7 @@ export default function ResumePage() {
             href={RESUME_PDF_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+            className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
           >
             <FileDown className="h-3 w-3" />
             Download PDF
@@ -278,7 +278,7 @@ export default function ResumePage() {
                   <h3 className="text-foreground text-base font-semibold tracking-tight">
                     {c.name}
                   </h3>
-                  <span className="text-muted-foreground/70 font-mono text-[11px] tracking-wider uppercase">
+                  <span className="text-muted-foreground/70 font-mono text-2xs tracking-wider uppercase">
                     {c.location}
                   </span>
                 </div>
@@ -302,11 +302,11 @@ export default function ResumePage() {
                 Re-Evaluating Android Malware Detection: Tabular Features,
                 Vision Models, and Ensembles
               </h3>
-              <span className="text-muted-foreground/70 font-mono text-[11px] tabular-nums">
+              <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
                 2026
               </span>
             </div>
-            <p className="text-muted-foreground/70 mt-1 font-mono text-[10px] tracking-wider uppercase">
+            <p className="text-muted-foreground/70 mt-1 font-mono text-3xs tracking-wider uppercase">
               Peer-reviewed
               <span className="text-muted-foreground/40"> · </span>
               MDPI Electronics
@@ -317,7 +317,7 @@ export default function ResumePage() {
               1M+ samples. Evaluates where modality choice changes the detection
               surface and where ensembles actually pay for themselves.
             </p>
-            <p className="text-muted-foreground/60 mt-2 font-mono text-[11px]">
+            <p className="text-muted-foreground/60 mt-2 font-mono text-2xs">
               Hosahalli Dayananda, P.; Chen, Z. Electronics 2026, 15, 544.
             </p>
             <Link
@@ -342,7 +342,7 @@ export default function ResumePage() {
                 <h3 className="text-foreground text-sm font-medium tracking-tight">
                   Data Transfer Cost Optimization
                 </h3>
-                <span className="text-muted-foreground/70 font-mono text-[11px] tabular-nums">
+                <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
                   Rootconf 2022
                 </span>
               </div>
@@ -366,7 +366,7 @@ export default function ResumePage() {
                 <h3 className="text-foreground text-sm font-medium tracking-tight">
                   Simplifying the Complexities of Kubernetes Cost Visibility
                 </h3>
-                <span className="text-muted-foreground/70 font-mono text-[11px] tabular-nums">
+                <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
                   Opslyft Webinar, Jun 2022
                 </span>
               </div>
@@ -392,7 +392,7 @@ export default function ResumePage() {
                   <h3 className="text-foreground text-sm font-medium tracking-tight">
                     {e.school}
                   </h3>
-                  <span className="text-muted-foreground/70 font-mono text-[11px] tabular-nums">
+                  <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
                     {e.from} to {e.to}
                   </span>
                 </div>

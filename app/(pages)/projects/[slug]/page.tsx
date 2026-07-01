@@ -101,7 +101,7 @@ export default async function ProjectPage({
         </div>
       )}
 
-      <div className="border-border bg-muted relative mt-6 overflow-hidden rounded-sm border">
+      <div className="border-border bg-muted relative mt-6 overflow-hidden rounded-lg border">
         <div className="relative flex aspect-[16/9] w-full items-center justify-center">
           {project.image ? (
             <Image

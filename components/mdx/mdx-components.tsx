@@ -11,7 +11,8 @@ import Pre from '@/components/mdx/pre-block';
 
 export const MDXComponents = {
   img: (props: any) => {
-    const isRemote = typeof props.src === 'string' && /^https?:\/\//.test(props.src);
+    const isRemote =
+      typeof props.src === 'string' && /^https?:\/\//.test(props.src);
     return (
       <Image
         {...props}
@@ -76,7 +77,7 @@ export const MDXComponents = {
     />
   ),
   strong: (props: any) => (
-    <strong className="text-foreground font-extrabold" {...props} />
+    <strong className="text-foreground font-semibold" {...props} />
   ),
   em: (props: any) => <em className="text-foreground/80 italic" {...props} />,
   hr: (props: any) => <hr className="border-border my-6" {...props} />,

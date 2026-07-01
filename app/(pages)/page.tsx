@@ -6,6 +6,7 @@ import Hero from '@/components/Hero';
 import SectionHeader from '@/components/section-header';
 import RecentBlogs from '@/components/blogs/recent-blogs';
 import FeaturedProjects from '@/components/projects/featured-projects';
+import Talks from '@/components/talks';
 
 export default async function Home() {
   return (
@@ -14,7 +15,7 @@ export default async function Home() {
       <div className="space-y-14 px-4 pb-20 md:space-y-20">
         <section id="now">
           <SectionHeader label="Now" />
-          <p className="text-muted-foreground/70 mb-3 font-mono text-[11px] tracking-wider uppercase">
+          <p className="text-muted-foreground/70 text-2xs mb-3 font-mono tracking-wider uppercase">
             Updated June 2026
           </p>
           <ul className="text-muted-foreground space-y-2 text-sm leading-relaxed">
@@ -78,7 +79,7 @@ export default async function Home() {
           <SectionHeader label="Featured work" />
           <div className="grid gap-6 sm:grid-cols-2 sm:items-start">
             <div className="">
-              <div className="border-border relative aspect-video w-full overflow-hidden rounded-md border">
+              <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
                 <Image
                   src="https://assets.hdprajwal.dev/images/research-malware-thumbnail.png"
                   alt="Android malware detection research"
@@ -89,10 +90,10 @@ export default async function Home() {
             </div>
             <div className="">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="border-border text-muted-foreground inline-flex items-center rounded-sm border px-1.5 py-0.5 font-mono text-[10px] tracking-wider uppercase">
+                <span className="border-border text-muted-foreground text-3xs inline-flex items-center rounded-sm border px-1.5 py-0.5 font-mono tracking-wider uppercase">
                   Peer-reviewed
                 </span>
-                <span className="text-muted-foreground/60 font-mono text-[10px] tracking-wider uppercase">
+                <span className="text-muted-foreground/60 text-3xs font-mono tracking-wider uppercase">
                   MDPI Electronics &middot; 2026
                 </span>
               </div>
@@ -138,46 +139,7 @@ export default async function Home() {
 
         <section id="talks">
           <SectionHeader label="Talks" />
-          <div className="divide-border divide-y">
-            <div className="py-4 first:pt-0">
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-foreground text-sm font-medium tracking-tight">
-                  Data Transfer Cost Optimization
-                </h3>
-                <span className="text-muted-foreground/60 shrink-0 font-mono text-xs">
-                  Rootconf 2022
-                </span>
-              </div>
-              <p className="text-muted-foreground mt-1 text-xs leading-relaxed">
-                Granular visibility into cloud data transfer costs using AWS CUR
-                and VPC flow logs.
-              </p>
-              <Link
-                href="https://hasgeek.com/rootconf/optimizing-costs-of-cloud-infrastructure/sub/data-transfer-cost-optimization-KGSAciSRiEjTo1bjGNWChG"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground group mt-2 inline-flex items-center gap-1 text-xs transition-colors"
-              >
-                View talk
-                <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-            </div>
-
-            <div className="py-4">
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-foreground text-sm font-medium tracking-tight">
-                  Simplifying Kubernetes Cost Visibility
-                </h3>
-                <span className="text-muted-foreground/60 shrink-0 font-mono text-xs">
-                  Opslyft 2022
-                </span>
-              </div>
-              <p className="text-muted-foreground mt-1 text-xs leading-relaxed">
-                Webinar on reducing the complexity of understanding and
-                attributing Kubernetes infrastructure costs.
-              </p>
-            </div>
-          </div>
+          <Talks />
         </section>
 
         <section id="contact">
@@ -189,14 +151,14 @@ export default async function Home() {
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <Link
               href="mailto:hdprajwal01@gmail.com"
-              className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 text-sm transition-colors"
+              className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors"
             >
               <Mail className="h-3.5 w-3.5" />
               Email me
             </Link>
             <Link
               href="/resume"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 text-sm transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors"
             >
               Resume
             </Link>
@@ -204,7 +166,7 @@ export default async function Home() {
               href="https://www.linkedin.com/in/hdprajwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 text-sm transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors"
             >
               LinkedIn
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -213,7 +175,7 @@ export default async function Home() {
               href="https://github.com/hdprajwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-3 py-1.5 text-sm transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors"
             >
               GitHub
               <ArrowUpRight className="h-3.5 w-3.5" />

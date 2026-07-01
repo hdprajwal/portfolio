@@ -43,7 +43,7 @@ export default function ProjectCard(p: Project) {
       <div className="flex gap-3">
         {/* Color accent or image */}
         {p.image ? (
-          <div className="border-border relative aspect-4/3 overflow-hidden rounded-md border">
+          <div className="border-border relative aspect-4/3 overflow-hidden rounded-lg border">
             <Image
               src={p.image}
               alt={p.name}

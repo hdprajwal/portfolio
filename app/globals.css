@@ -2,9 +2,56 @@
 @plugin '@tailwindcss/typography';
 @import 'tw-animate-css';
 
+/* Overused Grotesk — variable font (wght 300–900, slnt -10–0), self-hosted on
+   the assets CDN. One face with an oblique range: upright text rides slnt 0,
+   italics ride the slant axis instead of a synthesized skew. */
+@font-face {
+  font-family: 'Overused Grotesk';
+  src: url('https://assets.hdprajwal.dev/fonts/OverusedGrotesk-VF.woff2')
+    format('woff2-variations');
+  font-weight: 300 500 900;
+  /*font-style: oblique 0deg 10deg;*/
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-term-cyan: oklch(0.544 0 0);
   --color-term-yellow: oklch(0.708 0 0);
+
+  /* Type scale — rem-based, tuned for Overused Grotesk. Base reading size is
+     18px; the small end floor is raised so nothing reads as tiny. Root stays
+     16px so spacing/layout are unaffected — only text grows. Line-heights are
+     unitless so they scale with each size; display sizes get tighter tracking. */
+  --text-3xs: 0.75rem; /* 12px — micro mono labels */
+  --text-3xs--line-height: 1.4;
+  --text-2xs: 0.8125rem; /* 13px — small mono labels */
+  --text-2xs--line-height: 1.45;
+  --text-xs: 0.875rem; /* 14px */
+  --text-xs--line-height: 1.5;
+  --text-sm: 1rem; /* 16px — secondary body */
+  --text-sm--line-height: 1.5;
+  --text-base: 1.125rem; /* 18px — body default */
+  --text-base--line-height: 1.6;
+  --text-md: 1.1875rem; /* 19px — lead / large body */
+  --text-md--line-height: 1.6;
+  --text-lg: 1.3125rem; /* 21px */
+  --text-lg--line-height: 1.5;
+  --text-xl: 1.5rem; /* 24px */
+  --text-xl--line-height: 1.4;
+  --text-xl--letter-spacing: -0.01em;
+  --text-2xl: 1.75rem; /* 28px */
+  --text-2xl--line-height: 1.25;
+  --text-2xl--letter-spacing: -0.015em;
+  --text-3xl: 2.125rem; /* 34px */
+  --text-3xl--line-height: 1.15;
+  --text-3xl--letter-spacing: -0.02em;
+  --text-4xl: 2.5rem; /* 40px */
+  --text-4xl--line-height: 1.1;
+  --text-4xl--letter-spacing: -0.02em;
+  --text-5xl: 3.25rem; /* 52px */
+  --text-5xl--line-height: 1.05;
+  --text-5xl--letter-spacing: -0.025em;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -95,6 +142,9 @@
   --shadow-2xl: 0 16px 20px 0px hsl(0 0% 0% / 0.1);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+  --font-sans:
+    'Overused Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
 }
 
 .dark {
@@ -222,7 +272,7 @@
   --shadow-popover: var(--shadow-popover);
 
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --radius-sm: calc(var(--radius) - 1px);
   --radius-md: var(--radius);
@@ -251,12 +301,16 @@
   }
 
   html {
-    /*font-size: 1.05rem;*/
+    font-family: var(--font-sans);
     scrollbar-gutter: stable;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     @apply bg-background text-foreground;
+    /* 18px default so untyped/inherited text reads at body size */
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
   }
 
   /* Override @tailwindcss/typography to use shadcn CSS variables */

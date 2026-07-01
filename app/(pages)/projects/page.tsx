@@ -19,7 +19,7 @@ export default async function ProjectsPage() {
 
       <div className="px-4 pb-16">
         {projects.length === 0 ? (
-          <p className="text-muted-foreground text-[0.9rem]">
+          <p className="text-muted-foreground text-sm">
             No projects found.
           </p>
         ) : (

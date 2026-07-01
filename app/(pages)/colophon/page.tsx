@@ -22,7 +22,8 @@ export default function ColophonPage() {
             { name: 'TypeScript', detail: '' },
             { name: 'Tailwind CSS', detail: 'v4' },
             { name: 'shadcn/ui', detail: '' },
-            { name: 'Geist', detail: 'font' },
+            { name: 'Overused Grotesk', detail: 'display/body' },
+            { name: 'IBM Plex Mono', detail: 'mono' },
             { name: 'Vercel', detail: 'hosting' },
           ].map((t) => (
             <span
@@ -31,7 +32,7 @@ export default function ColophonPage() {
             >
               {t.name}
               {t.detail && (
-                <span className="text-muted-foreground ml-1 font-mono text-[10px]">
+                <span className="text-muted-foreground ml-1 font-mono text-3xs">
                   {t.detail}
                 </span>
               )}

@@ -30,7 +30,7 @@ export default async function BlogIndexPage() {
 
       <div className="px-4 pb-16">
         {posts.length === 0 ? (
-          <p className="text-muted-foreground text-[0.9rem]">No posts yet.</p>
+          <p className="text-muted-foreground text-sm">No posts yet.</p>
         ) : (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             {posts.map((p) => (

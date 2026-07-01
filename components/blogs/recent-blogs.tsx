@@ -32,7 +32,7 @@ export default async function RecentBlogs() {
               >
                 {dateStr}
               </time>
-              <span className="text-foreground group-hover:text-primary truncate text-sm transition-colors">
+              <span className="text-foreground group-hover:text-primary truncate text-base font-medium tracking-tight transition-colors">
                 {post.title}
               </span>
             </div>
@@ -41,7 +41,7 @@ export default async function RecentBlogs() {
                 {post.tags.slice(0, 2).map((tag) => (
                   <span
                     key={tag}
-                    className="text-muted-foreground/50 font-mono text-[10px]"
+                    className="text-muted-foreground/50 font-mono text-3xs"
                   >
                     {tag}
                   </span>

@@ -67,7 +67,7 @@ function CommandKButton({ compact = false }: { compact?: boolean }) {
     <button
       type="button"
       onClick={triggerCommandMenu}
-      className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-1.5 py-0.5 font-mono text-[10px] tracking-wider transition-colors"
+      className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-1.5 py-0.5 font-mono text-3xs tracking-wider transition-colors"
       aria-label="Open command menu"
     >
       <Search className="h-3 w-3" />
@@ -135,7 +135,7 @@ export default function SiteHeader() {
                   href={href}
                   aria-label={`Go to ${label} page`}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`relative px-2.5 py-1 font-mono text-sm tracking-wide transition-colors ${
+                  className={`relative px-2.5 py-1 font-mono text-xs tracking-wide transition-colors ${
                     isActive
                       ? 'text-foreground'
                       : 'text-muted-foreground hover:text-foreground'
@@ -192,7 +192,7 @@ export default function SiteHeader() {
                   key={href}
                   href={href}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`border-border/40 flex items-baseline justify-between border-b py-2.5 font-mono text-sm tracking-wide transition-colors last:border-b-0 ${
+                  className={`border-border/40 flex items-baseline justify-between border-b py-2.5 font-mono text-xs tracking-wide transition-colors last:border-b-0 ${
                     isActive
                       ? 'text-foreground'
                       : 'text-muted-foreground hover:text-foreground'
@@ -211,14 +211,14 @@ export default function SiteHeader() {
           </nav>
 
           <div className="border-border/40 border-t px-4 py-3">
-            <div className="text-muted-foreground/60 mb-2 font-mono text-[10px] tracking-wider uppercase">
+            <div className="text-muted-foreground/60 mb-2 font-mono text-3xs tracking-wider uppercase">
               Reach me
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href="mailto:hdprajwal01@gmail.com"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2 py-0.5 text-xs transition-colors"
+                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 text-xs transition-colors"
               >
                 <Mail className="h-3 w-3" />
                 Email
@@ -228,7 +228,7 @@ export default function SiteHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2 py-0.5 text-xs transition-colors"
+                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 text-xs transition-colors"
               >
                 <LinkedinIcon className="h-3 w-3" />
                 LinkedIn
@@ -239,7 +239,7 @@ export default function SiteHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2 py-0.5 text-xs transition-colors"
+                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 text-xs transition-colors"
               >
                 <GithubIcon className="h-3 w-3" />
                 GitHub
@@ -249,7 +249,7 @@ export default function SiteHeader() {
           </div>
 
           <div className="border-border/40 border-t px-4 py-3">
-            <p className="text-muted-foreground font-mono text-[10px] tracking-wider">
+            <p className="text-muted-foreground font-mono text-3xs tracking-wider">
               California, USA
             </p>
           </div>

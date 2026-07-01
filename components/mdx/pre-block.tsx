@@ -39,7 +39,7 @@ export default function Pre({ children, className, ...rest }: PreProps) {
     <div className="not-prose group relative max-w-full overflow-hidden rounded border">
       <div className="text-muted-foreground flex items-center justify-between border-b px-3 py-2 text-xs">
         <div className="flex items-center gap-2">
-          <span className="bg-muted rounded px-1.5 py-0.5 text-[11px]">
+          <span className="bg-muted rounded px-1.5 py-0.5 text-2xs">
             Code
           </span>
         </div>

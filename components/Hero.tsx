@@ -7,17 +7,16 @@ import { ArrowRight } from 'lucide-react';
 export default function Hero() {
   return (
     <section id="hero" className="px-4 pt-16 pb-12 md:pt-20 md:pb-16">
-      <h1 className="text-foreground text-3xl font-semibold tracking-tight md:text-4xl">
-        Prajwal HD
-      </h1>
-      <p className="text-foreground text-md mt-3 max-w-xl leading-relaxed font-semibold">
-        I build agentic systems and the infrastructure to run them safely in
-        production.
+      <p className="text-foreground/90 text-md leading-relaxed">
+        Hi, I&apos;m Prajwal
       </p>
-      <p className="text-muted-foreground text-md mt-3 max-w-xl leading-relaxed">
-        AI engineer with three years of cloud and software engineering at
-        Opslyft. I care more about how a system behaves under pressure than what
-        it is built with.
+      <p className="text-foreground/90 text-md mt-3 max-w-2xl leading-relaxed">
+        An AI engineer based in California. I build AI agents and the developer
+        tools around them, right now emberd, a runtime that runs untrusted
+        AI-agent code inside isolated microVMs. Before this I spent three years
+        at Opslyft on cloud cost and reliability systems, then a Master&apos;s
+        on adversarial ML and Android malware detection. I&apos;m open to
+        full-time AI engineer, backend, and full-stack roles.
       </p>
       <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
         <Link

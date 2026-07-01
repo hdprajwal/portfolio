@@ -45,7 +45,7 @@ export default function BucketListPage() {
           <tbody>
             {bucketListItems.map((item, i) => (
               <tr key={item.label} className={i % 2 === 0 ? 'bg-muted/40' : ''}>
-                <td className="text-muted-foreground/50 w-8 py-2.5 pl-2 font-mono text-[11px] tabular-nums">
+                <td className="text-muted-foreground/50 w-8 py-2.5 pl-2 font-mono text-2xs tabular-nums">
                   {String(i + 1).padStart(2, '0')}
                 </td>
                 <td

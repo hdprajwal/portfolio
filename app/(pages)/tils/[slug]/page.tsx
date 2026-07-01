@@ -89,7 +89,7 @@ export default async function TilPage({
             {til.tags.map((tag: string) => (
               <span
                 key={tag}
-                className="bg-muted text-muted-foreground ring-border rounded-md px-2 py-1 font-mono text-[10px] ring-1 ring-inset"
+                className="bg-muted text-muted-foreground ring-border rounded-md px-2 py-1 font-mono text-3xs ring-1 ring-inset"
               >
                 {tag}
               </span>

@@ -4,15 +4,16 @@ import { ThemeProvider } from '@/components/theme-provider';
 import AnalyticsProvider from '@/components/analytics';
 import { baseUrl } from '@/lib/site';
 
-import { Geist, Geist_Mono } from 'next/font/google';
+import { IBM_Plex_Mono } from 'next/font/google';
 
-const geist = Geist({
+// Sans/display is Overused Grotesk, loaded via @font-face in globals.css from
+// the assets CDN. IBM Plex Mono is self-hosted through next/font and exposed as
+// the --font-mono variable.
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  variable: '--font-sans',
-});
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -58,12 +59,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${geist.className} ${geistMono.className}`}
-    >
+    <html lang="en" suppressHydrationWarning className={ibmPlexMono.variable}>
       <body className="antialiased">
+        <link
+          rel="preconnect"
+          href="https://assets.hdprajwal.dev"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="https://assets.hdprajwal.dev/fonts/OverusedGrotesk-VF.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <link
           rel="alternate"
           type="application/rss+xml"

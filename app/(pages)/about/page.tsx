@@ -129,7 +129,7 @@ export default function AboutPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link
               href="mailto:hdprajwal01@gmail.com"
-              className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+              className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
             >
               <Mail className="h-3 w-3" />
               Email
@@ -138,7 +138,7 @@ export default function AboutPage() {
               href="https://www.linkedin.com/in/hdprajwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
             >
               <LinkedinIcon className="h-3 w-3" />
               LinkedIn
@@ -148,7 +148,7 @@ export default function AboutPage() {
               href="https://github.com/hdprajwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
             >
               <GithubIcon className="h-3 w-3" />
               GitHub

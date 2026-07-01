@@ -18,7 +18,7 @@ export default async function TilsPage() {
 
       <div className="px-4 pb-16">
         {tils.length === 0 ? (
-          <p className="text-muted-foreground text-[0.9rem]">
+          <p className="text-muted-foreground text-sm">
             No TILs yet. Check back soon.
           </p>
         ) : (

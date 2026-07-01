@@ -15,8 +15,8 @@ export default function TagChips({
   const list = typeof max === 'number' ? tags.slice(0, max) : tags;
   const sizeClasses =
     size === 'sm'
-      ? 'px-1.5 py-0.5 text-[10px]'
-      : 'px-1.5 py-0.5 text-[10px]';
+      ? 'px-1.5 py-0.5 text-3xs'
+      : 'px-1.5 py-0.5 text-3xs';
 
   return (
     <div className={className ?? 'flex flex-wrap gap-1.5'}>
