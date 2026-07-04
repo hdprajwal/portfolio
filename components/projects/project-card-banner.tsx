@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import GithubIcon from '@/components/icons/GithubIcon';
 import TagChips from '@/components/projects/tag-chips';
+import { ViewTransition } from '@/components/view-transition';
 import type { Project } from '@/lib/projects';
 
 export default function ProjectCardBanner({ project }: { project: Project }) {
@@ -12,18 +13,22 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
   const summary = project.tagline || project.description;
 
   const banner = (
-    <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
-      {project.image ? (
-        <Image
-          src={project.image}
-          alt={`${project.name} preview`}
-          fill
-          className="object-cover"
-        />
-      ) : (
-        <TypographyBanner name={project.name} tagline={summary} />
-      )}
-    </div>
+    <ViewTransition
+      name={internalHref ? `project-image-${project.slug}` : undefined}
+    >
+      <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt={`${project.name} preview`}
+            fill
+            className="object-cover"
+          />
+        ) : (
+          <TypographyBanner name={project.name} tagline={summary} />
+        )}
+      </div>
+    </ViewTransition>
   );
 
   return (
@@ -39,9 +44,11 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
       <div className="p-2">
         {internalHref ? (
           <Link href={internalHref}>
-            <h3 className="text-foreground group-hover:text-primary text-label-18 transition-colors">
-              {project.name}
-            </h3>
+            <ViewTransition name={`project-title-${project.slug}`}>
+              <h3 className="text-foreground group-hover:text-primary text-label-18 transition-colors">
+                {project.name}
+              </h3>
+            </ViewTransition>
           </Link>
         ) : (
           <h3 className="text-foreground text-label-18">{project.name}</h3>

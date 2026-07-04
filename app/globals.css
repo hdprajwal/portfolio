@@ -193,57 +193,57 @@
   --background: oklch(0 0 1);
   /* white */
   --foreground: oklch(1 0 0);
-  /* gray-900 */
-  --card: oklch(0.21 0.034 264.665);
-  /* gray-50 */
-  --card-foreground: oklch(0.985 0.002 247.839);
-  /* gray-900 */
-  --popover: oklch(0.21 0.034 264.665);
-  /* gray-50 */
-  --popover-foreground: oklch(0.985 0.002 247.839);
-  /* gray-700 */
-  --popover-border: oklch(0.373 0.034 259.733);
-  /* gray-50 */
-  --primary: oklch(0.985 0.002 247.839);
-  /* gray-950 */
-  --primary-foreground: oklch(0.13 0.028 261.692);
-  /* gray-800 */
-  --secondary: oklch(0.278 0.033 256.848);
-  /* gray-50 */
-  --secondary-foreground: oklch(0.985 0.002 247.839);
-  /* gray-800 */
-  --muted: oklch(0.278 0.033 256.848);
-  /* gray-400 */
-  --muted-foreground: oklch(0.707 0.022 261.325);
-  /* gray-800 */
-  --accent: oklch(0.278 0.033 256.848);
+  /* neutral-900 */
+  --card: oklch(0.205 0 0);
+  /* neutral-50 */
+  --card-foreground: oklch(0.985 0 0);
+  /* neutral-900 */
+  --popover: oklch(0.205 0 0);
+  /* neutral-50 */
+  --popover-foreground: oklch(0.985 0 0);
+  /* neutral-700 */
+  --popover-border: oklch(0.371 0 0);
+  /* neutral-50 */
+  --primary: oklch(0.985 0 0);
+  /* neutral-950 */
+  --primary-foreground: oklch(0.145 0 0);
+  /* neutral-800 */
+  --secondary: oklch(0.269 0 0);
+  /* neutral-50 */
+  --secondary-foreground: oklch(0.985 0 0);
+  /* neutral-800 */
+  --muted: oklch(0.269 0 0);
+  /* neutral-400 */
+  --muted-foreground: oklch(0.708 0 0);
+  /* neutral-800 */
+  --accent: oklch(0.269 0 0);
   --accent-muted: color-mix(in oklab, var(--accent) 20%, transparent);
-  /* gray-50 */
-  --accent-foreground: oklch(0.985 0.002 247.839);
+  /* neutral-50 */
+  --accent-foreground: oklch(0.985 0 0);
   /* red-700 */
   --destructive: oklch(0.505 0.213 27.518);
   --destructive-foreground: oklch(0 0 0);
-  /* gray-800 */
-  --border: oklch(0.278 0.033 256.848);
+  /* neutral-800 */
+  --border: oklch(0.269 0 0);
   --input: lab(100% 0 0 / 0.15);
-  /* gray-500 */
-  --ring: oklch(0.551 0.027 264.364);
+  /* neutral-500 */
+  --ring: oklch(0.556 0 0);
   /* green-500 */
   --success: oklch(0.723 0.219 149.579);
   /* blue-500 */
   --link: oklch(0.623 0.214 259.815);
-  /* gray-900 */
-  --code: oklch(0.21 0.034 264.665);
-  /* gray-50 */
-  --code-foreground: oklch(0.985 0.002 247.839);
-  /* gray-500 */
-  --code-number: oklch(0.551 0.027 264.364);
-  /* gray-800 */
-  --code-highlight: oklch(0.278 0.033 256.848);
-  /* gray-50 */
-  --selection: oklch(0.985 0.002 247.839);
-  /* gray-950 */
-  --selection-foreground: oklch(0.13 0.028 261.692);
+  /* neutral-900 */
+  --code: oklch(0.205 0 0);
+  /* neutral-50 */
+  --code-foreground: oklch(0.985 0 0);
+  /* neutral-500 */
+  --code-number: oklch(0.556 0 0);
+  /* neutral-800 */
+  --code-highlight: oklch(0.269 0 0);
+  /* neutral-50 */
+  --selection: oklch(0.985 0 0);
+  /* neutral-950 */
+  --selection-foreground: oklch(0.145 0 0);
   --shadow-popover: 0 0 24px rgba(0, 0, 0, 0.5);
   --chart-1: oklch(0.81 0.17 75.35);
   --chart-2: oklch(0.58 0.21 260.84);
@@ -557,4 +557,73 @@
 
 .prose :where(pre, table, img, video, iframe) {
   max-width: 100%;
+}
+
+/* Shared-element card morph transitions (project/blog cards -> writeup pages). */
+::view-transition-group(*) {
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
+}
+
+/* Directional page slide, driven by components/nav-direction.tsx setting html[data-page-nav]. */
+@keyframes page-enter-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes page-exit-to-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+}
+@keyframes page-enter-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes page-exit-to-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+
+html[data-page-nav='forward']::view-transition-old(page) {
+  animation: 280ms cubic-bezier(0.22, 1, 0.36, 1) both page-exit-to-left;
+}
+html[data-page-nav='forward']::view-transition-new(page) {
+  animation: 280ms cubic-bezier(0.22, 1, 0.36, 1) both page-enter-from-right;
+}
+html[data-page-nav='backward']::view-transition-old(page) {
+  animation: 280ms cubic-bezier(0.22, 1, 0.36, 1) both page-exit-to-right;
+}
+html[data-page-nav='backward']::view-transition-new(page) {
+  animation: 280ms cubic-bezier(0.22, 1, 0.36, 1) both page-enter-from-left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }

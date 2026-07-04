@@ -8,6 +8,7 @@ import { formatDate, getBlogPosts, baseUrl } from '@/lib/posts';
 import { type Post } from '@/lib/posts';
 import ShareActions from '@/components/blogs/share-actions';
 import TagChips from '@/components/projects/tag-chips';
+import { ViewTransition } from '@/components/view-transition';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { readingMinutes } from '@/lib/reading-time';
 import { extractToc } from '@/lib/toc';
@@ -103,9 +104,11 @@ export default async function Blog({
           <p className="text-muted-foreground text-2xs font-mono tracking-wider uppercase">
             {formatDate(post.date)} · {readingMins} min read
           </p>
-          <h1 className="text-heading-24 md:text-heading-40 mt-3 text-balance">
-            {post.title}
-          </h1>
+          <ViewTransition name={`post-title-${slug}`}>
+            <h1 className="text-heading-24 md:text-heading-40 mt-3 text-balance">
+              {post.title}
+            </h1>
+          </ViewTransition>
           {post.summary && (
             <p className="text-muted-foreground text-copy-18 mt-4">
               {post.summary}
@@ -119,18 +122,20 @@ export default async function Blog({
           )}
         </header>
         {heroImage && (
-          <div className="border-border relative mt-10 w-full overflow-hidden rounded-lg border">
-            <div className="bg-muted relative aspect-[16/9] w-full">
-              <Image
-                src={heroImage}
-                alt={post.title}
-                fill
-                className="object-cover"
-                unoptimized={isExternalImg}
-                priority
-              />
+          <ViewTransition name={`post-image-${slug}`}>
+            <div className="border-border relative mt-10 w-full overflow-hidden rounded-lg border">
+              <div className="bg-muted relative aspect-[16/9] w-full">
+                <Image
+                  src={heroImage}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  unoptimized={isExternalImg}
+                  priority
+                />
+              </div>
             </div>
-          </div>
+          </ViewTransition>
         )}
         <section className="w-full">
           <div className="mx-auto mt-10 w-full max-w-3xl min-w-0 md:mt-12">

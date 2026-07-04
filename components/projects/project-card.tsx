@@ -2,6 +2,7 @@ import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import GithubIcon from '@/components/icons/GithubIcon';
+import { ViewTransition } from '@/components/view-transition';
 
 export type Project = {
   name: string;
@@ -43,14 +44,16 @@ export default function ProjectCard(p: Project) {
       <div className="flex gap-3">
         {/* Color accent or image */}
         {p.image ? (
-          <div className="border-border relative aspect-4/3 overflow-hidden rounded-lg border">
-            <Image
-              src={p.image}
-              alt={p.name}
-              fill
-              className="aspect-4/3 object-cover"
-            />
-          </div>
+          <ViewTransition name={p.slug ? `project-image-${p.slug}` : undefined}>
+            <div className="border-border relative aspect-4/3 overflow-hidden rounded-lg border">
+              <Image
+                src={p.image}
+                alt={p.name}
+                fill
+                className="aspect-4/3 object-cover"
+              />
+            </div>
+          </ViewTransition>
         ) : (
           <div
             className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md ${accent} opacity-80`}
@@ -62,9 +65,11 @@ export default function ProjectCard(p: Project) {
         <div className="min-w-0 flex-1">
           {p.slug ? (
             <Link href={`/projects/${p.slug}`}>
-              <h3 className="text-primary text-label-18 group-hover:underline">
-                {p.name}
-              </h3>
+              <ViewTransition name={`project-title-${p.slug}`}>
+                <h3 className="text-primary text-label-18 group-hover:underline">
+                  {p.name}
+                </h3>
+              </ViewTransition>
             </Link>
           ) : (
             <h3 className="text-primary text-label-18 flex justify-between">

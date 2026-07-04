@@ -57,7 +57,7 @@ export default function BucketListPage() {
                   {item.done ? (
                     <span className="text-foreground">✓</span>
                   ) : (
-                    <span className="text-muted-foreground/20">-</span>
+                    <span className="text-muted-foreground">-</span>
                   )}
                 </td>
               </tr>

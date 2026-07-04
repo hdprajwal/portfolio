@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { CustomMDX } from '@/components/mdx/custom-mdx';
 import TagChips from '@/components/projects/tag-chips';
+import { ViewTransition } from '@/components/view-transition';
 import { formatDate, listTILs, getTIL, baseUrl } from '@/lib/tils';
 import { type TIL } from '@/lib/tils';
 
@@ -83,9 +84,11 @@ export default async function TilPage({
           <p className="text-muted-foreground text-2xs font-mono tracking-wider uppercase">
             TIL · {formatDate(til.date)}
           </p>
-          <h1 className="text-heading-24 md:text-heading-32 mt-3 text-balance">
-            {til.title}
-          </h1>
+          <ViewTransition name={`til-title-${til.slug}`}>
+            <h1 className="text-heading-24 md:text-heading-32 mt-3 text-balance">
+              {til.title}
+            </h1>
+          </ViewTransition>
           {til.tags && til.tags.length > 0 && (
             <TagChips tags={til.tags} className="mt-4 flex flex-wrap gap-1.5" />
           )}

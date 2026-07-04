@@ -31,7 +31,7 @@ export default function Talks() {
         <div key={talk.title} className="py-4 first:pt-0">
           <div className="flex items-baseline justify-between gap-4">
             <h3 className="text-foreground text-label-18">{talk.title}</h3>
-            <span className="text-muted-foreground/60 text-label-13-mono shrink-0">
+            <span className="text-muted-foreground text-label-13-mono shrink-0">
               {talk.event}
             </span>
           </div>

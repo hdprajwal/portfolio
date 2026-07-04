@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { ArrowLeftIcon, ExternalLink } from 'lucide-react';
 import { CustomMDX } from '@/components/mdx/custom-mdx';
 import TagChips from '@/components/projects/tag-chips';
+import { ViewTransition } from '@/components/view-transition';
 import {
   listProjects,
   getProject,
@@ -76,9 +77,11 @@ export default async function ProjectPage({
 
         <header className="mt-10 md:mt-12">
           <div className="flex items-baseline justify-between gap-4">
-            <h1 className="text-heading-24 md:text-heading-32 text-balance">
-              {project.name}
-            </h1>
+            <ViewTransition name={`project-title-${slug}`}>
+              <h1 className="text-heading-24 md:text-heading-32 text-balance">
+                {project.name}
+              </h1>
+            </ViewTransition>
             {project.liveHref && (
               <Link
                 href={project.liveHref}
@@ -105,24 +108,26 @@ export default async function ProjectPage({
         </header>
       </div>
 
-      <div className="border-border bg-muted relative mx-auto mt-8 max-w-3xl overflow-hidden rounded-lg border">
-        <div className="relative flex aspect-[16/9] w-full items-center justify-center">
-          {project.image ? (
-            <Image
-              src={project.image}
-              alt={`${project.name} preview`}
-              fill
-              className="object-cover"
-              unoptimized={!!isExternalImg}
-            />
-          ) : (
-            <span className="text-muted-foreground font-mono text-base opacity-40 select-none">
-              <span className="text-primary">❯</span>{' '}
-              {project.name.toLowerCase()}
-            </span>
-          )}
+      <ViewTransition name={`project-image-${slug}`}>
+        <div className="border-border bg-muted relative mx-auto mt-8 max-w-3xl overflow-hidden rounded-lg border">
+          <div className="relative flex aspect-[16/9] w-full items-center justify-center">
+            {project.image ? (
+              <Image
+                src={project.image}
+                alt={`${project.name} preview`}
+                fill
+                className="object-cover"
+                unoptimized={!!isExternalImg}
+              />
+            ) : (
+              <span className="text-muted-foreground font-mono text-base opacity-40 select-none">
+                <span className="text-primary">❯</span>{' '}
+                {project.name.toLowerCase()}
+              </span>
+            )}
+          </div>
         </div>
-      </div>
+      </ViewTransition>
 
       {project.content && (
         <div className="mx-auto mt-10 w-full max-w-3xl min-w-0 md:mt-12">

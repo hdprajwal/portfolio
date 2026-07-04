@@ -3,6 +3,8 @@ import SiteHeader from '@/components/site-header';
 import CommandMenu from '@/components/CommandMenu';
 import { Toaster } from '@/components/ui/sooner';
 import ScrollToTop from '@/components/scroll-to-top';
+import NavDirection from '@/components/nav-direction';
+import { ViewTransition } from '@/components/view-transition';
 import { listPosts } from '@/lib/posts';
 import { listProjects } from '@/lib/projects';
 import { listTILs } from '@/lib/tils';
@@ -25,13 +27,18 @@ export default async function Layout({
       <div className="flex min-h-screen flex-col items-center justify-start">
         <div className="flex min-h-screen w-full max-w-3xl flex-col">
           <SiteHeader />
-          <main className="w-full flex-1">{children}</main>
+          <main className="w-full flex-1">
+            <ViewTransition name="page">
+              <div className="w-full">{children}</div>
+            </ViewTransition>
+          </main>
           <Footer />
         </div>
       </div>
       <Toaster />
       <CommandMenu contentItems={contentItems} />
       <ScrollToTop />
+      <NavDirection />
     </>
   );
 }

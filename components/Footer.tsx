@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="px-4">
       <Separator className="bg-muted mt-1" />
-      <div className="flex flex-col items-start justify-between gap-4 py-4 sm:flex-row sm:items-center">
+      <div className="flex items-start justify-between gap-4 py-4">
         <p className="text-muted-foreground text-label-16">
           &copy; 2026 Prajwal HD
         </p>

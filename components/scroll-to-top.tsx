@@ -18,7 +18,7 @@ export default function ScrollToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Scroll to top"
-      className="bg-muted text-muted-foreground hover:text-foreground fixed right-8 bottom-4 z-50 flex size-10 cursor-pointer items-center justify-center rounded transition-[opacity,transform] duration-200"
+      className="bg-muted text-muted-foreground hover:text-foreground fixed right-8 bottom-12 z-50 flex size-10 cursor-pointer items-center justify-center rounded transition-[opacity,transform] duration-200 md:bottom-4"
     >
       <ArrowUp className="size-5" />
     </button>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Post } from '@/lib/posts';
 import { Clock } from 'lucide-react';
 import { readingMinutes } from '@/lib/reading-time';
+import { ViewTransition } from '@/components/view-transition';
 
 export default function BlogCard({ post }: { post: Post }) {
   const dateStr = new Date(post.date).toLocaleDateString('en-US', {
@@ -16,9 +17,11 @@ export default function BlogCard({ post }: { post: Post }) {
       className="group border-border block border-b py-4 transition-all duration-200 first:pt-0 last:border-b-0 hover:pl-2"
     >
       <div className="flex items-baseline justify-between gap-4">
-        <span className="group-hover:text-foreground text-label-18 transition-colors">
-          {post.title}
-        </span>
+        <ViewTransition name={`post-title-${post.slug}`}>
+          <span className="group-hover:text-foreground text-label-18 transition-colors">
+            {post.title}
+          </span>
+        </ViewTransition>
         <time
           dateTime={post.date}
           className="text-muted-foreground text-label-14-mono shrink-0 tabular-nums opacity-70"

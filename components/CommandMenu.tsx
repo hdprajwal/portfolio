@@ -109,9 +109,12 @@ export default function CommandMenu({
       showCloseButton
       className="sm:max-w-lg"
     >
-      <Command>
-        <CommandInput placeholder="Type a command or search..." />
-        <CommandList className="max-h-96">
+      <Command className="max-sm:rounded-none!">
+        <CommandInput
+          placeholder="Type a command or search..."
+          className="max-sm:pr-8"
+        />
+        <CommandList className="max-h-96 max-sm:max-h-none max-sm:flex-1">
           <CommandEmpty>No results found.</CommandEmpty>
 
           <CommandGroup heading="Navigation">

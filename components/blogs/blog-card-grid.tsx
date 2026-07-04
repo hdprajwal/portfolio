@@ -3,6 +3,7 @@ import Image from 'next/image';
 import type { Post } from '@/lib/posts';
 import TagChips from '@/components/projects/tag-chips';
 import { readingMinutes } from '@/lib/reading-time';
+import { ViewTransition } from '@/components/view-transition';
 
 export default function BlogCardGrid({ post }: { post: Post }) {
   const dateStr = new Date(post.date).toLocaleDateString('en-US', {
@@ -14,23 +15,27 @@ export default function BlogCardGrid({ post }: { post: Post }) {
 
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
-      <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
-        {post.image ? (
-          <Image
-            src={post.image}
-            alt={post.title}
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <TypographyBanner title={post.title} summary={post.summary} />
-        )}
-      </div>
+      <ViewTransition name={post.image ? `post-image-${post.slug}` : undefined}>
+        <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
+          {post.image ? (
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <TypographyBanner title={post.title} summary={post.summary} />
+          )}
+        </div>
+      </ViewTransition>
 
       <div className="mt-4">
-        <h3 className="text-foreground group-hover:text-primary text-label-18 line-clamp-2 transition-colors">
-          {post.title}
-        </h3>
+        <ViewTransition name={`post-title-${post.slug}`}>
+          <h3 className="text-foreground group-hover:text-primary text-label-18 line-clamp-2 transition-colors">
+            {post.title}
+          </h3>
+        </ViewTransition>
 
         {post.summary && (
           <p className="text-muted-foreground text-copy-16 mt-1.5 line-clamp-2">

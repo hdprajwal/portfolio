@@ -19,7 +19,9 @@ export default async function ProjectsPage() {
 
       <div className="px-4 pb-16">
         {projects.length === 0 ? (
-          <p className="text-muted-foreground text-copy-16">No projects found.</p>
+          <p className="text-muted-foreground text-copy-16">
+            No projects found.
+          </p>
         ) : (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             {projects.map((p) => (
