@@ -35,6 +35,13 @@ MDX is rendered by `components/mdx/custom-mdx.tsx` using `next-mdx-remote/rsc` w
 2. Fill out frontmatter. Blog/TIL need at least `title`, `date`, `summary`/`description`, `tags`. Project frontmatter supports `name`, `tagline`, `description`, `tags`, `codeHref`, `liveHref`, `image`, `featured`, `date`.
 3. Write dates as ISO `YYYY-MM-DD` (consumed by `new Date(...)` for sorting).
 4. A project gets a dedicated `/projects/[slug]` page only when its MDX body is non-empty; `app/sitemap.ts` filters with `p.content?.trim()`.
+5. Set `draft: true` in frontmatter to keep an item visible in dev but
+   excluded from production pages, sitemap, RSS, llms.txt, and search.
+   Remove the flag to publish.
+6. Featured project pages follow `docs/case-study-template.md`: opening
+   story, How it works (with a diagram), Hard decisions, Results
+   (measured claims only), What broke, and at least one demo artifact
+   (video or live link).
 
 ### Adding a New Content Type
 
@@ -57,7 +64,7 @@ Mirror an existing loader in `lib/`, create the content directory and the `app/(
 
 ## UI Testing
 
-When the user asks to test, verify, or check a UI change, use the **agent-browser** skill against the running dev server at `http://localhost:3000`. Do not claim a UI change works without visually verifying it.
+When the user asks to test, verify, or check a UI change, use the **agent-browser** skill against the running dev server at `http://localhost:3000`. Do not claim a UI change works without visually verifying it. **Ask before starting an agent-browser session**; runs take a while, so propose the pages and states you want to check and wait for a yes.
 
 The `agent-browser` skill is expected to be installed. If it is not available in the current session, stop and tell the user, and suggest installing it via the `find-skills` skill (or `/plugin`) before attempting UI verification. Do not fall back to `curl`, `fetch`, or other non-visual substitutes.
 
@@ -84,12 +91,14 @@ If a visual check is not possible (e.g. change requires auth, external data, or 
 ## Commands
 
 ```bash
-pnpm dev      # Next.js dev server (Turbopack) on localhost:3000
-pnpm build    # Production build
-pnpm start    # Serve production build
-pnpm lint     # next lint
+pnpm dev        # Next.js dev server (Turbopack) on localhost:3000
+pnpm build      # Production build
+pnpm start      # Serve production build
+pnpm lint       # eslint . (flat config in eslint.config.mjs)
+pnpm typecheck  # tsc --noEmit
+pnpm test       # vitest run
 ```
 
-**A dev server is always running on `localhost:3000`.** Do not start one after making changes; hot reload will pick up edits. Only run `pnpm build` or `pnpm lint` when you need to verify types/build integrity.
+**A dev server is always running on `localhost:3000`.** Do not start one after making changes; hot reload will pick up edits. Never run `pnpm build` while it runs (it corrupts the dev server cache); use `pnpm typecheck` locally and let CI run the build. Avoid `pnpm add`/`pnpm install` while the dev server is running for the same reason; if dependencies must change, tell the user to restart the dev server afterward.
 
-No test suite, no separate type-check script; `pnpm build` exercises the TypeScript compiler.
+CI (`.github/workflows/ci.yml`) runs lint, typecheck, tests, and the production build on every push to main and every PR.
