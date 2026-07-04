@@ -5,13 +5,16 @@ import { notFound } from 'next/navigation';
 import { ArrowLeftIcon, ExternalLink } from 'lucide-react';
 import { CustomMDX } from '@/components/mdx/custom-mdx';
 import TagChips from '@/components/projects/tag-chips';
-import { listProjects, getProject, baseUrl } from '@/lib/projects';
+import {
+  listProjects,
+  getProject,
+  hasProjectPage,
+  baseUrl,
+} from '@/lib/projects';
 
 export async function generateStaticParams() {
   const projects = await listProjects();
-  return projects
-    .filter((p) => p.content?.trim())
-    .map((p) => ({ slug: p.slug }));
+  return projects.filter(hasProjectPage).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -37,7 +40,6 @@ export async function generateMetadata({
       description: project.description || project.tagline,
       type: 'website',
       url: `${baseUrl}/projects/${slug}`,
-      images: project.image ? [{ url: project.image }] : [],
     },
     twitter: {
       card: 'summary_large_image',
@@ -55,51 +57,55 @@ export default async function ProjectPage({
   const { slug } = await params;
   const project = await getProject(slug);
 
-  if (!project || !project.content?.trim()) {
+  if (!project || !hasProjectPage(project)) {
     notFound();
   }
 
   const isExternalImg = project.image && /^https?:\/\//.test(project.image);
 
   return (
-    <div className="bg-background relative container mx-auto min-h-screen max-w-4xl overflow-x-hidden px-4 py-10 md:py-12">
-      <Link
-        href="/projects"
-        className="text-primary mb-6 inline-flex items-center gap-2 text-base hover:underline"
-      >
-        <ArrowLeftIcon className="h-4 w-4" />
-        Back
-      </Link>
+    <div className="bg-background relative min-h-screen overflow-x-hidden px-4 py-10 md:py-12">
+      <div className="mx-auto w-full max-w-3xl">
+        <Link
+          href="/projects"
+          className="text-muted-foreground hover:text-foreground text-label-16 inline-flex items-center gap-2 transition-colors"
+        >
+          <ArrowLeftIcon className="h-4 w-4" />
+          Projects
+        </Link>
 
-      <div className="flex items-baseline justify-between gap-4">
-        <h1 className="text-2xl leading-[1.2] font-semibold tracking-tight text-balance">
-          {project.name}
-        </h1>
-        {project.liveHref && (
-          <Link
-            href={project.liveHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:text-primary/80 inline-flex shrink-0 items-center gap-1 text-base transition-colors hover:underline"
-          >
-            View Live
-            <ExternalLink className="h-3.5 w-3.5" />
-          </Link>
-        )}
+        <header className="mt-10 md:mt-12">
+          <div className="flex items-baseline justify-between gap-4">
+            <h1 className="text-heading-24 md:text-heading-32 text-balance">
+              {project.name}
+            </h1>
+            {project.liveHref && (
+              <Link
+                href={project.liveHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground text-label-16 inline-flex shrink-0 items-center gap-1 transition-colors hover:underline"
+              >
+                View Live
+                <ExternalLink className="h-3.5 w-3.5" />
+              </Link>
+            )}
+          </div>
+
+          <p className="text-muted-foreground text-copy-18 mt-2">
+            {project.tagline}
+          </p>
+
+          {project.tags.length > 0 && (
+            <TagChips
+              tags={project.tags}
+              className="mt-4 flex flex-wrap gap-1.5"
+            />
+          )}
+        </header>
       </div>
 
-      <p className="text-muted-foreground mt-2 text-base leading-relaxed">
-        {project.tagline}
-      </p>
-
-      {project.tags.length > 0 && (
-        <TagChips
-          tags={project.tags}
-          className="mt-4 flex flex-wrap gap-1.5"
-        />
-      )}
-
-      <div className="border-border bg-muted relative mt-6 overflow-hidden rounded-lg border">
+      <div className="border-border bg-muted relative mx-auto mt-8 max-w-3xl overflow-hidden rounded-lg border">
         <div className="relative flex aspect-[16/9] w-full items-center justify-center">
           {project.image ? (
             <Image
@@ -118,12 +124,12 @@ export default async function ProjectPage({
         </div>
       </div>
 
-      <hr className="border-border my-8" />
-
       {project.content && (
-        <article className="prose prose-base dark:prose-invert md:prose-base w-full max-w-4xl">
-          <CustomMDX source={project.content} />
-        </article>
+        <div className="mx-auto mt-10 w-full max-w-3xl min-w-0 md:mt-12">
+          <article className="prose min-w-0">
+            <CustomMDX source={project.content} />
+          </article>
+        </div>
       )}
     </div>
   );

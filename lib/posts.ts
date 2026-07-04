@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { cache } from 'react';
+import { isHiddenDraft } from '@/lib/content';
 
 export type Post = {
   slug: string;
@@ -11,6 +12,7 @@ export type Post = {
   tags?: string[];
   content?: string;
   image?: string;
+  draft?: boolean;
 };
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
@@ -47,8 +49,10 @@ export const listPosts = cache(async (): Promise<Post[]> => {
         tags: data.tags || [],
         content: mdxContent,
         image: data.image || data.cover || data.banner || undefined,
+        draft: data.draft === true,
       };
     })
+    .filter((post) => !isHiddenDraft(post.draft))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return posts;
@@ -66,6 +70,10 @@ export async function getPost(slug: string) {
   const content = fs.readFileSync(filePath, 'utf8');
   const { data, content: mdxContent } = matter(content);
 
+  if (isHiddenDraft(data.draft === true)) {
+    return null;
+  }
+
   return {
     slug,
     title: data.title || slug,
@@ -73,6 +81,7 @@ export async function getPost(slug: string) {
     summary: data.summary,
     tags: data.tags || [],
     content: mdxContent,
+    draft: data.draft === true,
   };
 }
 

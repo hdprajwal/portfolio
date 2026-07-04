@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { cache } from 'react';
+import { isHiddenDraft } from '@/lib/content';
 
 export type TIL = {
   slug: string;
@@ -9,6 +10,8 @@ export type TIL = {
   date: string;
   description: string;
   tags?: string[];
+  content?: string;
+  draft?: boolean;
 };
 
 const TIL_DIR = path.join(process.cwd(), 'content/til');
@@ -43,8 +46,11 @@ export const listTILs = cache(async (): Promise<TIL[]> => {
         date: data.date || '1970-01-01',
         description: data.description || '',
         tags: data.tags || [],
+        content: mdxContent,
+        draft: data.draft === true,
       };
     })
+    .filter((til) => !isHiddenDraft(til.draft))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return tils;
@@ -60,6 +66,10 @@ export async function getTIL(slug: string) {
   const content = fs.readFileSync(filePath, 'utf8');
   const { data, content: mdxContent } = matter(content);
 
+  if (isHiddenDraft(data.draft === true)) {
+    return null;
+  }
+
   return {
     slug,
     title: data.title || slug,
@@ -67,5 +77,6 @@ export async function getTIL(slug: string) {
     description: data.description || '',
     content: mdxContent,
     tags: data.tags || [],
+    draft: data.draft === true,
   };
 }

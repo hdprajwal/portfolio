@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { cache } from 'react';
+import { isHiddenDraft } from '@/lib/content';
 
 export type Project = {
   slug: string;
@@ -15,11 +16,16 @@ export type Project = {
   content?: string;
   featured?: boolean;
   date?: string;
+  draft?: boolean;
 };
 
 const PROJECTS_DIR = path.join(process.cwd(), 'content/projects');
 
 export { baseUrl } from '@/lib/site';
+
+export function hasProjectPage(project: Pick<Project, 'content'>): boolean {
+  return Boolean(project.content?.trim());
+}
 
 export const listProjects = cache(async (): Promise<Project[]> => {
   if (!fs.existsSync(PROJECTS_DIR)) {
@@ -47,14 +53,17 @@ export const listProjects = cache(async (): Promise<Project[]> => {
         content,
         featured: data.featured || false,
         date: data.date,
+        draft: data.draft === true,
       };
     })
+    .filter((project) => !isHiddenDraft(project.draft))
     .sort((a, b) => {
       // Featured projects first
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
       // Then by date (newest first), undated projects last
-      if (a.date && b.date) return new Date(b.date).getTime() - new Date(a.date).getTime();
+      if (a.date && b.date)
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
       if (a.date) return -1;
       if (b.date) return 1;
       return 0;
@@ -71,6 +80,10 @@ export async function getProject(slug: string): Promise<Project | null> {
   const raw = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(raw);
 
+  if (isHiddenDraft(data.draft === true)) {
+    return null;
+  }
+
   return {
     slug,
     name: data.name || slug,
@@ -81,5 +94,6 @@ export async function getProject(slug: string): Promise<Project | null> {
     liveHref: data.liveHref,
     image: data.image,
     content,
+    draft: data.draft === true,
   };
 }
