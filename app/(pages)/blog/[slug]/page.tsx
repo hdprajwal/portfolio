@@ -8,9 +8,10 @@ import { formatDate, getBlogPosts, baseUrl } from '@/lib/posts';
 import { type Post } from '@/lib/posts';
 import ShareActions from '@/components/blogs/share-actions';
 import TagChips from '@/components/projects/tag-chips';
-import { ArrowLeftIcon, ArrowRightIcon, Clock } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { readingMinutes } from '@/lib/reading-time';
+import { extractToc } from '@/lib/toc';
+import TocMinimap from '@/components/blogs/toc-minimap';
 
 export async function generateStaticParams() {
   let posts = await getBlogPosts();
@@ -34,9 +35,6 @@ export async function generateMetadata({
   }
 
   let { title, date: publishedTime, summary: description } = post;
-  const socialImage = post.image
-    ? new URL(post.image, baseUrl).toString()
-    : undefined;
 
   return {
     title,
@@ -50,21 +48,11 @@ export async function generateMetadata({
       type: 'article',
       publishedTime,
       url: `${baseUrl}/blog/${post.slug}`,
-      ...(socialImage
-        ? {
-            images: [
-              {
-                url: socialImage,
-              },
-            ],
-          }
-        : {}),
     },
     twitter: {
-      card: socialImage ? 'summary_large_image' : 'summary',
+      card: 'summary_large_image',
       title,
       description,
-      ...(socialImage ? { images: [socialImage] } : {}),
     },
   };
 }
@@ -87,6 +75,7 @@ export default async function Blog({
   const next = index < posts.length - 1 ? posts[index + 1] : null;
 
   const readingMins = readingMinutes(post.content);
+  const toc = extractToc(post.content ?? '');
   const shareUrl = `${baseUrl}/blog/${post.slug}`;
   const heroImage = post.image;
   const structuredDataImage = heroImage
@@ -96,40 +85,41 @@ export default async function Blog({
 
   return (
     <div className="bg-background relative min-h-screen overflow-x-hidden px-4 py-10 md:py-12">
+      <TocMinimap items={toc} />
       <ReadingProgress />
-      <div className="mb-6 flex w-full items-center justify-between">
+      <div className="mx-auto flex w-full max-w-3xl items-center justify-between">
         <Link
           href="/blog"
-          className="text-primary inline-flex items-center gap-2 text-base hover:underline"
+          className="text-muted-foreground hover:text-foreground text-label-16 inline-flex items-center gap-2 transition-colors"
         >
           <ArrowLeftIcon className="inline-block h-4 w-4" />
           Blog
         </Link>
-        <div>
-          <ShareActions url={shareUrl} title={post.title} />
-        </div>
+        <ShareActions url={shareUrl} title={post.title} />
       </div>
 
-      <div className="mx-auto max-w-4xl">
-        <header className="mb-8 max-w-4xl">
-          <h1 className="mt-7 mb-6 text-3xl font-semibold tracking-tight md:text-5xl">
+      <div className="mx-auto max-w-3xl">
+        <header className="mx-auto mt-10 md:mt-12">
+          <p className="text-muted-foreground text-2xs font-mono tracking-wider uppercase">
+            {formatDate(post.date)} · {readingMins} min read
+          </p>
+          <h1 className="text-heading-24 md:text-heading-40 mt-3 text-balance">
             {post.title}
           </h1>
-          <div className="flex flex-wrap items-center gap-3 text-base">
-            <span className="text-muted-foreground">
-              {formatDate(post.date)}
-            </span>
-            <span className="text-muted-foreground flex items-center gap-1">
-              <Clock className="h-4 w-4" />
-              {readingMins} min read
-            </span>
-          </div>
+          {post.summary && (
+            <p className="text-muted-foreground text-copy-18 mt-4">
+              {post.summary}
+            </p>
+          )}
           {post.tags && post.tags.length > 0 && (
-            <TagChips tags={post.tags} className="mt-4 flex flex-wrap gap-1.5" />
+            <TagChips
+              tags={post.tags}
+              className="mt-5 flex flex-wrap gap-1.5"
+            />
           )}
         </header>
         {heroImage && (
-          <div className="border-border relative mb-8 w-full overflow-hidden rounded-lg border">
+          <div className="border-border relative mt-10 w-full overflow-hidden rounded-lg border">
             <div className="bg-muted relative aspect-[16/9] w-full">
               <Image
                 src={heroImage}
@@ -142,9 +132,8 @@ export default async function Blog({
             </div>
           </div>
         )}
-        <Separator className="mt-8 mb-16" />
         <section className="w-full">
-          <div className="w-full min-w-0">
+          <div className="mx-auto mt-10 w-full max-w-3xl min-w-0 md:mt-12">
             <script
               type="application/ld+json"
               suppressHydrationWarning
@@ -170,20 +159,20 @@ export default async function Blog({
               }}
             />
 
-            <article className="prose prose-sm dark:prose-invert md:prose-base mx-auto max-w-4xl min-w-0 break-words">
+            <article className="prose min-w-0">
               <CustomMDX source={post.content} />
             </article>
 
             <hr className="border-border my-10" />
 
-            <div className="flex flex-col gap-4 md:flex-row md:items-stretch md:justify-between">
+            <div className="flex flex-col gap-6 md:flex-row md:items-stretch md:justify-between md:gap-8">
               {prev && (
                 <Link href={`/blog/${prev.slug}`} className="group flex-1">
-                  <div className="text-muted-foreground group-hover:text-foreground mb-1 flex items-center gap-2 text-sm">
-                    <ArrowLeftIcon className="inline-block h-4 w-4" />
-                    New
+                  <div className="text-muted-foreground group-hover:text-foreground text-2xs mb-1 flex items-center gap-2 font-mono tracking-wider uppercase transition-colors">
+                    <ArrowLeftIcon className="inline-block h-3.5 w-3.5" />
+                    Newer
                   </div>
-                  <div className="font-medium group-hover:underline">
+                  <div className="text-label-16 group-hover:underline">
                     {prev.title}
                   </div>
                 </Link>
@@ -191,13 +180,13 @@ export default async function Blog({
               {next && (
                 <Link
                   href={`/blog/${next.slug}`}
-                  className="group hover:text-accent-foreground flex-1 text-right"
+                  className="group flex-1 md:text-right"
                 >
-                  <div className="text-muted-foreground group-hover:text-foreground mb-1 flex items-center justify-end gap-2 text-sm">
-                    Old
-                    <ArrowRightIcon className="inline-block h-4 w-4" />
+                  <div className="text-muted-foreground group-hover:text-foreground text-2xs mb-1 flex items-center gap-2 font-mono tracking-wider uppercase transition-colors md:justify-end">
+                    Older
+                    <ArrowRightIcon className="inline-block h-3.5 w-3.5" />
                   </div>
-                  <div className="font-medium group-hover:underline">
+                  <div className="text-label-16 group-hover:underline">
                     {next.title}
                   </div>
                 </Link>
