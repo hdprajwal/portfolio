@@ -14,8 +14,19 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      { source: '/blog/:slug.md', destination: '/md/blog/:slug' },
+      { source: '/projects/:slug.md', destination: '/md/projects/:slug' },
+      { source: '/tils/:slug.md', destination: '/md/tils/:slug' },
+    ];
+  },
 };
 
+// Compiles .mdx files placed under app/ into routes. Content in content/
+// goes through next-mdx-remote instead (components/mdx/custom-mdx.tsx).
+// Plugins use the string form: Turbopack requires the MDX options to be
+// serializable, so imported plugin functions can't be passed here.
 const withMDX = createMDX({
   options: {
     remarkPlugins: [['remark-gfm']],
@@ -35,8 +46,4 @@ const withMDX = createMDX({
   },
 });
 
-// Compiles .mdx files placed under app/ into routes. Content in content/
-// goes through next-mdx-remote instead (components/mdx/custom-mdx.tsx).
-// Plugins use the string form: Turbopack requires the MDX options to be
-// serializable, so imported plugin functions can't be passed here.
 export default withMDX(nextConfig);

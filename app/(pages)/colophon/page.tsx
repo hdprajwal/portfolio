@@ -6,10 +6,10 @@ export default function ColophonPage() {
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
-        <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h1 className="text-foreground text-heading-24 sm:text-heading-32">
           Colophon
         </h1>
-        <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed">
+        <p className="text-muted-foreground text-copy-16 mt-3 max-w-3xl">
           Notes about how this site is built and run.
         </p>
       </div>
@@ -30,11 +30,11 @@ export default function ColophonPage() {
             ].map((t) => (
               <span
                 key={t.name}
-                className="border-border bg-muted/40 text-foreground rounded-md border px-2.5 py-1 text-sm font-medium"
+                className="border-border bg-muted/40 text-foreground text-label-16 rounded-md border px-2.5 py-1"
               >
                 {t.name}
                 {t.detail && (
-                  <span className="text-muted-foreground ml-1 font-mono text-3xs">
+                  <span className="text-muted-foreground text-label-12-mono ml-1">
                     {t.detail}
                   </span>
                 )}
@@ -45,30 +45,30 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="Content & Blog" />
-          <ul className="text-muted-foreground space-y-2 text-base leading-relaxed">
+          <ul className="text-muted-foreground text-copy-18 space-y-2">
             <li>
               Posts are written in{' '}
-              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              <code className="bg-muted text-label-14-mono rounded-sm px-1 py-0.5">
                 .mdx
               </code>{' '}
               under{' '}
-              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              <code className="bg-muted text-label-14-mono rounded-sm px-1 py-0.5">
                 /content/blog
               </code>{' '}
               with frontmatter:{' '}
-              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              <code className="bg-muted text-label-14-mono rounded-sm px-1 py-0.5">
                 title
               </code>
               ,{' '}
-              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              <code className="bg-muted text-label-14-mono rounded-sm px-1 py-0.5">
                 summary
               </code>
               ,{' '}
-              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              <code className="bg-muted text-label-14-mono rounded-sm px-1 py-0.5">
                 tags
               </code>
               ,{' '}
-              <code className="bg-muted rounded-sm px-1 py-0.5 font-mono text-xs">
+              <code className="bg-muted text-label-14-mono rounded-sm px-1 py-0.5">
                 date
               </code>
             </li>
@@ -100,8 +100,47 @@ export default function ColophonPage() {
         </section>
 
         <section>
+          <SectionHeader label="Machine Readable" />
+          <ul className="text-muted-foreground text-copy-18 space-y-2">
+            <li>
+              <a
+                href="/llms.txt"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                /llms.txt
+              </a>{' '}
+              indexes the site for AI tools;{' '}
+              <a
+                href="/llms-full.txt"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                /llms-full.txt
+              </a>{' '}
+              has the full content in one file
+            </li>
+            <li>
+              Every post, project, and TIL is also available as raw markdown by
+              appending{' '}
+              <code className="bg-muted text-label-14-mono rounded-sm px-1 py-0.5">
+                .md
+              </code>{' '}
+              to its URL
+            </li>
+            <li>
+              <a
+                href="/rss.xml"
+                className="hover:text-foreground underline underline-offset-2 transition-colors"
+              >
+                /rss.xml
+              </a>{' '}
+              for feed readers
+            </li>
+          </ul>
+        </section>
+
+        <section>
           <SectionHeader label="Source" />
-          <ul className="text-muted-foreground space-y-2 text-base leading-relaxed">
+          <ul className="text-muted-foreground text-copy-18 space-y-2">
             <li>
               <a
                 href="https://github.com/hdprajwal/portfolio"
@@ -118,7 +157,7 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="System" />
-          <ul className="text-muted-foreground space-y-2 text-base leading-relaxed">
+          <ul className="text-muted-foreground text-copy-18 space-y-2">
             {[
               ['OS', 'Arch Linux'],
               ['WM', 'Hyprland'],
@@ -128,14 +167,14 @@ export default function ColophonPage() {
               ['Shell', 'zsh + oh-my-posh'],
             ].map(([key, value]) => (
               <li key={key} className="flex items-baseline gap-3">
-                <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-2xs">
+                <span className="text-muted-foreground/50 text-label-13-mono w-16 shrink-0">
                   {key}
                 </span>
                 <span>{value}</span>
               </li>
             ))}
             <li className="flex items-baseline gap-3">
-              <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-2xs">
+              <span className="text-muted-foreground/50 text-label-13-mono w-16 shrink-0">
                 Dotfiles
               </span>
               <a
