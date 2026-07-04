@@ -2,7 +2,6 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { MDXComponents } from '@/components/mdx/mdx-components';
 import remarkGfm from 'remark-gfm';
 import rehypeShiki from '@shikijs/rehype';
-import { transformerCopyButton } from '@rehype-pretty/transformers';
 
 export function CustomMDX({ source }: { source: string | undefined }) {
   if (!source) {
@@ -13,6 +12,8 @@ export function CustomMDX({ source }: { source: string | undefined }) {
       source={source}
       components={MDXComponents}
       options={{
+        // First-party MDX only; allows JSX attribute expressions (blockDangerousJS stays true).
+        blockJS: false,
         mdxOptions: {
           remarkPlugins: [remarkGfm],
           rehypePlugins: [
@@ -30,6 +31,9 @@ export function CustomMDX({ source }: { source: string | undefined }) {
                     name: 'theme-aware',
                     code(node: any) {
                       node.properties['data-theme'] = 'light dark';
+                    },
+                    pre(this: any, node: any) {
+                      node.properties['data-language'] = this.options.lang;
                     },
                   },
                 ],

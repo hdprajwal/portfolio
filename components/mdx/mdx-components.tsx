@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import type { ReactNode } from 'react';
 import {
   Table,
   TableBody,
@@ -8,6 +9,38 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import Pre from '@/components/mdx/pre-block';
+import Mermaid from '@/components/mdx/mermaid';
+import { slugify } from '@/lib/slugify';
+
+// Base typography lives in globals.css; components here only add behavior CSS can't.
+
+function textOf(node: ReactNode): string {
+  if (typeof node === 'string' || typeof node === 'number') return String(node);
+  if (Array.isArray(node)) return node.map(textOf).join('');
+  if (node && typeof node === 'object' && 'props' in node) {
+    return textOf((node.props as { children?: ReactNode }).children);
+  }
+  return '';
+}
+
+function createHeading(level: 1 | 2 | 3 | 4) {
+  const Tag = `h${level}` as const;
+  return function Heading({ children, ...props }: { children?: ReactNode }) {
+    const slug = slugify(textOf(children));
+    return (
+      <Tag id={slug} {...props}>
+        {children}
+        <a
+          href={`#${slug}`}
+          className="heading-anchor"
+          aria-label="Link to this section"
+        >
+          #
+        </a>
+      </Tag>
+    );
+  };
+}
 
 export const MDXComponents = {
   img: (props: any) => {
@@ -16,77 +49,46 @@ export const MDXComponents = {
     return (
       <Image
         {...props}
+        alt={props.alt ?? ''}
         width={props.width || 1920}
         height={props.height || 1080}
         quality={props.quality || 95}
-        sizes={props.sizes || '(max-width: 768px) 100vw, 896px'}
+        sizes={props.sizes || '(max-width: 768px) 100vw, 672px'}
         unoptimized={isRemote}
-        className={`rounded-lg ${props.className || ''}`}
+        className={`border-border rounded-lg border ${props.className || ''}`}
         style={{ width: '100%', height: 'auto' }}
       />
     );
   },
-  table: (props: any) => <Table {...props} />,
+  table: (props: any) => (
+    <div className="my-7">
+      <Table {...props} />
+    </div>
+  ),
   thead: (props: any) => <TableHeader {...props} />,
   tbody: (props: any) => <TableBody {...props} />,
   tr: (props: any) => <TableRow {...props} />,
   th: (props: any) => <TableHead {...props} />,
   td: (props: any) => <TableCell {...props} />,
-  // Typography elements - using shadcn typography styles
-  h1: (props: any) => (
-    <h1
-      className="mt-10 scroll-m-20 text-xl font-bold tracking-tight first:mt-0 md:text-2xl"
-      {...props}
-    />
-  ),
-  h2: (props: any) => (
-    <h2
-      className="border-border mt-8 scroll-m-20 border-b pb-2 text-lg font-semibold tracking-tight first:mt-0 md:text-xl"
-      {...props}
-    />
-  ),
-  h3: (props: any) => (
-    <h3
-      className="mt-6 scroll-m-20 text-base font-semibold tracking-tight md:text-lg"
-      {...props}
-    />
-  ),
-  h4: (props: any) => (
-    <h4
-      className="mt-4 scroll-m-20 text-sm font-semibold tracking-tight"
-      {...props}
-    />
-  ),
-  p: (props: any) => (
-    <p
-      className="text-foreground/80 text-base leading-relaxed [&:not(:first-child)]:mt-4"
-      {...props}
-    />
-  ),
-  ul: (props: any) => (
-    <ul className="text-foreground/80 my-6 ml-2 list-disc" {...props} />
-  ),
-  ol: (props: any) => (
-    <ol className="text-foreground/80 my-6 ml-2 list-decimal" {...props} />
-  ),
-  li: (props: any) => <li className="text-foreground/80" {...props} />,
-  a: (props: any) => (
-    <a
-      className="text-primary decoration-primary/30 hover:decoration-primary underline decoration-2 underline-offset-2 transition-colors"
-      {...props}
-    />
-  ),
-  strong: (props: any) => (
-    <strong className="text-foreground font-semibold" {...props} />
-  ),
-  em: (props: any) => <em className="text-foreground/80 italic" {...props} />,
-  hr: (props: any) => <hr className="border-border my-6" {...props} />,
-
+  h1: createHeading(1),
+  h2: createHeading(2),
+  h3: createHeading(3),
+  h4: createHeading(4),
+  a: (props: any) => {
+    const isExternal =
+      typeof props.href === 'string' && /^https?:\/\//.test(props.href);
+    return (
+      <a
+        {...props}
+        {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      />
+    );
+  },
   code: (props: any) => {
     if (!props.className?.includes('language-')) {
       return (
         <code
-          className="bg-muted text-foreground relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm"
+          className="bg-muted rounded-sm px-[0.3em] py-[0.15em] font-mono text-[0.85em]"
           {...props}
         />
       );
@@ -94,10 +96,5 @@ export const MDXComponents = {
     return <code {...props} />;
   },
   pre: (props: any) => <Pre {...props}>{props.children}</Pre>,
-  blockquote: (props: any) => (
-    <blockquote
-      className="border-border text-md mt-4 border-l-2 pl-4 italic"
-      {...props}
-    />
-  ),
+  Mermaid,
 };

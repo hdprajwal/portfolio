@@ -18,9 +18,25 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
+    remarkPlugins: [['remark-gfm']],
+    rehypePlugins: [
+      [
+        '@shikijs/rehype',
+        {
+          themes: {
+            light: 'github-light',
+            dark: 'github-dark',
+          },
+          defaultColor: false,
+          cssVariablePrefix: '--shiki-',
+        },
+      ],
+    ],
   },
 });
 
+// Compiles .mdx files placed under app/ into routes. Content in content/
+// goes through next-mdx-remote instead (components/mdx/custom-mdx.tsx).
+// Plugins use the string form: Turbopack requires the MDX options to be
+// serializable, so imported plugin functions can't be passed here.
 export default withMDX(nextConfig);
