@@ -10,7 +10,9 @@ export default function Footer() {
     <footer className="px-4">
       <Separator className="bg-muted mt-1" />
       <div className="flex flex-col items-start justify-between gap-4 py-4 sm:flex-row sm:items-center">
-        <p className="text-muted-foreground text-sm">&copy; 2026 Prajwal HD</p>
+        <p className="text-muted-foreground text-label-16">
+          &copy; 2026 Prajwal HD
+        </p>
         <div className="flex items-center gap-4">
           <Link
             href="https://github.com/hdprajwal"
@@ -49,7 +51,7 @@ export default function Footer() {
           <span className="bg-border h-3.5 w-px" />
           <Link
             href="/colophon"
-            className="text-muted-foreground hover:text-foreground text-xs transition-colors"
+            className="text-muted-foreground hover:text-foreground text-label-14 transition-colors"
           >
             Colophon
           </Link>

@@ -18,7 +18,7 @@ const ContactLink = ({
   return (
     <Link
       href={href}
-      className="group flex items-center text-sm transition-transform duration-200 ease-out hover:-translate-y-0.5"
+      className="text-label-16 group flex items-center transition-transform duration-200 ease-out hover:-translate-y-0.5"
     >
       <span className="text-muted-foreground group-hover:text-primary mr-3 transition-colors">
         {icon}

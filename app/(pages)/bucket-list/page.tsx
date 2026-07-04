@@ -32,20 +32,20 @@ export default function BucketListPage() {
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
-        <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h1 className="text-foreground text-heading-24 sm:text-heading-32">
           Bucket List
         </h1>
-        <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed">
+        <p className="text-muted-foreground text-copy-16 mt-3 max-w-3xl">
           Things I want to do, learn, and experience.
         </p>
       </div>
 
       <section className="px-4 pb-14">
-        <table className="w-full border-collapse text-base">
+        <table className="text-copy-18 w-full border-collapse">
           <tbody>
             {bucketListItems.map((item, i) => (
               <tr key={item.label} className={i % 2 === 0 ? 'bg-muted/40' : ''}>
-                <td className="text-muted-foreground/50 w-8 py-2.5 pl-2 font-mono text-2xs tabular-nums">
+                <td className="text-muted-foreground/50 text-label-13-mono w-8 py-2.5 pl-2 tabular-nums">
                   {String(i + 1).padStart(2, '0')}
                 </td>
                 <td
@@ -53,7 +53,7 @@ export default function BucketListPage() {
                 >
                   {item.label}
                 </td>
-                <td className="w-8 py-2.5 pr-2 text-right font-mono text-xs">
+                <td className="text-label-14-mono w-8 py-2.5 pr-2 text-right">
                   {item.done ? (
                     <span className="text-foreground">✓</span>
                   ) : (

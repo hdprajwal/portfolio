@@ -39,25 +39,21 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
       <div className="p-2">
         {internalHref ? (
           <Link href={internalHref}>
-            <h3 className="text-foreground group-hover:text-primary text-base font-semibold tracking-tight transition-colors md:text-lg">
+            <h3 className="text-foreground group-hover:text-primary text-label-18 transition-colors">
               {project.name}
             </h3>
           </Link>
         ) : (
-          <h3 className="text-foreground text-base font-semibold tracking-tight md:text-lg">
-            {project.name}
-          </h3>
+          <h3 className="text-foreground text-label-18">{project.name}</h3>
         )}
 
-        <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
-          {summary}
-        </p>
+        <p className="text-muted-foreground text-copy-16 mt-1.5">{summary}</p>
 
         <div className="mt-3">
-          <TagChips tags={project.tags} max={4} />
+          <TagChips tags={project.tags} max={3} />
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs">
+        <div className="text-label-14 mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
           {project.codeHref && (
             <Link
               href={project.codeHref}
@@ -113,7 +109,7 @@ function TypographyBanner({
         <div className="text-foreground font-mono text-lg font-semibold tracking-tight">
           {name}
         </div>
-        <p className="text-muted-foreground mt-1 line-clamp-2 text-xs leading-relaxed">
+        <p className="text-muted-foreground text-copy-14 mt-1 line-clamp-2">
           {tagline}
         </p>
       </div>

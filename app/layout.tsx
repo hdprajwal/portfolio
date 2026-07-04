@@ -6,9 +6,7 @@ import { baseUrl } from '@/lib/site';
 
 import { IBM_Plex_Mono } from 'next/font/google';
 
-// Sans/display is Overused Grotesk, loaded via @font-face in globals.css from
-// the assets CDN. IBM Plex Mono is self-hosted through next/font and exposed as
-// the --font-mono variable.
+// Sans/display is Overused Grotesk via @font-face in globals.css; this is --font-mono.
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],

@@ -7,7 +7,7 @@ export default async function RecentBlogs() {
 
   if (recentPosts.length === 0) {
     return (
-      <p className="text-muted-foreground text-sm">No blog posts yet.</p>
+      <p className="text-muted-foreground text-copy-16">No blog posts yet.</p>
     );
   }
 
@@ -28,11 +28,11 @@ export default async function RecentBlogs() {
             <div className="flex min-w-0 items-baseline gap-3">
               <time
                 dateTime={post.date}
-                className="text-muted-foreground/60 shrink-0 font-mono text-2xs tabular-nums"
+                className="text-muted-foreground/60 text-label-13-mono shrink-0 tabular-nums"
               >
                 {dateStr}
               </time>
-              <span className="text-foreground group-hover:text-primary truncate text-base font-medium tracking-tight transition-colors">
+              <span className="text-foreground group-hover:text-primary text-label-18 truncate transition-colors">
                 {post.title}
               </span>
             </div>
@@ -41,7 +41,7 @@ export default async function RecentBlogs() {
                 {post.tags.slice(0, 2).map((tag) => (
                   <span
                     key={tag}
-                    className="text-muted-foreground/50 font-mono text-3xs"
+                    className="text-muted-foreground/50 text-label-12-mono"
                   >
                     {tag}
                   </span>

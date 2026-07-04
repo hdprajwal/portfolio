@@ -28,12 +28,12 @@ export default function BlogCardGrid({ post }: { post: Post }) {
       </div>
 
       <div className="mt-4">
-        <h3 className="text-foreground group-hover:text-primary line-clamp-2 text-base font-semibold tracking-tight transition-colors md:text-lg">
+        <h3 className="text-foreground group-hover:text-primary text-label-18 line-clamp-2 transition-colors">
           {post.title}
         </h3>
 
         {post.summary && (
-          <p className="text-muted-foreground mt-1.5 line-clamp-2 text-sm leading-relaxed">
+          <p className="text-muted-foreground text-copy-16 mt-1.5 line-clamp-2">
             {post.summary}
           </p>
         )}
@@ -44,7 +44,7 @@ export default function BlogCardGrid({ post }: { post: Post }) {
           </div>
         )}
 
-        <div className="text-muted-foreground/60 mt-3 flex items-center gap-2 font-mono text-3xs tracking-wider uppercase">
+        <div className="text-muted-foreground/60 text-3xs mt-3 flex items-center gap-2 font-mono tracking-wider uppercase">
           <time dateTime={post.date} className="tabular-nums">
             {dateStr}
           </time>
@@ -69,7 +69,7 @@ function TypographyBanner({
     .replace(/(^-|-$)/g, '');
   return (
     <div className="bg-muted/30 flex h-full w-full flex-col justify-between p-6">
-      <span className="text-muted-foreground/60 font-mono text-3xs tracking-wider uppercase">
+      <span className="text-muted-foreground/60 text-3xs font-mono tracking-wider uppercase">
         ❯ {slug}
       </span>
       <div>
@@ -77,7 +77,7 @@ function TypographyBanner({
           {title}
         </div>
         {summary && (
-          <p className="text-muted-foreground mt-1 line-clamp-2 text-xs leading-relaxed">
+          <p className="text-muted-foreground text-copy-14 mt-1 line-clamp-2">
             {summary}
           </p>
         )}

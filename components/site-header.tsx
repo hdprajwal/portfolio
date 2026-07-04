@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { Moon, Sun, Menu, X, Search, Mail, ArrowUpRight } from 'lucide-react';
 import GithubIcon from '@/components/icons/GithubIcon';
 import LinkedinIcon from '@/components/icons/LinkedinIcon';
@@ -25,13 +25,20 @@ function triggerCommandMenu() {
   );
 }
 
+const emptySubscribe = () => () => {};
+
+// True only after hydration, so the theme icon never mismatches the server render.
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
+
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   return (
     <button
@@ -79,10 +86,13 @@ function CommandKButton({ compact = false }: { compact?: boolean }) {
 export default function SiteHeader() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [menuPathname, setMenuPathname] = useState(pathname);
 
-  useEffect(() => {
+  // Close the drawer on navigation, including routes reached via the command menu.
+  if (menuPathname !== pathname) {
+    setMenuPathname(pathname);
     setIsMobileMenuOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;

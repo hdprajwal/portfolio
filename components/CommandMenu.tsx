@@ -27,6 +27,7 @@ import {
   Sun,
   Moon,
 } from 'lucide-react';
+import type { ContentIndexItem } from '@/lib/content-index';
 
 const navigationItems = [
   { icon: Home, label: 'Home', href: '/', keywords: ['home', 'main'] },
@@ -69,7 +70,11 @@ const navigationItems = [
   },
 ];
 
-export default function CommandMenu() {
+export default function CommandMenu({
+  contentItems = [],
+}: {
+  contentItems?: ContentIndexItem[];
+}) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { theme, setTheme } = useTheme();
@@ -124,6 +129,33 @@ export default function CommandMenu() {
               );
             })}
           </CommandGroup>
+
+          {contentItems.length > 0 ? <CommandSeparator /> : null}
+
+          {(
+            [
+              { type: 'project', heading: 'Projects', icon: FolderGit2 },
+              { type: 'blog', heading: 'Blog', icon: Newspaper },
+              { type: 'til', heading: 'TILs', icon: Lightbulb },
+            ] as const
+          ).map(({ type, heading, icon: Icon }) => {
+            const items = contentItems.filter((i) => i.type === type);
+            if (items.length === 0) return null;
+            return (
+              <CommandGroup key={type} heading={heading}>
+                {items.map((item) => (
+                  <CommandItem
+                    key={`${item.type}-${item.href}-${item.title}`}
+                    value={`${item.title} ${item.tags.join(' ')} ${item.summary}`}
+                    onSelect={() => handleSelect(() => router.push(item.href))}
+                  >
+                    <Icon />
+                    <span className="truncate">{item.title}</span>
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            );
+          })}
 
           <CommandSeparator />
 

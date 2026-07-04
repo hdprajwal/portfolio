@@ -15,7 +15,7 @@ export default async function Home() {
       <div className="space-y-14 px-4 pb-20 md:space-y-20">
         <section id="now">
           <SectionHeader label="Now" />
-          <div className="text-muted-foreground text-sm leading-relaxed">
+          <div className="text-muted-foreground text-copy-16">
             <p>
               Open to AI engineer and backend/full-stack roles with end-to-end
               ownership. California, remote, or hybrid.
@@ -64,7 +64,7 @@ export default async function Home() {
           <SectionHeader label="Projects" />
           <FeaturedProjects />
           <Link
-            className="text-muted-foreground hover:text-foreground mt-6 inline-flex items-center gap-2 text-sm transition-colors"
+            className="text-muted-foreground hover:text-foreground text-label-16 mt-6 inline-flex items-center gap-2 transition-colors"
             href="/projects"
           >
             All projects{' '}
@@ -74,42 +74,30 @@ export default async function Home() {
 
         <section id="research">
           <SectionHeader label="Featured work" />
-          <div className="grid gap-6 sm:grid-cols-2 sm:items-start">
-            <div className="">
-              <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
-                <Image
-                  src="https://assets.hdprajwal.dev/images/research-malware-thumbnail.png"
-                  alt="Android malware detection research"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-            <div className="">
-              <h3 className="text-foreground text-base font-semibold tracking-tight md:text-lg">
-                Re-Evaluating Android Malware Detection: Tabular Features,
-                Vision Models, and Ensembles
-              </h3>
-              <p className="text-muted-foreground mt-1 text-xs italic">
-                Hosahalli Dayananda, P.; Chen, Z.
-              </p>
-              <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-                Compares tabular features, visual byte-plot images, and ensemble
-                strategies for Android malware detection. Evaluates where
-                modality choice changes the detection surface and where
-                ensembles actually pay for themselves.
-              </p>
-              <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
-                <Link
-                  href="https://doi.org/10.3390/electronics15030544"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground group inline-flex items-center gap-1 text-sm font-medium"
-                >
-                  Read paper
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-              </div>
+          <div className="">
+            <h3 className="text-foreground text-label-18">
+              Re-Evaluating Android Malware Detection: Tabular Features, Vision
+              Models, and Ensembles
+            </h3>
+            <p className="text-muted-foreground text-copy-14 mt-1 italic">
+              Hosahalli Dayananda, P.; Chen, Z.
+            </p>
+            <p className="text-muted-foreground text-copy-16 mt-3">
+              Compares tabular features, visual byte-plot images, and ensemble
+              strategies for Android malware detection. Evaluates where modality
+              choice changes the detection surface and where ensembles actually
+              pay for themselves.
+            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+              <Link
+                href="https://doi.org/10.3390/electronics15030544"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground text-label-16 group inline-flex items-center gap-1"
+              >
+                Read paper
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
             </div>
           </div>
         </section>
@@ -118,7 +106,7 @@ export default async function Home() {
           <SectionHeader label="Writing" />
           <RecentBlogs />
           <Link
-            className="text-muted-foreground hover:text-foreground mt-6 inline-flex items-center gap-2 text-sm transition-colors"
+            className="text-muted-foreground hover:text-foreground text-label-16 mt-6 inline-flex items-center gap-2 transition-colors"
             href="/blog"
           >
             All posts{' '}
@@ -133,11 +121,11 @@ export default async function Home() {
 
         <section id="contact">
           <SectionHeader label="Get in touch" />
-          <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
+          <p className="text-muted-foreground text-copy-16 max-w-xl">
             Open to AI engineer and backend/full-stack roles, California,
             remote, or hybrid. Email is the fastest way to reach me.
           </p>
-          <ul className="text-muted-foreground mt-5 max-w-xl space-y-2 text-base leading-relaxed">
+          <ul className="text-muted-foreground text-copy-18 mt-5 max-w-xl space-y-2">
             {[
               {
                 label: 'Email',
@@ -159,7 +147,7 @@ export default async function Home() {
               const external = href.startsWith('http');
               return (
                 <li key={label} className="flex items-baseline gap-3">
-                  <span className="text-muted-foreground/50 w-16 shrink-0 font-mono text-2xs">
+                  <span className="text-muted-foreground/50 text-label-13-mono w-16 shrink-0">
                     {label}
                   </span>
                   <Link

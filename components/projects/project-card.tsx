@@ -62,12 +62,12 @@ export default function ProjectCard(p: Project) {
         <div className="min-w-0 flex-1">
           {p.slug ? (
             <Link href={`/projects/${p.slug}`}>
-              <h3 className="text-primary text-sm font-medium tracking-tight group-hover:underline">
+              <h3 className="text-primary text-label-18 group-hover:underline">
                 {p.name}
               </h3>
             </Link>
           ) : (
-            <h3 className="text-primary flex justify-between text-sm font-medium tracking-tight">
+            <h3 className="text-primary text-label-18 flex justify-between">
               {p.name}
 
               {(p.codeHref || p.liveHref) && (
@@ -77,7 +77,7 @@ export default function ProjectCard(p: Project) {
                       href={p.codeHref}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary flex items-center gap-1 font-mono text-xs transition-colors"
+                      className="text-muted-foreground hover:text-primary text-label-14-mono flex items-center gap-1 transition-colors"
                     >
                       <GithubIcon className="h-3 w-3" />
                       Source
@@ -88,7 +88,7 @@ export default function ProjectCard(p: Project) {
                       href={p.liveHref}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary flex items-center gap-0.5 font-mono text-xs transition-colors"
+                      className="text-muted-foreground hover:text-primary text-label-14-mono flex items-center gap-0.5 transition-colors"
                     >
                       Live
                       <ExternalLink className="h-3 w-3" />
@@ -99,7 +99,7 @@ export default function ProjectCard(p: Project) {
             </h3>
           )}
 
-          <p className="text-muted-foreground mt-1 text-xs leading-relaxed">
+          <p className="text-muted-foreground text-copy-14 mt-1">
             {p.tagline || p.description}
           </p>
 
@@ -107,7 +107,7 @@ export default function ProjectCard(p: Project) {
             {p.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-muted-foreground font-mono text-xs"
+                className="text-muted-foreground text-label-14-mono"
               >
                 #{tag}
               </span>

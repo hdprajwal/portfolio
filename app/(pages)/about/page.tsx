@@ -10,17 +10,17 @@ export default function AboutPage() {
     <div className="flex-1">
       <section className="px-4 pt-14 pb-8">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
+          <h1 className="text-foreground text-heading-24 sm:text-heading-32">
             About
           </h1>
-          <span className="text-muted-foreground/60 font-mono text-xs">
+          <span className="text-muted-foreground/60 text-label-14-mono">
             / who, what, why
           </span>
         </div>
       </section>
 
       <div className="space-y-14 px-4 pb-20 md:space-y-20">
-        <p className="text-muted-foreground mt-3 text-base leading-relaxed">
+        <p className="text-muted-foreground text-copy-18 mt-3">
           I build AI agents, developer tools, and applied ML, with a fullstack
           and cloud infra background from three years at Opslyft. Most of the
           work I enjoy lies where product decisions and infrastructure decisions
@@ -30,7 +30,7 @@ export default function AboutPage() {
 
         <section id="how-i-think">
           <SectionHeader label="How I think about building" />
-          <div className="text-muted-foreground space-y-3 text-base leading-relaxed">
+          <div className="text-muted-foreground text-copy-18 space-y-3">
             <p>
               I care about systems that fail loudly, APIs that are hard to
               misuse, and code the next person can read without reverse-
@@ -47,7 +47,7 @@ export default function AboutPage() {
 
         <section id="how-i-work">
           <SectionHeader label="How I work with teams" />
-          <div className="text-muted-foreground space-y-3 text-base leading-relaxed">
+          <div className="text-muted-foreground text-copy-18 space-y-3">
             <p>
               I like ambiguous problems when the constraint is real. At Opslyft
               that meant customer-facing architecture work, cost investigations,
@@ -62,7 +62,7 @@ export default function AboutPage() {
 
         <section id="background">
           <SectionHeader label="Background" />
-          <div className="text-muted-foreground space-y-3 text-base leading-relaxed">
+          <div className="text-muted-foreground text-copy-18 space-y-3">
             <p>
               Before grad school, I spent close to three years at Opslyft
               working on cloud cost infrastructure, multi-cloud visibility, and
@@ -109,7 +109,7 @@ export default function AboutPage() {
 
         <section id="outside">
           <SectionHeader label="Outside the terminal" />
-          <div className="text-muted-foreground space-y-3 text-base leading-relaxed">
+          <div className="text-muted-foreground text-copy-18 space-y-3">
             <p>
               Gym and books. The gym taught me something about consistency that
               I haven&apos;t been able to learn any other way.
@@ -123,14 +123,14 @@ export default function AboutPage() {
 
         <section id="reach-me">
           <SectionHeader label="Reach me" />
-          <p className="text-muted-foreground mb-4 max-w-2xl text-base leading-relaxed">
+          <p className="text-muted-foreground text-copy-18 mb-4 max-w-3xl">
             If you&apos;re hiring for AI engineer, backend, or full-stack roles,
             email is the fastest way to reach me.
           </p>
           <div className="flex flex-wrap items-center gap-2">
             <Link
               href="mailto:hdprajwal01@gmail.com"
-              className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
+              className="border-foreground text-foreground hover:bg-foreground hover:text-background text-label-14 inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
             >
               <Mail className="h-3 w-3" />
               Email
@@ -139,7 +139,7 @@ export default function AboutPage() {
               href="https://www.linkedin.com/in/hdprajwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-14 inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
             >
               <LinkedinIcon className="h-3 w-3" />
               LinkedIn
@@ -149,14 +149,14 @@ export default function AboutPage() {
               href="https://github.com/hdprajwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-14 inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
             >
               <GithubIcon className="h-3 w-3" />
               GitHub
               <ArrowUpRight className="h-3 w-3" />
             </Link>
           </div>
-          <p className="text-muted-foreground mt-4 text-xs">
+          <p className="text-muted-foreground text-copy-14 mt-4">
             Or keep reading:{' '}
             <Link
               href="/projects"

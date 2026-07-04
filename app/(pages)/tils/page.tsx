@@ -7,10 +7,10 @@ export default async function TilsPage() {
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
-        <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h1 className="text-foreground text-heading-24 sm:text-heading-32">
           TILs
         </h1>
-        <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-relaxed">
+        <p className="text-muted-foreground text-copy-16 mt-3 max-w-3xl">
           Today I Learned. Quick notes on tools, bugs, and small discoveries
           picked up while building.
         </p>
@@ -18,7 +18,7 @@ export default async function TilsPage() {
 
       <div className="px-4 pb-16">
         {tils.length === 0 ? (
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-copy-16">
             No TILs yet. Check back soon.
           </p>
         ) : (

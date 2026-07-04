@@ -18,6 +18,7 @@ export default function BashTyping({
       '(prefers-reduced-motion: reduce)'
     ).matches;
     if (prefersReduced) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing with the matchMedia result, which is only readable client-side
       setOut(base);
       onDone();
       return;

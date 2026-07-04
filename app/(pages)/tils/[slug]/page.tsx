@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { CustomMDX } from '@/components/mdx/custom-mdx';
 import TagChips from '@/components/projects/tag-chips';
 import { formatDate, listTILs, getTIL, baseUrl } from '@/lib/tils';
@@ -43,7 +44,7 @@ export async function generateMetadata({
       url: `${baseUrl}/tils/${til.slug}`,
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title,
       description,
     },
@@ -68,64 +69,62 @@ export default async function TilPage({
   const next = index < tils.length - 1 ? tils[index + 1] : null;
 
   return (
-    <div className="bg-background relative container mx-auto min-h-screen max-w-4xl overflow-x-hidden px-4 py-10 md:py-12">
-      <div className="mx-auto mb-6 w-full max-w-4xl">
+    <div className="bg-background relative min-h-screen overflow-x-hidden px-4 py-10 md:py-12">
+      <div className="mx-auto w-full max-w-3xl">
         <Link
           href="/tils"
-          className="text-primary inline-block text-base hover:underline"
+          className="text-muted-foreground hover:text-foreground text-label-16 inline-flex items-center gap-2 transition-colors"
         >
-          ← Back to all TILs
+          <ArrowLeftIcon className="inline-block h-4 w-4" />
+          TILs
         </Link>
+
+        <header className="mt-10 md:mt-12">
+          <p className="text-muted-foreground text-2xs font-mono tracking-wider uppercase">
+            TIL · {formatDate(til.date)}
+          </p>
+          <h1 className="text-heading-24 md:text-heading-32 mt-3 text-balance">
+            {til.title}
+          </h1>
+          {til.tags && til.tags.length > 0 && (
+            <TagChips tags={til.tags} className="mt-4 flex flex-wrap gap-1.5" />
+          )}
+        </header>
+
+        <article className="prose mt-8 w-full min-w-0">
+          <CustomMDX source={til.content} />
+        </article>
+
+        <hr className="border-border my-10" />
+
+        <div className="flex flex-col gap-6 md:flex-row md:items-stretch md:justify-between md:gap-8">
+          {prev && (
+            <Link href={`/tils/${prev.slug}`} className="group flex-1">
+              <div className="text-muted-foreground group-hover:text-foreground text-2xs mb-1 flex items-center gap-2 font-mono tracking-wider uppercase transition-colors">
+                <ArrowLeftIcon className="inline-block h-3.5 w-3.5" />
+                Newer
+              </div>
+              <div className="text-label-16 group-hover:underline">
+                {prev.title}
+              </div>
+            </Link>
+          )}
+          {next && (
+            <Link
+              href={`/tils/${next.slug}`}
+              className="group flex-1 md:text-right"
+            >
+              <div className="text-muted-foreground group-hover:text-foreground text-2xs mb-1 flex items-center gap-2 font-mono tracking-wider uppercase transition-colors md:justify-end">
+                Older
+                <ArrowRightIcon className="inline-block h-3.5 w-3.5" />
+              </div>
+              <div className="text-label-16 group-hover:underline">
+                {next.title}
+              </div>
+            </Link>
+          )}
+        </div>
       </div>
-
-      <header className="mb-8">
-        <h1 className="title mb-4 text-2xl font-semibold tracking-tight text-balance">
-          {til.title}
-        </h1>
-        <div className="text-muted-foreground mb-4 flex flex-wrap items-center gap-3 text-base">
-          <span>{formatDate(til.date)}</span>
-        </div>
-        {til.tags && til.tags.length > 0 && (
-          <TagChips tags={til.tags} className="flex flex-wrap gap-1.5" />
-        )}
-      </header>
-
-      <section className="mx-auto w-full max-w-4xl">
-        <div className="mx-auto w-full max-w-4xl min-w-0">
-          <article className="prose prose-sm dark:prose-invert md:prose-base w-full max-w-none min-w-0 break-words">
-            <CustomMDX source={til.content} />
-          </article>
-
-          <hr className="border-border my-10" />
-
-          <div className="flex flex-col gap-4 md:flex-row md:items-stretch md:justify-between">
-            {prev && (
-              <Link
-                href={`/tils/${prev.slug}`}
-                className="group border-border hover:bg-accent hover:text-accent-foreground flex-1 rounded-md border p-4"
-              >
-                <div className="text-muted-foreground mb-1 text-sm">
-                  Previous
-                </div>
-                <div className="font-medium group-hover:underline">
-                  {prev.title}
-                </div>
-              </Link>
-            )}
-            {next && (
-              <Link
-                href={`/tils/${next.slug}`}
-                className="group border-border hover:bg-accent hover:text-accent-foreground flex-1 rounded-md border p-4 text-right"
-              >
-                <div className="text-muted-foreground mb-1 text-sm">Next</div>
-                <div className="font-medium group-hover:underline">
-                  {next.title}
-                </div>
-              </Link>
-            )}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

@@ -17,8 +17,9 @@ export default function NotFound() {
             404
           </h1>
 
-          <p className="text-base text-muted-foreground leading-relaxed">
-            The page you're looking for doesn't exist or has been moved.
+          <p className="text-copy-18 text-muted-foreground">
+            The page you&apos;re looking for doesn&apos;t exist or has been
+            moved.
             Here are some helpful links to get you back on track.
           </p>
 
@@ -27,7 +28,7 @@ export default function NotFound() {
               <Link
                 key={href}
                 href={href}
-                className="inline-flex items-center gap-2 text-base hover:text-muted-foreground transition-colors"
+                className="text-label-18 inline-flex items-center gap-2 hover:text-muted-foreground transition-colors"
               >
                 <ArrowRight className="h-4 w-4" />
                 {label}
@@ -35,7 +36,7 @@ export default function NotFound() {
             ))}
           </nav>
 
-          <p className="text-sm text-muted-foreground">
+          <p className="text-copy-16 text-muted-foreground">
             If you believe this is a broken link,{' '}
             <a
               href="mailto:hdprajwal01@gmail.com?subject=404%20on%20site"

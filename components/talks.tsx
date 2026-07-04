@@ -30,14 +30,12 @@ export default function Talks() {
       {talks.map((talk) => (
         <div key={talk.title} className="py-4 first:pt-0">
           <div className="flex items-baseline justify-between gap-4">
-            <h3 className="text-foreground text-base font-medium tracking-tight">
-              {talk.title}
-            </h3>
-            <span className="text-muted-foreground/60 text-2xs shrink-0 font-mono">
+            <h3 className="text-foreground text-label-18">{talk.title}</h3>
+            <span className="text-muted-foreground/60 text-label-13-mono shrink-0">
               {talk.event}
             </span>
           </div>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          <p className="text-muted-foreground text-copy-16">
             {talk.description}
           </p>
           {talk.href && (
@@ -45,7 +43,7 @@ export default function Talks() {
               href={talk.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground group inline-flex items-center gap-1 text-sm transition-colors"
+              className="text-muted-foreground hover:text-foreground text-label-16 group inline-flex items-center gap-1 transition-colors"
             >
               View talk
               <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
