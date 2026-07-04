@@ -3,172 +3,23 @@ import type { Metadata } from 'next';
 import { Mail, ArrowUpRight, FileDown } from 'lucide-react';
 import GithubIcon from '@/components/icons/GithubIcon';
 import LinkedinIcon from '@/components/icons/LinkedinIcon';
+import { resume, type ResumeRole } from '@/lib/resume';
 
-// TODO: update this URL once the PDF is uploaded to the CDN
-const RESUME_PDF_URL = 'https://assets.hdprajwal.dev/resume.pdf';
+const RESUME_PDF_URL = resume.pdfUrl;
 
-type Role = {
-  title: string;
-  type: 'Full-time' | 'Part-time' | 'Internship' | 'Open Source';
-  from: string;
-  to: string;
-  bullets: string[];
-};
-
-type Company = {
-  name: string;
-  location: string;
-  roles: Role[];
-};
-
-type Education = {
-  school: string;
-  degree: string;
-  major: string;
-  from: string;
-  to: string;
-  notes?: React.ReactNode;
-};
-
-const experience: Company[] = [
-  {
-    name: 'Translation Commons',
-    location: 'Remote',
-    roles: [
-      {
-        title: 'Software Engineer, Open Source',
-        type: 'Open Source',
-        from: 'Feb 2026',
-        to: 'Present',
-        bullets: [
-          "Built lang-nav-mcp, a TypeScript MCP (Model Context Protocol) server deployed on a Cloudflare Worker that exposes the language graph as MCP tools; as one use case, a PM can query a region's language distribution to plan market expansion and localization.",
-          'Set up per-PR Cloudflare preview deployments (a live URL for every PR), cutting review turnaround and letting non-technical Product and Design teammates review changes directly; paired with AI-generated variants, the team now previews multiple versions of a feature live before choosing one.',
-          'Instrumented the platform with Amplitude product analytics, giving maintainers their first visibility into feature and export usage and shifting roadmap decisions from guesswork to data on what users actually use.',
-        ],
-
-      },
-    ],
-  },
-  {
-    name: 'Opslyft',
-    location: 'Bangalore, India',
-    roles: [
-      {
-        title: 'Cloud Engineer',
-        type: 'Full-time',
-        from: 'Mar 2022',
-        to: 'Nov 2023',
-        bullets: [
-          'Drove ~$100K/month in recurring cost savings across enterprise AWS customers by identifying idle infrastructure, reserved-instance gaps, and data-transfer inefficiencies.',
-          'Built a multi-cloud asset management service that unified resource discovery across customer AWS, GCP, and Azure accounts for cost attribution and governance.',
-          'Partnered with customer engineering teams to redesign cloud architectures for cost and security, shortening their deployment cycles.',
-        ],
-      },
-      {
-        title: 'Software Development Engineer',
-        type: 'Full-time',
-        from: 'Apr 2021',
-        to: 'Mar 2022',
-        bullets: [
-          'Reduced SaaS platform page load times by 2x through UI component refactoring and render-path optimization.',
-          'Redesigned backend logic for the instance scheduler to cover edge cases, reaching 99% service uptime in customer environments.',
-          'Architected multi-cloud Data Transfer Visibility, solving a major pain point for teams trying to attribute cross-region and cross-AZ data transfer costs.',
-        ],
-      },
-    ],
-  },
-  {
-    name: 'Purdue University',
-    location: 'Fort Wayne, IN',
-    roles: [
-      {
-        title: 'Teaching Assistant, Machine Learning',
-        type: 'Part-time',
-        from: 'Jan 2025',
-        to: 'Dec 2025',
-        bullets: [
-          'Supported an undergraduate Machine Learning course through grading and feedback for ~40 students per semester.',
-          'Automated grading workflows in Python, improving consistency and reducing turnaround time on student evaluations.',
-        ],
-      },
-      {
-        title: 'Research Assistant',
-        type: 'Full-time',
-        from: 'Oct 2024',
-        to: 'Dec 2024',
-        bullets: [
-          'Designed and shipped an MVP mobile application and backend in React Native and TypeScript for a faculty research project.',
-        ],
-      },
-    ],
-  },
-  {
-    name: 'Gradspace',
-    location: 'Bangalore, India',
-    roles: [
-      {
-        title: 'Full-stack Developer Intern',
-        type: 'Internship',
-        from: 'Sep 2020',
-        to: 'Feb 2021',
-        bullets: [
-          'Rearchitected backend services on AWS, improving API response times and reducing deploy time.',
-          'Implemented mobile push notifications to improve user engagement on the platform.',
-          'Refactored the mobile codebase with the mobile team, cutting app load time by 60%.',
-        ],
-      },
-    ],
-  },
-];
-
-const education: Education[] = [
-  {
-    school: 'Purdue University, Fort Wayne, IN',
-    degree: 'Master of Science',
-    major: 'Computer Science',
-    from: 'Jan 2024',
-    to: 'Dec 2025',
-    notes: (
-      <>
-        Thesis:{' '}
-        <Link
-          href="https://doi.org/10.3390/electronics15030544"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-foreground underline underline-offset-2 transition-colors"
-        >
-          Re-Evaluating Android Malware Detection: Tabular Features, Vision
-          Models, and Ensembles
-        </Link>
-        . Coursework: Deep Learning, Cryptography and Network Security, NLP,
-        Algorithm Design, Database Systems.
-      </>
-    ),
-  },
-  {
-    school: 'Govt. S.K.S.J Technological Institute, Bangalore, India',
-    degree: 'Bachelor of Engineering',
-    major: 'Computer Science and Engineering',
-    from: 'Aug 2017',
-    to: 'Jul 2021',
-  },
-];
-
-function RoleBlock({ role }: { role: Role }) {
+function RoleBlock({ role }: { role: ResumeRole }) {
   return (
     <div className="border-border border-l pl-4">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h4 className="text-foreground text-sm font-medium tracking-tight">
-          {role.title}
-        </h4>
-        <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
+        <h4 className="text-foreground text-heading-14">{role.title}</h4>
+        <span className="text-muted-foreground/70 text-label-13-mono tabular-nums">
           {role.from} to {role.to}
         </span>
       </div>
-      <p className="text-muted-foreground/70 font-mono text-3xs tracking-wider uppercase">
+      <p className="text-muted-foreground/70 text-3xs font-mono tracking-wider uppercase">
         {role.type}
       </p>
-      <ul className="text-muted-foreground mt-2 list-disc space-y-2 pl-4 text-sm leading-relaxed">
+      <ul className="text-muted-foreground text-copy-16 mt-2 list-disc space-y-2 pl-4">
         {role.bullets.map((b, i) => (
           <li key={i}>{b}</li>
         ))}
@@ -184,34 +35,33 @@ export default function ResumePage() {
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h1 className="text-foreground text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h1 className="text-foreground text-heading-24 sm:text-heading-32">
                 Prajwal HD
               </h1>
-              <span className="text-muted-foreground/60 font-mono text-xs">
+              <span className="text-muted-foreground/60 text-label-14-mono">
                 / Resume
               </span>
             </div>
-            <p className="text-muted-foreground mt-2 font-mono text-xs">
+            <p className="text-muted-foreground text-label-14-mono mt-2">
               Software Engineer
               <span className="text-muted-foreground/40"> · </span>
               California, USA
               <span className="text-muted-foreground/40"> · </span>
               AI Engineer / Backend / Full-Stack
+              <span className="text-muted-foreground/40"> · </span>
+              Updated {resume.updated}
             </p>
           </div>
         </div>
 
-        <p className="text-muted-foreground mt-4 max-w-3xl text-sm leading-relaxed">
-          AI engineer with a backend and full-stack foundation. Three years
-          shipping production cloud cost infrastructure at Opslyft (including
-          ~$100K/month in recurring savings for enterprise AWS customers), plus
-          peer-reviewed research on Android malware detection at Purdue.
+        <p className="text-muted-foreground text-copy-16 mt-4 max-w-3xl">
+          {resume.summary}
         </p>
 
         <div className="mt-5 flex flex-wrap items-center gap-2 print:hidden">
           <Link
             href="mailto:hdprajwal01@gmail.com"
-            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
+            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-14 inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
           >
             <Mail className="h-3 w-3" />
             Email
@@ -220,7 +70,7 @@ export default function ResumePage() {
             href="https://www.linkedin.com/in/hdprajwal"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
+            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-14 inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
           >
             <LinkedinIcon className="h-3 w-3" />
             LinkedIn
@@ -230,7 +80,7 @@ export default function ResumePage() {
             href="https://github.com/hdprajwal"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
+            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-14 inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
           >
             <GithubIcon className="h-3 w-3" />
             GitHub
@@ -240,7 +90,7 @@ export default function ResumePage() {
             href={RESUME_PDF_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="border-foreground text-foreground hover:bg-foreground hover:text-background inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors"
+            className="border-foreground text-foreground hover:bg-foreground hover:text-background text-label-14 inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
           >
             <FileDown className="h-3 w-3" />
             Download PDF
@@ -248,7 +98,7 @@ export default function ResumePage() {
           </Link>
         </div>
 
-        <p className="text-muted-foreground/80 mt-4 text-xs">
+        <p className="text-muted-foreground/80 text-copy-14 mt-4">
           Selected projects and writing:{' '}
           <Link
             href="/projects"
@@ -272,13 +122,11 @@ export default function ResumePage() {
             Experience
           </h2>
           <div className="space-y-10">
-            {experience.map((c) => (
+            {resume.experience.map((c) => (
               <div key={c.name}>
                 <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="text-foreground text-base font-semibold tracking-tight">
-                    {c.name}
-                  </h3>
-                  <span className="text-muted-foreground/70 font-mono text-3xs tracking-wider uppercase">
+                  <h3 className="text-foreground text-heading-16">{c.name}</h3>
+                  <span className="text-muted-foreground/70 text-3xs font-mono tracking-wider uppercase">
                     {c.location}
                   </span>
                 </div>
@@ -296,39 +144,39 @@ export default function ResumePage() {
           <h2 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
             Publications
           </h2>
-          <div>
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-              <h3 className="text-foreground text-sm font-medium tracking-tight">
-                Re-Evaluating Android Malware Detection: Tabular Features,
-                Vision Models, and Ensembles
-              </h3>
-              <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
-                2026
-              </span>
-            </div>
-            <p className="text-muted-foreground/70 mt-1 font-mono text-3xs tracking-wider uppercase">
-              Peer-reviewed
-              <span className="text-muted-foreground/40"> · </span>
-              MDPI Electronics
-            </p>
-            <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-              Compares tabular static features, vision-based byte-plot models,
-              and ensemble strategies for Android malware classification across
-              1M+ samples. Evaluates where modality choice changes the detection
-              surface and where ensembles actually pay for themselves.
-            </p>
-            <p className="text-muted-foreground/60 mt-2 font-mono text-2xs">
-              Hosahalli Dayananda, P.; Chen, Z. Electronics 2026, 15, 544.
-            </p>
-            <Link
-              href="https://doi.org/10.3390/electronics15030544"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground group mt-2 inline-flex items-center gap-1 text-sm font-medium"
-            >
-              Read paper
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+          <div className="space-y-6">
+            {resume.publications.map((pub) => (
+              <div key={pub.title}>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="text-foreground text-heading-14">
+                    {pub.title}
+                  </h3>
+                  <span className="text-muted-foreground/70 text-label-13-mono tabular-nums">
+                    {pub.year}
+                  </span>
+                </div>
+                <p className="text-muted-foreground/70 text-3xs mt-1 font-mono tracking-wider uppercase">
+                  Peer-reviewed
+                  <span className="text-muted-foreground/40"> · </span>
+                  {pub.venue}
+                </p>
+                <p className="text-muted-foreground text-copy-16 mt-2">
+                  {pub.summary}
+                </p>
+                <p className="text-muted-foreground/60 text-copy-13-mono mt-2">
+                  {pub.citation}
+                </p>
+                <Link
+                  href={pub.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground text-label-16 group mt-2 inline-flex items-center gap-1"
+                >
+                  Read paper
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -337,47 +185,32 @@ export default function ResumePage() {
             Speaking
           </h2>
           <div className="space-y-6">
-            <div className="border-border border-l pl-4">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-foreground text-sm font-medium tracking-tight">
-                  Data Transfer Cost Optimization
-                </h3>
-                <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
-                  Rootconf 2022
-                </span>
+            {resume.talks.map((talk) => (
+              <div key={talk.title} className="border-border border-l pl-4">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="text-foreground text-heading-14">
+                    {talk.title}
+                  </h3>
+                  <span className="text-muted-foreground/70 text-label-13-mono tabular-nums">
+                    {talk.venue}
+                  </span>
+                </div>
+                <p className="text-muted-foreground text-copy-16 mt-1">
+                  {talk.summary}
+                </p>
+                {talk.href && (
+                  <Link
+                    href={talk.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground text-label-14 group mt-1.5 inline-flex items-center gap-1 transition-colors"
+                  >
+                    View talk
+                    <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                )}
               </div>
-              <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
-                Co-presented an approach to granular visibility into cloud data
-                transfer costs using AWS Cost and Usage Reports and VPC flow
-                logs.
-              </p>
-              <Link
-                href="https://hasgeek.com/rootconf/optimizing-costs-of-cloud-infrastructure/sub/data-transfer-cost-optimization-KGSAciSRiEjTo1bjGNWChG"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground group mt-1.5 inline-flex items-center gap-1 text-xs transition-colors"
-              >
-                View talk
-                <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-            </div>
-            <div className="border-border border-l pl-4">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-foreground text-sm font-medium tracking-tight">
-                  Simplifying the Complexities of Kubernetes Cost Visibility
-                </h3>
-                <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
-                  Opslyft Webinar, Jun 2022
-                </span>
-              </div>
-              <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
-                Spoke alongside Aayush Kumar (Founder and CEO, Opslyft) on
-                bridging Kubernetes orchestration and underlying cloud
-                infrastructure costs: capacity misconfigurations, siloed
-                visibility, and building a transparency layer for effective cost
-                management.
-              </p>
-            </div>
+            ))}
           </div>
         </section>
 
@@ -386,22 +219,36 @@ export default function ResumePage() {
             Education
           </h2>
           <div className="space-y-6">
-            {education.map((e) => (
+            {resume.education.map((e) => (
               <div key={e.school}>
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="text-foreground text-sm font-medium tracking-tight">
+                  <h3 className="text-foreground text-heading-14">
                     {e.school}
                   </h3>
-                  <span className="text-muted-foreground/70 font-mono text-2xs tabular-nums">
+                  <span className="text-muted-foreground/70 text-label-13-mono tabular-nums">
                     {e.from} to {e.to}
                   </span>
                 </div>
-                <p className="text-muted-foreground mt-0.5 text-sm">
+                <p className="text-muted-foreground text-copy-16 mt-0.5">
                   {e.degree}, {e.major}
                 </p>
-                {e.notes && (
-                  <div className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
-                    {e.notes}
+                {(e.thesis || e.coursework) && (
+                  <div className="text-muted-foreground text-copy-16 mt-1.5">
+                    {e.thesis && (
+                      <>
+                        Thesis:{' '}
+                        <Link
+                          href={e.thesis.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-foreground underline underline-offset-2 transition-colors"
+                        >
+                          {e.thesis.title}
+                        </Link>
+                        .{' '}
+                      </>
+                    )}
+                    {e.coursework && <>Coursework: {e.coursework}.</>}
                   </div>
                 )}
               </div>
