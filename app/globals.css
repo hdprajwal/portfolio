@@ -409,6 +409,22 @@
     color: var(--shiki-light, var(--foreground)) !important;
   }
 
+  /* Opt-in line numbers via CSS counters over shiki's span.line rows.
+     ::before content stays out of selection, so copy keeps only the code. */
+  .code-line-numbers pre code {
+    counter-reset: line;
+  }
+
+  .code-line-numbers pre code .line::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 2.5ch;
+    margin-right: 1.5rem;
+    text-align: right;
+    color: var(--muted-foreground);
+    opacity: 0.5;
+  }
 }
 
 /* Typeset preset for markdown surfaces — rides the site's own fonts:
