@@ -105,7 +105,7 @@ export default async function Blog({
             {formatDate(post.date)} · {readingMins} min read
           </p>
           <ViewTransition name={`post-title-${slug}`}>
-            <h1 className="text-heading-24 md:text-heading-40 mt-3 text-balance">
+            <h1 className="text-heading-24 md:text-heading-40 font-[450]! mt-3 text-balance">
               {post.title}
             </h1>
           </ViewTransition>
@@ -164,7 +164,7 @@ export default async function Blog({
               }}
             />
 
-            <article className="prose min-w-0">
+            <article className="typeset typeset-notes min-w-0">
               <CustomMDX source={post.content} />
             </article>
 

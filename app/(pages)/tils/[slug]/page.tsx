@@ -94,7 +94,7 @@ export default async function TilPage({
           )}
         </header>
 
-        <article className="prose mt-8 w-full min-w-0">
+        <article className="typeset typeset-notes mt-8 w-full min-w-0">
           <CustomMDX source={til.content} />
         </article>
 

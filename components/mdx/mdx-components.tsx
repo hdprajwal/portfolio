@@ -12,7 +12,7 @@ import Pre from '@/components/mdx/pre-block';
 import Mermaid from '@/components/mdx/mermaid';
 import { slugify } from '@/lib/slugify';
 
-// Base typography lives in globals.css; components here only add behavior CSS can't.
+// Typography is owned by typeset (app/typeset.css); components here only add behavior CSS can't.
 
 function textOf(node: ReactNode): string {
   if (typeof node === 'string' || typeof node === 'number') return String(node);
@@ -55,7 +55,6 @@ export const MDXComponents = {
         quality={props.quality || 95}
         sizes={props.sizes || '(max-width: 768px) 100vw, 672px'}
         unoptimized={isRemote}
-        className={`border-border rounded-lg border ${props.className || ''}`}
         style={{ width: '100%', height: 'auto' }}
       />
     );
@@ -83,17 +82,6 @@ export const MDXComponents = {
         {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       />
     );
-  },
-  code: (props: any) => {
-    if (!props.className?.includes('language-')) {
-      return (
-        <code
-          className="bg-muted rounded-sm px-[0.3em] py-[0.15em] font-mono text-[0.85em]"
-          {...props}
-        />
-      );
-    }
-    return <code {...props} />;
   },
   pre: (props: any) => <Pre {...props}>{props.children}</Pre>,
   Mermaid,

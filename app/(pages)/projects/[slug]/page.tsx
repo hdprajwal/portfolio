@@ -78,7 +78,7 @@ export default async function ProjectPage({
         <header className="mt-10 md:mt-12">
           <div className="flex items-baseline justify-between gap-4">
             <ViewTransition name={`project-title-${slug}`}>
-              <h1 className="text-heading-24 md:text-heading-32 text-balance">
+              <h1 className="text-heading-24 md:text-heading-32 font-[450]! text-balance">
                 {project.name}
               </h1>
             </ViewTransition>
@@ -131,7 +131,7 @@ export default async function ProjectPage({
 
       {project.content && (
         <div className="mx-auto mt-10 w-full max-w-3xl min-w-0 md:mt-12">
-          <article className="prose min-w-0">
+          <article className="typeset typeset-notes min-w-0">
             <CustomMDX source={project.content} />
           </article>
         </div>
