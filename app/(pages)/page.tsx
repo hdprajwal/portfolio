@@ -7,8 +7,11 @@ import SectionHeader from '@/components/section-header';
 import RecentBlogs from '@/components/blogs/recent-blogs';
 import FeaturedProjects from '@/components/projects/featured-projects';
 import Talks from '@/components/talks';
+import { listRegistryComponents } from '@/lib/registry';
 
 export default async function Home() {
+  const registryComponents = await listRegistryComponents();
+
   return (
     <>
       <Hero />
@@ -110,6 +113,32 @@ export default async function Home() {
             href="/blog"
           >
             All posts{' '}
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
+        </section>
+
+        <section id="components">
+          <SectionHeader label="Components" />
+          <div className="space-y-5">
+            {registryComponents.map((component) => (
+              <div key={component.slug}>
+                <Link
+                  href={`/components/${component.slug}`}
+                  className="text-foreground text-label-18 hover:underline"
+                >
+                  {component.name}
+                </Link>
+                <p className="text-muted-foreground text-copy-16 mt-1">
+                  {component.tagline}
+                </p>
+              </div>
+            ))}
+          </div>
+          <Link
+            className="text-muted-foreground hover:text-foreground text-label-16 mt-6 inline-flex items-center gap-2 transition-colors"
+            href="/components"
+          >
+            All components{' '}
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </section>

@@ -19,6 +19,7 @@ import {
   User,
   Newspaper,
   FolderGit2,
+  Blocks,
   Lightbulb,
   FileText,
   Mountain,
@@ -43,6 +44,12 @@ const navigationItems = [
     label: 'Projects',
     href: '/projects',
     keywords: ['projects', 'work', 'portfolio'],
+  },
+  {
+    icon: Blocks,
+    label: 'Components',
+    href: '/components',
+    keywords: ['components', 'ui', 'registry', 'shadcn'],
   },
   {
     icon: Lightbulb,

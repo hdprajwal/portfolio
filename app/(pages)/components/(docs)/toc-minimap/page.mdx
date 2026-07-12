@@ -1,0 +1,76 @@
+import ComponentDocHeader from '@/components/registry/component-doc-header';
+import { ComponentSource } from '@/components/registry/component-source';
+import InstallCommand from '@/components/registry/install-command';
+import TocMinimapDemo from './demo';
+import { tocMinimapMeta } from './meta';
+
+export const metadata = {
+  title: `${tocMinimapMeta.name} | Components`,
+  description: tocMinimapMeta.description,
+  alternates: { canonical: `/components/${tocMinimapMeta.slug}` },
+  openGraph: {
+    title: tocMinimapMeta.name,
+    description: tocMinimapMeta.description,
+    type: 'website',
+  },
+};
+
+<ComponentDocHeader meta={tocMinimapMeta} />
+
+<div className="mt-8">
+  <TocMinimapDemo
+    code={
+      <ComponentSource file="app/(pages)/components/(docs)/toc-minimap/preview.tsx" />
+    }
+  />
+</div>
+
+
+<article className="typeset typeset-notes mt-10 min-w-0 md:mt-12">
+
+## Installation
+
+<InstallCommand args="shadcn@latest add https://hdprajwal.dev/r/toc-minimap.json" />
+
+## Usage
+
+Headings need ids, e.g. via `rehype-slug`. The bundled hook reads the rendered headings after mount:
+
+```tsx
+import { TocMinimap, useTocItems } from '@/components/ui/toc-minimap';
+
+export function ArticleMinimap() {
+  const items = useTocItems('article');
+  return <TocMinimap items={items} />;
+}
+```
+
+Or pass your own items if you build a table of contents at build time:
+
+```tsx
+<TocMinimap
+  items={[
+    { id: 'install', text: 'Install' },
+    { id: 'usage', text: 'Usage', preview: 'Headings need ids...' },
+  ]}
+/>
+```
+
+## API reference
+
+| Prop                | Type               | Default             |
+| ------------------- | ------------------ | ------------------- |
+| `items`             | `TocMinimapItem[]` | required            |
+| `scrollOffset`      | `number`           | `80`                |
+| `containerSelector` | `string`           | window              |
+| `onSelect`          | `(item) => void`   | scroll and set hash |
+| `className`         | `string`           |                     |
+| `mobileClassName`   | `string`           |                     |
+| `tooltipClassName`  | `string`           |                     |
+| `panelClassName`    | `string`           |                     |
+
+`TocMinimapItem` is `{ id, text, level?, preview? }`. A `level` deeper than 2 indents the entry in the mobile list, and `preview` shows under the title in the tooltip.
+
+Pass `containerSelector` to run the scroll spy and jumps against a scrollable element in place of the window, like the demo above. Jumps then scroll only the container and skip the URL hash.
+
+</article>
