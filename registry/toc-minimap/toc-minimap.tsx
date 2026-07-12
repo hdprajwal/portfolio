@@ -11,7 +11,31 @@ import {
   type SetStateAction,
 } from 'react';
 import { cn } from '@/lib/utils';
-import type { TocItem } from '@/lib/toc';
+
+export interface TocMinimapItem {
+  id: string;
+  text: string;
+  // Heading depth; items deeper than level 2 are indented in the mobile list panel.
+  level?: number;
+  // Optional snippet shown under the section title in the tooltip.
+  preview?: string | null;
+}
+
+export interface TocMinimapProps {
+  items: TocMinimapItem[];
+  // Viewport-top inset in px treated as covered (e.g. a sticky header) by the scroll spy.
+  scrollOffset?: number;
+  // Runs the scroll spy and jumps against this scrollable element in place of the window.
+  containerSelector?: string;
+  // Replaces the default scroll-into-view and hash update when a section is chosen.
+  onSelect?: (item: TocMinimapItem) => void;
+  // Desktop rail wrapper.
+  className?: string;
+  // Mobile rail wrapper.
+  mobileClassName?: string;
+  tooltipClassName?: string;
+  panelClassName?: string;
+}
 
 const TOC_MINIMAP_ITEM_SPACING = 8;
 const TOC_MINIMAP_MAX_HEIGHT_CSS = 'calc(100vh - 18rem)';
@@ -21,7 +45,7 @@ const TOC_MINIMAP_MOBILE_MAX_WIDTH_CSS = 'calc(100vw - 7rem)';
 const TOC_MINIMAP_TAP_THRESHOLD_PX = 8;
 
 // Shared by the vertical (desktop) and horizontal (mobile) rails: natural size grows with item count, capped by the viewport-relative CSS max.
-function resolveTocMinimapNaturalSizeStyle(
+export function resolveTocMinimapNaturalSizeStyle(
   itemCount: number,
   spacing: number,
   maxSizeCss: string
@@ -46,13 +70,16 @@ function resolveTocMinimapMobileWidthStyle(itemCount: number): string {
   );
 }
 
-function resolveTocMinimapTopPercent(index: number, itemCount: number): number {
+export function resolveTocMinimapTopPercent(
+  index: number,
+  itemCount: number
+): number {
   if (itemCount <= 1) return 0;
   return (Math.max(0, Math.min(index, itemCount - 1)) / (itemCount - 1)) * 100;
 }
 
 // Shared by the vertical (desktop) and horizontal (mobile) rails: maps a pointer position along the rail's axis to the nearest item index.
-function resolveTocMinimapIndexFromPointerPos(input: {
+export function resolveTocMinimapIndexFromPointerPos(input: {
   itemCount: number;
   railStart: number;
   railSize: number;
@@ -83,15 +110,31 @@ function moveTocMinimapActiveIndex(
   });
 }
 
-// getElementById resolves the first element with a given id, so duplicate heading ids scroll to (and are tracked as "current" by) the first occurrence, matching native DOM/anchor behavior.
-function selectSection(id: string): void {
-  document
-    .getElementById(id)
-    ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  history.replaceState(null, '', `#${id}`);
+// True on devices with a real hover pointer. Gates the horizontal rail between hover scrubbing (mouse) and drag scrubbing with a tap popup (touch).
+function useFinePointer(): boolean {
+  const [finePointer, setFinePointer] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const update = () => setFinePointer(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  return finePointer;
 }
 
-export default function TocMinimap({ items }: { items: TocItem[] }) {
+export function TocMinimap({
+  items,
+  scrollOffset = 80,
+  containerSelector,
+  onSelect,
+  className,
+  mobileClassName,
+  tooltipClassName,
+  panelClassName,
+}: TocMinimapProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   // Separate active index for the mobile scrub rail so desktop hover and mobile touch cannot interfere.
   const [mobileActiveIndex, setMobileActiveIndex] = useState<number | null>(
@@ -106,18 +149,54 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
   const capturedPointerId = useRef<number | null>(null);
   // Pointerdown position on the mobile rail, used to tell a tap from a scrub at pointerup.
   const mobilePointerDownPos = useRef<{ x: number; y: number } | null>(null);
+  const finePointer = useFinePointer();
 
-  // A section spans from its heading to the next one; every span overlapping the viewport is highlighted.
+  const selectItem = useCallback(
+    (item: TocMinimapItem) => {
+      if (onSelect) {
+        onSelect(item);
+        return;
+      }
+      // getElementById resolves the first element with a given id, so duplicate heading ids scroll to the first occurrence, matching native anchor behavior.
+      const el = document.getElementById(item.id);
+      if (!el) return;
+      const behavior: ScrollBehavior = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches
+        ? 'auto'
+        : 'smooth';
+      const container = containerSelector
+        ? document.querySelector(containerSelector)
+        : null;
+      if (container) {
+        // Scrolls only the container and skips the hash update, since the target is embedded content.
+        const delta =
+          el.getBoundingClientRect().top -
+          container.getBoundingClientRect().top;
+        container.scrollTo({ top: container.scrollTop + delta, behavior });
+        return;
+      }
+      el.scrollIntoView({ behavior, block: 'start' });
+      history.replaceState(null, '', `#${item.id}`);
+    },
+    [onSelect, containerSelector]
+  );
+
+  // A section spans from its heading to the next one; every span overlapping the view is highlighted.
   useEffect(() => {
     if (items.length < 2) return;
 
+    const container = containerSelector
+      ? document.querySelector(containerSelector)
+      : null;
     const headings = items.map((item) => document.getElementById(item.id));
     let frame = 0;
 
     const update = () => {
       frame = 0;
-      const viewTop = 80;
-      const viewBottom = window.innerHeight;
+      const containerRect = container?.getBoundingClientRect();
+      const viewTop = (containerRect?.top ?? 0) + scrollOffset;
+      const viewBottom = containerRect?.bottom ?? window.innerHeight;
       const tops = headings.map((el) =>
         el ? el.getBoundingClientRect().top : null
       );
@@ -148,14 +227,15 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
     };
 
     update();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    const scrollTarget = container ?? window;
+    scrollTarget.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     return () => {
       if (frame) cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', onScroll);
+      scrollTarget.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [items]);
+  }, [items, scrollOffset, containerSelector]);
 
   // Escape closes the panel regardless of which element inside it has focus.
   useEffect(() => {
@@ -174,6 +254,8 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
     activeIndex !== null && activeIndex < items.length ? activeIndex : null;
   const activeItem =
     resolvedActiveIndex === null ? null : (items[resolvedActiveIndex] ?? null);
+  // Announced by the desktop rail's slider semantics; falls back to the section currently in view.
+  const announcedIndex = resolvedActiveIndex ?? Math.max(currentIndex, 0);
   const activeTopPercent =
     resolvedActiveIndex === null
       ? 0
@@ -202,7 +284,12 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
 
   const moveActiveIndex = useCallback(
     (delta: number) =>
-      moveTocMinimapActiveIndex(setActiveIndex, items.length, currentIndex, delta),
+      moveTocMinimapActiveIndex(
+        setActiveIndex,
+        items.length,
+        currentIndex,
+        delta
+      ),
     [items.length, currentIndex]
   );
 
@@ -227,8 +314,9 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
           ? '-100%'
           : '-50%';
 
+  // Pointer events extend mouse events, so this serves both the touch scrub handlers and the fine-pointer hover handlers.
   const resolveMobileActiveIndexFromPointer = useCallback(
-    (event: ReactPointerEvent<HTMLButtonElement>) => {
+    (event: ReactMouseEvent<HTMLButtonElement>) => {
       const rect = event.currentTarget.getBoundingClientRect();
       return resolveTocMinimapIndexFromPointerPos({
         itemCount: items.length,
@@ -293,10 +381,10 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
         resolvedMobileActiveIndex === null
           ? null
           : (items[resolvedMobileActiveIndex] ?? null);
-      if (nextItem) selectSection(nextItem.id);
+      if (nextItem) selectItem(nextItem);
       setMobileActiveIndex(null);
     },
-    [resolvedMobileActiveIndex, items]
+    [resolvedMobileActiveIndex, items, selectItem]
   );
 
   const onMobileRailPointerCancel = useCallback(() => {
@@ -305,24 +393,44 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
     setMobileActiveIndex(null);
   }, []);
 
+  // Fine-pointer click on the horizontal rail jumps like the vertical rail; the popup list stays a touch and keyboard affordance.
+  const onMobileRailClick = useCallback(
+    (event: ReactMouseEvent<HTMLButtonElement>) => {
+      const nextIndex = resolveMobileActiveIndexFromPointer(event);
+      const nextItem = nextIndex === null ? null : (items[nextIndex] ?? null);
+      if (nextItem) selectItem(nextItem);
+      setMobileExpanded(false);
+      event.currentTarget.blur();
+    },
+    [resolveMobileActiveIndexFromPointer, items, selectItem]
+  );
+
   if (items.length < 2) return null;
 
   return (
     <>
       <div
-        className="fixed top-1/2 left-0 z-40 hidden w-18 -translate-y-1/2 [@media(pointer:fine)]:lg:block"
+        className={cn(
+          'fixed top-1/2 left-0 z-40 hidden w-18 -translate-y-1/2 [@media(pointer:fine)]:lg:block',
+          className
+        )}
         data-toc-minimap
       >
         <div className="relative h-full w-full select-none">
           <button
-            aria-label={`Jump to section: ${activeItem?.text ?? 'section'}`}
+            aria-label="Table of contents"
+            aria-orientation="vertical"
+            aria-valuemax={items.length - 1}
+            aria-valuemin={0}
+            aria-valuenow={announcedIndex}
+            aria-valuetext={items[announcedIndex]?.text}
             className="focus-visible:ring-ring/70 pointer-events-auto absolute top-1/2 left-3 w-10 -translate-y-1/2 cursor-pointer bg-transparent focus-visible:ring-2 focus-visible:outline-none"
             onBlur={() => setActiveIndex(null)}
             onClick={(event) => {
               const nextIndex = resolveActiveIndexFromPointer(event);
               const nextItem =
                 nextIndex === null ? null : (items[nextIndex] ?? null);
-              if (nextItem) selectSection(nextItem.id);
+              if (nextItem) selectItem(nextItem);
               event.currentTarget.blur();
             }}
             onFocus={() =>
@@ -343,7 +451,7 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
                 setActiveIndex(items.length - 1);
               } else if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
-                if (activeItem) selectSection(activeItem.id);
+                if (activeItem) selectItem(activeItem);
               }
             }}
             onMouseDown={(event) => event.preventDefault()}
@@ -351,6 +459,7 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
             onMouseMove={(event) =>
               setActiveIndex(resolveActiveIndexFromPointer(event))
             }
+            role="slider"
             style={{ height: resolveTocMinimapHeightStyle(items.length) }}
             type="button"
           >
@@ -366,19 +475,17 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
                 <span
                   aria-hidden="true"
                   className={cn(
-                    'pointer-events-none absolute left-0 h-0.5 -translate-y-1/2 rounded-full transition-[background-color,width] duration-150',
+                    'pointer-events-none absolute left-0 h-0.5 w-6 origin-left -translate-y-1/2 rounded-full transition-[background-color,transform] duration-150 motion-reduce:transition-none',
                     isCurrent
                       ? 'bg-foreground/90'
                       : activeDistance === 0
                         ? 'bg-muted-foreground/75'
                         : 'bg-muted-foreground/35',
                     activeDistance === 0
-                      ? 'w-6'
+                      ? 'scale-x-100'
                       : activeDistance === 1
-                        ? 'w-4'
-                        : activeDistance === 2
-                          ? 'w-2.5'
-                          : 'w-2.5'
+                        ? 'scale-x-[0.67]'
+                        : 'scale-x-[0.42]'
                   )}
                   // Index suffix avoids duplicate React keys when heading text repeats and ids collide.
                   key={`${item.id}-${index}`}
@@ -388,18 +495,21 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
             })}
             {activeItem ? (
               <span
-                className="border-border/70 bg-background/95 text-foreground pointer-events-none absolute left-8 w-80 rounded-xl border p-3 text-left shadow-xl backdrop-blur"
+                className={cn(
+                  'border-border/70 bg-background/95 text-foreground pointer-events-none absolute left-8 w-80 rounded-xl border p-3 text-left shadow-xl backdrop-blur transition-[top,transform] duration-150 ease-out motion-reduce:transition-none',
+                  tooltipClassName
+                )}
                 style={{
                   top: `${activeTopPercent}%`,
                   transform: `translateY(${activeTooltipTranslate})`,
                 }}
               >
-                <span className="text-label-16 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                <span className="block max-w-full overflow-hidden text-sm leading-tight text-ellipsis whitespace-nowrap">
                   {activeItem.text}
                 </span>
                 {activeItem.preview ? (
                   <span
-                    className="text-muted-foreground text-copy-16 mt-1 block"
+                    className="text-muted-foreground mt-1 block text-sm leading-normal"
                     style={{
                       display: '-webkit-box',
                       WebkitBoxOrient: 'vertical',
@@ -424,13 +534,19 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
         />
       ) : null}
       <div
-        className="fixed inset-x-0 z-40 flex flex-col items-center [@media(pointer:fine)]:lg:hidden"
+        className={cn(
+          'fixed inset-x-0 z-40 flex flex-col items-center [@media(pointer:fine)]:lg:hidden',
+          mobileClassName
+        )}
         data-toc-minimap-mobile
         style={{ bottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
       >
         {mobileExpanded ? (
           <div
-            className="border-border/70 bg-background/95 mb-2 max-h-[55vh] w-72 max-w-[85vw] overflow-y-auto rounded-xl border shadow-xl backdrop-blur"
+            className={cn(
+              'border-border/70 bg-background/95 mb-2 max-h-[55vh] w-72 max-w-[85vw] overflow-y-auto rounded-xl border shadow-xl backdrop-blur',
+              panelClassName
+            )}
             role="menu"
           >
             {items.map((item, index) => {
@@ -438,8 +554,8 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
               return (
                 <button
                   className={cn(
-                    'hover:bg-muted/60 active:bg-muted/60 text-label-16 block w-full px-3 py-2 text-left transition-colors',
-                    item.level === 3 && 'pl-6',
+                    'hover:bg-muted/60 active:bg-muted/60 block w-full px-3 py-2 text-left text-sm leading-tight transition-colors',
+                    (item.level ?? 2) >= 3 && 'pl-6',
                     isCurrent
                       ? 'text-foreground font-medium'
                       : 'text-muted-foreground'
@@ -447,7 +563,7 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
                   // Index suffix avoids duplicate React keys when heading text repeats and ids collide.
                   key={`${item.id}-${index}-mobile-menu`}
                   onClick={() => {
-                    selectSection(item.id);
+                    selectItem(item);
                     setMobileExpanded(false);
                   }}
                   role="menuitem"
@@ -473,7 +589,7 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
           <button
             aria-expanded={mobileExpanded}
             aria-haspopup="menu"
-            aria-label={`Jump to section: ${mobileActiveItem?.text ?? 'section'}`}
+            aria-label="Table of contents"
             className="focus-visible:ring-ring/70 relative block cursor-pointer touch-none bg-transparent focus-visible:ring-2 focus-visible:outline-none"
             onBlur={() => setMobileActiveIndex(null)}
             onFocus={() =>
@@ -498,7 +614,7 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
                 event.preventDefault();
                 // An arrow-selected item still jumps; otherwise Enter/Space opens the list panel.
                 if (mobileActiveItem) {
-                  selectSection(mobileActiveItem.id);
+                  selectItem(mobileActiveItem);
                 } else if (!mobileExpanded) {
                   // Opening the panel hides the scrub preview.
                   setMobileActiveIndex(null);
@@ -506,10 +622,26 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
                 }
               }
             }}
-            onPointerCancel={onMobileRailPointerCancel}
-            onPointerDown={onMobileRailPointerDown}
-            onPointerMove={onMobileRailPointerMove}
-            onPointerUp={onMobileRailPointerUp}
+            {...(finePointer
+              ? {
+                  onClick: onMobileRailClick,
+                  onMouseDown: (event: ReactMouseEvent<HTMLButtonElement>) =>
+                    event.preventDefault(),
+                  onMouseLeave: () => setMobileActiveIndex(null),
+                  onMouseMove: (event: ReactMouseEvent<HTMLButtonElement>) => {
+                    if (!mobileExpanded) {
+                      setMobileActiveIndex(
+                        resolveMobileActiveIndexFromPointer(event)
+                      );
+                    }
+                  },
+                }
+              : {
+                  onPointerCancel: onMobileRailPointerCancel,
+                  onPointerDown: onMobileRailPointerDown,
+                  onPointerMove: onMobileRailPointerMove,
+                  onPointerUp: onMobileRailPointerUp,
+                })}
             style={{
               width: resolveTocMinimapMobileWidthStyle(items.length),
               height: '24px',
@@ -528,19 +660,19 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
                 <span
                   aria-hidden="true"
                   className={cn(
-                    'pointer-events-none absolute top-1/2 w-0.5 -translate-x-1/2 -translate-y-1/2 rounded-full transition-[background-color,height] duration-150',
+                    'pointer-events-none absolute top-1/2 h-5 w-0.5 -translate-x-1/2 -translate-y-1/2 rounded-full transition-[background-color,transform] duration-150 motion-reduce:transition-none',
                     isCurrent
                       ? 'bg-foreground/90'
                       : activeDistance === 0
                         ? 'bg-muted-foreground/75'
                         : 'bg-muted-foreground/35',
                     activeDistance === 0
-                      ? 'h-5'
+                      ? 'scale-y-100'
                       : activeDistance === 1
-                        ? 'h-4'
+                        ? 'scale-y-[0.8]'
                         : activeDistance === 2
-                          ? 'h-3'
-                          : 'h-2'
+                          ? 'scale-y-[0.6]'
+                          : 'scale-y-[0.4]'
                   )}
                   // Index suffix avoids duplicate React keys when heading text repeats and ids collide.
                   key={`${item.id}-${index}-mobile`}
@@ -550,19 +682,22 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
             })}
             {!mobileExpanded && mobileActiveItem ? (
               <span
-                className="border-border/70 bg-background/95 text-foreground pointer-events-none absolute w-72 max-w-[80vw] rounded-xl border p-3 text-left shadow-xl backdrop-blur"
+                className={cn(
+                  'border-border/70 bg-background/95 text-foreground pointer-events-none absolute w-72 max-w-[80vw] rounded-xl border p-3 text-left shadow-xl backdrop-blur transition-[left,transform] duration-150 ease-out motion-reduce:transition-none',
+                  tooltipClassName
+                )}
                 style={{
                   left: `${mobileActiveLeftPercent}%`,
                   bottom: 'calc(100% + 0.75rem)',
                   transform: `translateX(${mobileActiveTooltipTranslate})`,
                 }}
               >
-                <span className="text-label-16 block max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                <span className="block max-w-full overflow-hidden text-sm leading-tight text-ellipsis whitespace-nowrap">
                   {mobileActiveItem.text}
                 </span>
                 {mobileActiveItem.preview ? (
                   <span
-                    className="text-muted-foreground text-copy-16 mt-1 block"
+                    className="text-muted-foreground mt-1 block text-sm leading-normal"
                     style={{
                       display: '-webkit-box',
                       WebkitBoxOrient: 'vertical',
@@ -581,3 +716,51 @@ export default function TocMinimap({ items }: { items: TocItem[] }) {
     </>
   );
 }
+
+// Builds minimap items from rendered headings, for apps without build-time TOC extraction. Headings need ids (e.g. via rehype-slug).
+export function useTocItems(
+  containerSelector = 'article',
+  headingSelector = 'h2[id], h3[id]'
+): TocMinimapItem[] {
+  const [items, setItems] = useState<TocMinimapItem[]>([]);
+
+  // Deferred a frame so the DOM read happens after paint instead of forcing a cascading render during mount.
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const root = document.querySelector(containerSelector);
+      const headings = root
+        ? Array.from(root.querySelectorAll<HTMLElement>(headingSelector))
+        : [];
+      setItems(
+        headings
+          .map((heading) => ({
+            id: heading.id,
+            text: heading.textContent?.trim() ?? '',
+            level: Number(heading.tagName.slice(1)) || 2,
+            preview: resolveHeadingPreview(heading),
+          }))
+          .filter((item) => item.id && item.text)
+      );
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [containerSelector, headingSelector]);
+
+  return items;
+}
+
+// First following paragraph's text, collapsed and trimmed to a tooltip-sized snippet.
+function resolveHeadingPreview(heading: HTMLElement): string | null {
+  for (
+    let node = heading.nextElementSibling;
+    node;
+    node = node.nextElementSibling
+  ) {
+    if (/^H[1-6]$/.test(node.tagName)) break;
+    if (node.tagName !== 'P') continue;
+    const text = node.textContent?.replace(/\s+/g, ' ').trim() ?? '';
+    if (text) return text.slice(0, 160);
+  }
+  return null;
+}
+
+export default TocMinimap;

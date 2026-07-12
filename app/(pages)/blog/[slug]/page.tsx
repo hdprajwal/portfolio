@@ -12,7 +12,7 @@ import { ViewTransition } from '@/components/view-transition';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { readingMinutes } from '@/lib/reading-time';
 import { extractToc } from '@/lib/toc';
-import TocMinimap from '@/components/blogs/toc-minimap';
+import { TocMinimap } from '@/registry/toc-minimap';
 
 export async function generateStaticParams() {
   let posts = await getBlogPosts();

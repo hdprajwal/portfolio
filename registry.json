@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "hdprajwal",
+  "homepage": "https://hdprajwal.dev",
+  "items": [
+    {
+      "name": "toc-minimap",
+      "type": "registry:ui",
+      "title": "TOC Minimap",
+      "description": "A scrubbing table-of-contents rail with scroll spy, section previews, keyboard and screen-reader support, and a mobile scrub bar with an expandable section list. No dependencies beyond Tailwind and the cn utility.",
+      "files": [
+        {
+          "path": "registry/toc-minimap/toc-minimap.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}
