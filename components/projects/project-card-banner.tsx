@@ -32,7 +32,7 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
   );
 
   return (
-    <div className="group rounded-xl border p-1">
+    <div className="group flex h-full flex-col rounded-xl border p-1">
       {internalHref ? (
         <Link href={internalHref} className="block">
           {banner}
@@ -41,7 +41,7 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
         banner
       )}
 
-      <div className="p-2">
+      <div className="flex flex-1 flex-col p-2">
         {internalHref ? (
           <Link href={internalHref}>
             <ViewTransition name={`project-title-${project.slug}`}>
@@ -60,7 +60,7 @@ export default function ProjectCardBanner({ project }: { project: Project }) {
           <TagChips tags={project.tags} max={3} />
         </div>
 
-        <div className="text-label-14 mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+        <div className="text-label-14 mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-3">
           {project.codeHref && (
             <Link
               href={project.codeHref}
