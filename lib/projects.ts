@@ -17,6 +17,7 @@ export type Project = {
   featured?: boolean;
   date?: string;
   draft?: boolean;
+  archived?: boolean;
 };
 
 const PROJECTS_DIR = path.join(process.cwd(), 'content/projects');
@@ -54,9 +55,10 @@ export const listProjects = cache(async (): Promise<Project[]> => {
         featured: data.featured || false,
         date: data.date,
         draft: data.draft === true,
+        archived: data.archived === true,
       };
     })
-    .filter((project) => !isHiddenDraft(project.draft))
+    .filter((project) => !project.archived && !isHiddenDraft(project.draft))
     .sort((a, b) => {
       // Featured projects first
       if (a.featured && !b.featured) return -1;
@@ -80,7 +82,7 @@ export async function getProject(slug: string): Promise<Project | null> {
   const raw = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(raw);
 
-  if (isHiddenDraft(data.draft === true)) {
+  if (data.archived === true || isHiddenDraft(data.draft === true)) {
     return null;
   }
 

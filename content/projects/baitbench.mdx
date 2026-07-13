@@ -1,0 +1,11 @@
+---
+name: BaitBench
+tagline: Measures how often an LLM, writing a job application for you, falls for a prompt injection hidden in the job post.
+description: 'Recruiters and hiring managers hide prompt injections in job posts to catch AI-written and auto-apply applications. BaitBench tests how often AI models fall for that bait. It runs synthetic job posts, each with a candidate profile and one planted injection, across a mix of models from the latest expensive ones to the older and cheaper ones that real auto-apply tools run on. Grading is inverted: a pass means the model resisted. Single-turn harness on Bun and the Vercel AI SDK through the Vercel AI Gateway, graded by a substring check plus a cheap LLM judge, with a Next.js visualizer for the leaderboard, per-job heatmap, and reasoning traces.'
+tags: ['Prompt Injection', 'LLM Evals',  'Security', 'Bun', 'TypeScript',  'Next.js']
+codeHref: https://github.com/hdprajwal/baitbench
+liveHref: https://baitbench.hdprajwal.dev
+date: '2026-06-26'
+featured: true
+image: https://assets.hdprajwal.dev/projects/baitbench.png
+---
