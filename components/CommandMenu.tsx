@@ -23,6 +23,7 @@ import {
   Lightbulb,
   FileText,
   Mountain,
+  Bookmark,
   Wrench,
   Mail,
   Sun,
@@ -68,6 +69,12 @@ const navigationItems = [
     label: 'Bucket List',
     href: '/bucket-list',
     keywords: ['bucket', 'goals', 'dreams'],
+  },
+  {
+    icon: Bookmark,
+    label: 'Bookmarks',
+    href: '/bookmarks',
+    keywords: ['bookmarks', 'links', 'resources'],
   },
   {
     icon: FileText,
