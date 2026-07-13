@@ -7,7 +7,6 @@ import ReadingProgress from '@/components/reading-progress';
 import { formatDate, getBlogPosts, baseUrl } from '@/lib/posts';
 import { type Post } from '@/lib/posts';
 import ShareActions from '@/components/blogs/share-actions';
-import TagChips from '@/components/projects/tag-chips';
 import { ViewTransition } from '@/components/view-transition';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { readingMinutes } from '@/lib/reading-time';
@@ -85,7 +84,7 @@ export default async function Blog({
   const isExternalImg = heroImage ? /^https?:\/\//.test(heroImage) : false;
 
   return (
-    <div className="bg-background relative min-h-screen overflow-x-hidden px-4 py-10 md:py-12">
+    <div className="bg-background relative min-h-screen overflow-x-hidden px-4 py-10 md:py-16">
       <TocMinimap items={toc} />
       <ReadingProgress />
       <div className="mx-auto flex w-full max-w-3xl items-center justify-between">
@@ -93,38 +92,26 @@ export default async function Blog({
           href="/blog"
           className="text-muted-foreground hover:text-foreground text-label-16 inline-flex items-center gap-2 transition-colors"
         >
-          <ArrowLeftIcon className="inline-block h-4 w-4" />
           Blog
         </Link>
         <ShareActions url={shareUrl} title={post.title} />
       </div>
 
       <div className="mx-auto max-w-3xl">
-        <header className="mx-auto mt-10 md:mt-12">
-          <p className="text-muted-foreground text-2xs font-mono tracking-wider uppercase">
-            {formatDate(post.date)} · {readingMins} min read
-          </p>
+        <header className="mx-auto mt-4">
           <ViewTransition name={`post-title-${slug}`}>
             <h1 className="text-heading-24 md:text-heading-40 font-[450]! mt-3 text-balance">
               {post.title}
             </h1>
           </ViewTransition>
-          {post.summary && (
-            <p className="text-muted-foreground text-copy-18 mt-4">
-              {post.summary}
-            </p>
-          )}
-          {post.tags && post.tags.length > 0 && (
-            <TagChips
-              tags={post.tags}
-              className="mt-5 flex flex-wrap gap-1.5"
-            />
-          )}
+          <p className="text-muted-foreground text-copy-13 tracking-wider uppercase mt-4">
+            {formatDate(post.date)} · {readingMins} min read
+          </p>
         </header>
         {heroImage && (
           <ViewTransition name={`post-image-${slug}`}>
             <div className="border-border relative mt-10 w-full overflow-hidden rounded-lg border">
-              <div className="bg-muted relative aspect-[16/9] w-full">
+              <div className="bg-muted relative aspect-video w-full">
                 <Image
                   src={heroImage}
                   alt={post.title}

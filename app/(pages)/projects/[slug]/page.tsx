@@ -2,9 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { ArrowLeftIcon, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { CustomMDX } from '@/components/mdx/custom-mdx';
-import TagChips from '@/components/projects/tag-chips';
 import { ViewTransition } from '@/components/view-transition';
 import {
   listProjects,
@@ -65,18 +64,16 @@ export default async function ProjectPage({
   const isExternalImg = project.image && /^https?:\/\//.test(project.image);
 
   return (
-    <div className="bg-background relative min-h-screen overflow-x-hidden px-4 py-10 md:py-12">
+    <div className="bg-background relative min-h-screen overflow-x-hidden px-4 py-10 md:py-16">
       <div className="mx-auto w-full max-w-3xl">
         <Link
           href="/projects"
           className="text-muted-foreground hover:text-foreground text-label-16 inline-flex items-center gap-2 transition-colors"
         >
-          <ArrowLeftIcon className="h-4 w-4" />
           Projects
         </Link>
-
-        <header className="mt-10 md:mt-12">
-          <div className="flex items-baseline justify-between gap-4">
+        <header className="mt-4">
+          <div className="flex items-baseline justify-between gap-5">
             <ViewTransition name={`project-title-${slug}`}>
               <h1 className="text-heading-24 md:text-heading-32 font-[450]! text-balance">
                 {project.name}
@@ -98,13 +95,6 @@ export default async function ProjectPage({
           <p className="text-muted-foreground text-copy-18 mt-2">
             {project.tagline}
           </p>
-
-          {project.tags.length > 0 && (
-            <TagChips
-              tags={project.tags}
-              className="mt-4 flex flex-wrap gap-1.5"
-            />
-          )}
         </header>
       </div>
 

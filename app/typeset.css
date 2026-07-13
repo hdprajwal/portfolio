@@ -113,10 +113,12 @@
       color: inherit;
       font-weight: 500;
       text-decoration-line: underline;
-      text-decoration-color: color-mix(in oklab, currentColor 30%, transparent);
+      text-underline-offset: 2px;
+      text-decoration-color: currentColor;
     }
     &:where(a:hover) {
-      text-decoration-color: currentColor;
+      color: oklch(0.67 0.17 244.98);
+      text-decoration-color: oklch(0.67 0.17 244.98);
     }
     &:where(a:focus-visible) {
       outline: 2px solid var(--color-ring, currentColor);
