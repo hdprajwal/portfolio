@@ -145,6 +145,7 @@ export default async function Blog({
                   url: `${baseUrl}/blog/${post.slug}`,
                   author: {
                     '@type': 'Person',
+                    '@id': `${baseUrl}/#person`,
                     name: 'Prajwal HD',
                   },
                 }),
