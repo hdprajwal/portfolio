@@ -23,7 +23,7 @@ export default async function ProjectsPage() {
             No projects found.
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-7 sm:grid-cols-2">
             {projects.map((p) => (
               <ProjectCardBanner key={p.slug} project={p} />
             ))}

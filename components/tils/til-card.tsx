@@ -12,24 +12,24 @@ export default function TilCard({ til }: { til: TIL }) {
   return (
     <Link
       href={`/tils/${til.slug}`}
-      className="group border-border block border-b py-4 transition-all duration-200 first:pt-0 last:border-b-0 hover:pl-2"
+      className="group border-border block border-b py-3 transition-all duration-200 first:pt-0 last:border-b-0 hover:pl-2"
     >
       <div className="flex items-baseline justify-between gap-4">
         <ViewTransition name={`til-title-${til.slug}`}>
-          <span className="text-foreground group-hover:text-primary text-label-18 transition-colors">
+          <span className="text-foreground text-title-14 group-hover:underline group-hover:underline-offset-3">
             {til.title}
           </span>
         </ViewTransition>
         <time
           dateTime={til.date}
-          className="text-muted-foreground/60 text-label-13-mono shrink-0 tabular-nums"
+          className="text-muted-foreground text-label-11-mono shrink-0 tabular-nums"
         >
           {dateStr}
         </time>
       </div>
 
       {til.description && (
-        <p className="text-muted-foreground text-copy-16 mt-1 line-clamp-1">
+        <p className="text-muted-foreground text-read-13 mt-1 line-clamp-1">
           {til.description}
         </p>
       )}
@@ -38,7 +38,7 @@ export default function TilCard({ til }: { til: TIL }) {
         <TagChips
           tags={til.tags}
           max={2}
-          className="mt-2 flex flex-wrap gap-1.5"
+          className="mt-2.5 flex flex-wrap gap-1.5"
         />
       )}
     </Link>

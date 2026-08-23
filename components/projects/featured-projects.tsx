@@ -6,7 +6,7 @@ export default async function FeaturedProjects() {
 
   if (projects.length === 0) {
     return (
-      <p className="text-muted-foreground text-copy-16">No projects found.</p>
+      <p className="text-muted-foreground text-read-14">No projects found.</p>
     );
   }
 
@@ -14,7 +14,7 @@ export default async function FeaturedProjects() {
   const featured = projects.slice(0, 4);
 
   return (
-    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-7 sm:grid-cols-2">
       {featured.map((project) => (
         <ProjectCardBanner key={project.slug} project={project} />
       ))}

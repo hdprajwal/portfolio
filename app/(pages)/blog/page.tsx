@@ -32,7 +32,7 @@ export default async function BlogIndexPage() {
         {posts.length === 0 ? (
           <p className="text-muted-foreground text-copy-16">No posts yet.</p>
         ) : (
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-7 sm:grid-cols-2">
             {posts.map((p) => (
               <BlogCardGrid key={p.slug} post={p} />
             ))}

@@ -23,7 +23,7 @@ export default async function ComponentsPage() {
             No components yet.
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-7 sm:grid-cols-2">
             {components.map((c) => (
               <ComponentCard key={c.slug} component={c} />
             ))}

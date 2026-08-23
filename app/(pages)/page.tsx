@@ -15,10 +15,10 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <div className="space-y-14 px-4 pb-20 md:space-y-20">
+      <div className="space-y-14 px-4 pb-20">
         <section id="now">
           <SectionHeader label="Now" />
-          <div className="text-muted-foreground text-copy-16">
+          <div className="text-muted-foreground text-read-14 space-y-4.5">
             <p>
               Open to AI engineer and backend/full-stack roles with end-to-end
               ownership. California, remote, or hybrid.
@@ -27,7 +27,7 @@ export default async function Home() {
               Building{' '}
               <Link
                 href="/projects/emberd"
-                className="hover:text-foreground underline underline-offset-2 transition-colors"
+                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 emberd
               </Link>
@@ -35,14 +35,14 @@ export default async function Home() {
               inside isolated microVMs. Also maintaining{' '}
               <Link
                 href="/projects/quackcode"
-                className="hover:text-foreground underline underline-offset-2 transition-colors"
+                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 QuackCode
               </Link>{' '}
               and{' '}
               <Link
                 href="/projects/gitwise"
-                className="hover:text-foreground underline underline-offset-2 transition-colors"
+                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 Gitwise
               </Link>
@@ -54,7 +54,7 @@ export default async function Home() {
                 href="https://a.co/d/050niXpi"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground underline underline-offset-2 transition-colors"
+                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 AI Systems Performance Engineering
               </Link>{' '}
@@ -67,7 +67,7 @@ export default async function Home() {
           <SectionHeader label="Projects" />
           <FeaturedProjects />
           <Link
-            className="text-muted-foreground hover:text-foreground text-label-16 mt-6 inline-flex items-center gap-2 transition-colors"
+            className="text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
             href="/projects"
           >
             All projects{' '}
@@ -78,25 +78,25 @@ export default async function Home() {
         <section id="research">
           <SectionHeader label="Featured work" />
           <div className="">
-            <h3 className="text-foreground text-label-18">
+            <h3 className="text-foreground text-title-15">
               Re-Evaluating Android Malware Detection: Tabular Features, Vision
               Models, and Ensembles
             </h3>
-            <p className="text-muted-foreground text-copy-14 mt-1 italic">
+            <p className="text-muted-foreground text-read-13 mt-1 italic">
               Hosahalli Dayananda, P.; Chen, Z.
             </p>
-            <p className="text-muted-foreground text-copy-16 mt-3">
+            <p className="text-muted-foreground text-read-13 mt-2.5">
               Compares tabular features, visual byte-plot images, and ensemble
               strategies for Android malware detection. Evaluates where modality
               choice changes the detection surface and where ensembles actually
               pay for themselves.
             </p>
-            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
               <Link
                 href="https://doi.org/10.3390/electronics15030544"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground text-label-16 group inline-flex items-center gap-1"
+                className="text-label-13-mono group text-foreground decoration-muted-foreground hover:decoration-foreground inline-flex items-center gap-1.5 underline underline-offset-4 transition-colors"
               >
                 Read paper
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -109,7 +109,7 @@ export default async function Home() {
           <SectionHeader label="Writing" />
           <RecentBlogs />
           <Link
-            className="text-muted-foreground hover:text-foreground text-label-16 mt-6 inline-flex items-center gap-2 transition-colors"
+            className="text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
             href="/blog"
           >
             All posts{' '}
@@ -119,23 +119,23 @@ export default async function Home() {
 
         <section id="components">
           <SectionHeader label="Components" />
-          <div className="space-y-5">
+          <div className="space-y-5.5">
             {registryComponents.map((component) => (
               <div key={component.slug}>
                 <Link
                   href={`/components/${component.slug}`}
-                  className="text-foreground text-label-18 hover:underline"
+                  className="text-foreground text-title-14 hover:underline hover:underline-offset-3"
                 >
                   {component.name}
                 </Link>
-                <p className="text-muted-foreground text-copy-16 mt-1">
+                <p className="text-muted-foreground text-read-13 mt-1">
                   {component.tagline}
                 </p>
               </div>
             ))}
           </div>
           <Link
-            className="text-muted-foreground hover:text-foreground text-label-16 mt-6 inline-flex items-center gap-2 transition-colors"
+            className="text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
             href="/components"
           >
             All components{' '}
@@ -150,11 +150,11 @@ export default async function Home() {
 
         <section id="contact">
           <SectionHeader label="Get in touch" />
-          <p className="text-muted-foreground text-copy-16 max-w-xl">
+          <p className="text-muted-foreground text-read-14 max-w-xl">
             Open to AI engineer and backend/full-stack roles, California,
             remote, or hybrid. Email is the fastest way to reach me.
           </p>
-          <ul className="text-muted-foreground text-copy-18 mt-5 max-w-xl space-y-2">
+          <ul className="text-muted-foreground text-read-14 mt-4 max-w-xl space-y-1.5">
             {[
               {
                 label: 'Email',
@@ -175,8 +175,8 @@ export default async function Home() {
             ].map(({ label, value, href }) => {
               const external = href.startsWith('http');
               return (
-                <li key={label} className="flex items-baseline gap-3">
-                  <span className="text-muted-foreground/50 text-label-13-mono w-16 shrink-0">
+                <li key={label} className="flex items-baseline gap-3.5">
+                  <span className="text-muted-foreground text-label-11-mono w-17 shrink-0">
                     {label}
                   </span>
                   <Link
@@ -184,7 +184,7 @@ export default async function Home() {
                     {...(external
                       ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
-                    className="group hover:text-foreground inline-flex items-center underline underline-offset-2 transition-colors"
+                    className="group text-foreground decoration-muted-foreground hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
                   >
                     {value}
                     <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />

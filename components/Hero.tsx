@@ -6,20 +6,22 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section id="hero" className="px-4 pt-16 pb-12 md:pt-20 md:pb-16">
-      <p className="text-foreground/90 text-copy-20">Hi, I&apos;m Prajwal</p>
-      <p className="text-foreground/90 text-copy-18 mt-3">
+    <section id="hero" className="px-4 pt-14 pb-12">
+      <p className="text-muted-foreground text-read-14">Hi, I&apos;m Prajwal</p>
+      <p className="text-muted-foreground text-read-14 mt-4.5">
         An AI engineer based in California. I build AI agents and the developer
-        tools around them, right now emberd, a runtime that runs untrusted
-        AI-agent code inside isolated microVMs. Before this I spent three years
-        at Opslyft on cloud cost and reliability systems, then a Master&apos;s
-        on adversarial ML and Android malware detection. I&apos;m open to
-        full-time AI engineer, backend, and full-stack roles.
+        tools around them, right now{' '}
+        <strong className="text-foreground font-medium">emberd</strong>, a
+        runtime that runs untrusted AI-agent code inside isolated microVMs.
+        Before this I spent three years at Opslyft on cloud cost and reliability
+        systems, then a Master&apos;s on adversarial ML and Android malware
+        detection. I&apos;m open to full-time AI engineer, backend, and
+        full-stack roles.
       </p>
-      <div className="text-label-16 mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+      <div className="text-label-13-mono mt-5 flex flex-wrap items-center gap-x-4.5 gap-y-1.5">
         <Link
           href="/resume"
-          className="text-foreground hover:text-foreground inline-flex items-center gap-1 underline underline-offset-2 transition-colors"
+          className="text-foreground inline-flex items-center gap-1 underline underline-offset-4"
         >
           Resume
           <ArrowRight className="h-3.5 w-3.5" />
@@ -36,7 +38,7 @@ export default function Hero() {
         >
           Email
         </Link>
-        <span aria-hidden className="bg-border h-4 w-px" />
+        <span aria-hidden className="bg-border h-3 w-px" />
         <Link
           href="https://github.com/hdprajwal"
           target="_blank"

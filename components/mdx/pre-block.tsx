@@ -73,7 +73,7 @@ export default function Pre({ children, className, ...rest }: PreProps) {
     >
       {fileName ? (
         <div className="border-border bg-muted/40 flex items-center justify-between border-b py-0.5 pr-2 pl-4">
-          <span className="text-muted-foreground font-mono text-3xs tracking-wider select-none">
+          <span className="text-muted-foreground text-label-11-mono tracking-wider select-none">
             {fileName}
           </span>
           {copyButton(false)}

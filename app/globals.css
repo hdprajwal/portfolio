@@ -2,27 +2,14 @@
 @import 'tw-animate-css';
 @import './typeset.css';
 
-/* Overused Grotesk — variable font (wght 300–900, slnt -10–0), self-hosted on
-   the assets CDN. One face with an oblique range: upright text rides slnt 0,
-   italics ride the slant axis instead of a synthesized skew. */
-@font-face {
-  font-family: 'Overused Grotesk';
-  src: url('https://assets.hdprajwal.dev/fonts/OverusedGrotesk-VF.woff2')
-    format('woff2-variations');
-  font-weight: 300 900;
-  /*font-style: oblique 0deg 10deg;*/
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
   --color-term-cyan: oklch(0.544 0 0);
   --color-term-yellow: oklch(0.708 0 0);
 
-  /* Type scale — rem-based, tuned for Overused Grotesk. Base reading size is
-     18px; the small end floor is raised so nothing reads as tiny. Root stays
-     16px so spacing/layout are unaffected — only text grows. Line-heights are
-     unitless so they scale with each size; display sizes get tighter tracking. */
+  /* Type scale — rem-based. Base reading size is 18px; the small end floor is
+     raised so nothing reads as tiny. Root stays 16px so spacing/layout are
+     unaffected — only text grows. Line-heights are unitless so they scale with
+     each size; display sizes get tighter tracking. */
   --text-3xs: 0.75rem; /* 12px — micro mono labels */
   --text-3xs--line-height: 1.4;
   --text-2xs: 0.8125rem; /* 13px — small mono labels */
@@ -59,10 +46,10 @@
 @custom-variant group-data-selected (.group[data-selected='true'] &);
 
 :root {
-  /* white */
+  /* ds-background-100 */
   --background: oklch(1 0 0);
-  /* zinc-950 */
-  --foreground: oklch(0.141 0.005 285.823);
+  /* ds-gray-1000 */
+  --foreground: oklch(0.205 0 0);
   /* white */
   --card: oklch(1 0 0);
   /* zinc-950 */
@@ -80,10 +67,10 @@
   --secondary: oklch(0.967 0.001 286.375);
   /* zinc-950 */
   --secondary-foreground: oklch(0.141 0.005 285.823);
-  /* zinc-100 */
-  --muted: oklch(0.967 0.001 286.375);
-  /* zinc-500 */
-  --muted-foreground: oklch(0.552 0.016 285.938);
+  /* ds-background-200 */
+  --muted: oklch(0.984 0 0);
+  /* ds-gray-900 */
+  --muted-foreground: oklch(0.42 0 0);
   /* zinc-100 */
   --accent: oklch(0.967 0.001 286.375);
   --accent-muted: color-mix(in oklab, var(--accent) 50%, transparent);
@@ -92,8 +79,8 @@
   /* red-600 */
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
-  /* zinc-200 */
-  --border: oklch(0.92 0.004 286.32);
+  /* ds-gray-alpha-400 */
+  --border: oklch(0 0 0 / 0.08);
   --edge: color-mix(in oklab, var(--border) 64%, var(--background));
   /* zinc-200 */
   --input: oklch(0.92 0.004 286.32);
@@ -111,10 +98,10 @@
   /* zinc-400 */
   --code-number: oklch(0.705 0.015 286.067);
   --code-highlight: oklch(0.9584 0.0013 286.37);
-  /* zinc-950 */
-  --selection: oklch(0.141 0.005 285.823);
-  /* zinc-50 */
-  --selection-foreground: oklch(0.985 0 0);
+  /* ds-gray-1000 */
+  --selection: oklch(0.205 0 0);
+  /* ds-background-100 */
+  --selection-foreground: oklch(1 0 0);
   --shadow-popover: 0 6px 24px rgba(0, 0, 0, 0.25);
   --chart-1: oklch(0.81 0.17 75.35);
   --chart-2: oklch(0.55 0.22 264.53);
@@ -143,8 +130,7 @@
   --tracking-normal: 0em;
   --spacing: 0.25rem;
   --font-sans:
-    'Overused Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
-    Roboto, Helvetica, Arial, sans-serif;
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 /* Vercel Geist type scale — same sizing (rem = px/16, px in comments). Headings
@@ -188,11 +174,22 @@
 @utility text-copy-13 { font-size: 0.8125rem; /* 13px */ line-height: 1.38; letter-spacing: 0; font-weight: 400; }
 @utility text-copy-13-mono { font-size: 0.8125rem; /* 13px */ line-height: 1.38; letter-spacing: 0; font-weight: 400; font-family: var(--font-mono); }
 
+/* Mono scale from the font-pairing mockup — a 14px reading base at 1.75
+   leading, titles at 600 / -0.02em, and mono chrome down to 10px. */
+@utility text-read-14 { font-size: 0.875rem; /* 14px */ line-height: 1.75; letter-spacing: 0; font-weight: 400; }
+@utility text-read-13 { font-size: 0.8125rem; /* 13px */ line-height: 1.65; letter-spacing: 0; font-weight: 400; }
+@utility text-read-12 { font-size: 0.75rem; /* 12px */ line-height: 1.55; letter-spacing: 0; font-weight: 400; }
+@utility text-title-15 { font-size: 0.9375rem; /* 15px */ line-height: 1.45; letter-spacing: -0.02em; font-weight: 600; }
+@utility text-title-14 { font-size: 0.875rem; /* 14px */ line-height: 1.4; letter-spacing: -0.02em; font-weight: 600; }
+@utility text-eyebrow-11 { font-size: 0.6875rem; /* 11px */ line-height: 1.4; letter-spacing: 0.16em; font-weight: 500; text-transform: uppercase; font-family: var(--font-mono); }
+@utility text-label-11-mono { font-size: 0.6875rem; /* 11px */ line-height: 1.4; letter-spacing: 0; font-weight: 400; font-family: var(--font-mono); }
+@utility text-label-10-mono { font-size: 0.625rem; /* 10px */ line-height: 1.4; letter-spacing: 0; font-weight: 400; font-family: var(--font-mono); }
+
 .dark {
-  /* back */
-  --background: oklch(0 0 1);
-  /* white */
-  --foreground: oklch(1 0 0);
+  /* ds-background-100 */
+  --background: oklch(0 0 0);
+  /* ds-gray-1000 */
+  --foreground: oklch(0.946 0 0);
   /* neutral-900 */
   --card: oklch(0.205 0 0);
   /* neutral-50 */
@@ -211,10 +208,10 @@
   --secondary: oklch(0.269 0 0);
   /* neutral-50 */
   --secondary-foreground: oklch(0.985 0 0);
-  /* neutral-800 */
-  --muted: oklch(0.269 0 0);
-  /* neutral-400 */
-  --muted-foreground: oklch(0.708 0 0);
+  /* ds-background-200 */
+  --muted: oklch(0.027 0 0);
+  /* ds-gray-900, nudged up from 0.706 to hold the contrast floor */
+  --muted-foreground: oklch(0.72 0 0);
   /* neutral-800 */
   --accent: oklch(0.269 0 0);
   --accent-muted: color-mix(in oklab, var(--accent) 20%, transparent);
@@ -223,8 +220,8 @@
   /* red-700 */
   --destructive: oklch(0.505 0.213 27.518);
   --destructive-foreground: oklch(0 0 0);
-  /* neutral-800 */
-  --border: oklch(0.269 0 0);
+  /* ds-gray-alpha-400 */
+  --border: oklch(1 0 0 / 0.14);
   --input: lab(100% 0 0 / 0.15);
   /* neutral-500 */
   --ring: oklch(0.556 0 0);
@@ -240,10 +237,10 @@
   --code-number: oklch(0.556 0 0);
   /* neutral-800 */
   --code-highlight: oklch(0.269 0 0);
-  /* neutral-50 */
-  --selection: oklch(0.985 0 0);
-  /* neutral-950 */
-  --selection-foreground: oklch(0.145 0 0);
+  /* ds-gray-1000 */
+  --selection: oklch(0.946 0 0);
+  /* ds-background-100 */
+  --selection-foreground: oklch(0 0 0);
   --shadow-popover: 0 0 24px rgba(0, 0, 0, 0.5);
   --chart-1: oklch(0.81 0.17 75.35);
   --chart-2: oklch(0.58 0.21 260.84);
@@ -312,8 +309,10 @@
   --color-selection-foreground: var(--selection-foreground);
   --shadow-popover: var(--shadow-popover);
 
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --radius-sm: calc(var(--radius) - 1px);
   --radius-md: var(--radius);
@@ -427,15 +426,67 @@
   }
 }
 
-/* Typeset preset for markdown surfaces — rides the site's own fonts:
-   Overused Grotesk (--font-sans) and IBM Plex Mono (--font-mono). */
+/* Typeset preset for markdown surfaces — rides the site's own font, Geist Mono
+   (--font-sans and --font-mono both resolve to it), on the landing page's
+   reading scale: 14px at 1.75 leading, paragraphs 1.35em apart. */
 .typeset-notes {
   --typeset-font-body: var(--font-sans);
   --typeset-font-heading: var(--font-sans);
   --typeset-font-mono: var(--font-mono);
-  --typeset-size: 18px;
+  --typeset-size: 14px;
   --typeset-leading: 1.75;
-  --typeset-flow: 1.25em;
+  --typeset-flow: 1.35em;
+}
+
+/* typeset bumps text 1.125x below 48rem; the landing page holds one size at
+   every width, so pin it and let the reading scale match across the site. */
+.typeset-notes {
+  font-size: var(--typeset-size);
+}
+
+/* Landing-page roles carried into markdown: prose rides --muted-foreground,
+   titles and emphasis ride --foreground, links wear a faint underline that
+   firms up on hover. These sit outside @layer components, so they beat
+   typeset.css on cascade origin and need no specificity arms race. */
+.typeset-notes :where(p, li, blockquote, dd, td, figcaption, caption) {
+  color: var(--muted-foreground);
+}
+.typeset-notes :where(h1, h2, h3, h4) {
+  letter-spacing: -0.02em;
+}
+.typeset-notes :where(h1) {
+  font-size: 1.5em; /* 21px */
+}
+.typeset-notes :where(h3) {
+  font-size: 1.0714em; /* 15px — the landing page's text-title-15 */
+}
+.typeset-notes :where(h6) {
+  letter-spacing: 0.16em; /* matches text-eyebrow-11 */
+}
+.typeset-notes :where(strong, b) {
+  color: var(--foreground);
+  font-weight: 500;
+}
+.typeset-notes :where(:is(h1, h2, h3, h4) :is(strong, b)) {
+  font-weight: 600;
+}
+.typeset-notes :where(a) {
+  color: var(--foreground);
+  font-weight: 400;
+  text-decoration-color: var(--muted-foreground);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 150ms ease;
+}
+.typeset-notes :where(a:hover) {
+  color: var(--foreground);
+  text-decoration-color: var(--foreground);
+}
+.typeset-notes :where(:is(h1, h2, h3, h4, h5, h6) a) {
+  font-weight: inherit;
+}
+/* Body is mono now, so inline code no longer needs a step down to hold width. */
+.typeset-notes :where(:not(pre) > code) {
+  font-size: 1em;
 }
 
 /* Typeset tables shrink to fit their content, which reads ragged next to
@@ -444,10 +495,10 @@
    the old shadcn table did. */
 .typeset :where(table) {
   width: 100%;
-  font-size: 0.875em;
+  font-size: 0.929em; /* 13px — the landing page's secondary-copy tier */
 }
 .typeset :where(thead th) {
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 /* Behavior typeset doesn't cover: anchor offset under the sticky nav, and

@@ -74,7 +74,7 @@ function CommandKButton({ compact = false }: { compact?: boolean }) {
     <button
       type="button"
       onClick={triggerCommandMenu}
-      className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-1.5 py-0.5 font-mono text-3xs tracking-wider transition-colors"
+      className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-11-mono inline-flex items-center gap-1.5 rounded-lg border px-1.5 py-0.5 transition-colors"
       aria-label="Open command menu"
     >
       <Search className="h-3 w-3" />
@@ -105,7 +105,7 @@ export default function SiteHeader() {
 
   return (
     <header className="bg-background/90 border-border sticky top-0 z-50 border-b backdrop-blur-md">
-      <div className="flex items-center justify-between px-4 py-3">
+      <div className="flex items-center justify-between px-4 py-3.5">
         <Link
           href="/"
           aria-label="Go to home page"
@@ -128,8 +128,8 @@ export default function SiteHeader() {
               </g>
             </svg>
           </span>
-          <span className="text-muted-foreground group-hover:text-foreground hidden font-mono text-xs tracking-tight transition-colors sm:inline">
-            hdprajwal<span className="text-muted-foreground/50">.dev</span>
+          <span className="text-muted-foreground group-hover:text-foreground text-label-13-mono hidden transition-colors sm:inline">
+            hdprajwal<span>.dev</span>
           </span>
         </Link>
 
@@ -145,7 +145,7 @@ export default function SiteHeader() {
                   href={href}
                   aria-label={`Go to ${label} page`}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`relative px-2.5 py-1 font-mono text-xs tracking-wide transition-colors ${
+                  className={`text-label-13-mono relative px-2.5 py-1 transition-colors ${
                     isActive
                       ? 'text-foreground'
                       : 'text-muted-foreground hover:text-foreground'
@@ -202,7 +202,7 @@ export default function SiteHeader() {
                   key={href}
                   href={href}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`border-border/40 flex items-baseline justify-between border-b py-2.5 font-mono text-xs tracking-wide transition-colors last:border-b-0 ${
+                  className={`border-border/40 text-label-13-mono flex items-baseline justify-between border-b py-2.5 transition-colors last:border-b-0 ${
                     isActive
                       ? 'text-foreground'
                       : 'text-muted-foreground hover:text-foreground'
@@ -221,14 +221,14 @@ export default function SiteHeader() {
           </nav>
 
           <div className="border-border/40 border-t px-4 py-3">
-            <div className="text-muted-foreground/60 mb-2 font-mono text-3xs tracking-wider uppercase">
+            <div className="text-muted-foreground text-eyebrow-11 mb-2">
               Reach me
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href="mailto:hdprajwal01@gmail.com"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 text-xs transition-colors"
+                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
               >
                 <Mail className="h-3 w-3" />
                 Email
@@ -238,7 +238,7 @@ export default function SiteHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 text-xs transition-colors"
+                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
               >
                 <LinkedinIcon className="h-3 w-3" />
                 LinkedIn
@@ -249,7 +249,7 @@ export default function SiteHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 text-xs transition-colors"
+                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
               >
                 <GithubIcon className="h-3 w-3" />
                 GitHub
@@ -259,7 +259,7 @@ export default function SiteHeader() {
           </div>
 
           <div className="border-border/40 border-t px-4 py-3">
-            <p className="text-muted-foreground font-mono text-3xs tracking-wider">
+            <p className="text-muted-foreground text-label-11-mono tracking-wider">
               California, USA
             </p>
           </div>

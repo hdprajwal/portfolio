@@ -4,13 +4,12 @@ import { ThemeProvider } from '@/components/theme-provider';
 import AnalyticsProvider from '@/components/analytics';
 import { baseUrl } from '@/lib/site';
 
-import { IBM_Plex_Mono } from 'next/font/google';
+import { Geist_Mono } from 'next/font/google';
 
-// Sans/display is Overused Grotesk via @font-face in globals.css; this is --font-mono.
-const ibmPlexMono = IBM_Plex_Mono({
+// Geist Mono is the whole type system now: --font-sans in globals.css points at it too.
+const geistMono = Geist_Mono({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-mono',
+  variable: '--font-geist-mono',
   display: 'swap',
 });
 
@@ -57,18 +56,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={ibmPlexMono.variable}>
+    <html lang="en" suppressHydrationWarning className={geistMono.variable}>
       <body className="antialiased">
         <link
           rel="preconnect"
           href="https://assets.hdprajwal.dev"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="https://assets.hdprajwal.dev/fonts/OverusedGrotesk-VF.woff2"
-          as="font"
-          type="font/woff2"
           crossOrigin="anonymous"
         />
         <link

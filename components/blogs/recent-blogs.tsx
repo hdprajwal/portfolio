@@ -8,49 +8,36 @@ export default async function RecentBlogs() {
 
   if (recentPosts.length === 0) {
     return (
-      <p className="text-muted-foreground text-copy-16">No blog posts yet.</p>
+      <p className="text-muted-foreground text-read-14">No blog posts yet.</p>
     );
   }
 
   return (
-    <div className="divide-border divide-y">
+    <div className="space-y-5.5">
       {recentPosts.map((post) => {
         const dateStr = new Date(post.date).toLocaleDateString('en-US', {
           month: 'short',
           year: 'numeric',
         });
+        const tags = post.tags?.slice(0, 2) ?? [];
 
         return (
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group flex items-baseline justify-between gap-4 py-4 first:pt-0"
+            className="group block"
           >
-            <div className="flex min-w-0 items-baseline gap-3">
-              <time
-                dateTime={post.date}
-                className="text-muted-foreground text-label-13-mono shrink-0 tabular-nums"
-              >
+            <ViewTransition name={`post-title-${post.slug}`}>
+              <h3 className="text-foreground text-title-14 group-hover:underline group-hover:underline-offset-3">
+                {post.title}
+              </h3>
+            </ViewTransition>
+            <p className="text-muted-foreground text-label-11-mono mt-0.5">
+              <time dateTime={post.date} className="tabular-nums">
                 {dateStr}
               </time>
-              <ViewTransition name={`post-title-${post.slug}`}>
-                <span className="text-foreground group-hover:text-primary text-label-18 truncate transition-colors">
-                  {post.title}
-                </span>
-              </ViewTransition>
-            </div>
-            {post.tags && post.tags.length > 0 && (
-              <div className="hidden shrink-0 gap-1.5 sm:flex">
-                {post.tags.slice(0, 2).map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-muted-foreground text-label-12-mono"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
+              {tags.length > 0 && ` · ${tags.join(', ')}`}
+            </p>
           </Link>
         );
       })}

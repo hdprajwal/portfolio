@@ -30,30 +30,30 @@ export default function BlogCardGrid({ post }: { post: Post }) {
         </div>
       </ViewTransition>
 
-      <div className="mt-4">
+      <div className="mt-3">
         <ViewTransition name={`post-title-${post.slug}`}>
-          <h3 className="text-foreground group-hover:text-primary text-label-18 line-clamp-2 transition-colors">
+          <h3 className="text-foreground text-title-14 line-clamp-2 group-hover:underline group-hover:underline-offset-3">
             {post.title}
           </h3>
         </ViewTransition>
 
         {post.summary && (
-          <p className="text-muted-foreground text-copy-16 mt-1.5 line-clamp-2">
+          <p className="text-muted-foreground text-read-13 mt-1 line-clamp-2">
             {post.summary}
           </p>
         )}
 
         {post.tags && post.tags.length > 0 && (
-          <div className="mt-3">
+          <div className="mt-2.5">
             <TagChips tags={post.tags} max={4} />
           </div>
         )}
 
-        <div className="text-muted-foreground/60 text-3xs mt-3 flex items-center gap-2 font-mono tracking-wider uppercase">
+        <div className="text-muted-foreground text-label-11-mono mt-2.5 flex items-center gap-2">
           <time dateTime={post.date} className="tabular-nums">
             {dateStr}
           </time>
-          <span className="text-muted-foreground/40">·</span>
+          <span>·</span>
           <span>{readTime} min read</span>
         </div>
       </div>
@@ -73,16 +73,16 @@ function TypographyBanner({
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
   return (
-    <div className="bg-muted/30 flex h-full w-full flex-col justify-between p-6">
-      <span className="text-muted-foreground/60 text-3xs font-mono tracking-wider uppercase">
+    <div className="bg-muted flex h-full w-full flex-col justify-between px-4 py-3.5">
+      <span className="text-muted-foreground text-label-11-mono tracking-wider">
         ❯ {slug}
       </span>
       <div>
-        <div className="text-foreground line-clamp-2 font-mono text-lg font-semibold tracking-tight">
+        <div className="text-foreground text-title-15 line-clamp-2">
           {title}
         </div>
         {summary && (
-          <p className="text-muted-foreground text-copy-14 mt-1 line-clamp-2">
+          <p className="text-muted-foreground text-read-12 mt-0.5 line-clamp-2">
             {summary}
           </p>
         )}
