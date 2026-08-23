@@ -187,7 +187,7 @@ export default async function Home() {
                     className="group text-foreground decoration-muted-foreground hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
                   >
                     {value}
-                    <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
+                    <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />
                   </Link>
                 </li>
               );

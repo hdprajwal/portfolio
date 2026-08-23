@@ -6,6 +6,12 @@
   --color-term-cyan: oklch(0.544 0 0);
   --color-term-yellow: oklch(0.708 0 0);
 
+  /* Shared easing. Entrances, exits and hovers ride --ease-out; --ease-in-out
+     is for symmetric moves. Both override Tailwind's built-in ease-* values so
+     the utilities and raw var() usage stay in sync. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
   /* Type scale — rem-based. Base reading size is 18px; the small end floor is
      raised so nothing reads as tiny. Root stays 16px so spacing/layout are
      unaffected — only text grows. Line-heights are unitless so they scale with
@@ -46,6 +52,9 @@
 @custom-variant group-data-selected (.group[data-selected='true'] &);
 
 :root {
+  /* Lets height transition to and from auto, used by the demo panel disclosure. */
+  interpolate-size: allow-keywords;
+
   /* ds-background-100 */
   --background: oklch(1 0 0);
   /* ds-gray-1000 */

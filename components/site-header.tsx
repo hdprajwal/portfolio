@@ -43,7 +43,7 @@ function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-      className="text-muted-foreground hover:text-foreground inline-flex h-7 w-7 items-center justify-center transition-colors"
+      className="text-muted-foreground hover:text-foreground inline-flex h-7 w-7 items-center justify-center transition-[color,scale] duration-160 ease-out active:scale-[0.97]"
       aria-label="Toggle theme"
     >
       {!mounted ? (
@@ -63,7 +63,7 @@ function CommandKButton({ compact = false }: { compact?: boolean }) {
       <button
         type="button"
         onClick={triggerCommandMenu}
-        className="text-muted-foreground hover:text-foreground inline-flex h-7 w-7 items-center justify-center transition-colors"
+        className="text-muted-foreground hover:text-foreground inline-flex h-7 w-7 items-center justify-center transition-[color,scale] duration-160 ease-out active:scale-[0.97]"
         aria-label="Open command menu"
       >
         <Search className="h-3.5 w-3.5" />
@@ -74,7 +74,7 @@ function CommandKButton({ compact = false }: { compact?: boolean }) {
     <button
       type="button"
       onClick={triggerCommandMenu}
-      className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-11-mono inline-flex items-center gap-1.5 rounded-lg border px-1.5 py-0.5 transition-colors"
+      className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-11-mono inline-flex items-center gap-1.5 rounded-lg border px-1.5 py-0.5 transition-[color,border-color,scale] duration-160 ease-out active:scale-[0.97]"
       aria-label="Open command menu"
     >
       <Search className="h-3 w-3" />
@@ -173,7 +173,7 @@ export default function SiteHeader() {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen((o) => !o)}
-            className="text-muted-foreground hover:text-foreground inline-flex h-7 w-7 items-center justify-center transition-colors"
+            className="text-muted-foreground hover:text-foreground inline-flex h-7 w-7 items-center justify-center transition-[color,scale] duration-160 ease-out active:scale-[0.97]"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-nav"
@@ -187,84 +187,84 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
-      {isMobileMenuOpen && (
-        <div
-          id="mobile-nav"
-          className="border-border bg-background/95 border-t backdrop-blur-md md:hidden"
-        >
-          <nav className="flex flex-col px-4 py-3">
-            {navLinks.map(({ href, label }) => {
-              const isActive =
-                pathname === href || pathname.startsWith(href + '/');
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  aria-current={isActive ? 'page' : undefined}
-                  className={`border-border/40 text-label-13-mono flex items-baseline justify-between border-b py-2.5 transition-colors last:border-b-0 ${
-                    isActive
-                      ? 'text-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <span className="inline-flex items-center gap-2">
-                    {label}
-                  </span>
-                  {isActive && (
-                    <span className="bg-foreground h-1 w-1 rounded-full" />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
+      {/* Mobile drawer: stays mounted and rides allow-discrete on display so it unfolds from the header bar on the way out as well as in. */}
+      <div
+        id="mobile-nav"
+        className={`border-border bg-background/95 border-t backdrop-blur-md transition-[opacity,translate,display] transition-discrete duration-200 ease-out motion-reduce:translate-y-0 md:hidden starting:-translate-y-2 starting:opacity-0 motion-reduce:starting:translate-y-0 ${
+          isMobileMenuOpen
+            ? 'block translate-y-0 opacity-100'
+            : 'hidden -translate-y-2 opacity-0'
+        }`}
+      >
+        <nav className="flex flex-col px-4 py-3">
+          {navLinks.map(({ href, label }) => {
+            const isActive =
+              pathname === href || pathname.startsWith(href + '/');
+            return (
+              <Link
+                key={href}
+                href={href}
+                aria-current={isActive ? 'page' : undefined}
+                className={`border-border/40 text-label-13-mono flex items-baseline justify-between border-b py-2.5 transition-colors last:border-b-0 ${
+                  isActive
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="inline-flex items-center gap-2">{label}</span>
+                {isActive && (
+                  <span className="bg-foreground h-1 w-1 rounded-full" />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
 
-          <div className="border-border/40 border-t px-4 py-3">
-            <div className="text-muted-foreground text-eyebrow-11 mb-2">
-              Reach me
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Link
-                href="mailto:hdprajwal01@gmail.com"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
-              >
-                <Mail className="h-3 w-3" />
-                Email
-              </Link>
-              <Link
-                href="https://www.linkedin.com/in/hdprajwal"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
-              >
-                <LinkedinIcon className="h-3 w-3" />
-                LinkedIn
-                <ArrowUpRight className="h-3 w-3" />
-              </Link>
-              <Link
-                href="https://github.com/hdprajwal"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
-              >
-                <GithubIcon className="h-3 w-3" />
-                GitHub
-                <ArrowUpRight className="h-3 w-3" />
-              </Link>
-            </div>
+        <div className="border-border/40 border-t px-4 py-3">
+          <div className="text-muted-foreground text-eyebrow-11 mb-2">
+            Reach me
           </div>
-
-          <div className="border-border/40 border-t px-4 py-3">
-            <p className="text-muted-foreground text-label-11-mono tracking-wider">
-              California, USA
-            </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              href="mailto:hdprajwal01@gmail.com"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
+            >
+              <Mail className="h-3 w-3" />
+              Email
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/hdprajwal"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
+            >
+              <LinkedinIcon className="h-3 w-3" />
+              LinkedIn
+              <ArrowUpRight className="h-3 w-3" />
+            </Link>
+            <Link
+              href="https://github.com/hdprajwal"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
+            >
+              <GithubIcon className="h-3 w-3" />
+              GitHub
+              <ArrowUpRight className="h-3 w-3" />
+            </Link>
           </div>
         </div>
-      )}
+
+        <div className="border-border/40 border-t px-4 py-3">
+          <p className="text-muted-foreground text-label-11-mono tracking-wider">
+            California, USA
+          </p>
+        </div>
+      </div>
     </header>
   );
 }

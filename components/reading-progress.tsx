@@ -7,10 +7,11 @@ export default function ReadingProgress() {
 
   useEffect(() => {
     const onScroll = () => {
-      const total =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
       const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
-      if (barRef.current) barRef.current.style.width = `${pct}%`;
+      // Compositor-only: the bar is full width and scales from its left edge.
+      if (barRef.current)
+        barRef.current.style.transform = `scaleX(${pct / 100})`;
     };
 
     onScroll();
@@ -22,8 +23,8 @@ export default function ReadingProgress() {
     <div aria-hidden className="fixed top-0 right-0 left-0 z-[100]">
       <div
         ref={barRef}
-        className="bg-ring h-[2px]"
-        style={{ width: '0%' }}
+        className="bg-ring h-[2px] w-full origin-left"
+        style={{ transform: 'scaleX(0)' }}
       />
     </div>
   );

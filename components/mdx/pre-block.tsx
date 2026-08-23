@@ -56,11 +56,27 @@ export default function Pre({ children, className, ...rest }: PreProps) {
       onClick={handleCopy}
       className={cn(
         // Hidden until the code block is hovered; stays reachable via keyboard focus and always visible on touch devices, which have no hover.
-        'text-muted-foreground hover:text-foreground inline-flex cursor-pointer items-center rounded-md p-1.5 opacity-0 transition-[color,opacity] group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-1 focus-visible:outline-none [@media(hover:none)]:opacity-100',
+        'text-muted-foreground hover:text-foreground inline-flex cursor-pointer items-center rounded-md p-1.5 opacity-0 transition-[color,opacity,scale] duration-160 ease-out group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-1 focus-visible:outline-none active:scale-[0.97] [@media(hover:none)]:opacity-100',
         overlay && 'border-border bg-background/70 border backdrop-blur-sm'
       )}
     >
-      {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+      {/* Both icons stay mounted and crossfade so the copy confirmation reads as a swap, not a pop. */}
+      <span className="relative inline-flex size-3.5">
+        <Copy
+          aria-hidden
+          className={cn(
+            'absolute inset-0 size-3.5 transition-[opacity,scale] duration-150 ease-out',
+            copied ? 'scale-90 opacity-0' : 'scale-100 opacity-100'
+          )}
+        />
+        <Check
+          aria-hidden
+          className={cn(
+            'absolute inset-0 size-3.5 transition-[opacity,scale] duration-150 ease-out',
+            copied ? 'scale-100 opacity-100' : 'scale-90 opacity-0'
+          )}
+        />
+      </span>
     </button>
   );
 

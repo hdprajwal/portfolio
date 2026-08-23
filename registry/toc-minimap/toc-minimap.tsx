@@ -494,45 +494,49 @@ export function TocMinimap({
               );
             })}
             {activeItem ? (
+              // Full-height anchor: its own percentage translate reproduces the old top offset without touching layout.
               <span
-                className={cn(
-                  'border-border/70 bg-background/95 text-foreground pointer-events-none absolute left-8 w-80 rounded-xl border p-3 text-left shadow-xl backdrop-blur transition-[top,transform] duration-150 ease-out motion-reduce:transition-none',
-                  tooltipClassName
-                )}
-                style={{
-                  top: `${activeTopPercent}%`,
-                  transform: `translateY(${activeTooltipTranslate})`,
-                }}
+                className="pointer-events-none absolute inset-y-0 left-8 transition-transform duration-150 ease-out motion-reduce:transition-none"
+                style={{ transform: `translateY(${activeTopPercent}%)` }}
               >
-                <span className="block max-w-full overflow-hidden text-sm leading-tight text-ellipsis whitespace-nowrap">
-                  {activeItem.text}
-                </span>
-                {activeItem.preview ? (
-                  <span
-                    className="text-muted-foreground mt-1 block text-sm leading-normal"
-                    style={{
-                      display: '-webkit-box',
-                      WebkitBoxOrient: 'vertical',
-                      WebkitLineClamp: 3,
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {activeItem.preview}
+                <span
+                  className={cn(
+                    'border-border/70 bg-background/95 text-foreground pointer-events-none absolute top-0 left-0 w-80 rounded-xl border p-3 text-left shadow-xl backdrop-blur transition-transform duration-150 ease-out motion-reduce:transition-none',
+                    tooltipClassName
+                  )}
+                  style={{ transform: `translateY(${activeTooltipTranslate})` }}
+                >
+                  <span className="block max-w-full overflow-hidden text-sm leading-tight text-ellipsis whitespace-nowrap">
+                    {activeItem.text}
                   </span>
-                ) : null}
+                  {activeItem.preview ? (
+                    <span
+                      className="text-muted-foreground mt-1 block text-sm leading-normal"
+                      style={{
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 3,
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {activeItem.preview}
+                    </span>
+                  ) : null}
+                </span>
               </span>
             ) : null}
           </button>
         </div>
       </div>
-      {mobileExpanded ? (
-        <button
-          aria-label="Close table of contents"
-          className="fixed inset-0 z-40 cursor-default bg-transparent [@media(pointer:fine)]:lg:hidden"
-          onClick={() => setMobileExpanded(false)}
-          type="button"
-        />
-      ) : null}
+      <button
+        aria-label="Close table of contents"
+        className={cn(
+          'fixed inset-0 z-40 cursor-default bg-transparent transition-[opacity,display] transition-discrete duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none starting:opacity-0 [@media(pointer:fine)]:lg:hidden',
+          mobileExpanded ? 'block opacity-100' : 'hidden opacity-0'
+        )}
+        onClick={() => setMobileExpanded(false)}
+        type="button"
+      />
       <div
         className={cn(
           'fixed inset-x-0 z-40 flex flex-col items-center [@media(pointer:fine)]:lg:hidden',
@@ -541,50 +545,53 @@ export function TocMinimap({
         data-toc-minimap-mobile
         style={{ bottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
       >
-        {mobileExpanded ? (
-          <div
-            className={cn(
-              'border-border/70 bg-background/95 mb-2 max-h-[55vh] w-72 max-w-[85vw] overflow-y-auto rounded-xl border shadow-xl backdrop-blur',
-              panelClassName
-            )}
-            role="menu"
-          >
-            {items.map((item, index) => {
-              const isCurrent = visibleIndexes.has(index);
-              return (
-                <button
-                  className={cn(
-                    'hover:bg-muted/60 active:bg-muted/60 block w-full px-3 py-2 text-left text-sm leading-tight transition-colors',
-                    (item.level ?? 2) >= 3 && 'pl-6',
-                    isCurrent
-                      ? 'text-foreground font-medium'
-                      : 'text-muted-foreground'
-                  )}
-                  // Index suffix avoids duplicate React keys when heading text repeats and ids collide.
-                  key={`${item.id}-${index}-mobile-menu`}
-                  onClick={() => {
-                    selectItem(item);
-                    setMobileExpanded(false);
-                  }}
-                  role="menuitem"
-                  type="button"
-                >
-                  <span className="flex items-center gap-2">
-                    {isCurrent ? (
-                      <span
-                        aria-hidden="true"
-                        className="bg-foreground/70 h-1.5 w-1.5 shrink-0 rounded-full"
-                      />
-                    ) : null}
-                    <span className="block overflow-hidden text-ellipsis whitespace-nowrap">
-                      {item.text}
-                    </span>
+        {/* Grows out of the trigger sitting directly below it; the literal curve keeps this file free of site-level tokens. */}
+        <div
+          className={cn(
+            'border-border/70 bg-background/95 mb-2 max-h-[55vh] w-72 max-w-[85vw] origin-bottom overflow-y-auto rounded-xl border shadow-xl backdrop-blur',
+            'transition-[opacity,translate,scale,display] transition-discrete duration-180 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none starting:translate-y-1 starting:scale-97 starting:opacity-0',
+            mobileExpanded
+              ? 'block translate-y-0 scale-100 opacity-100'
+              : 'hidden translate-y-1 scale-97 opacity-0',
+            panelClassName
+          )}
+          role="menu"
+        >
+          {items.map((item, index) => {
+            const isCurrent = visibleIndexes.has(index);
+            return (
+              <button
+                className={cn(
+                  'hover:bg-muted/60 active:bg-muted/60 block w-full px-3 py-2 text-left text-sm leading-tight transition-colors',
+                  (item.level ?? 2) >= 3 && 'pl-6',
+                  isCurrent
+                    ? 'text-foreground font-medium'
+                    : 'text-muted-foreground'
+                )}
+                // Index suffix avoids duplicate React keys when heading text repeats and ids collide.
+                key={`${item.id}-${index}-mobile-menu`}
+                onClick={() => {
+                  selectItem(item);
+                  setMobileExpanded(false);
+                }}
+                role="menuitem"
+                type="button"
+              >
+                <span className="flex items-center gap-2">
+                  {isCurrent ? (
+                    <span
+                      aria-hidden="true"
+                      className="bg-foreground/70 h-1.5 w-1.5 shrink-0 rounded-full"
+                    />
+                  ) : null}
+                  <span className="block overflow-hidden text-ellipsis whitespace-nowrap">
+                    {item.text}
                   </span>
-                </button>
-              );
-            })}
-          </div>
-        ) : null}
+                </span>
+              </button>
+            );
+          })}
+        </div>
         <div className="border-border/50 bg-background/85 rounded-full border px-4 py-2.5 shadow-lg backdrop-blur">
           <button
             aria-expanded={mobileExpanded}

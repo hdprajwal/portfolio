@@ -149,7 +149,7 @@ export default function ColophonPage() {
                 className="group hover:text-foreground inline-flex items-center underline underline-offset-2 transition-colors"
               >
                 github.com/hdprajwal/portfolio{' '}
-                <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
+                <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />
               </a>
             </li>
           </ul>
@@ -184,7 +184,7 @@ export default function ColophonPage() {
                 className="group hover:text-foreground inline-flex items-center underline underline-offset-2 transition-colors"
               >
                 github.com/hdprajwal/dotfiles
-                <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
+                <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />
               </a>
             </li>
           </ul>

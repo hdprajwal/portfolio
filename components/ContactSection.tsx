@@ -29,7 +29,7 @@ const ContactLink = ({
       <span className="border-border mx-4 flex-grow border-b border-dashed" />
       <span className="text-muted-foreground group-hover:text-primary flex shrink-0 items-center gap-1 transition-colors">
         {value}
-        <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:rotate-45" />
+        <ArrowUpRight className="h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />
       </span>
     </Link>
   );
