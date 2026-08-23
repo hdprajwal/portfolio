@@ -8,10 +8,8 @@ export default async function ComponentsPage() {
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
-        <h1 className="text-foreground text-heading-24 sm:text-heading-32">
-          Components
-        </h1>
-        <p className="text-muted-foreground text-copy-16 mt-3 max-w-3xl">
+        <h1 className="text-foreground text-title-24">Components</h1>
+        <p className="text-muted-foreground text-read-14 mt-3 max-w-3xl">
           UI components I built for this site and published to a shadcn
           registry. Each one has a live demo, docs, and a one line install.
         </p>
@@ -19,7 +17,7 @@ export default async function ComponentsPage() {
 
       <div className="px-4 pb-16">
         {components.length === 0 ? (
-          <p className="text-muted-foreground text-copy-16">
+          <p className="text-muted-foreground text-read-14">
             No components yet.
           </p>
         ) : (

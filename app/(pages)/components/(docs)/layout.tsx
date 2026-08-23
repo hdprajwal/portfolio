@@ -12,7 +12,7 @@ export default function ComponentDocsLayout({
       <div className="mx-auto w-full max-w-3xl">
         <Link
           href="/components"
-          className="text-muted-foreground hover:text-foreground text-label-16 inline-flex items-center gap-2 transition-colors"
+          className="text-muted-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-2 transition-colors"
         >
           <ArrowLeftIcon className="h-4 w-4" />
           Components

@@ -68,23 +68,21 @@ export default async function ProjectPage({
       <div className="mx-auto w-full max-w-3xl">
         <Link
           href="/projects"
-          className="text-muted-foreground hover:text-foreground text-label-16 inline-flex items-center gap-2 transition-colors"
+          className="text-muted-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-2 transition-colors"
         >
           Projects
         </Link>
         <header className="mt-4">
           <div className="flex items-baseline justify-between gap-5">
             <ViewTransition name={`project-title-${slug}`}>
-              <h1 className="text-heading-24 md:text-heading-32 font-[450]! text-balance">
-                {project.name}
-              </h1>
+              <h1 className="text-title-24 text-balance">{project.name}</h1>
             </ViewTransition>
             {project.liveHref && (
               <Link
                 href={project.liveHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground text-label-16 inline-flex shrink-0 items-center gap-1 transition-colors hover:underline"
+                className="text-foreground decoration-muted-foreground hover:decoration-foreground text-label-13-mono inline-flex shrink-0 items-center gap-1 underline underline-offset-4 transition-colors"
               >
                 View Live
                 <ExternalLink className="h-3.5 w-3.5" />
@@ -92,7 +90,7 @@ export default async function ProjectPage({
             )}
           </div>
 
-          <p className="text-muted-foreground text-copy-18 mt-2">
+          <p className="text-muted-foreground text-read-14 mt-2">
             {project.tagline}
           </p>
         </header>

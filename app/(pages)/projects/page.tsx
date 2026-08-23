@@ -8,10 +8,8 @@ export default async function ProjectsPage() {
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
-        <h1 className="text-foreground text-heading-24 sm:text-heading-32">
-          Projects
-        </h1>
-        <p className="text-muted-foreground text-copy-16 mt-3 max-w-3xl">
+        <h1 className="text-foreground text-title-24">Projects</h1>
+        <p className="text-muted-foreground text-read-14 mt-3 max-w-3xl">
           Work across applied AI, security, and developer tooling. Research
           papers, shipped tools, and things I built to scratch my own itch.
         </p>
@@ -19,7 +17,7 @@ export default async function ProjectsPage() {
 
       <div className="px-4 pb-16">
         {projects.length === 0 ? (
-          <p className="text-muted-foreground text-copy-16">
+          <p className="text-muted-foreground text-read-14">
             No projects found.
           </p>
         ) : (

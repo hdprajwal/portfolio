@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="text-label-13-mono mt-5 flex flex-wrap items-center gap-x-4.5 gap-y-1.5">
         <Link
           href="/resume"
-          className="text-foreground inline-flex items-center gap-1 underline underline-offset-4"
+          className="text-foreground decoration-muted-foreground hover:decoration-foreground inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
         >
           Resume
           <ArrowRight className="h-3.5 w-3.5" />

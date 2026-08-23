@@ -72,13 +72,16 @@ export default function TocMinimapPreview({
         {DEMO_SECTIONS.map((section) => (
           <section key={section.id}>
             <h3
-              className="text-foreground text-label-18 mt-8 first:mt-0"
+              className="text-foreground text-title-15 mt-8 first:mt-0"
               id={section.id}
             >
               {section.title}
             </h3>
             {section.paragraphs.map((paragraph, index) => (
-              <p className="text-muted-foreground text-copy-16 mt-3" key={index}>
+              <p
+                className="text-muted-foreground text-read-14 mt-3"
+                key={index}
+              >
                 {paragraph}
               </p>
             ))}

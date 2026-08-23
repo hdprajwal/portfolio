@@ -11,24 +11,26 @@ const links = [
 export default function NotFound() {
   return (
     <>
-      <main className="min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-2xl w-full text-center space-y-6 py-24">
-          <h1 className="font-extrabold leading-tight tracking-tight text-[clamp(4rem,15vw,8rem)]">
+      <main className="flex min-h-screen items-center justify-center px-4">
+        <div className="w-full max-w-2xl space-y-6 py-24 text-center">
+          <h1 className="text-[clamp(4rem,15vw,8rem)] leading-tight font-extrabold tracking-tight">
             404
           </h1>
 
-          <p className="text-copy-18 text-muted-foreground">
+          <p className="text-read-14 text-muted-foreground">
             The page you&apos;re looking for doesn&apos;t exist or has been
-            moved.
-            Here are some helpful links to get you back on track.
+            moved. Here are some helpful links to get you back on track.
           </p>
 
-          <nav className="flex flex-wrap gap-4 justify-center" aria-label="Quick navigation">
+          <nav
+            className="flex flex-wrap justify-center gap-4"
+            aria-label="Quick navigation"
+          >
             {links.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="text-label-18 inline-flex items-center gap-2 hover:text-muted-foreground transition-colors"
+                className="text-label-13-mono hover:text-muted-foreground inline-flex items-center gap-2 transition-colors"
               >
                 <ArrowRight className="h-4 w-4" />
                 {label}
@@ -36,11 +38,11 @@ export default function NotFound() {
             ))}
           </nav>
 
-          <p className="text-copy-16 text-muted-foreground">
+          <p className="text-read-13 text-muted-foreground">
             If you believe this is a broken link,{' '}
             <a
               href="mailto:hdprajwal01@gmail.com?subject=404%20on%20site"
-              className="underline hover:text-foreground transition-colors"
+              className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
             >
               let me know
             </a>

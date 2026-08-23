@@ -90,7 +90,7 @@ export default async function Blog({
       <div className="mx-auto flex w-full max-w-3xl items-center justify-between">
         <Link
           href="/blog"
-          className="text-muted-foreground hover:text-foreground text-label-16 inline-flex items-center gap-2 transition-colors"
+          className="text-muted-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-2 transition-colors"
         >
           Blog
         </Link>
@@ -100,11 +100,9 @@ export default async function Blog({
       <div className="mx-auto max-w-3xl">
         <header className="mx-auto mt-4">
           <ViewTransition name={`post-title-${slug}`}>
-            <h1 className="text-heading-24 md:text-heading-40 font-[450]! mt-3 text-balance">
-              {post.title}
-            </h1>
+            <h1 className="text-title-24 mt-3 text-balance">{post.title}</h1>
           </ViewTransition>
-          <p className="text-muted-foreground text-copy-13 tracking-wider uppercase mt-4">
+          <p className="text-muted-foreground text-eyebrow-11 mt-4">
             {formatDate(post.date)} · {readingMins} min read
           </p>
         </header>
@@ -161,11 +159,11 @@ export default async function Blog({
             <div className="flex flex-col gap-6 md:flex-row md:items-stretch md:justify-between md:gap-8">
               {prev && (
                 <Link href={`/blog/${prev.slug}`} className="group flex-1">
-                  <div className="text-muted-foreground group-hover:text-foreground text-2xs mb-1 flex items-center gap-2 font-mono tracking-wider uppercase transition-colors">
+                  <div className="text-muted-foreground group-hover:text-foreground text-eyebrow-11 mb-1 flex items-center gap-2 transition-colors">
                     <ArrowLeftIcon className="inline-block h-3.5 w-3.5" />
                     Newer
                   </div>
-                  <div className="text-label-16 group-hover:underline">
+                  <div className="text-title-14 group-hover:underline">
                     {prev.title}
                   </div>
                 </Link>
@@ -175,11 +173,11 @@ export default async function Blog({
                   href={`/blog/${next.slug}`}
                   className="group flex-1 md:text-right"
                 >
-                  <div className="text-muted-foreground group-hover:text-foreground text-2xs mb-1 flex items-center gap-2 font-mono tracking-wider uppercase transition-colors md:justify-end">
+                  <div className="text-muted-foreground group-hover:text-foreground text-eyebrow-11 mb-1 flex items-center gap-2 transition-colors md:justify-end">
                     Older
                     <ArrowRightIcon className="inline-block h-3.5 w-3.5" />
                   </div>
-                  <div className="text-label-16 group-hover:underline">
+                  <div className="text-title-14 group-hover:underline">
                     {next.title}
                   </div>
                 </Link>
