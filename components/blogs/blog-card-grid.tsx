@@ -16,13 +16,13 @@ export default function BlogCardGrid({ post }: { post: Post }) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
       <ViewTransition name={post.image ? `post-image-${post.slug}` : undefined}>
-        <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
+        <div className="border-border group-hover:border-foreground/20 relative aspect-video w-full overflow-hidden rounded-lg border transition-colors duration-200 ease-out">
           {post.image ? (
             <Image
               src={post.image}
               alt={post.title}
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
             />
           ) : (
             <TypographyBanner title={post.title} summary={post.summary} />
@@ -74,7 +74,7 @@ function TypographyBanner({
     .replace(/(^-|-$)/g, '');
   return (
     <div className="bg-muted flex h-full w-full flex-col justify-between px-4 py-3.5">
-      <span className="text-muted-foreground text-label-11-mono tracking-wider">
+      <span className="text-muted-foreground group-hover:text-foreground text-label-11-mono tracking-wider transition-colors duration-200 ease-out">
         ❯ {slug}
       </span>
       <div>

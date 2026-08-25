@@ -114,7 +114,7 @@ export default function CommandMenu({
       title="Command Menu"
       description="Quick navigation and actions"
       showCloseButton
-      className="sm:max-w-lg"
+      className="duration-0 sm:max-w-lg"
     >
       <Command className="max-sm:rounded-none!">
         <CommandInput

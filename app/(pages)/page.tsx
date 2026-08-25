@@ -67,11 +67,11 @@ export default async function Home() {
           <SectionHeader label="Projects" />
           <FeaturedProjects />
           <Link
-            className="text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
+            className="group text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
             href="/projects"
           >
             All projects{' '}
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
           </Link>
         </section>
 
@@ -109,11 +109,11 @@ export default async function Home() {
           <SectionHeader label="Writing" />
           <RecentBlogs />
           <Link
-            className="text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
+            className="group text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
             href="/blog"
           >
             All posts{' '}
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
           </Link>
         </section>
 
@@ -135,11 +135,11 @@ export default async function Home() {
             ))}
           </div>
           <Link
-            className="text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
+            className="group text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
             href="/components"
           >
             All components{' '}
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
           </Link>
         </section>
 

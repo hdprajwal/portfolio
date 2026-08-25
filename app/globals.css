@@ -532,8 +532,8 @@
 
 /* Shared-element card morph transitions (project/blog cards -> writeup pages). */
 ::view-transition-group(*) {
-  animation-duration: 250ms;
-  animation-timing-function: ease-in-out;
+  animation-duration: 220ms;
+  animation-timing-function: var(--ease-in-out);
 }
 
 /* Directional page slide, driven by components/nav-direction.tsx setting html[data-page-nav]. */
@@ -578,17 +578,18 @@
   }
 }
 
+/* Exits run shorter than entrances so the incoming page leads the move. */
 html[data-page-nav='forward']::view-transition-old(page) {
-  animation: 280ms cubic-bezier(0.22, 1, 0.36, 1) both page-exit-to-left;
+  animation: 180ms var(--ease-out) both page-exit-to-left;
 }
 html[data-page-nav='forward']::view-transition-new(page) {
-  animation: 280ms cubic-bezier(0.22, 1, 0.36, 1) both page-enter-from-right;
+  animation: 260ms var(--ease-out) both page-enter-from-right;
 }
 html[data-page-nav='backward']::view-transition-old(page) {
-  animation: 280ms cubic-bezier(0.22, 1, 0.36, 1) both page-exit-to-right;
+  animation: 180ms var(--ease-out) both page-exit-to-right;
 }
 html[data-page-nav='backward']::view-transition-new(page) {
-  animation: 280ms cubic-bezier(0.22, 1, 0.36, 1) both page-enter-from-left;
+  animation: 260ms var(--ease-out) both page-enter-from-left;
 }
 
 @media (prefers-reduced-motion: reduce) {

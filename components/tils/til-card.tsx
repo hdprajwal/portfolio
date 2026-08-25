@@ -12,7 +12,7 @@ export default function TilCard({ til }: { til: TIL }) {
   return (
     <Link
       href={`/tils/${til.slug}`}
-      className="group border-border block border-b py-3 transition-transform duration-200 ease-out first:pt-0 last:border-b-0 hover:translate-x-2"
+      className="group border-border block border-b py-3 transition-transform duration-200 ease-out first:pt-0 last:border-b-0 hover:translate-x-1 motion-reduce:hover:translate-x-0"
     >
       <div className="flex items-baseline justify-between gap-4">
         <ViewTransition name={`til-title-${til.slug}`}>

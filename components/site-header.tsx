@@ -6,6 +6,8 @@ import { useEffect, useState, useSyncExternalStore } from 'react';
 import { Moon, Sun, Menu, X, Search, Mail, ArrowUpRight } from 'lucide-react';
 import GithubIcon from '@/components/icons/GithubIcon';
 import LinkedinIcon from '@/components/icons/LinkedinIcon';
+import { ViewTransition } from '@/components/view-transition';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/about', label: 'About' },
@@ -46,13 +48,24 @@ function ThemeToggle() {
       className="text-muted-foreground hover:text-foreground inline-flex h-7 w-7 items-center justify-center transition-[color,scale] duration-160 ease-out active:scale-[0.97]"
       aria-label="Toggle theme"
     >
-      {!mounted ? (
-        <span className="inline-block h-3.5 w-3.5" aria-hidden />
-      ) : resolvedTheme === 'dark' ? (
-        <Sun className="h-3.5 w-3.5" />
-      ) : (
-        <Moon className="h-3.5 w-3.5" />
-      )}
+      <span aria-hidden className="relative inline-block h-3.5 w-3.5">
+        <Sun
+          className={cn(
+            'absolute inset-0 h-3.5 w-3.5 transition-[opacity,rotate,scale] duration-200 ease-out motion-reduce:transition-[opacity]',
+            mounted && resolvedTheme === 'dark'
+              ? 'scale-100 rotate-0 opacity-100'
+              : 'scale-90 -rotate-90 opacity-0'
+          )}
+        />
+        <Moon
+          className={cn(
+            'absolute inset-0 h-3.5 w-3.5 transition-[opacity,rotate,scale] duration-200 ease-out motion-reduce:transition-[opacity]',
+            mounted && resolvedTheme !== 'dark'
+              ? 'scale-100 rotate-0 opacity-100'
+              : 'scale-90 rotate-90 opacity-0'
+          )}
+        />
+      </span>
     </button>
   );
 }
@@ -152,7 +165,9 @@ export default function SiteHeader() {
                   }`}
                 >
                   {isActive && (
-                    <span className="bg-foreground absolute right-2.5 bottom-0 left-2.5 h-px" />
+                    <ViewTransition name="nav-active-underline">
+                      <span className="bg-foreground absolute right-2.5 bottom-0 left-2.5 h-px" />
+                    </ViewTransition>
                   )}
                   {label}
                 </Link>
