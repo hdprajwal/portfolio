@@ -100,6 +100,11 @@
   --success: oklch(0.723 0.219 149.579);
   /* blue-700 */
   --link: oklch(0.488 0.243 264.376);
+  /* Link-underline accents — one value for both themes, so they live only in
+     :root and .dark inherits them. Primary is the default underline; secondary
+     is the yellow alternate for underlines that need a second voice. */
+  --accent-link: oklch(0.68 0.16 250);
+  --accent-link-secondary: oklch(0.82 0.16 95);
   /* zinc-50 */
   --code: oklch(0.985 0 0);
   /* zinc-950 */
@@ -308,6 +313,8 @@
   /* Extended vars */
   --color-popover-border: var(--popover-border);
   --color-accent-muted: var(--accent-muted);
+  --color-accent-link: var(--accent-link);
+  --color-accent-link-secondary: var(--accent-link-secondary);
   --color-edge: var(--edge);
   --color-info: var(--info);
   --color-success: var(--success);
@@ -455,13 +462,11 @@
   font-size: var(--typeset-size);
 }
 
-/* Landing-page roles carried into markdown: prose rides --muted-foreground,
-   titles and emphasis ride --foreground, links wear a faint underline that
-   firms up on hover. These sit outside @layer components, so they beat
-   typeset.css on cascade origin and need no specificity arms race. */
-.typeset-notes :where(p, li, blockquote, dd, td, figcaption, caption) {
-  color: var(--muted-foreground);
-}
+/* Landing-page roles carried into markdown: prose and titles ride
+   --foreground (typeset's own defaults keep captions, markers and footnotes
+   muted), links wear a faint underline that firms up on hover. These sit
+   outside @layer components, so they beat typeset.css on cascade origin and
+   need no specificity arms race. */
 .typeset-notes :where(h1, h2, h3, h4) {
   letter-spacing: -0.02em;
 }
@@ -475,7 +480,6 @@
   letter-spacing: 0.16em; /* matches text-eyebrow-11 */
 }
 .typeset-notes :where(strong, b) {
-  color: var(--foreground);
   font-weight: 500;
 }
 .typeset-notes :where(:is(h1, h2, h3, h4) :is(strong, b)) {
@@ -484,7 +488,7 @@
 .typeset-notes :where(a) {
   color: var(--foreground);
   font-weight: 400;
-  text-decoration-color: var(--muted-foreground);
+  text-decoration-color: var(--accent-link);
   text-underline-offset: 4px;
   transition: text-decoration-color 150ms ease;
 }

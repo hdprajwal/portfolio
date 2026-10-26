@@ -17,7 +17,7 @@ export default function NotFound() {
             404
           </h1>
 
-          <p className="text-read-14 text-muted-foreground">
+          <p className="text-read-14 text-foreground">
             The page you&apos;re looking for doesn&apos;t exist or has been
             moved. Here are some helpful links to get you back on track.
           </p>
@@ -42,7 +42,7 @@ export default function NotFound() {
             If you believe this is a broken link,{' '}
             <a
               href="mailto:hdprajwal01@gmail.com?subject=404%20on%20site"
-              className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+              className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
             >
               let me know
             </a>

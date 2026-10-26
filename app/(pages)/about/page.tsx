@@ -18,7 +18,7 @@ export default function AboutPage() {
       </section>
 
       <div className="space-y-14 px-4 pb-20">
-        <p className="text-muted-foreground text-read-14 mt-3">
+        <p className="text-foreground text-read-14 mt-3">
           I build AI agents, developer tools, and applied ML, with a fullstack
           and cloud infra background from three years at Opslyft. Most of the
           work I enjoy lies where product decisions and infrastructure decisions
@@ -28,7 +28,7 @@ export default function AboutPage() {
 
         <section id="how-i-think">
           <SectionHeader label="How I think about building" />
-          <div className="text-muted-foreground text-read-14 space-y-4.5">
+          <div className="text-foreground text-read-14 space-y-4.5">
             <p>
               I care about systems that fail loudly, APIs that are hard to
               misuse, and code the next person can read without reverse-
@@ -45,7 +45,7 @@ export default function AboutPage() {
 
         <section id="how-i-work">
           <SectionHeader label="How I work with teams" />
-          <div className="text-muted-foreground text-read-14 space-y-4.5">
+          <div className="text-foreground text-read-14 space-y-4.5">
             <p>
               I like ambiguous problems when the constraint is real. At Opslyft
               that meant customer-facing architecture work, cost investigations,
@@ -60,7 +60,7 @@ export default function AboutPage() {
 
         <section id="background">
           <SectionHeader label="Background" />
-          <div className="text-muted-foreground text-read-14 space-y-4.5">
+          <div className="text-foreground text-read-14 space-y-4.5">
             <p>
               Before grad school, I spent close to three years at Opslyft
               working on cloud cost infrastructure, multi-cloud visibility, and
@@ -71,7 +71,7 @@ export default function AboutPage() {
                 href="https://hasgeek.com/rootconf/optimizing-costs-of-cloud-infrastructure/sub/data-transfer-cost-optimization-KGSAciSRiEjTo1bjGNWChG"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 data transfer cost optimization at Rootconf 2022
               </Link>
@@ -85,7 +85,7 @@ export default function AboutPage() {
                 href="https://doi.org/10.3390/electronics15030544"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 MDPI Electronics
               </Link>
@@ -107,7 +107,7 @@ export default function AboutPage() {
 
         <section id="outside">
           <SectionHeader label="Outside the terminal" />
-          <div className="text-muted-foreground text-read-14 space-y-4.5">
+          <div className="text-foreground text-read-14 space-y-4.5">
             <p>
               Gym and books. The gym taught me something about consistency that
               I haven&apos;t been able to learn any other way.
@@ -121,7 +121,7 @@ export default function AboutPage() {
 
         <section id="reach-me">
           <SectionHeader label="Reach me" />
-          <p className="text-muted-foreground text-read-14 mb-4 max-w-3xl">
+          <p className="text-foreground text-read-14 mb-4 max-w-3xl">
             If you&apos;re hiring for AI engineer, backend, or full-stack roles,
             email is the fastest way to reach me.
           </p>
@@ -137,7 +137,7 @@ export default function AboutPage() {
               href="https://www.linkedin.com/in/hdprajwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
+              className="border-border text-foreground hover:border-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
             >
               <LinkedinIcon className="h-3 w-3" />
               LinkedIn
@@ -147,7 +147,7 @@ export default function AboutPage() {
               href="https://github.com/hdprajwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
+              className="border-border text-foreground hover:border-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
             >
               <GithubIcon className="h-3 w-3" />
               GitHub
@@ -158,21 +158,21 @@ export default function AboutPage() {
             Or keep reading:{' '}
             <Link
               href="/projects"
-              className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+              className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
             >
               projects
             </Link>
             <span className="text-muted-foreground/40"> · </span>
             <Link
               href="/blog"
-              className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+              className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
             >
               blog
             </Link>
             <span className="text-muted-foreground/40"> · </span>
             <Link
               href="/resume"
-              className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+              className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
             >
               resume
             </Link>

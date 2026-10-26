@@ -82,7 +82,7 @@ export default async function ProjectPage({
                 href={project.liveHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground text-label-13-mono inline-flex shrink-0 items-center gap-1 underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground text-label-13-mono inline-flex shrink-0 items-center gap-1 underline underline-offset-4 transition-colors"
               >
                 View Live
                 <ExternalLink className="h-3.5 w-3.5" />

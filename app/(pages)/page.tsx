@@ -20,7 +20,7 @@ export default async function Home() {
       <div className="space-y-14 px-4 pb-20">
         <section id="now">
           <SectionHeader label="Now" />
-          <div className="text-muted-foreground text-read-14 space-y-4.5">
+          <div className="text-foreground text-read-14 space-y-4.5">
             <p>
               Open to AI engineer and backend/full-stack roles with end-to-end
               ownership. California, remote, or hybrid.
@@ -29,7 +29,7 @@ export default async function Home() {
               Building{' '}
               <Link
                 href="/projects/emberd"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 emberd
               </Link>
@@ -37,14 +37,14 @@ export default async function Home() {
               inside isolated microVMs. Also maintaining{' '}
               <Link
                 href="/projects/quackcode"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 QuackCode
               </Link>{' '}
               and{' '}
               <Link
                 href="/projects/gitwise"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 Gitwise
               </Link>
@@ -56,7 +56,7 @@ export default async function Home() {
                 href="https://a.co/d/050niXpi"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 AI Systems Performance Engineering
               </Link>{' '}
@@ -98,7 +98,7 @@ export default async function Home() {
                 href="https://doi.org/10.3390/electronics15030544"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-label-13-mono group text-foreground decoration-muted-foreground hover:decoration-foreground inline-flex items-center gap-1.5 underline underline-offset-4 transition-colors"
+                className="text-label-13-mono group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center gap-1.5 underline underline-offset-4 transition-colors"
               >
                 Read paper
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -152,11 +152,11 @@ export default async function Home() {
 
         <section id="contact">
           <SectionHeader label="Get in touch" />
-          <p className="text-muted-foreground text-read-14 max-w-xl">
+          <p className="text-foreground text-read-14 max-w-xl">
             Open to AI engineer and backend/full-stack roles, California,
             remote, or hybrid. Email is the fastest way to reach me.
           </p>
-          <ul className="text-muted-foreground text-read-14 mt-4 max-w-xl space-y-1.5">
+          <ul className="text-foreground text-read-14 mt-4 max-w-xl space-y-1.5">
             {[
               {
                 label: 'Email',
@@ -186,7 +186,7 @@ export default async function Home() {
                     {...(external
                       ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
-                    className="group text-foreground decoration-muted-foreground hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
+                    className="group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
                   >
                     {value}
                     <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />

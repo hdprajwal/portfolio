@@ -8,7 +8,7 @@ export default async function TilsPage() {
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
         <h1 className="text-foreground text-title-24">TILs</h1>
-        <p className="text-muted-foreground text-read-14 mt-3 max-w-3xl">
+        <p className="text-foreground text-read-14 mt-3 max-w-3xl">
           Today I Learned. Quick notes on tools, bugs, and small discoveries
           picked up while building.
         </p>

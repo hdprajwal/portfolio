@@ -17,7 +17,7 @@ function RoleBlock({ role }: { role: ResumeRole }) {
         </span>
       </div>
       <p className="text-muted-foreground/70 text-eyebrow-11">{role.type}</p>
-      <ul className="text-muted-foreground text-read-14 mt-2 list-disc space-y-2 pl-4">
+      <ul className="text-foreground text-read-14 mt-2 list-disc space-y-2 pl-4">
         {role.bullets.map((b, i) => (
           <li key={i}>{b}</li>
         ))}
@@ -50,14 +50,14 @@ export default function ResumePage() {
           </div>
         </div>
 
-        <p className="text-muted-foreground text-read-14 mt-4 max-w-3xl">
+        <p className="text-foreground text-read-14 mt-4 max-w-3xl">
           {resume.summary}
         </p>
 
         <div className="mt-5 flex flex-wrap items-center gap-2 print:hidden">
           <Link
             href="mailto:hdprajwal01@gmail.com"
-            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
+            className="border-border text-foreground hover:border-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
           >
             <Mail className="h-3 w-3" />
             Email
@@ -66,7 +66,7 @@ export default function ResumePage() {
             href="https://www.linkedin.com/in/hdprajwal"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
+            className="border-border text-foreground hover:border-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
           >
             <LinkedinIcon className="h-3 w-3" />
             LinkedIn
@@ -76,7 +76,7 @@ export default function ResumePage() {
             href="https://github.com/hdprajwal"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
+            className="border-border text-foreground hover:border-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
           >
             <GithubIcon className="h-3 w-3" />
             GitHub
@@ -98,14 +98,14 @@ export default function ResumePage() {
           Selected projects and writing:{' '}
           <Link
             href="/projects"
-            className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+            className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
           >
             hdprajwal.dev/projects
           </Link>
           <span className="text-muted-foreground/40"> · </span>
           <Link
             href="/blog"
-            className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+            className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
           >
             hdprajwal.dev/blog
           </Link>
@@ -150,7 +150,7 @@ export default function ResumePage() {
                   <span className="text-muted-foreground/40"> · </span>
                   {pub.venue}
                 </p>
-                <p className="text-muted-foreground text-read-14 mt-2">
+                <p className="text-foreground text-read-14 mt-2">
                   {pub.summary}
                 </p>
                 <p className="text-muted-foreground/60 text-read-12 mt-2">
@@ -183,7 +183,7 @@ export default function ResumePage() {
                     {talk.venue}
                   </span>
                 </div>
-                <p className="text-muted-foreground text-read-14 mt-1">
+                <p className="text-foreground text-read-14 mt-1">
                   {talk.summary}
                 </p>
                 {talk.href && (
@@ -213,11 +213,11 @@ export default function ResumePage() {
                     {e.from} to {e.to}
                   </span>
                 </div>
-                <p className="text-muted-foreground text-read-14 mt-0.5">
+                <p className="text-foreground text-read-14 mt-0.5">
                   {e.degree}, {e.major}
                 </p>
                 {(e.thesis || e.coursework) && (
-                  <div className="text-muted-foreground text-read-14 mt-1.5">
+                  <div className="text-foreground text-read-14 mt-1.5">
                     {e.thesis && (
                       <>
                         Thesis:{' '}
@@ -225,7 +225,7 @@ export default function ResumePage() {
                           href={e.thesis.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                          className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
                         >
                           {e.thesis.title}
                         </Link>

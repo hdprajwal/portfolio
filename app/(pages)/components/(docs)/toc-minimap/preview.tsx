@@ -79,7 +79,7 @@ export default function TocMinimapPreview({
             </h3>
             {section.paragraphs.map((paragraph, index) => (
               <p
-                className="text-muted-foreground text-read-14 mt-3"
+                className="text-foreground text-read-14 mt-3"
                 key={index}
               >
                 {paragraph}

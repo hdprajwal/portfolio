@@ -20,7 +20,7 @@ export default async function BlogIndexPage() {
             <span>RSS</span>
           </Link>
         </div>
-        <p className="text-muted-foreground text-read-14 mt-3 max-w-3xl">
+        <p className="text-foreground text-read-14 mt-3 max-w-3xl">
           Essays and notes on software engineering, security, applied AI, and
           the systems behind them. Occasional deep dives, mostly short.
         </p>

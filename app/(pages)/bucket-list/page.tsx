@@ -33,7 +33,7 @@ export default function BucketListPage() {
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
         <h1 className="text-foreground text-title-24">Bucket List</h1>
-        <p className="text-muted-foreground text-read-14 mt-3 max-w-3xl">
+        <p className="text-foreground text-read-14 mt-3 max-w-3xl">
           Things I want to do, learn, and experience.
         </p>
       </div>

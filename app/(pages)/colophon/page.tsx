@@ -7,7 +7,7 @@ export default function ColophonPage() {
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
         <h1 className="text-foreground text-title-24">Colophon</h1>
-        <p className="text-muted-foreground text-read-14 mt-3 max-w-3xl">
+        <p className="text-foreground text-read-14 mt-3 max-w-3xl">
           Notes about how this site is built and run.
         </p>
       </div>
@@ -27,7 +27,7 @@ export default function ColophonPage() {
             ].map((t) => (
               <span
                 key={t.name}
-                className="border-border bg-muted/40 text-foreground text-label-13-mono rounded-md border px-2.5 py-1"
+                className="border-border bg-muted/40 text-foreground text-label-13-mono rounded-md border px-2 py-0.5"
               >
                 {t.name}
                 {t.detail && (
@@ -42,7 +42,7 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="Content & Blog" />
-          <ul className="text-muted-foreground text-read-14 space-y-2.5">
+          <ul className="text-foreground text-read-14 space-y-2.5">
             <li>
               Posts are written in{' '}
               <code className="bg-muted text-label-13-mono rounded-sm px-1 py-0.5">
@@ -75,7 +75,7 @@ export default function ColophonPage() {
                 href="https://github.com/hashicorp/next-mdx-remote"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 next-mdx-remote
               </a>{' '}
@@ -84,7 +84,7 @@ export default function ColophonPage() {
                 href="https://shiki.style/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 rehype-shiki
               </a>{' '}
@@ -99,18 +99,18 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="Machine Readable" />
-          <ul className="text-muted-foreground text-read-14 space-y-2.5">
+          <ul className="text-foreground text-read-14 space-y-2.5">
             <li>
               <a
                 href="/llms.txt"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 /llms.txt
               </a>{' '}
               indexes the site for AI tools;{' '}
               <a
                 href="/llms-full.txt"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 /llms-full.txt
               </a>{' '}
@@ -127,7 +127,7 @@ export default function ColophonPage() {
             <li>
               <a
                 href="/rss.xml"
-                className="text-foreground decoration-muted-foreground hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 /rss.xml
               </a>{' '}
@@ -138,13 +138,13 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="Source" />
-          <ul className="text-muted-foreground text-read-14 space-y-2.5">
+          <ul className="text-foreground text-read-14 space-y-2.5">
             <li>
               <a
                 href="https://github.com/hdprajwal/portfolio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group text-foreground decoration-muted-foreground hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
+                className="group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
               >
                 github.com/hdprajwal/portfolio{' '}
                 <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />
@@ -155,7 +155,7 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="System" />
-          <ul className="text-muted-foreground text-read-14 space-y-2.5">
+          <ul className="text-foreground text-read-14 space-y-2.5">
             {[
               ['OS', 'Arch Linux'],
               ['WM', 'Hyprland'],
@@ -179,7 +179,7 @@ export default function ColophonPage() {
                 href="https://github.com/hdprajwal/dotfiles"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group text-foreground decoration-muted-foreground hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
+                className="group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
               >
                 github.com/hdprajwal/dotfiles
                 <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />
