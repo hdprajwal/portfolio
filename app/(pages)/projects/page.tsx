@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { listProjects } from '@/lib/projects';
-import ProjectCardBanner from '@/components/projects/project-card-banner';
+import ProjectList from '@/components/projects/project-list';
 
 export default async function ProjectsPage() {
   const projects = await listProjects();
@@ -21,11 +21,7 @@ export default async function ProjectsPage() {
             No projects found.
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-7 sm:grid-cols-2">
-            {projects.map((p) => (
-              <ProjectCardBanner key={p.slug} project={p} />
-            ))}
-          </div>
+          <ProjectList projects={projects} />
         )}
       </div>
     </div>

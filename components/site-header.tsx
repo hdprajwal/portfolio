@@ -10,7 +10,6 @@ import { ViewTransition } from '@/components/view-transition';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
-  { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
   { href: '/blog', label: 'Blog' },
   { href: '/tils', label: 'TILs' },

@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 // Top-level page order used to derive slide direction between route changes.
 const PAGE_ORDER: Record<string, number> = {
   '/': 0,
-  '/about': 1,
   '/projects': 2,
   '/blog': 3,
   '/tils': 4,

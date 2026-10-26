@@ -1,5 +1,5 @@
+import ProjectList from '@/components/projects/project-list';
 import { listProjects } from '@/lib/projects';
-import ProjectCardBanner from '@/components/projects/project-card-banner';
 
 export default async function FeaturedProjects() {
   const projects = await listProjects();
@@ -10,14 +10,6 @@ export default async function FeaturedProjects() {
     );
   }
 
-  // listProjects sorts featured first, then newest; the top four fill the home page's 2x2 grid.
-  const featured = projects.slice(0, 4);
-
-  return (
-    <div className="grid grid-cols-1 gap-7 sm:grid-cols-2">
-      {featured.map((project) => (
-        <ProjectCardBanner key={project.slug} project={project} />
-      ))}
-    </div>
-  );
+  // listProjects sorts featured first, then newest; the top four fill the list.
+  return <ProjectList projects={projects.slice(0, 4)} />;
 }

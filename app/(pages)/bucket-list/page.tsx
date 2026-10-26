@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 type BucketItem = { label: string; done: boolean };
 
 const bucketListItems: BucketItem[] = [
+  { label: 'Run a 10k', done: true },
   { label: 'Run a full marathon', done: false },
   { label: 'Finish a full Ironman', done: false },
   { label: 'Trek to Everest Base Camp', done: false },

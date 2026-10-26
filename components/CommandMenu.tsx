@@ -18,7 +18,6 @@ import {
 } from '@/components/ui/command';
 import {
   Home,
-  User,
   Newspaper,
   FolderGit2,
   Blocks,
@@ -34,7 +33,6 @@ import type { ContentIndexItem } from '@/lib/content-index';
 
 const navigationItems = [
   { icon: Home, label: 'Home', href: '/', keywords: ['home', 'main'] },
-  { icon: User, label: 'About', href: '/about', keywords: ['about', 'bio'] },
   {
     icon: Newspaper,
     label: 'Blog',

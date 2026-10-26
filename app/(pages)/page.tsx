@@ -173,7 +173,11 @@ export default async function Home() {
                 value: 'github.com/hdprajwal',
                 href: 'https://github.com/hdprajwal',
               },
-              { label: 'Resume', value: '/resume', href: '/resume' },
+              {
+                label: 'X',
+                value: 'x.com/_hdprajwal',
+                href: 'https://x.com/_hdprajwal',
+              },
             ].map(({ label, value, href }) => {
               const external = href.startsWith('http');
               return (
