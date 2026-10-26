@@ -8,7 +8,7 @@ export default function SectionHeader({
   className?: string;
 }) {
   return (
-    <h2 className={cn('text-muted-foreground text-eyebrow-11 mb-4', className)}>
+    <h2 className={cn('text-muted-foreground text-section-14 mb-4', className)}>
       {label}
     </h2>
   );

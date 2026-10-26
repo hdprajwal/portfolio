@@ -114,7 +114,7 @@ export default function ResumePage() {
 
       <div className="space-y-14 px-4 pb-20">
         <section id="experience">
-          <h2 className="text-foreground text-eyebrow-11 mb-5">Experience</h2>
+          <h2 className="text-muted-foreground text-section-14 mb-5">Experience</h2>
           <div className="space-y-10">
             {resume.experience.map((c) => (
               <div key={c.name}>
@@ -135,7 +135,7 @@ export default function ResumePage() {
         </section>
 
         <section id="publications">
-          <h2 className="text-foreground text-eyebrow-11 mb-5">Publications</h2>
+          <h2 className="text-muted-foreground text-section-14 mb-5">Publications</h2>
           <div className="space-y-6">
             {resume.publications.map((pub) => (
               <div key={pub.title}>
@@ -171,7 +171,7 @@ export default function ResumePage() {
         </section>
 
         <section id="speaking">
-          <h2 className="text-foreground text-eyebrow-11 mb-5">Speaking</h2>
+          <h2 className="text-muted-foreground text-section-14 mb-5">Speaking</h2>
           <div className="space-y-6">
             {resume.talks.map((talk) => (
               <div key={talk.title} className="border-border border-l pl-4">
@@ -203,7 +203,7 @@ export default function ResumePage() {
         </section>
 
         <section id="education">
-          <h2 className="text-foreground text-eyebrow-11 mb-5">Education</h2>
+          <h2 className="text-muted-foreground text-section-14 mb-5">Education</h2>
           <div className="space-y-6">
             {resume.education.map((e) => (
               <div key={e.school}>

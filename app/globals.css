@@ -45,6 +45,11 @@
   --text-5xl: 3.25rem; /* 52px */
   --text-5xl--line-height: 1.05;
   --text-5xl--letter-spacing: -0.025em;
+
+  --text-section-14: 0.875rem; /* 14px — section headers */
+  --text-section-14--line-height: 1.4;
+  --text-section-14--letter-spacing: 0.02em;
+  --text-section-14--font-weight: 500;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -100,9 +105,7 @@
   --success: oklch(0.723 0.219 149.579);
   /* blue-700 */
   --link: oklch(0.488 0.243 264.376);
-  /* Link-underline accents — one value for both themes, so they live only in
-     :root and .dark inherits them. Primary is the default underline; secondary
-     is the yellow alternate for underlines that need a second voice. */
+  /* Link underline accents, one value for both themes; .dark inherits. */
   --accent-link: oklch(0.68 0.16 250);
   --accent-link-secondary: oklch(0.82 0.16 95);
   /* zinc-50 */
