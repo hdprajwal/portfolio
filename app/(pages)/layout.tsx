@@ -3,6 +3,7 @@ import SiteHeader from '@/components/site-header';
 import CommandMenu from '@/components/CommandMenu';
 import { Toaster } from '@/components/ui/sooner';
 import ScrollToTop from '@/components/scroll-to-top';
+import TrackingEvents from '@/components/tracking-events';
 import NavDirection from '@/components/nav-direction';
 import { ViewTransition } from '@/components/view-transition';
 import { listPosts } from '@/lib/posts';
@@ -39,6 +40,7 @@ export default async function Layout({
       <CommandMenu contentItems={contentItems} />
       <ScrollToTop />
       <NavDirection />
+      <TrackingEvents />
     </>
   );
 }

@@ -7,6 +7,7 @@ import SectionHeader from '@/components/section-header';
 import RecentBlogs from '@/components/blogs/recent-blogs';
 import FeaturedProjects from '@/components/projects/featured-projects';
 import Talks from '@/components/talks';
+import SectionViewTracker from '@/components/section-view-tracker';
 import { listRegistryComponents } from '@/lib/registry';
 
 export default async function Home() {
@@ -15,6 +16,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
+      <SectionViewTracker />
       <div className="space-y-14 px-4 pb-20">
         <section id="now">
           <SectionHeader label="Now" />

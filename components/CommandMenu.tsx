@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
+import posthog from 'posthog-js';
+import { CONTACT_EMAIL } from '@/lib/tracking';
 import {
   Command,
   CommandDialog,
@@ -173,7 +175,10 @@ export default function CommandMenu({
             <CommandItem
               value="copy email contact"
               onSelect={() =>
-                handleSelect(() => copyToClipboard('hdprajwal01@gmail.com'))
+                handleSelect(() => {
+                  copyToClipboard(CONTACT_EMAIL);
+                  posthog.capture('copy_email', { via: 'command_menu' });
+                })
               }
             >
               <Mail />
