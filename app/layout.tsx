@@ -4,9 +4,15 @@ import { ThemeProvider } from '@/components/theme-provider';
 import AnalyticsProvider from '@/components/analytics';
 import { baseUrl } from '@/lib/site';
 
-import { Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 
-// Geist Mono is the whole type system now: --font-sans in globals.css points at it too.
+// Geist Sans carries the type system (--font-sans in globals.css); Geist Mono stays for code.
+const geistSans = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist-sans',
+  display: 'swap',
+});
+
 const geistMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-geist-mono',
@@ -56,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={geistMono.variable}>
+    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
         <link
           rel="preconnect"

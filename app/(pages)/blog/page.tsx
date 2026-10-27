@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Rss } from 'lucide-react';
 import { listPosts } from '@/lib/posts';
-import BlogCardGrid from '@/components/blogs/blog-card-grid';
+import BlogList from '@/components/blogs/blog-list';
 import type { Metadata } from 'next';
 
 export default async function BlogIndexPage() {
@@ -10,17 +10,17 @@ export default async function BlogIndexPage() {
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
         <div className="flex items-center justify-between gap-4">
-          <h1 className="text-foreground text-title-24">Blog</h1>
+          <h1 className="text-foreground text-display">Blog</h1>
           <Link
             href="/rss.xml"
-            className="text-muted-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 transition-colors"
+            className="text-muted-foreground hover:text-foreground text-meta inline-flex items-center gap-1.5 transition-colors"
             aria-label="RSS feed"
           >
             <Rss className="h-3.5 w-3.5" />
             <span>RSS</span>
           </Link>
         </div>
-        <p className="text-foreground text-read-14 mt-3 max-w-3xl">
+        <p className="text-foreground text-body mt-4">
           Essays and notes on software engineering, security, applied AI, and
           the systems behind them. Occasional deep dives, mostly short.
         </p>
@@ -28,13 +28,9 @@ export default async function BlogIndexPage() {
 
       <div className="px-4 pb-16">
         {posts.length === 0 ? (
-          <p className="text-muted-foreground text-read-14">No posts yet.</p>
+          <p className="text-muted-foreground text-body">No posts yet.</p>
         ) : (
-          <div className="grid grid-cols-1 gap-7 sm:grid-cols-2">
-            {posts.map((p) => (
-              <BlogCardGrid key={p.slug} post={p} />
-            ))}
-          </div>
+          <BlogList posts={posts} />
         )}
       </div>
     </div>

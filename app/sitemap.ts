@@ -43,11 +43,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const registryComponentRoutes: MetadataRoute.Sitemap =
-    registryComponents.map((component) => ({
+  const registryComponentRoutes: MetadataRoute.Sitemap = registryComponents.map(
+    (component) => ({
       url: `${BASE_URL}/components/${component.slug}`,
       priority: 0.6,
-    }));
+    })
+  );
 
   return [
     ...staticRoutes,

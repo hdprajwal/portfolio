@@ -9,8 +9,8 @@ export default function Footer() {
   return (
     <footer className="px-4">
       <Separator className="bg-muted mt-1" />
-      <div className="flex items-start justify-between gap-4 pt-7 pb-10">
-        <p className="text-muted-foreground text-label-12-mono">
+      <div className="flex items-start justify-between gap-4 pt-6 pb-10">
+        <p className="text-muted-foreground text-meta">
           &copy; 2026 Prajwal HD
         </p>
         <div className="flex items-center gap-4">
@@ -51,7 +51,7 @@ export default function Footer() {
           <span className="bg-border h-3.5 w-px" />
           <Link
             href="/colophon"
-            className="text-muted-foreground hover:text-foreground text-label-12-mono transition-colors"
+            className="text-muted-foreground hover:text-foreground text-meta transition-colors"
           >
             Colophon
           </Link>

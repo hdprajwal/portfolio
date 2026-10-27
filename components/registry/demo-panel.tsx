@@ -40,7 +40,7 @@ export default function DemoPanel({
           {codeExpanded ? (
             <div className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center">
               <button
-                className="border-border bg-background text-foreground text-label-13-mono pointer-events-auto cursor-pointer rounded-lg border px-3 py-1.5 shadow-sm transition-[background-color,border-color,color,box-shadow,scale] duration-160 ease-out hover:shadow active:scale-[0.97]"
+                className="border-border bg-background text-foreground text-meta pointer-events-auto cursor-pointer rounded-lg border px-3 py-1.5 shadow-sm transition-[background-color,border-color,color,box-shadow,scale] duration-160 ease-out hover:shadow active:scale-[0.97]"
                 onClick={() => setCodeExpanded(false)}
                 type="button"
               >
@@ -50,7 +50,7 @@ export default function DemoPanel({
           ) : (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
               <button
-                className="border-border bg-background text-foreground text-label-13-mono pointer-events-auto cursor-pointer rounded-lg border px-3 py-1.5 shadow-sm transition-[background-color,border-color,color,box-shadow,scale] duration-160 ease-out hover:shadow active:scale-[0.97]"
+                className="border-border bg-background text-foreground text-meta pointer-events-auto cursor-pointer rounded-lg border px-3 py-1.5 shadow-sm transition-[background-color,border-color,color,box-shadow,scale] duration-160 ease-out hover:shadow active:scale-[0.97]"
                 onClick={() => setCodeExpanded(true)}
                 type="button"
               >
@@ -61,7 +61,7 @@ export default function DemoPanel({
         </div>
       </div>
       {caption ? (
-        <p className="text-muted-foreground text-read-13 mt-4">{caption}</p>
+        <p className="text-muted-foreground text-subtitle mt-4">{caption}</p>
       ) : null}
     </div>
   );

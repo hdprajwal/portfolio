@@ -86,7 +86,7 @@ function CommandKButton({ compact = false }: { compact?: boolean }) {
     <button
       type="button"
       onClick={triggerCommandMenu}
-      className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-11-mono inline-flex items-center gap-1.5 rounded-lg border px-1.5 py-0.5 transition-[color,border-color,scale] duration-160 ease-out active:scale-[0.97]"
+      className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-meta inline-flex items-center gap-1.5 rounded-lg border px-1.5 py-0.5 transition-[color,border-color,scale] duration-160 ease-out active:scale-[0.97]"
       aria-label="Open command menu"
     >
       <Search className="h-3 w-3" />
@@ -141,7 +141,7 @@ export default function SiteHeader() {
               </g>
             </svg>
           </span>
-          <span className="text-muted-foreground group-hover:text-foreground text-label-13-mono hidden transition-colors sm:inline">
+          <span className="text-muted-foreground group-hover:text-foreground text-meta hidden transition-colors sm:inline">
             hdprajwal<span>.dev</span>
           </span>
         </Link>
@@ -158,7 +158,7 @@ export default function SiteHeader() {
                   href={href}
                   aria-label={`Go to ${label} page`}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`text-label-13-mono relative px-2.5 py-1 transition-colors ${
+                  className={`text-meta relative px-2.5 py-1 transition-colors ${
                     isActive
                       ? 'text-foreground'
                       : 'text-muted-foreground hover:text-foreground'
@@ -220,7 +220,7 @@ export default function SiteHeader() {
                 key={href}
                 href={href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`border-border/40 text-label-13-mono flex items-baseline justify-between border-b py-2.5 transition-colors last:border-b-0 ${
+                className={`border-border/40 text-meta flex items-baseline justify-between border-b py-2.5 transition-colors last:border-b-0 ${
                   isActive
                     ? 'text-foreground'
                     : 'text-muted-foreground hover:text-foreground'
@@ -237,14 +237,14 @@ export default function SiteHeader() {
         </nav>
 
         <div className="border-border/40 border-t px-4 py-3">
-          <div className="text-muted-foreground text-eyebrow-11 mb-2">
+          <div className="text-muted-foreground text-eyebrow mb-2">
             Reach me
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <Link
               href="mailto:hdprajwal01@gmail.com"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-meta inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
             >
               <Mail className="h-3 w-3" />
               Email
@@ -254,7 +254,7 @@ export default function SiteHeader() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-meta inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
             >
               <LinkedinIcon className="h-3 w-3" />
               LinkedIn
@@ -265,7 +265,7 @@ export default function SiteHeader() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
+              className="border-border text-muted-foreground hover:border-foreground hover:text-foreground text-meta inline-flex items-center gap-1.5 rounded-lg border px-2 py-0.5 transition-colors"
             >
               <GithubIcon className="h-3 w-3" />
               GitHub
@@ -275,9 +275,7 @@ export default function SiteHeader() {
         </div>
 
         <div className="border-border/40 border-t px-4 py-3">
-          <p className="text-muted-foreground text-label-11-mono tracking-wider">
-            California, USA
-          </p>
+          <p className="text-muted-foreground text-eyebrow">California, USA</p>
         </div>
       </div>
     </header>

@@ -26,7 +26,7 @@ export default async function Layout({
   return (
     <>
       <div className="flex min-h-screen flex-col items-center justify-start">
-        <div className="flex min-h-screen w-full max-w-3xl flex-col">
+        <div className="flex min-h-screen w-full max-w-2xl flex-col">
           <SiteHeader />
           <main className="w-full flex-1">
             <ViewTransition name="page">

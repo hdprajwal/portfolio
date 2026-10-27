@@ -109,7 +109,7 @@ export default function InstallCommand({ args }: { args: string }) {
           <TabsList aria-label="Package manager" className="bg-transparent">
             {PACKAGE_MANAGERS.map(({ value }) => (
               <TabsTrigger
-                className="text-3xs cursor-pointer px-2 font-mono tracking-wider"
+                className="text-meta cursor-pointer px-2"
                 key={value}
                 value={value}
               >

@@ -7,6 +7,7 @@ import SectionHeader from '@/components/section-header';
 import RecentBlogs from '@/components/blogs/recent-blogs';
 import FeaturedProjects from '@/components/projects/featured-projects';
 import Talks from '@/components/talks';
+import Stack from '@/components/stack';
 import SectionViewTracker from '@/components/section-view-tracker';
 import { listRegistryComponents } from '@/lib/registry';
 
@@ -17,10 +18,10 @@ export default async function Home() {
     <>
       <Hero />
       <SectionViewTracker />
-      <div className="space-y-14 px-4 pb-20">
+      <div className="space-y-14 px-4 pb-14">
         <section id="now">
           <SectionHeader label="Now" />
-          <div className="text-foreground text-read-14 space-y-4.5">
+          <div className="text-foreground text-body space-y-4">
             <p>
               Open to AI engineer and backend/full-stack roles with end-to-end
               ownership. California, remote, or hybrid.
@@ -28,7 +29,9 @@ export default async function Home() {
             <p>
               Building{' '}
               <Link
-                href="/projects/emberd"
+                href="https://emberd.hdprajwal.dev"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
               >
                 emberd
@@ -69,7 +72,7 @@ export default async function Home() {
           <SectionHeader label="Projects" />
           <FeaturedProjects />
           <Link
-            className="group text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
+            className="group text-muted-foreground hover:text-foreground text-meta mt-4 inline-flex items-center gap-1.5 transition-colors"
             href="/projects"
           >
             All projects{' '}
@@ -77,28 +80,33 @@ export default async function Home() {
           </Link>
         </section>
 
+        <section id="stack">
+          <SectionHeader label="Stack" />
+          <Stack />
+        </section>
+
         <section id="research">
           <SectionHeader label="Featured work" />
           <div className="">
-            <h3 className="text-foreground text-title-15">
+            <h3 className="text-foreground text-title">
               Re-Evaluating Android Malware Detection: Tabular Features, Vision
               Models, and Ensembles
             </h3>
-            <p className="text-muted-foreground text-read-13 mt-1 italic">
+            <p className="text-muted-foreground text-subtitle mt-1 italic">
               Hosahalli Dayananda, P.; Chen, Z.
             </p>
-            <p className="text-muted-foreground text-read-13 mt-2.5">
+            <p className="text-muted-foreground text-subtitle mt-2">
               Compares tabular features, visual byte-plot images, and ensemble
               strategies for Android malware detection. Evaluates where modality
               choice changes the detection surface and where ensembles actually
               pay for themselves.
             </p>
-            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
               <Link
                 href="https://doi.org/10.3390/electronics15030544"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-label-13-mono group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center gap-1.5 underline underline-offset-4 transition-colors"
+                className="text-meta group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center gap-1.5 underline underline-offset-4 transition-colors"
               >
                 Read paper
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -111,7 +119,7 @@ export default async function Home() {
           <SectionHeader label="Writing" />
           <RecentBlogs />
           <Link
-            className="group text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
+            className="group text-muted-foreground hover:text-foreground text-meta mt-4 inline-flex items-center gap-1.5 transition-colors"
             href="/blog"
           >
             All posts{' '}
@@ -121,23 +129,23 @@ export default async function Home() {
 
         <section id="components">
           <SectionHeader label="Components" />
-          <div className="space-y-5.5">
+          <div className="space-y-6">
             {registryComponents.map((component) => (
               <div key={component.slug}>
                 <Link
                   href={`/components/${component.slug}`}
-                  className="text-foreground text-title-14 hover:underline hover:underline-offset-3"
+                  className="text-foreground text-title hover:underline hover:underline-offset-3"
                 >
                   {component.name}
                 </Link>
-                <p className="text-muted-foreground text-read-13 mt-1">
+                <p className="text-muted-foreground text-subtitle mt-1">
                   {component.tagline}
                 </p>
               </div>
             ))}
           </div>
           <Link
-            className="group text-muted-foreground hover:text-foreground text-label-13-mono mt-4.5 inline-flex items-center gap-1.5 transition-colors"
+            className="group text-muted-foreground hover:text-foreground text-meta mt-4 inline-flex items-center gap-1.5 transition-colors"
             href="/components"
           >
             All components{' '}
@@ -152,11 +160,11 @@ export default async function Home() {
 
         <section id="contact">
           <SectionHeader label="Get in touch" />
-          <p className="text-foreground text-read-14 max-w-xl">
+          <p className="text-foreground text-body">
             Open to AI engineer and backend/full-stack roles, California,
             remote, or hybrid. Email is the fastest way to reach me.
           </p>
-          <ul className="text-foreground text-read-14 mt-4 max-w-xl space-y-1.5">
+          <ul className="text-foreground text-body mt-4 space-y-2">
             {[
               {
                 label: 'Email',
@@ -181,8 +189,8 @@ export default async function Home() {
             ].map(({ label, value, href }) => {
               const external = href.startsWith('http');
               return (
-                <li key={label} className="flex items-baseline gap-3.5">
-                  <span className="text-muted-foreground text-label-11-mono w-17 shrink-0">
+                <li key={label} className="flex items-baseline gap-4">
+                  <span className="text-muted-foreground text-meta w-20 shrink-0">
                     {label}
                   </span>
                   <Link

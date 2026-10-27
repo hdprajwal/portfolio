@@ -65,24 +65,24 @@ export default async function ProjectPage({
 
   return (
     <div className="bg-background relative min-h-screen overflow-x-hidden px-4 py-10 md:py-16">
-      <div className="mx-auto w-full max-w-3xl">
+      <div className="mx-auto w-full max-w-2xl">
         <Link
           href="/projects"
-          className="text-muted-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-2 transition-colors"
+          className="text-muted-foreground hover:text-foreground text-meta inline-flex items-center gap-2 transition-colors"
         >
           Projects
         </Link>
         <header className="mt-4">
           <div className="flex items-baseline justify-between gap-5">
             <ViewTransition name={`project-title-${slug}`}>
-              <h1 className="text-title-24 text-balance">{project.name}</h1>
+              <h1 className="text-display text-balance">{project.name}</h1>
             </ViewTransition>
             {project.liveHref && (
               <Link
                 href={project.liveHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-accent-link hover:decoration-foreground text-label-13-mono inline-flex shrink-0 items-center gap-1 underline underline-offset-4 transition-colors"
+                className="text-foreground decoration-accent-link hover:decoration-foreground text-meta inline-flex shrink-0 items-center gap-1 underline underline-offset-4 transition-colors"
               >
                 View Live
                 <ExternalLink className="h-3.5 w-3.5" />
@@ -90,14 +90,14 @@ export default async function ProjectPage({
             )}
           </div>
 
-          <p className="text-muted-foreground text-read-14 mt-2">
+          <p className="text-muted-foreground text-body mt-2">
             {project.tagline}
           </p>
         </header>
       </div>
 
       <ViewTransition name={`project-image-${slug}`}>
-        <div className="border-border bg-muted relative mx-auto mt-8 max-w-3xl overflow-hidden rounded-lg border">
+        <div className="border-border bg-muted relative mx-auto mt-8 max-w-2xl overflow-hidden rounded-lg border">
           <div className="relative flex aspect-[16/9] w-full items-center justify-center">
             {project.image ? (
               <Image
@@ -118,7 +118,7 @@ export default async function ProjectPage({
       </ViewTransition>
 
       {project.content && (
-        <div className="mx-auto mt-10 w-full max-w-3xl min-w-0 md:mt-12">
+        <div className="mx-auto mt-10 w-full max-w-2xl min-w-0 md:mt-12">
           <article className="typeset typeset-notes min-w-0">
             <CustomMDX source={project.content} />
           </article>

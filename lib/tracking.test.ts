@@ -72,7 +72,9 @@ describe('classifyLink', () => {
   });
 
   it('ignores unparseable hrefs', () => {
-    expect(classifyLink('javascript:void(0)', siteHost, resumePdfUrl)).toBeNull();
+    expect(
+      classifyLink('javascript:void(0)', siteHost, resumePdfUrl)
+    ).toBeNull();
   });
 });
 

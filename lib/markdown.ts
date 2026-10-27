@@ -5,7 +5,9 @@ import type { TIL } from '@/lib/tils';
 
 function toIsoDate(value: string | Date): string {
   const date = value instanceof Date ? value : new Date(value);
-  return Number.isNaN(date.getTime()) ? String(value) : date.toISOString().slice(0, 10);
+  return Number.isNaN(date.getTime())
+    ? String(value)
+    : date.toISOString().slice(0, 10);
 }
 
 function metaLine(parts: Array<string | false | undefined>): string {
@@ -104,7 +106,8 @@ export function resumeToMarkdown(resume: Resume): string {
       `### ${edu.school}`,
       `${edu.degree}, ${edu.major}, ${edu.from} to ${edu.to}`
     );
-    if (edu.thesis) lines.push(`Thesis: ${edu.thesis.title} (${edu.thesis.href})`);
+    if (edu.thesis)
+      lines.push(`Thesis: ${edu.thesis.title} (${edu.thesis.href})`);
     if (edu.coursework) lines.push(`Coursework: ${edu.coursework}`);
   }
 

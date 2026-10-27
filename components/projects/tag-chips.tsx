@@ -15,7 +15,7 @@ export default function TagChips({
       {list.map((tag) => (
         <span
           key={tag}
-          className="border-border text-muted-foreground text-label-12-mono inline-flex items-center rounded-sm border px-1.5 py-0.5"
+          className="border-border text-muted-foreground text-meta inline-flex items-center rounded-sm border px-1.5 py-0.5"
         >
           {tag}
         </span>

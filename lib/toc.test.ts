@@ -52,7 +52,10 @@ Body text.`;
     const items = extractToc(markdown);
 
     expect(items).toHaveLength(1);
-    expect(items[0]).toMatchObject({ id: 'real-heading', text: 'Real Heading' });
+    expect(items[0]).toMatchObject({
+      id: 'real-heading',
+      text: 'Real Heading',
+    });
   });
 
   it('strips inline markdown from heading text', () => {
@@ -184,7 +187,10 @@ Body text.`;
     const items = extractToc(markdown);
 
     expect(items).toHaveLength(1);
-    expect(items[0]).toMatchObject({ id: 'real-heading', text: 'Real Heading' });
+    expect(items[0]).toMatchObject({
+      id: 'real-heading',
+      text: 'Real Heading',
+    });
   });
 
   it('documents that duplicate heading text produces duplicate ids (known limitation)', () => {

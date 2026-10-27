@@ -6,8 +6,8 @@ export default function ColophonPage() {
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
-        <h1 className="text-foreground text-title-24">Colophon</h1>
-        <p className="text-foreground text-read-14 mt-3 max-w-3xl">
+        <h1 className="text-foreground text-display">Colophon</h1>
+        <p className="text-foreground text-body mt-4">
           Notes about how this site is built and run.
         </p>
       </div>
@@ -22,16 +22,17 @@ export default function ColophonPage() {
               { name: 'TypeScript', detail: '' },
               { name: 'Tailwind CSS', detail: 'v4' },
               { name: 'shadcn/ui', detail: '' },
-              { name: 'Geist Mono', detail: 'everything' },
+              { name: 'Geist Sans', detail: 'text' },
+              { name: 'Geist Mono', detail: 'code' },
               { name: 'Vercel', detail: 'hosting' },
             ].map((t) => (
               <span
                 key={t.name}
-                className="border-border bg-muted/40 text-foreground text-label-13-mono rounded-md border px-2 py-0.5"
+                className="border-border bg-muted/40 text-foreground text-meta rounded-md border px-2 py-0.5"
               >
                 {t.name}
                 {t.detail && (
-                  <span className="text-muted-foreground text-label-12-mono ml-1">
+                  <span className="text-muted-foreground text-meta ml-1">
                     {t.detail}
                   </span>
                 )}
@@ -42,30 +43,30 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="Content & Blog" />
-          <ul className="text-foreground text-read-14 space-y-2.5">
+          <ul className="text-foreground text-body space-y-2">
             <li>
               Posts are written in{' '}
-              <code className="bg-muted text-label-13-mono rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
                 .mdx
               </code>{' '}
               under{' '}
-              <code className="bg-muted text-label-13-mono rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
                 /content/blog
               </code>{' '}
               with frontmatter:{' '}
-              <code className="bg-muted text-label-13-mono rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
                 title
               </code>
               ,{' '}
-              <code className="bg-muted text-label-13-mono rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
                 summary
               </code>
               ,{' '}
-              <code className="bg-muted text-label-13-mono rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
                 tags
               </code>
               ,{' '}
-              <code className="bg-muted text-label-13-mono rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
                 date
               </code>
             </li>
@@ -99,7 +100,7 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="Machine Readable" />
-          <ul className="text-foreground text-read-14 space-y-2.5">
+          <ul className="text-foreground text-body space-y-2">
             <li>
               <a
                 href="/llms.txt"
@@ -119,7 +120,7 @@ export default function ColophonPage() {
             <li>
               Every post, project, and TIL is also available as raw markdown by
               appending{' '}
-              <code className="bg-muted text-label-13-mono rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
                 .md
               </code>{' '}
               to its URL
@@ -138,7 +139,7 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="Source" />
-          <ul className="text-foreground text-read-14 space-y-2.5">
+          <ul className="text-foreground text-body space-y-2">
             <li>
               <a
                 href="https://github.com/hdprajwal/portfolio"
@@ -155,7 +156,7 @@ export default function ColophonPage() {
 
         <section>
           <SectionHeader label="System" />
-          <ul className="text-foreground text-read-14 space-y-2.5">
+          <ul className="text-foreground text-body space-y-2">
             {[
               ['OS', 'Arch Linux'],
               ['WM', 'Hyprland'],
@@ -165,14 +166,14 @@ export default function ColophonPage() {
               ['Shell', 'zsh + oh-my-posh'],
             ].map(([key, value]) => (
               <li key={key} className="flex items-baseline gap-3">
-                <span className="text-muted-foreground/50 text-label-13-mono w-16 shrink-0">
+                <span className="text-muted-foreground/50 text-meta w-16 shrink-0">
                   {key}
                 </span>
                 <span>{value}</span>
               </li>
             ))}
             <li className="flex items-baseline gap-3">
-              <span className="text-muted-foreground/50 text-label-13-mono w-16 shrink-0">
+              <span className="text-muted-foreground/50 text-meta w-16 shrink-0">
                 Dotfiles
               </span>
               <a

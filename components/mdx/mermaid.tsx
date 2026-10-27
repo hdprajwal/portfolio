@@ -42,7 +42,7 @@ export default function Mermaid({ chart }: { chart: string }) {
 
   if (failed) {
     return (
-      <div className="text-muted-foreground text-label-14-mono my-8 text-center">
+      <div className="text-muted-foreground text-meta my-8 text-center">
         <p>Failed to render diagram</p>
         <pre className="mt-2 overflow-x-auto text-left whitespace-pre-wrap">
           {chart.trim()}
@@ -53,7 +53,7 @@ export default function Mermaid({ chart }: { chart: string }) {
 
   if (!svg) {
     return (
-      <div className="text-muted-foreground text-label-14-mono my-8 text-center">
+      <div className="text-muted-foreground text-meta my-8 text-center">
         Rendering diagram...
       </div>
     );

@@ -6,7 +6,7 @@ export default async function FeaturedProjects() {
 
   if (projects.length === 0) {
     return (
-      <p className="text-muted-foreground text-read-14">No projects found.</p>
+      <p className="text-muted-foreground text-body">No projects found.</p>
     );
   }
 

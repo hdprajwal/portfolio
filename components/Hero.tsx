@@ -6,19 +6,18 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section id="hero" className="px-4 pt-14 pb-12">
-      <p className="text-foreground text-read-14">Hi, I&apos;m Prajwal</p>
-      <p className="text-foreground text-read-14 mt-4.5">
+    <section id="hero" className="px-4 pt-14 pb-14">
+      <h1 className="text-foreground text-display">Hi, I&apos;m Prajwal</h1>
+      <p className="text-foreground text-body mt-4">
         An AI engineer based in California. I build AI agents and the developer
         tools around them, right now{' '}
-        <strong className="font-medium">emberd</strong>, a
-        runtime that runs untrusted AI-agent code inside isolated microVMs.
-        Before this I spent three years at Opslyft on cloud cost and reliability
-        systems, then a Master&apos;s on adversarial ML and Android malware
-        detection. I&apos;m open to full-time AI engineer, backend, and
-        full-stack roles.
+        <strong className="font-medium">emberd</strong>, a runtime that runs
+        untrusted AI-agent code inside isolated microVMs. Before this I spent
+        three years at Opslyft on cloud cost and reliability systems, then a
+        Master&apos;s on adversarial ML and Android malware detection. I&apos;m
+        open to full-time AI engineer, backend, and full-stack roles.
       </p>
-      <div className="text-label-13-mono mt-5 flex flex-wrap items-center gap-x-4.5 gap-y-1.5">
+      <div className="text-meta mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
         <Link
           href="/resume"
           className="group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center gap-1 underline underline-offset-4 transition-colors"

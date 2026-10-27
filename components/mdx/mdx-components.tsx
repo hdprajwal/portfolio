@@ -79,7 +79,9 @@ export const MDXComponents = {
     return (
       <a
         {...props}
-        {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        {...(isExternal
+          ? { target: '_blank', rel: 'noopener noreferrer' }
+          : {})}
       />
     );
   },

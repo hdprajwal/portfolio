@@ -55,7 +55,7 @@ function ProjectRow({ project }: { project: Project }) {
                 className="object-cover"
               />
             ) : (
-              <span className="text-muted-foreground text-label-11-mono flex h-full w-full items-center justify-center">
+              <span className="text-muted-foreground text-meta flex h-full w-full items-center justify-center">
                 ❯ {project.slug}
               </span>
             )}
@@ -66,9 +66,7 @@ function ProjectRow({ project }: { project: Project }) {
             <ViewTransition
               name={internal ? `project-title-${project.slug}` : undefined}
             >
-              <span className="text-foreground text-title-14">
-                {project.name}
-              </span>
+              <span className="text-foreground text-title">{project.name}</span>
             </ViewTransition>
             {project.codeHref && (
               <Link
@@ -82,11 +80,11 @@ function ProjectRow({ project }: { project: Project }) {
               </Link>
             )}
           </span>
-          <span className="text-muted-foreground text-read-13 block truncate">
+          <span className="text-muted-foreground text-subtitle block truncate">
             {shortTagline(project)}
           </span>
         </span>
-        <span className="text-muted-foreground text-label-12-mono hidden shrink-0 items-center gap-1 sm:inline-flex">
+        <span className="text-muted-foreground text-meta hidden shrink-0 items-center gap-1 sm:inline-flex">
           {projectDomain(project)}
           <ArrowUpRight className="group-hover:text-foreground h-3.5 w-3.5 transition-[color,transform] duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>

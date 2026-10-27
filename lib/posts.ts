@@ -84,4 +84,3 @@ export async function getPost(slug: string) {
     draft: data.draft === true,
   };
 }
-

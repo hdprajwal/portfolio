@@ -71,7 +71,7 @@ export default async function TilPage({
 
   return (
     <div className="bg-background relative min-h-screen overflow-x-hidden px-4 py-10 md:py-12">
-      <div className="mx-auto w-full max-w-3xl">
+      <div className="mx-auto w-full max-w-2xl">
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -94,18 +94,18 @@ export default async function TilPage({
         />
         <Link
           href="/tils"
-          className="text-muted-foreground hover:text-foreground text-label-13-mono inline-flex items-center gap-2 transition-colors"
+          className="text-muted-foreground hover:text-foreground text-meta inline-flex items-center gap-2 transition-colors"
         >
           <ArrowLeftIcon className="inline-block h-4 w-4" />
           TILs
         </Link>
 
         <header className="mt-10 md:mt-12">
-          <p className="text-muted-foreground text-eyebrow-11">
+          <p className="text-muted-foreground text-eyebrow">
             TIL · {formatDate(til.date)}
           </p>
           <ViewTransition name={`til-title-${til.slug}`}>
-            <h1 className="text-title-24 mt-3 text-balance">{til.title}</h1>
+            <h1 className="text-display mt-3 text-balance">{til.title}</h1>
           </ViewTransition>
           {til.tags && til.tags.length > 0 && (
             <TagChips tags={til.tags} className="mt-4 flex flex-wrap gap-1.5" />
@@ -121,11 +121,11 @@ export default async function TilPage({
         <div className="flex flex-col gap-6 md:flex-row md:items-stretch md:justify-between md:gap-8">
           {prev && (
             <Link href={`/tils/${prev.slug}`} className="group flex-1">
-              <div className="text-muted-foreground group-hover:text-foreground text-eyebrow-11 mb-1 flex items-center gap-2 transition-colors">
+              <div className="text-muted-foreground group-hover:text-foreground text-eyebrow mb-1 flex items-center gap-2 transition-colors">
                 <ArrowLeftIcon className="inline-block h-3.5 w-3.5" />
                 Newer
               </div>
-              <div className="text-title-14 group-hover:underline">
+              <div className="text-title group-hover:underline">
                 {prev.title}
               </div>
             </Link>
@@ -135,11 +135,11 @@ export default async function TilPage({
               href={`/tils/${next.slug}`}
               className="group flex-1 md:text-right"
             >
-              <div className="text-muted-foreground group-hover:text-foreground text-eyebrow-11 mb-1 flex items-center gap-2 transition-colors md:justify-end">
+              <div className="text-muted-foreground group-hover:text-foreground text-eyebrow mb-1 flex items-center gap-2 transition-colors md:justify-end">
                 Older
                 <ArrowRightIcon className="inline-block h-3.5 w-3.5" />
               </div>
-              <div className="text-title-14 group-hover:underline">
+              <div className="text-title group-hover:underline">
                 {next.title}
               </div>
             </Link>

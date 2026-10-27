@@ -6,17 +6,7 @@ tags: ['Go', 'MicroVM', 'Firecracker', 'Sandboxing', 'AI Agents', 'Self-hosted']
 codeHref: https://github.com/hdprajwal/emberd
 liveHref: https://emberd.hdprajwal.dev
 date: '2026-06-12'
-hasContent: true
+hasContent: false
 featured: true
 image: https://assets.hdprajwal.dev/projects/emberd.webp
 ---
-
-Most sandbox services run your code in their cloud. E2B, Modal, Fly Machines, Cloudflare sandboxes. They all work, and they are all the same shape. You send your code to their machines, it runs over there, and the output comes back. That is fine until the code is the part you do not trust, or the data is the part you cannot send anywhere.
-
-That is the spot I kept landing in. I wanted to run code from an AI agent, but an agent can run anything, including code written to do damage. So I did not want to run it on my own machine as is. But I also did not want to ship it off to someone else's cloud just to keep my machine safe. Both options were bad for the same reason. The code had to run somewhere I either trusted too much or controlled too little.
-
-The local answer everyone reaches for is a container. A container is light and fast, and it would have been a lot less code to write. But a container shares the host kernel with everything else on the box. For normal apps that is fine. For code an agent wrote, that shared kernel is the one boundary I did not want to sit on top of. One kernel bug and the sandbox is not a sandbox anymore.
-
-So I built emberd. It runs a real Firecracker microVM for each sandbox, on your own machine, inside your own network. A microVM has its own kernel, so the agent code never touches yours. It is the same kind of boundary your cloud provider uses to keep its customers apart, except you get to spin one up per code run, and it never leaves your network.
-
-emberd is still being built, so the details keep changing. The full writeup, the API, and the setup steps live in the docs at [emberd.hdprajwal.dev](https://emberd.hdprajwal.dev). The code is on [GitHub](https://github.com/hdprajwal/emberd).

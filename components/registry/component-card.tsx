@@ -39,17 +39,17 @@ export default function ComponentCard({
       <div className="px-2 pt-3 pb-2">
         <Link href={href}>
           <ViewTransition name={`component-title-${component.slug}`}>
-            <h3 className="text-foreground text-title-14 group-hover:underline group-hover:underline-offset-3">
+            <h3 className="text-foreground text-title group-hover:underline group-hover:underline-offset-3">
               {component.name}
             </h3>
           </ViewTransition>
         </Link>
 
-        <p className="text-muted-foreground text-read-13 mt-1">
+        <p className="text-muted-foreground text-subtitle mt-1">
           {component.tagline}
         </p>
 
-        <div className="text-label-12-mono mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <div className="text-meta mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-2">
           <Link
             href={href}
             className="text-muted-foreground hover:text-foreground group/link inline-flex items-center gap-1.5 transition-colors"
@@ -86,12 +86,12 @@ function TypographyBanner({
 }) {
   return (
     <div className="bg-muted flex h-full w-full flex-col justify-between px-4 py-3.5">
-      <span className="text-muted-foreground text-label-11-mono tracking-wider">
+      <span className="text-muted-foreground text-meta">
         ❯ npx shadcn add {slug}
       </span>
       <div>
-        <div className="text-foreground text-title-15">{name}</div>
-        <p className="text-muted-foreground text-read-12 mt-0.5 line-clamp-2">
+        <div className="text-foreground text-title">{name}</div>
+        <p className="text-muted-foreground text-subtitle mt-1 line-clamp-2">
           {tagline}
         </p>
       </div>
