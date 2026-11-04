@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { listPosts } from '@/lib/posts';
+import { readingMinutes } from '@/lib/reading-time';
 import { ViewTransition } from '@/components/view-transition';
 
 export default async function RecentBlogs() {
@@ -14,23 +15,22 @@ export default async function RecentBlogs() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="-mx-3 space-y-1">
       {recentPosts.map((post) => {
         const dateStr = new Date(post.date).toLocaleDateString('en-US', {
           month: 'short',
           year: 'numeric',
         });
-        const tags = post.tags?.slice(0, 2) ?? [];
 
         return (
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group block"
+            className="group hover:bg-accent/60 block rounded-md px-3 py-2.5 transition-colors duration-150"
           >
             <div className="flex items-baseline gap-1.5">
               <ViewTransition name={`post-title-${post.slug}`}>
-                <h3 className="text-foreground text-title group-hover:underline group-hover:underline-offset-3">
+                <h3 className="text-foreground text-title">
                   {post.title}
                 </h3>
               </ViewTransition>
@@ -40,7 +40,7 @@ export default async function RecentBlogs() {
               <time dateTime={post.date} className="tabular-nums">
                 {dateStr}
               </time>
-              {tags.length > 0 && ` · ${tags.join(', ')}`}
+              {` · ${readingMinutes(post.content)} min read`}
             </p>
           </Link>
         );

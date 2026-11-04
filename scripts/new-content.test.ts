@@ -47,10 +47,11 @@ describe('frontmatterFor', () => {
 describe('CLI', () => {
   const repoRoot = path.resolve(__dirname, '..');
   const scriptPath = path.join('scripts', 'new-content.mjs');
-  const createdFile = path.join(
+  const createdDir = path.join(
     repoRoot,
-    'content/til/cli-test-title-12345.mdx'
+    'app/(pages)/tils/_content/cli-test-title-12345'
   );
+  const createdFile = path.join(createdDir, 'index.mdx');
 
   it('creates a draft TIL file and refuses to overwrite it on a second run', () => {
     try {
@@ -70,9 +71,7 @@ describe('CLI', () => {
         })
       ).toThrow();
     } finally {
-      if (fs.existsSync(createdFile)) {
-        fs.unlinkSync(createdFile);
-      }
+      fs.rmSync(createdDir, { recursive: true, force: true });
     }
   });
 });

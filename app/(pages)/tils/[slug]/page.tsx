@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
-import { CustomMDX } from '@/components/mdx/custom-mdx';
 import TagChips from '@/components/projects/tag-chips';
 import { ViewTransition } from '@/components/view-transition';
 import { formatDate, listTILs, getTIL, baseUrl } from '@/lib/tils';
@@ -64,6 +63,10 @@ export default async function TilPage({
     notFound();
   }
 
+  const { default: Content } = await import(
+    `../_content/${slug}/index.mdx`
+  );
+
   const tils = await listTILs();
   const index = tils.findIndex((t) => t.slug === slug);
   const prev = index > 0 ? tils[index - 1] : null;
@@ -101,11 +104,11 @@ export default async function TilPage({
         </Link>
 
         <header className="mt-10 md:mt-12">
-          <p className="text-muted-foreground text-eyebrow">
+          <p className="text-muted-foreground text-meta">
             TIL · {formatDate(til.date)}
           </p>
           <ViewTransition name={`til-title-${til.slug}`}>
-            <h1 className="text-display mt-3 text-balance">{til.title}</h1>
+            <h1 className="text-display mt-3 text-pretty">{til.title}</h1>
           </ViewTransition>
           {til.tags && til.tags.length > 0 && (
             <TagChips tags={til.tags} className="mt-4 flex flex-wrap gap-1.5" />
@@ -113,7 +116,7 @@ export default async function TilPage({
         </header>
 
         <article className="typeset typeset-notes mt-8 w-full min-w-0">
-          <CustomMDX source={til.content} />
+          <Content />
         </article>
 
         <hr className="border-border my-10" />

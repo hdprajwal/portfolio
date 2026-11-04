@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section id="hero" className="px-4 pt-14 pb-14">
+    <section id="hero" className="px-4 pt-14 pb-16">
       <h1 className="text-foreground text-display">Hi, I&apos;m Prajwal</h1>
       <p className="text-foreground text-body mt-4">
         An AI engineer based in California. I build AI agents and the developer

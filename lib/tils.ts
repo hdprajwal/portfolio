@@ -1,8 +1,11 @@
-import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
 import { cache } from 'react';
-import { isHiddenDraft } from '@/lib/content';
+import {
+  isHiddenDraft,
+  readMdxEntries,
+  readMdxEntry,
+  type MdxEntry,
+} from '@/lib/content';
 
 export type TIL = {
   slug: string;
@@ -14,7 +17,7 @@ export type TIL = {
   draft?: boolean;
 };
 
-const TIL_DIR = path.join(process.cwd(), 'content/til');
+const TIL_DIR = path.join(process.cwd(), 'app/(pages)/tils/_content');
 
 export { baseUrl } from '@/lib/site';
 
@@ -26,57 +29,28 @@ export function formatDate(date: string): string {
   });
 }
 
-export const listTILs = cache(async (): Promise<TIL[]> => {
-  if (!fs.existsSync(TIL_DIR)) {
-    return [];
-  }
-
-  const files = fs.readdirSync(TIL_DIR);
-  const tils = files
-    .filter((file) => file.endsWith('.mdx'))
-    .map((file) => {
-      const slug = file.replace('.mdx', '');
-      const filePath = path.join(TIL_DIR, file);
-      const content = fs.readFileSync(filePath, 'utf8');
-      const { data, content: mdxContent } = matter(content);
-
-      return {
-        slug,
-        title: data.title || slug,
-        date: data.date || '1970-01-01',
-        description: data.description || '',
-        tags: data.tags || [],
-        content: mdxContent,
-        draft: data.draft === true,
-      };
-    })
-    .filter((til) => !isHiddenDraft(til.draft))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  return tils;
-});
-
-export async function getTIL(slug: string) {
-  const filePath = path.join(TIL_DIR, `${slug}.mdx`);
-
-  if (!fs.existsSync(filePath)) {
-    return null;
-  }
-
-  const content = fs.readFileSync(filePath, 'utf8');
-  const { data, content: mdxContent } = matter(content);
-
-  if (isHiddenDraft(data.draft === true)) {
-    return null;
-  }
-
+function toTIL({ slug, data, content }: MdxEntry): TIL {
   return {
     slug,
     title: data.title || slug,
     date: data.date || '1970-01-01',
     description: data.description || '',
-    content: mdxContent,
     tags: data.tags || [],
+    content,
     draft: data.draft === true,
   };
+}
+
+export const listTILs = cache(async (): Promise<TIL[]> => {
+  return readMdxEntries(TIL_DIR)
+    .map(toTIL)
+    .filter((til) => !isHiddenDraft(til.draft))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+});
+
+export async function getTIL(slug: string): Promise<TIL | null> {
+  const entry = readMdxEntry(TIL_DIR, slug);
+  if (!entry) return null;
+  const til = toTIL(entry);
+  return isHiddenDraft(til.draft) ? null : til;
 }

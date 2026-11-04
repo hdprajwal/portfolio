@@ -1,8 +1,11 @@
-import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
 import { cache } from 'react';
-import { isHiddenDraft } from '@/lib/content';
+import {
+  isHiddenDraft,
+  readMdxEntries,
+  readMdxEntry,
+  type MdxEntry,
+} from '@/lib/content';
 
 export type Post = {
   slug: string;
@@ -15,7 +18,7 @@ export type Post = {
   draft?: boolean;
 };
 
-const BLOG_DIR = path.join(process.cwd(), 'content/blog');
+const BLOG_DIR = path.join(process.cwd(), 'app/(pages)/blog/_content');
 
 export { baseUrl } from '@/lib/site';
 
@@ -27,60 +30,31 @@ export function formatDate(date: string): string {
   });
 }
 
-export const listPosts = cache(async (): Promise<Post[]> => {
-  if (!fs.existsSync(BLOG_DIR)) {
-    return [];
-  }
-
-  const files = fs.readdirSync(BLOG_DIR);
-  const posts = files
-    .filter((file) => file.endsWith('.mdx'))
-    .map((file) => {
-      const slug = file.replace('.mdx', '');
-      const filePath = path.join(BLOG_DIR, file);
-      const content = fs.readFileSync(filePath, 'utf8');
-      const { data, content: mdxContent } = matter(content);
-
-      return {
-        slug,
-        title: data.title || slug,
-        date: data.date || '1970-01-01',
-        summary: data.summary,
-        tags: data.tags || [],
-        content: mdxContent,
-        image: data.image || data.cover || data.banner || undefined,
-        draft: data.draft === true,
-      };
-    })
-    .filter((post) => !isHiddenDraft(post.draft))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  return posts;
-});
-
-export const getBlogPosts = listPosts;
-
-export async function getPost(slug: string) {
-  const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
-
-  if (!fs.existsSync(filePath)) {
-    return null;
-  }
-
-  const content = fs.readFileSync(filePath, 'utf8');
-  const { data, content: mdxContent } = matter(content);
-
-  if (isHiddenDraft(data.draft === true)) {
-    return null;
-  }
-
+function toPost({ slug, data, content }: MdxEntry): Post {
   return {
     slug,
     title: data.title || slug,
     date: data.date || '1970-01-01',
     summary: data.summary,
     tags: data.tags || [],
-    content: mdxContent,
+    content,
+    image: data.image || data.cover || data.banner || undefined,
     draft: data.draft === true,
   };
+}
+
+export const listPosts = cache(async (): Promise<Post[]> => {
+  return readMdxEntries(BLOG_DIR)
+    .map(toPost)
+    .filter((post) => !isHiddenDraft(post.draft))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+});
+
+export const getBlogPosts = listPosts;
+
+export async function getPost(slug: string): Promise<Post | null> {
+  const entry = readMdxEntry(BLOG_DIR, slug);
+  if (!entry) return null;
+  const post = toPost(entry);
+  return isHiddenDraft(post.draft) ? null : post;
 }

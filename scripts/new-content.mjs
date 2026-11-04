@@ -48,17 +48,18 @@ draft: true
   throw new Error(`Unknown content type: ${type}`);
 }
 
-const DIRS = {
-  post: 'content/blog',
-  til: 'content/til',
-  project: 'content/projects',
+// Posts and TILs are folders so they can hold colocated components; projects stay flat files.
+const PATHS = {
+  post: (slug) => path.join('app/(pages)/blog/_content', slug, 'index.mdx'),
+  til: (slug) => path.join('app/(pages)/tils/_content', slug, 'index.mdx'),
+  project: (slug) => path.join('content/projects', `${slug}.mdx`),
 };
 
 function main() {
   const [type, ...titleParts] = process.argv.slice(2);
   const title = titleParts.join(' ').trim();
 
-  if (!DIRS[type] || !title) {
+  if (!PATHS[type] || !title) {
     console.error('Usage: node scripts/new-content.mjs <post|til|project> <title>');
     process.exit(1);
   }
@@ -72,13 +73,14 @@ function main() {
   }
 
   const date = new Date().toISOString().slice(0, 10);
-  const file = path.join(process.cwd(), DIRS[type], `${slug}.mdx`);
+  const file = path.join(process.cwd(), PATHS[type](slug));
 
   if (fs.existsSync(file)) {
     console.error(`Refusing to overwrite existing file: ${file}`);
     process.exit(1);
   }
 
+  fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, frontmatterFor(type, title, date));
   console.log(`Created ${file}`);
 }

@@ -1,3 +1,4 @@
+import path from 'node:path';
 import createMDX from '@next/mdx';
 
 /** @type {import('next').NextConfig} */
@@ -23,26 +24,11 @@ const nextConfig = {
   },
 };
 
-// Compiles .mdx files placed under app/ into routes. Content in content/
-// goes through next-mdx-remote instead (components/mdx/custom-mdx.tsx).
-// Plugins use the string form: Turbopack requires the MDX options to be
-// serializable, so imported plugin functions can't be passed here.
+// Compiles app/ MDX (incl. blog/TIL posts); plugins are strings because Turbopack needs serializable options.
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [['remark-gfm']],
-    rehypePlugins: [
-      [
-        '@shikijs/rehype',
-        {
-          themes: {
-            light: 'github-light-default',
-            dark: 'github-dark-default',
-          },
-          defaultColor: false,
-          cssVariablePrefix: '--shiki-',
-        },
-      ],
-    ],
+    remarkPlugins: [['remark-gfm'], ['remark-frontmatter']],
+    rehypePlugins: [[path.join(import.meta.dirname, 'lib/mdx/rehype-code.mjs')]],
   },
 });
 

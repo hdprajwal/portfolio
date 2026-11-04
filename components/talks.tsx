@@ -35,7 +35,7 @@ export default function Talks() {
               {talk.event}
             </span>
           </div>
-          <p className="text-muted-foreground text-subtitle mt-1">
+          <p className="text-foreground-soft text-subtitle mt-1">
             {talk.description}
           </p>
           {talk.href && (
@@ -43,7 +43,7 @@ export default function Talks() {
               href={talk.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground text-meta group mt-3 inline-flex items-center gap-1.5 transition-colors"
+              className="text-foreground decoration-accent-link hover:decoration-foreground text-meta group mt-2 inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
             >
               View talk
               <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

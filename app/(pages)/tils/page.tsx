@@ -20,7 +20,11 @@ export default async function TilsPage() {
             No TILs yet. Check back soon.
           </p>
         ) : (
-          tils.map((til) => <TilCard key={til.slug} til={til} />)
+          <div className="-mx-3 space-y-2">
+            {tils.map((til) => (
+              <TilCard key={til.slug} til={til} />
+            ))}
+          </div>
         )}
       </div>
     </div>

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import type { Metadata } from 'next';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Hero from '@/components/Hero';
@@ -11,6 +10,9 @@ import Stack from '@/components/stack';
 import SectionViewTracker from '@/components/section-view-tracker';
 import { listRegistryComponents } from '@/lib/registry';
 
+const inlineLink =
+  'text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors';
+
 export default async function Home() {
   const registryComponents = await listRegistryComponents();
 
@@ -18,7 +20,7 @@ export default async function Home() {
     <>
       <Hero />
       <SectionViewTracker />
-      <div className="space-y-14 px-4 pb-14">
+      <div className="space-y-16 px-4 pb-16">
         <section id="now">
           <SectionHeader label="Now" />
           <div className="text-foreground text-body space-y-4">
@@ -69,15 +71,12 @@ export default async function Home() {
         </section>
 
         <section id="projects">
-          <SectionHeader label="Projects" />
-          <FeaturedProjects />
-          <Link
-            className="group text-muted-foreground hover:text-foreground text-meta mt-4 inline-flex items-center gap-1.5 transition-colors"
+          <SectionHeader
+            label="Projects"
             href="/projects"
-          >
-            All projects{' '}
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
-          </Link>
+            linkLabel="All projects"
+          />
+          <FeaturedProjects />
         </section>
 
         <section id="stack">
@@ -87,70 +86,71 @@ export default async function Home() {
 
         <section id="research">
           <SectionHeader label="Featured work" />
-          <div className="">
-            <h3 className="text-foreground text-title">
+          <div>
+            <h3 className="text-foreground text-title text-balance">
               Re-Evaluating Android Malware Detection: Tabular Features, Vision
               Models, and Ensembles
             </h3>
-            <p className="text-muted-foreground text-subtitle mt-1 italic">
-              Hosahalli Dayananda, P.; Chen, Z.
+            <p className="text-muted-foreground text-meta mt-1">
+              Hosahalli Dayananda, P.;{' '}
+              <span className="whitespace-nowrap">Chen, Z.</span>
+              <span className="whitespace-nowrap">
+                <span className="text-muted-foreground/50"> · </span>
+                Peer-reviewed, Electronics (MDPI), 2026
+              </span>
             </p>
-            <p className="text-muted-foreground text-subtitle mt-2">
+            <p className="text-foreground-soft text-subtitle mt-2 text-pretty">
               Compares tabular features, visual byte-plot images, and ensemble
               strategies for Android malware detection. Evaluates where modality
               choice changes the detection surface and where ensembles actually
               pay for themselves.
             </p>
-            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-              <Link
-                href="https://doi.org/10.3390/electronics15030544"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-meta group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center gap-1.5 underline underline-offset-4 transition-colors"
-              >
-                Read paper
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-            </div>
+            <Link
+              href="https://doi.org/10.3390/electronics15030544"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${inlineLink} text-meta group mt-3 inline-flex items-center gap-1`}
+            >
+              Read paper
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
           </div>
         </section>
 
         <section id="blog">
-          <SectionHeader label="Writing" />
-          <RecentBlogs />
-          <Link
-            className="group text-muted-foreground hover:text-foreground text-meta mt-4 inline-flex items-center gap-1.5 transition-colors"
+          <SectionHeader
+            label="Writing"
             href="/blog"
-          >
-            All posts{' '}
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
-          </Link>
+            linkLabel="All posts"
+          />
+          <RecentBlogs />
         </section>
 
         <section id="components">
-          <SectionHeader label="Components" />
-          <div className="space-y-6">
+          <SectionHeader
+            label="Components"
+            href="/components"
+            linkLabel="All components"
+          />
+          <div className="-mx-3 space-y-1">
             {registryComponents.map((component) => (
-              <div key={component.slug}>
-                <Link
-                  href={`/components/${component.slug}`}
-                  className="text-foreground text-title hover:underline hover:underline-offset-3"
-                >
-                  {component.name}
-                </Link>
-                <p className="text-muted-foreground text-subtitle mt-1">
+              <Link
+                key={component.slug}
+                href={`/components/${component.slug}`}
+                className="group hover:bg-accent/60 block rounded-md px-3 py-2.5 transition-colors duration-150"
+              >
+                <span className="flex items-baseline gap-1.5">
+                  <span className="text-foreground text-title">
+                    {component.name}
+                  </span>
+                  <ArrowRight className="text-muted-foreground size-3.5 shrink-0 -translate-x-1 opacity-0 transition-[opacity,translate] duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0" />
+                </span>
+                <span className="text-foreground-soft text-subtitle mt-1 block">
                   {component.tagline}
-                </p>
-              </div>
+                </span>
+              </Link>
             ))}
           </div>
-          <Link
-            className="group text-muted-foreground hover:text-foreground text-meta mt-4 inline-flex items-center gap-1.5 transition-colors"
-            href="/components"
-          >
-            All components{' '}
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
-          </Link>
         </section>
 
         <section id="talks">

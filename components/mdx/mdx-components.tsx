@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import type { ReactNode } from 'react';
+import ZoomImage from '@/components/mdx/zoom-image';
 import {
   Table,
   TableBody,
@@ -43,22 +43,7 @@ function createHeading(level: 1 | 2 | 3 | 4) {
 }
 
 export const MDXComponents = {
-  img: (props: any) => {
-    const isRemote =
-      typeof props.src === 'string' && /^https?:\/\//.test(props.src);
-    return (
-      <Image
-        {...props}
-        alt={props.alt ?? ''}
-        width={props.width || 1920}
-        height={props.height || 1080}
-        quality={props.quality || 95}
-        sizes={props.sizes || '(max-width: 768px) 100vw, 672px'}
-        unoptimized={isRemote}
-        style={{ width: '100%', height: 'auto' }}
-      />
-    );
-  },
+  img: (props: any) => <ZoomImage {...props} />,
   table: (props: any) => (
     <div className="my-7">
       <Table {...props} />

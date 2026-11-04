@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { CustomMDX } from '@/components/mdx/custom-mdx';
 import ReadingProgress from '@/components/reading-progress';
 import { formatDate, getBlogPosts, baseUrl } from '@/lib/posts';
 import { type Post } from '@/lib/posts';
@@ -70,6 +69,10 @@ export default async function Blog({
     notFound();
   }
 
+  const { default: Content } = await import(
+    `../_content/${slug}/index.mdx`
+  );
+
   const index = posts.findIndex((p) => p.slug === slug);
   const prev = index > 0 ? posts[index - 1] : null;
   const next = index < posts.length - 1 ? posts[index + 1] : null;
@@ -100,9 +103,9 @@ export default async function Blog({
       <div className="mx-auto max-w-2xl">
         <header className="mx-auto mt-4">
           <ViewTransition name={`post-title-${slug}`}>
-            <h1 className="text-display mt-3 text-balance">{post.title}</h1>
+            <h1 className="text-display mt-3 text-pretty">{post.title}</h1>
           </ViewTransition>
-          <p className="text-muted-foreground text-eyebrow mt-4">
+          <p className="text-muted-foreground text-meta mt-3">
             {formatDate(post.date)} · {readingMins} min read
           </p>
         </header>
@@ -151,7 +154,7 @@ export default async function Blog({
             />
 
             <article className="typeset typeset-notes min-w-0">
-              <CustomMDX source={post.content} />
+              <Content />
             </article>
 
             <hr className="border-border my-10" />

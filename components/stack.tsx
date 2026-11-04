@@ -3,13 +3,13 @@ import { stack } from '@/lib/stack';
 
 export default function Stack() {
   return (
-    <div className="border-border divide-border divide-y rounded-lg border">
+    <div className="space-y-3">
       {stack.map((category) => (
         <div
           key={category.label}
-          className="flex flex-col gap-x-4 gap-y-2 px-4 py-3 sm:flex-row sm:items-baseline"
+          className="flex flex-col gap-x-4 gap-y-1.5 sm:flex-row sm:items-baseline"
         >
-          <span className="text-muted-foreground text-meta w-40 shrink-0">
+          <span className="text-muted-foreground text-meta shrink-0 sm:w-28">
             {category.label}
           </span>
           <ul className="text-foreground text-meta flex flex-wrap items-center gap-x-4 gap-y-1.5">

@@ -7,7 +7,6 @@ import { ViewTransition } from '@/components/view-transition';
 function BlogRow({ post }: { post: Post }) {
   const dateStr = new Date(post.date).toLocaleDateString('en-US', {
     month: 'short',
-    day: 'numeric',
     year: 'numeric',
   });
   const readTime = readingMinutes(post.content);
@@ -19,33 +18,26 @@ function BlogRow({ post }: { post: Post }) {
         className="absolute inset-0"
         aria-label={post.title}
       />
-      <div className="flex items-center gap-4 py-3">
-        <span className="min-w-0 flex-1">
+      <div className="py-4">
+        <span className="flex items-start gap-1.5">
           <ViewTransition name={`post-title-${post.slug}`}>
-            <span className="text-foreground text-title block">
+            <span className="text-foreground text-title text-pretty">
               {post.title}
             </span>
           </ViewTransition>
-          {post.summary && (
-            <span className="text-muted-foreground text-subtitle block truncate">
-              {post.summary}
-            </span>
-          )}
-          <span className="text-muted-foreground text-meta mt-1 block sm:hidden">
-            <time dateTime={post.date} className="tabular-nums">
-              {dateStr}
-            </time>
-            {' · '}
-            {readTime} min read
-          </span>
+          <ArrowRight className="text-muted-foreground mt-[5px] size-3.5 shrink-0 -translate-x-1 opacity-0 transition-[opacity,translate] duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0" />
         </span>
-        <span className="text-muted-foreground text-meta hidden shrink-0 items-center gap-1 sm:inline-flex">
+        {post.summary && (
+          <span className="text-foreground-soft text-subtitle mt-0.5 line-clamp-2 text-pretty">
+            {post.summary}
+          </span>
+        )}
+        <span className="text-muted-foreground text-meta mt-2 block">
           <time dateTime={post.date} className="tabular-nums">
             {dateStr}
           </time>
-          <span>·</span>
+          {' · '}
           {readTime} min read
-          <ArrowRight className="group-hover:text-foreground ml-0.5 h-3.5 w-3.5 transition-[color,transform] duration-200 group-hover:translate-x-0.5" />
         </span>
       </div>
     </div>
@@ -54,7 +46,7 @@ function BlogRow({ post }: { post: Post }) {
 
 export default function BlogList({ posts }: { posts: Post[] }) {
   return (
-    <div className="-mx-3">
+    <div className="-mx-3 space-y-2">
       {posts.map((post) => (
         <BlogRow key={post.slug} post={post} />
       ))}
