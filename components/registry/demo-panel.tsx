@@ -17,7 +17,7 @@ export default function DemoPanel({
 
   return (
     <div>
-      <div className="border-border overflow-hidden rounded-xl border">
+      <div className="border-border overflow-hidden rounded-md border">
         {children}
         <div className="border-border relative border-t">
           {/* Height is a layout property, but a disclosure needs the bridge; interpolate-size in globals.css is what lets it reach auto. */}
@@ -40,7 +40,7 @@ export default function DemoPanel({
           {codeExpanded ? (
             <div className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center">
               <button
-                className="border-border bg-background text-foreground text-meta pointer-events-auto cursor-pointer rounded-lg border px-3 py-1.5 shadow-sm transition-[background-color,border-color,color,box-shadow,scale] duration-160 ease-out hover:shadow active:scale-[0.97]"
+                className="border-border bg-background text-foreground text-meta pointer-events-auto cursor-pointer rounded-md border px-3 py-1.5 shadow-sm transition-[background-color,border-color,color,box-shadow,scale] duration-160 ease-out hover:shadow active:scale-[0.97]"
                 onClick={() => setCodeExpanded(false)}
                 type="button"
               >
@@ -50,7 +50,7 @@ export default function DemoPanel({
           ) : (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
               <button
-                className="border-border bg-background text-foreground text-meta pointer-events-auto cursor-pointer rounded-lg border px-3 py-1.5 shadow-sm transition-[background-color,border-color,color,box-shadow,scale] duration-160 ease-out hover:shadow active:scale-[0.97]"
+                className="border-border bg-background text-foreground text-meta pointer-events-auto cursor-pointer rounded-md border px-3 py-1.5 shadow-sm transition-[background-color,border-color,color,box-shadow,scale] duration-160 ease-out hover:shadow active:scale-[0.97]"
                 onClick={() => setCodeExpanded(true)}
                 type="button"
               >

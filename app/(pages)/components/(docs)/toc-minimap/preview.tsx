@@ -72,7 +72,7 @@ export default function TocMinimapPreview({
         {DEMO_SECTIONS.map((section) => (
           <section key={section.id}>
             <h3
-              className="text-foreground text-title mt-8 first:mt-0"
+              className="text-foreground-strong text-title mt-8 first:mt-0"
               id={section.id}
             >
               {section.title}

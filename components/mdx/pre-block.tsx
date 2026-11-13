@@ -83,7 +83,7 @@ export default function Pre({ children, className, ...rest }: PreProps) {
   return (
     <div
       className={cn(
-        'not-typeset group border-border my-7 max-w-full overflow-hidden rounded-lg border',
+        'not-typeset group border-border my-7 max-w-full overflow-hidden rounded-md border',
         lineNumbers && 'code-line-numbers'
       )}
     >

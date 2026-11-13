@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { listPosts } from '@/lib/posts';
+import { listWriting } from '@/lib/writing';
 import { readingMinutes } from '@/lib/reading-time';
 import { ViewTransition } from '@/components/view-transition';
 
 export default async function RecentBlogs() {
-  const posts = await listPosts();
-  const recentPosts = posts.slice(0, 6);
+  const items = await listWriting();
+  const recentPosts = items.filter((i) => i.kind === 'post').slice(0, 3);
 
   if (recentPosts.length === 0) {
     return (
@@ -24,13 +24,13 @@ export default async function RecentBlogs() {
 
         return (
           <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
+            key={`${post.kind}-${post.slug}`}
+            href={post.href}
             className="group hover:bg-accent/60 block rounded-md px-3 py-2.5 transition-colors duration-150"
           >
             <div className="flex items-baseline gap-1.5">
-              <ViewTransition name={`post-title-${post.slug}`}>
-                <h3 className="text-foreground text-title">
+              <ViewTransition name={`${post.kind}-title-${post.slug}`}>
+                <h3 className="text-foreground-strong text-title">
                   {post.title}
                 </h3>
               </ViewTransition>

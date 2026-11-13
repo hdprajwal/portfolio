@@ -21,7 +21,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/blog`, lastModified: now, priority: 0.8 },
     { url: `${BASE_URL}/projects`, lastModified: now, priority: 0.8 },
     { url: `${BASE_URL}/components`, lastModified: now, priority: 0.7 },
-    { url: `${BASE_URL}/tils`, lastModified: now, priority: 0.7 },
     { url: `${BASE_URL}/bucket-list`, lastModified: now, priority: 0.5 },
     { url: `${BASE_URL}/colophon`, lastModified: now, priority: 0.4 },
   ];

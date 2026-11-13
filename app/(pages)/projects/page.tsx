@@ -8,7 +8,7 @@ export default async function ProjectsPage() {
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
-        <h1 className="text-foreground text-display">Projects</h1>
+        <h1 className="text-foreground-strong text-display">Projects</h1>
         <p className="text-foreground text-body mt-4">
           Work across applied AI, security, and developer tooling. Research
           papers, shipped tools, and things I built to scratch my own itch.

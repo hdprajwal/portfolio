@@ -99,7 +99,7 @@ export default function InstallCommand({ args }: { args: string }) {
   };
 
   return (
-    <div className="not-typeset group border-border my-7 max-w-full overflow-hidden rounded-lg border">
+    <div className="not-typeset group border-border my-7 max-w-full overflow-hidden rounded-md border">
       <div className="border-border bg-muted/40 flex items-center gap-2 border-b px-3 py-1">
         <ActiveIcon aria-hidden="true" className="bg-muted size-4 shrink-0" />
         <Tabs

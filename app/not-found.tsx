@@ -42,7 +42,7 @@ export default function NotFound() {
             If you believe this is a broken link,{' '}
             <a
               href="mailto:hdprajwal01@gmail.com?subject=404%20on%20site"
-              className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
+              className="text-foreground-strong decoration-accent-link hover:decoration-foreground-strong underline underline-offset-4 transition-colors"
             >
               let me know
             </a>

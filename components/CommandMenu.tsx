@@ -52,12 +52,6 @@ const navigationItems = [
     keywords: ['components', 'ui', 'registry', 'shadcn'],
   },
   {
-    icon: Lightbulb,
-    label: 'TILs',
-    href: '/tils',
-    keywords: ['til', 'today i learned', 'learning'],
-  },
-  {
     icon: FileText,
     label: 'Resume',
     href: '/resume',

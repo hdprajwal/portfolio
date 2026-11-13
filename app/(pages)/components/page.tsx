@@ -8,7 +8,7 @@ export default async function ComponentsPage() {
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
-        <h1 className="text-foreground text-display">Components</h1>
+        <h1 className="text-foreground-strong text-display">Components</h1>
         <p className="text-foreground text-body mt-4">
           UI components I built for this site and published to a shadcn
           registry. Each one has a live demo, docs, and a one line install.

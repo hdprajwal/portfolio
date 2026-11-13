@@ -4,7 +4,6 @@ import { ArrowUpRight } from 'lucide-react';
 type Talk = {
   title: string;
   event: string;
-  description: string;
   href?: string;
 };
 
@@ -12,45 +11,40 @@ const talks: Talk[] = [
   {
     title: 'Data Transfer Cost Optimization',
     event: 'Rootconf 2022',
-    description:
-      'Granular visibility into cloud data transfer costs using AWS CUR and VPC flow logs.',
     href: 'https://hasgeek.com/rootconf/optimizing-costs-of-cloud-infrastructure/sub/data-transfer-cost-optimization-KGSAciSRiEjTo1bjGNWChG',
   },
   {
     title: 'Simplifying Kubernetes Cost Visibility',
     event: 'Opslyft 2022',
-    description:
-      'Webinar on reducing the complexity of understanding and attributing Kubernetes infrastructure costs.',
   },
 ];
 
 export default function Talks() {
   return (
-    <div className="divide-border divide-y">
+    <ul className="space-y-2">
       {talks.map((talk) => (
-        <div key={talk.title} className="py-3 first:pt-0">
-          <div className="flex items-baseline justify-between gap-4">
-            <h3 className="text-foreground text-title">{talk.title}</h3>
-            <span className="text-muted-foreground text-meta shrink-0">
-              {talk.event}
-            </span>
-          </div>
-          <p className="text-foreground-soft text-subtitle mt-1">
-            {talk.description}
-          </p>
-          {talk.href && (
+        <li
+          key={talk.title}
+          className="flex items-baseline justify-between gap-4"
+        >
+          {talk.href ? (
             <Link
               href={talk.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground decoration-accent-link hover:decoration-foreground text-meta group mt-2 inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
+              className="group text-foreground-strong decoration-accent-link hover:decoration-foreground-strong text-body inline-flex items-center underline underline-offset-4 transition-colors"
             >
-              View talk
-              <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              {talk.title}
+              <ArrowUpRight className="ml-1 h-3 w-3 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
+          ) : (
+            <span className="text-foreground text-body">{talk.title}</span>
           )}
-        </div>
+          <span className="text-muted-foreground text-meta shrink-0">
+            {talk.event}
+          </span>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

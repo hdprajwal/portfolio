@@ -1,7 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import AnalyticsProvider from '@/components/analytics';
+import ThemeColor from '@/components/theme-color';
 import { baseUrl } from '@/lib/site';
 
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -56,13 +57,25 @@ export const metadata: Metadata = {
   },
 };
 
+// Browser chrome matches the page background in each scheme; ThemeColor handles the manual toggle.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable}`}
+    >
       <body className="antialiased">
         <link
           rel="preconnect"
@@ -134,6 +147,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <ThemeColor />
           <AnalyticsProvider />
         </ThemeProvider>
       </body>

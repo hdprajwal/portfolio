@@ -63,9 +63,7 @@ export default async function TilPage({
     notFound();
   }
 
-  const { default: Content } = await import(
-    `../_content/${slug}/index.mdx`
-  );
+  const { default: Content } = await import(`../_content/${slug}/index.mdx`);
 
   const tils = await listTILs();
   const index = tils.findIndex((t) => t.slug === slug);
@@ -96,11 +94,11 @@ export default async function TilPage({
           }}
         />
         <Link
-          href="/tils"
+          href="/blog"
           className="text-muted-foreground hover:text-foreground text-meta inline-flex items-center gap-2 transition-colors"
         >
           <ArrowLeftIcon className="inline-block h-4 w-4" />
-          TILs
+          Blog
         </Link>
 
         <header className="mt-10 md:mt-12">
@@ -108,7 +106,9 @@ export default async function TilPage({
             TIL · {formatDate(til.date)}
           </p>
           <ViewTransition name={`til-title-${til.slug}`}>
-            <h1 className="text-display mt-3 text-pretty">{til.title}</h1>
+            <h1 className="text-foreground-strong text-display mt-3 text-pretty">
+              {til.title}
+            </h1>
           </ViewTransition>
           {til.tags && til.tags.length > 0 && (
             <TagChips tags={til.tags} className="mt-4 flex flex-wrap gap-1.5" />
@@ -128,7 +128,7 @@ export default async function TilPage({
                 <ArrowLeftIcon className="inline-block h-3.5 w-3.5" />
                 Newer
               </div>
-              <div className="text-title group-hover:underline">
+              <div className="text-foreground-strong text-title group-hover:underline">
                 {prev.title}
               </div>
             </Link>
@@ -142,7 +142,7 @@ export default async function TilPage({
                 Older
                 <ArrowRightIcon className="inline-block h-3.5 w-3.5" />
               </div>
-              <div className="text-title group-hover:underline">
+              <div className="text-foreground-strong text-title group-hover:underline">
                 {next.title}
               </div>
             </Link>

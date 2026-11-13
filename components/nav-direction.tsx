@@ -6,7 +6,7 @@ const PAGE_ORDER: Record<string, number> = {
   '/': 0,
   '/projects': 2,
   '/blog': 3,
-  '/tils': 4,
+  '/resume': 4,
 };
 
 function isModifiedClick(e: MouseEvent) {

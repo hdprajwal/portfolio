@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import { Rss } from 'lucide-react';
-import { listPosts } from '@/lib/posts';
+import { listWriting } from '@/lib/writing';
 import BlogList from '@/components/blogs/blog-list';
 import type { Metadata } from 'next';
 
 export default async function BlogIndexPage() {
-  const posts = await listPosts();
+  const items = await listWriting();
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
         <div className="flex items-center justify-between gap-4">
-          <h1 className="text-foreground text-display">Blog</h1>
+          <h1 className="text-foreground-strong text-display">Blog</h1>
           <Link
             href="/rss.xml"
             className="text-muted-foreground hover:text-foreground text-meta inline-flex items-center gap-1.5 transition-colors"
@@ -27,10 +27,10 @@ export default async function BlogIndexPage() {
       </div>
 
       <div className="px-4 pb-16">
-        {posts.length === 0 ? (
+        {items.length === 0 ? (
           <p className="text-muted-foreground text-body">No posts yet.</p>
         ) : (
-          <BlogList posts={posts} />
+          <BlogList items={items} />
         )}
       </div>
     </div>

@@ -28,7 +28,7 @@ function ProjectRow({ project }: { project: Project }) {
   const internal = hasProjectPage(project);
 
   return (
-    <div className="group hover:bg-accent/60 relative rounded-md px-3 transition-colors duration-150">
+    <div className="group hover:bg-accent/60 relative rounded-md px-3 transition-[background-color,scale] duration-150 ease-out has-[a:active]:scale-[0.99]">
       <Link
         href={href}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -63,7 +63,9 @@ function ProjectRow({ project }: { project: Project }) {
             <ViewTransition
               name={internal ? `project-title-${project.slug}` : undefined}
             >
-              <span className="text-foreground text-title">{project.name}</span>
+              <span className="text-foreground-strong text-title">
+                {project.name}
+              </span>
             </ViewTransition>
             {project.codeHref && (
               <Link

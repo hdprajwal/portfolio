@@ -4,6 +4,8 @@ import createMDX from '@next/mdx';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: { viewTransition: true },
+  // Lets phones on the LAN load dev assets and HMR.
+  allowedDevOrigins: ['10.0.0.95'],
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   images: {
     remotePatterns: [
@@ -14,6 +16,9 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  async redirects() {
+    return [{ source: '/tils', destination: '/blog', permanent: false }];
   },
   async rewrites() {
     return [

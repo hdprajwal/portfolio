@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Mail, ArrowUpRight, FileDown } from 'lucide-react';
+import { Mail, ArrowUpRight, CalendarDays } from 'lucide-react';
 import GithubIcon from '@/components/icons/GithubIcon';
 import LinkedinIcon from '@/components/icons/LinkedinIcon';
 import { resume, type ResumeRole } from '@/lib/resume';
 import Stack from '@/components/stack';
 import SectionHeader from '@/components/section-header';
-
-const RESUME_PDF_URL = resume.pdfUrl;
 
 const MONTHS = [
   'Jan',
@@ -47,7 +45,7 @@ function duration(from: string, to: string) {
 function RoleBlock({ role }: { role: ResumeRole }) {
   return (
     <div>
-      <h4 className="text-foreground text-title">{role.title}</h4>
+      <h4 className="text-foreground-strong text-title">{role.title}</h4>
       <p className="text-muted-foreground text-meta mt-0.5 tabular-nums">
         {role.type}
         <span className="text-muted-foreground/40"> · </span>
@@ -55,7 +53,7 @@ function RoleBlock({ role }: { role: ResumeRole }) {
         <span className="text-muted-foreground/40"> · </span>
         {duration(role.from, role.to)}
       </p>
-      <ul className="text-foreground text-body marker:text-muted-foreground/60 mt-2 list-disc space-y-2 pl-4">
+      <ul className="text-foreground text-subtitle marker:text-muted-foreground/60 mt-2 list-disc space-y-2 pl-4">
         {role.bullets.map((b, i) => (
           <li key={i}>{b}</li>
         ))}
@@ -71,7 +69,9 @@ export default function ResumePage() {
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-              <h1 className="text-foreground text-display">Prajwal HD</h1>
+              <h1 className="text-foreground-strong text-display">
+                Prajwal HD
+              </h1>
               <span className="text-muted-foreground text-meta">/ Resume</span>
             </div>
             <p className="text-muted-foreground text-meta mt-2">
@@ -97,27 +97,27 @@ export default function ResumePage() {
 
         <div className="mt-6 flex flex-wrap items-center gap-2 print:hidden">
           <Link
-            href={RESUME_PDF_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-foreground bg-foreground text-background text-meta inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-opacity hover:opacity-90"
-          >
-            <FileDown className="h-3 w-3" />
-            Download PDF
-            <ArrowUpRight className="h-3 w-3" />
-          </Link>
-          <Link
             href="mailto:hdprajwal01@gmail.com"
-            className="border-border text-foreground hover:border-foreground text-meta inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
+            className="border-border text-foreground hover:border-foreground text-meta inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 transition-colors"
           >
             <Mail className="h-3 w-3" />
             Email
           </Link>
           <Link
+            href="https://cal.com/hdprajwal/intro"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border-border text-foreground hover:border-foreground text-meta inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 transition-colors"
+          >
+            <CalendarDays className="h-3 w-3" />
+            Book a call
+            <ArrowUpRight className="h-3 w-3" />
+          </Link>
+          <Link
             href="https://www.linkedin.com/in/hdprajwal"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border text-foreground hover:border-foreground text-meta inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
+            className="border-border text-foreground hover:border-foreground text-meta inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 transition-colors"
           >
             <LinkedinIcon className="h-3 w-3" />
             LinkedIn
@@ -127,7 +127,7 @@ export default function ResumePage() {
             href="https://github.com/hdprajwal"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border text-foreground hover:border-foreground text-meta inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-colors"
+            className="border-border text-foreground hover:border-foreground text-meta inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 transition-colors"
           >
             <GithubIcon className="h-3 w-3" />
             GitHub
@@ -143,7 +143,9 @@ export default function ResumePage() {
             {resume.education.map((e) => (
               <div key={e.school}>
                 <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-4 sm:[&>span]:shrink-0">
-                  <h3 className="text-foreground text-title">{e.school}</h3>
+                  <h3 className="text-foreground-strong text-title">
+                    {e.school}
+                  </h3>
                   <span className="text-muted-foreground text-meta tabular-nums">
                     {e.from} to {e.to}
                   </span>
@@ -160,7 +162,7 @@ export default function ResumePage() {
                           href={e.thesis.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
+                          className="text-foreground-strong decoration-accent-link hover:decoration-foreground-strong underline underline-offset-4 transition-colors"
                         >
                           {e.thesis.title}
                         </Link>
@@ -181,7 +183,9 @@ export default function ResumePage() {
             {resume.experience.map((c) => (
               <div key={c.name}>
                 <div className="border-border mb-4 flex flex-col gap-0.5 border-b pb-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-4">
-                  <h3 className="text-foreground text-title">{c.name}</h3>
+                  <h3 className="text-foreground-strong text-title">
+                    {c.name}
+                  </h3>
                   <span className="text-muted-foreground text-meta shrink-0">
                     {c.location}
                   </span>
@@ -206,7 +210,9 @@ export default function ResumePage() {
           <div className="space-y-6">
             {resume.publications.map((pub) => (
               <div key={pub.title}>
-                <h3 className="text-foreground text-title">{pub.title}</h3>
+                <h3 className="text-foreground-strong text-title">
+                  {pub.title}
+                </h3>
                 <p className="text-muted-foreground text-meta mt-1">
                   Peer-reviewed
                   <span className="text-muted-foreground/40"> · </span>
@@ -238,22 +244,49 @@ export default function ResumePage() {
             {resume.talks.map((talk) => (
               <div key={talk.title}>
                 <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-4 sm:[&>span]:shrink-0">
-                  <h3 className="text-foreground text-title">{talk.title}</h3>
+                  <h3 className="text-foreground-strong text-title">
+                    {talk.title}
+                  </h3>
                   <span className="text-muted-foreground text-meta tabular-nums">
-                    {talk.venue}
+                    {talk.date}
                   </span>
                 </div>
-                <p className="text-foreground text-body mt-1">{talk.summary}</p>
-                {talk.href && (
-                  <Link
-                    href={talk.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground decoration-accent-link hover:decoration-foreground text-meta group mt-1.5 inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
-                  >
-                    View talk
-                    <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
+                <p className="text-muted-foreground text-meta mt-0.5">
+                  {talk.venue}
+                  <span className="text-muted-foreground/40"> · </span>
+                  {talk.format}
+                  {talk.with && (
+                    <>
+                      <span className="text-muted-foreground/40"> · </span>
+                      with {talk.with}
+                    </>
+                  )}
+                </p>
+                <p className="text-foreground text-subtitle mt-2">
+                  {talk.summary}
+                </p>
+                {talk.points && (
+                  <ul className="text-foreground text-subtitle marker:text-muted-foreground/60 mt-2 list-disc space-y-2 pl-4">
+                    {talk.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                )}
+                {talk.links && (
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 print:hidden">
+                    {talk.links.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground-strong decoration-accent-link hover:decoration-foreground-strong text-meta group inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
+                      >
+                        {link.label}
+                        <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </Link>
+                    ))}
+                  </div>
                 )}
               </div>
             ))}

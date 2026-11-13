@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import Hero from '@/components/Hero';
 import SectionHeader from '@/components/section-header';
 import RecentBlogs from '@/components/blogs/recent-blogs';
@@ -8,68 +8,16 @@ import FeaturedProjects from '@/components/projects/featured-projects';
 import Talks from '@/components/talks';
 import Stack from '@/components/stack';
 import SectionViewTracker from '@/components/section-view-tracker';
-import { listRegistryComponents } from '@/lib/registry';
 
 const inlineLink =
-  'text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors';
+  'text-foreground-strong decoration-accent-link hover:decoration-foreground-strong underline underline-offset-4 transition-colors';
 
-export default async function Home() {
-  const registryComponents = await listRegistryComponents();
-
+export default function Home() {
   return (
     <>
       <Hero />
       <SectionViewTracker />
-      <div className="space-y-16 px-4 pb-16">
-        <section id="now">
-          <SectionHeader label="Now" />
-          <div className="text-foreground text-body space-y-4">
-            <p>
-              Open to AI engineer and backend/full-stack roles with end-to-end
-              ownership. California, remote, or hybrid.
-            </p>
-            <p>
-              Building{' '}
-              <Link
-                href="https://emberd.hdprajwal.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
-              >
-                emberd
-              </Link>
-              , a Firecracker-based sandbox runtime that runs AI-agent code
-              inside isolated microVMs. Also maintaining{' '}
-              <Link
-                href="/projects/quackcode"
-                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
-              >
-                QuackCode
-              </Link>{' '}
-              and{' '}
-              <Link
-                href="/projects/gitwise"
-                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
-              >
-                Gitwise
-              </Link>
-              .
-            </p>
-            <p>
-              Reading:{' '}
-              <Link
-                href="https://a.co/d/050niXpi"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
-              >
-                AI Systems Performance Engineering
-              </Link>{' '}
-              right now, and papers on AI agents.
-            </p>
-          </div>
-        </section>
-
+      <div className="px-4 pb-16">
         <section id="projects">
           <SectionHeader
             label="Projects"
@@ -79,15 +27,10 @@ export default async function Home() {
           <FeaturedProjects />
         </section>
 
-        <section id="stack">
-          <SectionHeader label="Stack" />
-          <Stack />
-        </section>
-
-        <section id="research">
-          <SectionHeader label="Featured work" />
+        <section id="research" className="mt-24">
+          <SectionHeader label="Research" />
           <div>
-            <h3 className="text-foreground text-title text-balance">
+            <h3 className="text-foreground-strong text-title text-balance">
               Re-Evaluating Android Malware Detection: Tabular Features, Vision
               Models, and Ensembles
             </h3>
@@ -117,52 +60,25 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="blog">
-          <SectionHeader
-            label="Writing"
-            href="/blog"
-            linkLabel="All posts"
-          />
+        <section id="blog" className="mt-24">
+          <SectionHeader label="Writing" href="/blog" linkLabel="All posts" />
           <RecentBlogs />
         </section>
 
-        <section id="components">
-          <SectionHeader
-            label="Components"
-            href="/components"
-            linkLabel="All components"
-          />
-          <div className="-mx-3 space-y-1">
-            {registryComponents.map((component) => (
-              <Link
-                key={component.slug}
-                href={`/components/${component.slug}`}
-                className="group hover:bg-accent/60 block rounded-md px-3 py-2.5 transition-colors duration-150"
-              >
-                <span className="flex items-baseline gap-1.5">
-                  <span className="text-foreground text-title">
-                    {component.name}
-                  </span>
-                  <ArrowRight className="text-muted-foreground size-3.5 shrink-0 -translate-x-1 opacity-0 transition-[opacity,translate] duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0" />
-                </span>
-                <span className="text-foreground-soft text-subtitle mt-1 block">
-                  {component.tagline}
-                </span>
-              </Link>
-            ))}
-          </div>
+        <section id="stack" className="mt-24">
+          <SectionHeader label="Stack" />
+          <Stack />
         </section>
 
-        <section id="talks">
+        <section id="talks" className="mt-24">
           <SectionHeader label="Talks" />
           <Talks />
         </section>
 
-        <section id="contact">
+        <section id="contact" className="mt-24">
           <SectionHeader label="Get in touch" />
           <p className="text-foreground text-body">
-            Open to AI engineer and backend/full-stack roles, California,
-            remote, or hybrid. Email is the fastest way to reach me.
+            Email is the fastest way to reach me, or you can book a call.
           </p>
           <ul className="text-foreground text-body mt-4 space-y-2">
             {[
@@ -170,6 +86,11 @@ export default async function Home() {
                 label: 'Email',
                 value: 'hdprajwal01@gmail.com',
                 href: 'mailto:hdprajwal01@gmail.com',
+              },
+              {
+                label: 'Call',
+                value: 'cal.com/hdprajwal/intro',
+                href: 'https://cal.com/hdprajwal/intro',
               },
               {
                 label: 'LinkedIn',
@@ -198,7 +119,7 @@ export default async function Home() {
                     {...(external
                       ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
-                    className="group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
+                    className="group text-foreground-strong decoration-accent-link hover:decoration-foreground-strong inline-flex items-center underline underline-offset-4 transition-colors"
                   >
                     {value}
                     <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />

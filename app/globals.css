@@ -60,6 +60,8 @@
   --muted-foreground: oklch(0.47 0 0);
   /* Second text tier: descriptions and summaries, between prose and metadata. */
   --foreground-soft: oklch(0.38 0 0);
+  /* Headings, titles, names and links; same as foreground in light mode. */
+  --foreground-strong: oklch(0.205 0 0);
   /* zinc-100 */
   --accent: oklch(0.967 0 0);
   --accent-muted: color-mix(in oklab, var(--accent) 50%, transparent);
@@ -119,14 +121,13 @@
   --shadow-2xl: 0 16px 20px 0px hsl(0 0% 0% / 0.1);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
-  --font-sans:
-    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Role-based type scale — the only text utilities on the site. Seven roles,
    all sizes derived from the --text-size-* knobs in :root. The site font is
    Geist Sans everywhere, so no per-role font-family. Color is applied in markup
-   (foreground for prose and titles, muted for metadata).
+   (foreground-strong for titles and links, foreground for prose, muted for metadata).
 
    display  — page titles and the hero lead; the one large register
    title    — item titles (projects, posts, roles); body size at 500
@@ -185,8 +186,8 @@
 .dark {
   /* ds-background-100 */
   --background: oklch(0 0 0);
-  /* ds-gray-1000 */
-  --foreground: oklch(0.97 0 0);
+  /* Two-tier dark text: prose at ~14:1 on black, headings and links stay near white. */
+  --foreground: oklch(0.86 0 0);
   /* neutral-900 */
   --card: oklch(0.145 0 0);
   /* neutral-50 */
@@ -207,9 +208,9 @@
   --secondary-foreground: oklch(0.97 0 0);
   /* ds-background-200 */
   --muted: oklch(0.145 0 0);
-  /* ds-gray-900, nudged up from 0.706 to hold the contrast floor */
-  --muted-foreground: oklch(0.715 0 0);
-  --foreground-soft: oklch(0.8 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --foreground-soft: oklch(0.78 0 0);
+  --foreground-strong: oklch(0.95 0 0);
   /* neutral-800 */
   --accent: oklch(0.2 0 0);
   --accent-muted: color-mix(in oklab, var(--accent) 20%, transparent);
@@ -270,6 +271,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-foreground-soft: var(--foreground-soft);
+  --color-foreground-strong: var(--foreground-strong);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
@@ -309,8 +311,7 @@
   --color-selection-foreground: var(--selection-foreground);
   --shadow-popover: var(--shadow-popover);
 
-  --font-sans:
-    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono:
     var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
@@ -344,6 +345,7 @@
     font-family: var(--font-sans);
     scrollbar-gutter: stable;
     text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -357,7 +359,6 @@
     background-color: var(--selection);
     color: var(--selection-foreground);
   }
-
 
   /* Shiki syntax highlighting styles. Chrome (border, radius, header bar)
      is owned by the Pre wrapper in components/mdx/pre-block.tsx — keep the
@@ -584,6 +585,58 @@ html[data-page-nav='backward']::view-transition-new(page) {
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
+  }
+}
+
+/* Hero link preview card. Opens after a short delay so a passing cursor does not flash it, and closes faster than it opens. */
+.hero-preview {
+  display: none;
+  opacity: 0;
+  scale: 0.95;
+  transition:
+    opacity 100ms var(--ease-out),
+    scale 100ms var(--ease-out),
+    display 100ms allow-discrete;
+}
+
+@media (min-width: 48rem) {
+  .hero-link:focus-within .hero-preview {
+    display: block;
+    opacity: 1;
+    scale: 1;
+    transition:
+      opacity 150ms var(--ease-out) 100ms,
+      scale 150ms var(--ease-out) 100ms,
+      display 150ms allow-discrete;
+
+    @starting-style {
+      opacity: 0;
+      scale: 0.95;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hero-link:hover .hero-preview {
+      display: block;
+      opacity: 1;
+      scale: 1;
+      transition:
+        opacity 150ms var(--ease-out) 100ms,
+        scale 150ms var(--ease-out) 100ms,
+        display 150ms allow-discrete;
+
+      @starting-style {
+        opacity: 0;
+        scale: 0.95;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-preview,
+  .hero-link .hero-preview {
+    scale: 1 !important;
   }
 }
 

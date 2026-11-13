@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import NextStep from '@/components/next-step';
 import ReadingProgress from '@/components/reading-progress';
 import { formatDate, getBlogPosts, baseUrl } from '@/lib/posts';
 import { type Post } from '@/lib/posts';
@@ -69,9 +70,7 @@ export default async function Blog({
     notFound();
   }
 
-  const { default: Content } = await import(
-    `../_content/${slug}/index.mdx`
-  );
+  const { default: Content } = await import(`../_content/${slug}/index.mdx`);
 
   const index = posts.findIndex((p) => p.slug === slug);
   const prev = index > 0 ? posts[index - 1] : null;
@@ -103,7 +102,9 @@ export default async function Blog({
       <div className="mx-auto max-w-2xl">
         <header className="mx-auto mt-4">
           <ViewTransition name={`post-title-${slug}`}>
-            <h1 className="text-display mt-3 text-pretty">{post.title}</h1>
+            <h1 className="text-foreground-strong text-display mt-3 text-pretty">
+              {post.title}
+            </h1>
           </ViewTransition>
           <p className="text-muted-foreground text-meta mt-3">
             {formatDate(post.date)} · {readingMins} min read
@@ -111,7 +112,7 @@ export default async function Blog({
         </header>
         {heroImage && (
           <ViewTransition name={`post-image-${slug}`}>
-            <div className="border-border relative mt-10 w-full overflow-hidden rounded-lg border">
+            <div className="border-border relative mt-10 w-full overflow-hidden rounded-md border">
               <div className="bg-muted relative aspect-video w-full">
                 <Image
                   src={heroImage}
@@ -166,7 +167,7 @@ export default async function Blog({
                     <ArrowLeftIcon className="inline-block h-3.5 w-3.5" />
                     Newer
                   </div>
-                  <div className="text-title group-hover:underline">
+                  <div className="text-foreground-strong text-title group-hover:underline">
                     {prev.title}
                   </div>
                 </Link>
@@ -180,12 +181,14 @@ export default async function Blog({
                     Older
                     <ArrowRightIcon className="inline-block h-3.5 w-3.5" />
                   </div>
-                  <div className="text-title group-hover:underline">
+                  <div className="text-foreground-strong text-title group-hover:underline">
                     {next.title}
                   </div>
                 </Link>
               )}
             </div>
+
+            <NextStep subject="this post" />
           </div>
         </section>
       </div>

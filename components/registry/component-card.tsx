@@ -14,10 +14,10 @@ export default function ComponentCard({
   const href = `/components/${component.slug}`;
 
   return (
-    <div className="group rounded-xl border p-1">
+    <div className="group rounded-md border p-1">
       <Link href={href} className="block">
         <ViewTransition name={`component-image-${component.slug}`}>
-          <div className="border-border relative aspect-video w-full overflow-hidden rounded-lg border">
+          <div className="border-border relative aspect-video w-full overflow-hidden rounded-md border">
             {component.image ? (
               <Image
                 src={component.image}
@@ -39,7 +39,7 @@ export default function ComponentCard({
       <div className="px-2 pt-3 pb-2">
         <Link href={href}>
           <ViewTransition name={`component-title-${component.slug}`}>
-            <h3 className="text-foreground text-title group-hover:underline group-hover:underline-offset-3">
+            <h3 className="text-foreground-strong text-title group-hover:underline group-hover:underline-offset-3">
               {component.name}
             </h3>
           </ViewTransition>
@@ -90,7 +90,7 @@ function TypographyBanner({
         ❯ npx shadcn add {slug}
       </span>
       <div>
-        <div className="text-foreground text-title">{name}</div>
+        <div className="text-foreground-strong text-title">{name}</div>
         <p className="text-muted-foreground text-subtitle mt-1 line-clamp-2">
           {tagline}
         </p>

@@ -15,7 +15,7 @@ export default function SectionHeader({
 }) {
   return (
     <div className={cn('mb-4 flex items-baseline gap-4', className)}>
-      <h2 className="text-foreground text-header">{label}</h2>
+      <h2 className="text-foreground-strong text-header">{label}</h2>
       {href && (
         <Link
           href={href}

@@ -27,26 +27,26 @@ export default function ShareActions({
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="ghost" className="rounded-sm" size="icon">
+          <Button variant="ghost" className="rounded-md" size="icon">
             <Share />
           </Button>
         }
       />
-      <DropdownMenuContent className="rounded-sm" align="end">
-        <DropdownMenuItem className="rounded-sm">
+      <DropdownMenuContent className="rounded-md" align="end">
+        <DropdownMenuItem className="rounded-md">
           <Link className="flex items-center gap-2" href={x}>
             <TwitterIcon className="inline-block h-4 w-4" />
             Twitter
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="rounded-sm">
+        <DropdownMenuItem className="rounded-md">
           <Link className="flex items-center gap-2" href={li}>
             <LinkedinIcon className="inline-block h-4 w-4" />
             LinkedIn
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem
-          className="rounded-sm"
+          className="rounded-md"
           onClick={() => {
             navigator.clipboard.writeText(url);
             toast.success('Link copied to clipboard');

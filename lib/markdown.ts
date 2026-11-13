@@ -95,8 +95,13 @@ export function resumeToMarkdown(resume: Resume): string {
 
   lines.push('', '## Speaking');
   for (const talk of resume.talks) {
-    lines.push('', `### ${talk.title} (${talk.venue})`, talk.summary);
-    if (talk.href) lines.push(talk.href);
+    const meta = [talk.venue, talk.date, talk.format].join(', ');
+    lines.push('', `### ${talk.title}`, meta);
+    if (talk.with) lines.push(`With ${talk.with}`);
+    lines.push(talk.summary);
+    for (const point of talk.points ?? []) lines.push(`- ${point}`);
+    for (const link of talk.links ?? [])
+      lines.push(`${link.label}: ${link.href}`);
   }
 
   lines.push('', '## Education');

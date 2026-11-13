@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import SectionHeader from '@/components/section-header';
+import ProjectList from '@/components/projects/project-list';
+import NextStep from '@/components/next-step';
 import { ExternalLink } from 'lucide-react';
 import { CustomMDX } from '@/components/mdx/custom-mdx';
 import { ViewTransition } from '@/components/view-transition';
@@ -61,6 +64,9 @@ export default async function ProjectPage({
     notFound();
   }
 
+  const others = (await listProjects())
+    .filter((p) => p.slug !== slug)
+    .slice(0, 3);
   const isExternalImg = project.image && /^https?:\/\//.test(project.image);
 
   return (
@@ -75,14 +81,16 @@ export default async function ProjectPage({
         <header className="mt-4">
           <div className="flex items-baseline justify-between gap-5">
             <ViewTransition name={`project-title-${slug}`}>
-              <h1 className="text-display text-balance">{project.name}</h1>
+              <h1 className="text-foreground-strong text-display text-balance">
+                {project.name}
+              </h1>
             </ViewTransition>
             {project.liveHref && (
               <Link
                 href={project.liveHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-accent-link hover:decoration-foreground text-meta inline-flex shrink-0 items-center gap-1 underline underline-offset-4 transition-colors"
+                className="text-foreground-strong decoration-accent-link hover:decoration-foreground-strong text-meta inline-flex shrink-0 items-center gap-1 underline underline-offset-4 transition-colors"
               >
                 View Live
                 <ExternalLink className="h-3.5 w-3.5" />
@@ -97,7 +105,7 @@ export default async function ProjectPage({
       </div>
 
       <ViewTransition name={`project-image-${slug}`}>
-        <div className="border-border bg-muted relative mx-auto mt-8 max-w-2xl overflow-hidden rounded-lg border">
+        <div className="border-border bg-muted relative mx-auto mt-8 max-w-2xl overflow-hidden rounded-md border">
           <div className="relative flex aspect-[16/9] w-full items-center justify-center">
             {project.image ? (
               <Image
@@ -124,6 +132,21 @@ export default async function ProjectPage({
           </article>
         </div>
       )}
+
+      <div className="mx-auto mt-10 w-full max-w-2xl">
+        <hr className="border-border mb-10" />
+        {others.length > 0 && (
+          <section>
+            <SectionHeader
+              label="More projects"
+              href="/projects"
+              linkLabel="All projects"
+            />
+            <ProjectList projects={others} />
+          </section>
+        )}
+        <NextStep subject={project.name} />
+      </div>
     </div>
   );
 }

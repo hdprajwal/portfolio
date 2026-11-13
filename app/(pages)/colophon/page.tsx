@@ -6,7 +6,7 @@ export default function ColophonPage() {
   return (
     <div className="flex-1">
       <div className="px-4 pt-14 pb-8">
-        <h1 className="text-foreground text-display">Colophon</h1>
+        <h1 className="text-foreground-strong text-display">Colophon</h1>
         <p className="text-foreground text-body mt-4">
           Notes about how this site is built and run.
         </p>
@@ -46,27 +46,27 @@ export default function ColophonPage() {
           <ul className="text-foreground text-body space-y-2">
             <li>
               Posts are written in{' '}
-              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-md px-1 py-0.5">
                 .mdx
               </code>{' '}
               under{' '}
-              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-md px-1 py-0.5">
                 /content/blog
               </code>{' '}
               with frontmatter:{' '}
-              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-md px-1 py-0.5">
                 title
               </code>
               ,{' '}
-              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-md px-1 py-0.5">
                 summary
               </code>
               ,{' '}
-              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-md px-1 py-0.5">
                 tags
               </code>
               ,{' '}
-              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-md px-1 py-0.5">
                 date
               </code>
             </li>
@@ -76,7 +76,7 @@ export default function ColophonPage() {
                 href="https://github.com/hashicorp/next-mdx-remote"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground-strong decoration-accent-link hover:decoration-foreground-strong underline underline-offset-4 transition-colors"
               >
                 next-mdx-remote
               </a>{' '}
@@ -85,7 +85,7 @@ export default function ColophonPage() {
                 href="https://shiki.style/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground-strong decoration-accent-link hover:decoration-foreground-strong underline underline-offset-4 transition-colors"
               >
                 rehype-shiki
               </a>{' '}
@@ -104,14 +104,14 @@ export default function ColophonPage() {
             <li>
               <a
                 href="/llms.txt"
-                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground-strong decoration-accent-link hover:decoration-foreground-strong underline underline-offset-4 transition-colors"
               >
                 /llms.txt
               </a>{' '}
               indexes the site for AI tools;{' '}
               <a
                 href="/llms-full.txt"
-                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground-strong decoration-accent-link hover:decoration-foreground-strong underline underline-offset-4 transition-colors"
               >
                 /llms-full.txt
               </a>{' '}
@@ -120,7 +120,7 @@ export default function ColophonPage() {
             <li>
               Every post, project, and TIL is also available as raw markdown by
               appending{' '}
-              <code className="bg-muted text-meta rounded-sm px-1 py-0.5">
+              <code className="bg-muted text-meta rounded-md px-1 py-0.5">
                 .md
               </code>{' '}
               to its URL
@@ -128,7 +128,7 @@ export default function ColophonPage() {
             <li>
               <a
                 href="/rss.xml"
-                className="text-foreground decoration-accent-link hover:decoration-foreground underline underline-offset-4 transition-colors"
+                className="text-foreground-strong decoration-accent-link hover:decoration-foreground-strong underline underline-offset-4 transition-colors"
               >
                 /rss.xml
               </a>{' '}
@@ -145,7 +145,7 @@ export default function ColophonPage() {
                 href="https://github.com/hdprajwal/portfolio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
+                className="group text-foreground-strong decoration-accent-link hover:decoration-foreground-strong inline-flex items-center underline underline-offset-4 transition-colors"
               >
                 github.com/hdprajwal/portfolio{' '}
                 <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />
@@ -180,7 +180,7 @@ export default function ColophonPage() {
                 href="https://github.com/hdprajwal/dotfiles"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group text-foreground decoration-accent-link hover:decoration-foreground inline-flex items-center underline underline-offset-4 transition-colors"
+                className="group text-foreground-strong decoration-accent-link hover:decoration-foreground-strong inline-flex items-center underline underline-offset-4 transition-colors"
               >
                 github.com/hdprajwal/dotfiles
                 <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-out group-hover:rotate-45" />

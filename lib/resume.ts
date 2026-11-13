@@ -34,8 +34,12 @@ export type ResumePublication = {
 export type ResumeTalk = {
   title: string;
   venue: string;
+  date: string;
+  format: string;
+  with?: string;
   summary: string;
-  href?: string;
+  points?: string[];
+  links?: { label: string; href: string }[];
 };
 
 export type Resume = {
@@ -194,16 +198,41 @@ export const resume: Resume = {
   talks: [
     {
       title: 'Data Transfer Cost Optimization',
-      venue: 'Rootconf 2022',
+      venue: 'Rootconf, Optimizing Costs of Cloud Infrastructure',
+      date: 'Mar 2022',
+      format: '15 min talk',
+      with: 'Shivam Beeyani (OpsLyft)',
       summary:
-        'Co-presented an approach to granular visibility into cloud data transfer costs using AWS Cost and Usage Reports and VPC flow logs.',
-      href: 'https://hasgeek.com/rootconf/optimizing-costs-of-cloud-infrastructure/sub/data-transfer-cost-optimization-KGSAciSRiEjTo1bjGNWChG',
+        'AWS Cost and Usage Reports show data transfer cost by operation, but not which resources are talking to each other. We used VPC flow logs, enriched with resource metadata, to trace transfer cost down to source and destination regions and services.',
+      points: [
+        'Built a three-step ETL pipeline (extract, transform, load) that turns raw VPC flow logs into dashboards and an aggregation browser.',
+        'Showed where transfer cost actually comes from, broken down by source and destination region and service.',
+        'Takeaways: swap some NAT gateways for an internet gateway, serve static content through CloudFront, keep RDS and Redshift in the same region, use VPC peering or sharing across regions and accounts, and use private IPs so intra-AZ traffic stays free.',
+      ],
+      links: [
+        {
+          label: 'Talk page',
+          href: 'https://hasgeek.com/rootconf/optimizing-costs-of-cloud-infrastructure/sub/data-transfer-cost-optimization-KGSAciSRiEjTo1bjGNWChG',
+        },
+        {
+          label: 'Slides',
+          href: 'https://docs.google.com/presentation/d/1dphLNKK6qBjKjv3K2AJzhhkA2kIAaduxerrPi8tSwOI/edit?usp=sharing',
+        },
+      ],
     },
     {
       title: 'Simplifying the Complexities of Kubernetes Cost Visibility',
-      venue: 'Opslyft Webinar, Jun 2022',
+      venue: 'Opslyft Webinar',
+      date: 'Jun 2022',
+      format: 'Webinar',
+      with: 'Aayush Kumar (Founder and CEO, Opslyft)',
       summary:
-        'Spoke alongside Aayush Kumar (Founder and CEO, Opslyft) on bridging Kubernetes orchestration and underlying cloud infrastructure costs: capacity misconfigurations, siloed visibility, and building a transparency layer for effective cost management.',
+        'Bridging Kubernetes orchestration and the cloud infrastructure costs underneath it, so teams can see and manage what their clusters actually cost.',
+      points: [
+        'Capacity misconfigurations and the spend they cause.',
+        'Siloed visibility into Kubernetes costs.',
+        'Building a transparency layer for effective cost management.',
+      ],
     },
   ],
 };
