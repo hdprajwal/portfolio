@@ -1,5 +1,5 @@
 import type { Post } from '@/lib/posts';
-import { hasProjectPage, type Project } from '@/lib/projects';
+import { type Project } from '@/lib/projects';
 import type { TIL } from '@/lib/tils';
 import { resume } from '@/lib/resume';
 import {
@@ -24,9 +24,7 @@ export function buildLlmsIndex(input: LlmsInput, siteUrl: string): string {
 
   lines.push('## Projects', '');
   for (const p of input.projects) {
-    const href = hasProjectPage(p)
-      ? `${siteUrl}/projects/${p.slug}.md`
-      : `${siteUrl}/projects`;
+    const href = `${siteUrl}/projects/${p.slug}.md`;
     lines.push(`- [${p.name}](${href}): ${p.tagline || p.description}`);
   }
 
@@ -63,7 +61,7 @@ export function buildLlmsFull(input: LlmsInput, siteUrl: string): string {
   const sections = [
     HEADER,
     resumeToMarkdown(resume),
-    ...input.projects.filter(hasProjectPage).map((p) => projectToMarkdown(p)),
+    ...input.projects.map((p) => projectToMarkdown(p)),
     ...input.posts.map((p) => postToMarkdown(p)),
     ...input.tils.map((t) => tilToMarkdown(t)),
     `Canonical site: ${siteUrl}`,

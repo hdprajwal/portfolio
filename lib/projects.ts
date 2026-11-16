@@ -13,6 +13,10 @@ export type Project = {
   codeHref?: string;
   liveHref?: string;
   image?: string;
+  video?: string;
+  poster?: string;
+  duration?: string;
+  accent?: string;
   content?: string;
   featured?: boolean;
   date?: string;
@@ -24,8 +28,27 @@ const PROJECTS_DIR = path.join(process.cwd(), 'content/projects');
 
 export { baseUrl } from '@/lib/site';
 
-export function hasProjectPage(project: Pick<Project, 'content'>): boolean {
-  return Boolean(project.content?.trim());
+function parseProject(slug: string, raw: string): Project {
+  const { data, content } = matter(raw);
+  return {
+    slug,
+    name: data.name || slug,
+    tagline: data.tagline || '',
+    description: data.description || '',
+    tags: data.tags || [],
+    codeHref: data.codeHref,
+    liveHref: data.liveHref,
+    image: data.image,
+    video: data.video,
+    poster: data.poster,
+    duration: data.duration,
+    accent: data.accent,
+    content,
+    featured: data.featured || false,
+    date: data.date,
+    draft: data.draft === true,
+    archived: data.archived === true,
+  };
 }
 
 export const listProjects = cache(async (): Promise<Project[]> => {
@@ -33,31 +56,15 @@ export const listProjects = cache(async (): Promise<Project[]> => {
     return [];
   }
 
-  const files = fs.readdirSync(PROJECTS_DIR);
-  return files
+  return fs
+    .readdirSync(PROJECTS_DIR)
     .filter((file) => file.endsWith('.mdx'))
-    .map((file) => {
-      const slug = file.replace('.mdx', '');
-      const filePath = path.join(PROJECTS_DIR, file);
-      const raw = fs.readFileSync(filePath, 'utf8');
-      const { data, content } = matter(raw);
-
-      return {
-        slug,
-        name: data.name || slug,
-        tagline: data.tagline || '',
-        description: data.description || '',
-        tags: data.tags || [],
-        codeHref: data.codeHref,
-        liveHref: data.liveHref,
-        image: data.image,
-        content,
-        featured: data.featured || false,
-        date: data.date,
-        draft: data.draft === true,
-        archived: data.archived === true,
-      };
-    })
+    .map((file) =>
+      parseProject(
+        file.replace('.mdx', ''),
+        fs.readFileSync(path.join(PROJECTS_DIR, file), 'utf8')
+      )
+    )
     .filter((project) => !project.archived && !isHiddenDraft(project.draft))
     .sort((a, b) => {
       // Featured projects first
@@ -79,23 +86,9 @@ export async function getProject(slug: string): Promise<Project | null> {
     return null;
   }
 
-  const raw = fs.readFileSync(filePath, 'utf8');
-  const { data, content } = matter(raw);
-
-  if (data.archived === true || isHiddenDraft(data.draft === true)) {
+  const project = parseProject(slug, fs.readFileSync(filePath, 'utf8'));
+  if (project.archived || isHiddenDraft(project.draft)) {
     return null;
   }
-
-  return {
-    slug,
-    name: data.name || slug,
-    tagline: data.tagline || '',
-    description: data.description || '',
-    tags: data.tags || [],
-    codeHref: data.codeHref,
-    liveHref: data.liveHref,
-    image: data.image,
-    content,
-    draft: data.draft === true,
-  };
+  return project;
 }
