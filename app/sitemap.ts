@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { listPosts } from '@/lib/posts';
-import { hasProjectPage, listProjects } from '@/lib/projects';
+import { listProjects } from '@/lib/projects';
 import { listTILs } from '@/lib/tils';
 import { listRegistryComponents } from '@/lib/registry';
 import { baseUrl as BASE_URL } from '@/lib/site';
@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     listProjects(),
     listRegistryComponents(),
   ]);
-  const projectSlugs = projects.filter(hasProjectPage).map((p) => p.slug);
+  const projectSlugs = projects.map((p) => p.slug);
 
   const now = new Date();
   const staticRoutes: MetadataRoute.Sitemap = [

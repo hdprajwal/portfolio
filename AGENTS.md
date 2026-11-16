@@ -32,9 +32,9 @@ MDX is rendered by `components/mdx/custom-mdx.tsx` using `next-mdx-remote/rsc` w
 ### Adding a New Content Item
 
 1. Create an `.mdx` file under the relevant `content/<type>/` directory.
-2. Fill out frontmatter. Blog/TIL need at least `title`, `date`, `summary`/`description`, `tags`. Project frontmatter supports `name`, `tagline`, `description`, `tags`, `codeHref`, `liveHref`, `image`, `featured`, `date`.
+2. Fill out frontmatter. Blog/TIL need at least `title`, `date`, `summary`/`description`, `tags`. Project frontmatter supports `name`, `tagline`, `description`, `tags`, `codeHref`, `liveHref`, `image`, `featured`, `date`, plus `video` (mp4 or YouTube URL), `poster` (falls back to `image`), `duration` (e.g. `'2:14'`), and `accent` (a key from `lib/project-accent.ts` that tints card frames, the page wash, and the play button).
 3. Write dates as ISO `YYYY-MM-DD` (consumed by `new Date(...)` for sorting).
-4. A project gets a dedicated `/projects/[slug]` page only when its MDX body is non-empty; `app/sitemap.ts` filters with `p.content?.trim()`.
+4. Every non-archived project gets a `/projects/[slug]` page, listed in the sitemap, llms.txt and search. Each should carry a writeup (MDX body) or a `video`. Cards (`components/projects/project-list.tsx`) open that page and show a separate Live link when `liveHref` is set. The page layout lives in `components/projects/page/`: a centered 672px column with a facts card that floats in the right gutter at `xl` and sits inline under the video below it. Without a writeup the page shows `description`.
 5. Set `draft: true` in frontmatter to keep an item visible in dev but
    excluded from production pages, sitemap, RSS, llms.txt, and search.
    Remove the flag to publish.

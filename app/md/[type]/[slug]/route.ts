@@ -1,5 +1,5 @@
 import { getPost, listPosts } from '@/lib/posts';
-import { getProject, listProjects, hasProjectPage } from '@/lib/projects';
+import { getProject, listProjects } from '@/lib/projects';
 import { getTIL, listTILs } from '@/lib/tils';
 import {
   postToMarkdown,
@@ -35,7 +35,7 @@ const registry: Record<string, ContentEntry<{ slug: string }>> = {
     list: listProjects,
     get: getProject,
     toMarkdown: projectToMarkdown,
-    isPublished: hasProjectPage,
+    isPublished: () => true,
   }),
   tils: defineEntry({
     list: listTILs,

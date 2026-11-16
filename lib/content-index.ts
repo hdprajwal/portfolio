@@ -1,5 +1,5 @@
 import type { Post } from '@/lib/posts';
-import { hasProjectPage, type Project } from '@/lib/projects';
+import { type Project } from '@/lib/projects';
 import type { TIL } from '@/lib/tils';
 
 export type ContentIndexItem = {
@@ -26,7 +26,7 @@ export function buildContentIndex(
   const projectItems: ContentIndexItem[] = projects.map((p) => ({
     type: 'project',
     // Detail pages only exist for projects with a body; see app/sitemap.ts.
-    href: hasProjectPage(p) ? `/projects/${p.slug}` : '/projects',
+    href: `/projects/${p.slug}`,
     title: p.name,
     summary: p.tagline || p.description,
     tags: p.tags,

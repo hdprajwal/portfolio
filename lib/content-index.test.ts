@@ -43,9 +43,9 @@ describe('buildContentIndex', () => {
     expect(index.find((i) => i.type === 'til')?.href).toBe('/tils/a-til');
   });
 
-  it('points body-less projects at the projects list, not a 404 page', () => {
+  it('links every project to its own page, with or without a writeup', () => {
     const index = buildContentIndex([], [stubProject], []);
-    expect(index[0].href).toBe('/projects');
+    expect(index[0].href).toBe(`/projects/${stubProject.slug}`);
   });
 
   it('uses tagline as the project summary', () => {
