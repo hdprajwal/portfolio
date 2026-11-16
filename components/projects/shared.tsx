@@ -12,7 +12,8 @@ export function projectHref(p: Project) {
 }
 
 export function projectYear(p: Project) {
-  return p.date ? new Date(p.date).getFullYear().toString() : '';
+  // UTC so a date-only value like 2026-01-01 does not read as the previous year west of UTC.
+  return p.date ? new Date(p.date).getUTCFullYear().toString() : '';
 }
 
 export function liveHost(p: Project) {

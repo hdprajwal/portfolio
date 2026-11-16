@@ -76,7 +76,7 @@ export function resolveAccent(project: {
   slug: string;
   accent?: string;
 }): Accent {
-  if (project.accent && project.accent in ACCENTS) {
+  if (project.accent && Object.hasOwn(ACCENTS, project.accent)) {
     return ACCENTS[project.accent as AccentName];
   }
   let hash = 0;

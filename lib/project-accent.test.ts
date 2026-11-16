@@ -13,4 +13,14 @@ describe('resolveAccent', () => {
     expect(resolveAccent({ slug: 'gitwise' })).toBe(a);
     expect(Object.values(ACCENTS)).toContain(a);
   });
+
+  it('ignores inherited object keys like constructor', () => {
+    const fallback = resolveAccent({ slug: 'gitwise' });
+    expect(resolveAccent({ slug: 'gitwise', accent: 'constructor' })).toBe(
+      fallback
+    );
+    expect(resolveAccent({ slug: 'gitwise', accent: 'toString' })).toBe(
+      fallback
+    );
+  });
 });

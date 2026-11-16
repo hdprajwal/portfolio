@@ -4,13 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-function youtubeId(url: string) {
-  const m = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/
-  );
-  return m?.[1];
-}
+import { youtubeId } from '@/lib/youtube';
 
 // Poster with a play button; the player (mp4 or YouTube) only loads after the click.
 export default function ProjectVideo({
