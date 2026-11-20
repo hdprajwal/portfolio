@@ -2,7 +2,7 @@ import type { SVGProps } from 'react';
 
 // Brand icon paths from simple-icons (simpleicons.org, CC0) and svgl (svgl.app),
 // rendered monochrome via currentColor.
-const icons = {
+export const stackIcons = {
   astro: {
     viewBox: '0 0 24 24',
     paths: [
@@ -203,18 +203,33 @@ const icons = {
   vercel: { viewBox: '0 0 24 24', paths: ['m12 1.608 12 20.784H0Z'] },
 } as const;
 
-export type StackIconSlug = keyof typeof icons;
+export type StackIconSlug = keyof typeof stackIcons;
+
+export const STACK_SPRITE_PATH = '/stack-icons.svg';
+
+// One cached SVG file holding every icon as a <symbol>, so pages don't inline the path data.
+export function buildStackSprite(): string {
+  const symbols = Object.entries(stackIcons).map(
+    ([slug, icon]) =>
+      `<symbol id="${slug}" viewBox="${icon.viewBox}">${icon.paths
+        .map((d) => `<path d="${d}"/>`)
+        .join('')}</symbol>`
+  );
+  return `<svg xmlns="http://www.w3.org/2000/svg">${symbols.join('')}</svg>`;
+}
 
 export default function StackIcon({
   slug,
   ...props
 }: { slug: StackIconSlug } & SVGProps<SVGSVGElement>) {
-  const icon = icons[slug];
   return (
-    <svg viewBox={icon.viewBox} fill="currentColor" aria-hidden {...props}>
-      {icon.paths.map((d) => (
-        <path key={d.slice(0, 24)} d={d} />
-      ))}
+    <svg
+      viewBox={stackIcons[slug].viewBox}
+      fill="currentColor"
+      aria-hidden
+      {...props}
+    >
+      <use href={`${STACK_SPRITE_PATH}#${slug}`} />
     </svg>
   );
 }

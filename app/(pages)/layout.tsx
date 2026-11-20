@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sooner';
 import ScrollToTop from '@/components/scroll-to-top';
 import TrackingEvents from '@/components/tracking-events';
 import NavDirection from '@/components/nav-direction';
+import WebMCPTools from '@/components/webmcp-tools';
 import { ViewTransition } from '@/components/view-transition';
 import { listPosts } from '@/lib/posts';
 import { listProjects } from '@/lib/projects';
@@ -41,6 +42,7 @@ export default async function Layout({
       <ScrollToTop />
       <NavDirection />
       <TrackingEvents />
+      <WebMCPTools contentItems={contentItems} />
     </>
   );
 }

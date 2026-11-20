@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import AnalyticsProvider from '@/components/analytics';
 import ThemeColor from '@/components/theme-color';
 import { baseUrl } from '@/lib/site';
+import { buildSiteGraph } from '@/lib/structured-data';
 
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -92,52 +93,7 @@ export default function RootLayout({
           type="application/ld+json"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@graph': [
-                {
-                  '@type': 'WebSite',
-                  '@id': `${baseUrl}/#website`,
-                  url: baseUrl,
-                  name: 'Prajwal HD',
-                  description:
-                    'Portfolio, projects, writing, and resume of Prajwal HD.',
-                  inLanguage: 'en-US',
-                },
-                {
-                  '@type': 'Person',
-                  '@id': `${baseUrl}/#person`,
-                  name: 'Prajwal HD',
-                  url: baseUrl,
-                  jobTitle: 'AI Engineer',
-                  alumniOf: [
-                    {
-                      '@type': 'CollegeOrUniversity',
-                      name: 'Purdue University Fort Wayne',
-                    },
-                  ],
-                  knowsAbout: [
-                    'Applied AI',
-                    'AI Agents',
-                    'Developer Tools',
-                    'Backend Systems',
-                    'Full-Stack Development',
-                    'Android Malware Detection',
-                    'Platform Engineering',
-                    'Cloud Cost Engineering',
-                    'Multi-cloud Infrastructure',
-                    'Python',
-                    'TypeScript',
-                    'Go',
-                  ],
-                  sameAs: [
-                    'https://github.com/hdprajwal',
-                    'https://www.linkedin.com/in/hdprajwal',
-                    'https://x.com/_hdprajwal',
-                  ],
-                },
-              ],
-            }),
+            __html: JSON.stringify(buildSiteGraph(baseUrl)),
           }}
         />
         <ThemeProvider

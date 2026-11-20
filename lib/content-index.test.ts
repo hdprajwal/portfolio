@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildContentIndex } from '@/lib/content-index';
+import { buildContentIndex, searchContent } from '@/lib/content-index';
 
 const post = {
   slug: 'my-post',
@@ -51,5 +51,43 @@ describe('buildContentIndex', () => {
   it('uses tagline as the project summary', () => {
     const index = buildContentIndex([], [projectWithBody], []);
     expect(index[0].summary).toBe('MicroVM sandbox runtime');
+  });
+});
+
+describe('searchContent', () => {
+  const items = [
+    {
+      type: 'blog' as const,
+      title: 'WebMCP agents',
+      href: '/blog/a',
+      summary: 'tools',
+      tags: ['ai'],
+    },
+    {
+      type: 'project' as const,
+      title: 'Mailbox',
+      href: '/projects/b',
+      summary: 'agents on R2',
+      tags: ['cloudflare'],
+    },
+    {
+      type: 'til' as const,
+      title: 'Shell tip',
+      href: '/tils/c',
+      summary: 'zsh',
+      tags: [],
+    },
+  ];
+
+  it('ranks title matches above summary matches', () => {
+    expect(searchContent(items, 'agents').map((i) => i.href)).toEqual([
+      '/blog/a',
+      '/projects/b',
+    ]);
+  });
+
+  it('filters by type and drops non-matches', () => {
+    expect(searchContent(items, 'agents', 'project')).toHaveLength(1);
+    expect(searchContent(items, 'kubernetes')).toEqual([]);
   });
 });

@@ -25,6 +25,7 @@ const nextConfig = {
       { source: '/blog/:slug.md', destination: '/md/blog/:slug' },
       { source: '/projects/:slug.md', destination: '/md/projects/:slug' },
       { source: '/tils/:slug.md', destination: '/md/tils/:slug' },
+      { source: '/resume.md', destination: '/md/resume' },
     ];
   },
 };

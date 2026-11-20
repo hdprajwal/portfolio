@@ -42,3 +42,34 @@ export function buildContentIndex(
 
   return [...postItems, ...projectItems, ...tilItems];
 }
+
+// Ranks items for the WebMCP search tool: title hits beat tag hits beat summary hits.
+export function searchContent(
+  items: ContentIndexItem[],
+  query: string,
+  type?: ContentIndexItem['type'],
+  limit = 10
+): ContentIndexItem[] {
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const pool = type ? items.filter((item) => item.type === type) : items;
+  if (terms.length === 0) return pool.slice(0, limit);
+  return pool
+    .map((item) => {
+      const title = item.title.toLowerCase();
+      const tags = item.tags.join(' ').toLowerCase();
+      const summary = item.summary.toLowerCase();
+      const score = terms.reduce(
+        (sum, term) =>
+          sum +
+          (title.includes(term) ? 3 : 0) +
+          (tags.includes(term) ? 2 : 0) +
+          (summary.includes(term) ? 1 : 0),
+        0
+      );
+      return { item, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ item }) => item);
+}

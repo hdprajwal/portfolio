@@ -6,6 +6,8 @@ import {
   projectToMarkdown,
   tilToMarkdown,
 } from '@/lib/markdown';
+import { buildNotFoundMarkdown, markdownResponse } from '@/lib/agent-discovery';
+import { baseUrl } from '@/lib/site';
 
 export const dynamic = 'force-static';
 
@@ -73,13 +75,11 @@ export async function GET(
   const markdown = await toMarkdown(type, slug);
 
   if (markdown === null) {
-    return new Response('Not found', { status: 404 });
+    return markdownResponse(
+      buildNotFoundMarkdown(`/${type}/${slug}`, baseUrl),
+      404
+    );
   }
 
-  return new Response(markdown, {
-    headers: {
-      'Content-Type': 'text/markdown; charset=utf-8',
-      'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
-    },
-  });
+  return markdownResponse(markdown);
 }
