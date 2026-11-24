@@ -1,0 +1,11 @@
+---
+name: r2-mailbox
+tagline: A receive-only email inbox for AI agents, on your own domain and Cloudflare's free tier.
+description: 'A receive-only email inbox for AI agents. Cloudflare Email Routing hands each email to a small Worker that saves it to an R2 bucket as a raw .eml file, and a Python reader with no dependencies lists, parses, and exports the mail as JSON for an agent to read. The Worker has no public URL, the reader only gets a read-only key to that one bucket, and optional sender allowlists and DMARC checks keep out mail you did not ask for. I use it to let an agent read my newsletters without giving it my whole inbox.'
+tags: ['Cloudflare Workers', 'R2', 'Email', 'AI Agents', 'Python']
+codeHref: https://github.com/hdprajwal/r2-mailbox
+liveHref: https://r2-mailbox.hdprajwal.dev
+image: https://assets.hdprajwal.dev/projects/r2-mailbox.png
+date: '2026-11-06'
+accent: amber
+---

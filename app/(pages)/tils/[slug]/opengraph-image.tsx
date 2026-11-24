@@ -13,12 +13,14 @@ export default async function Image({
   const { slug } = await params;
   const til = await getTIL(slug);
   if (!til) {
-    return renderOgImage({ kicker: 'TIL', title: 'Prajwal HD' });
+    return renderOgImage({
+      kicker: 'TIL',
+      title: 'Prajwal HD',
+    });
   }
   return renderOgImage({
-    kicker: 'Today I Learned',
+    kicker: 'TIL',
     title: til.title,
     subtitle: til.description,
-    tags: til.tags,
   });
 }

@@ -13,12 +13,14 @@ export default async function Image({
   const { slug } = await params;
   const project = await getProject(slug);
   if (!project) {
-    return renderOgImage({ kicker: 'Projects', title: 'Prajwal HD' });
+    return renderOgImage({
+      kicker: 'Projects',
+      title: 'Prajwal HD',
+    });
   }
   return renderOgImage({
     kicker: 'Project',
     title: project.name,
     subtitle: project.tagline || project.description,
-    tags: project.tags,
   });
 }

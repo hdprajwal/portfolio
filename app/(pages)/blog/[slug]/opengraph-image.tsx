@@ -14,12 +14,14 @@ export default async function Image({
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) {
-    return renderOgImage({ kicker: 'Blog', title: 'Prajwal HD' });
+    return renderOgImage({
+      kicker: 'Blog',
+      title: 'Prajwal HD',
+    });
   }
   return renderOgImage({
     kicker: `Blog / ${readingMinutes(post.content)} min read`,
     title: post.title,
     subtitle: post.summary,
-    tags: post.tags,
   });
 }

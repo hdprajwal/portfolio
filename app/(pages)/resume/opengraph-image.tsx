@@ -10,6 +10,5 @@ export default async function Image() {
     title: 'Prajwal HD',
     subtitle:
       'AI engineer, backend, and full-stack. Opslyft, Purdue research, open source at Translation Commons.',
-    tags: ['AI Engineer', 'Backend', 'Full-Stack'],
   });
 }
